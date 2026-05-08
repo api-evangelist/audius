@@ -5,37 +5,42 @@ provider: Audius
 providerId: audius
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Music
 - Streaming
-- Web3
 - Decentralized
+- Web3
+- Open Source
 - Blockchain
 - Plans
-description: Placeholder plans/pricing artifact for Audius. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled.
+description: >-
+  Audius is a decentralized, open-source protocol. The public REST API is free and unauthenticated for
+  read endpoints (tracks, users, playlists, search, resolve). There is no API key, no plan tier, and
+  no per-call charge. Self-hosting a discovery node is possible.
+notes: Free, open-source, no API key required for public read endpoints.
 sources:
-- https://audius.co/
+- https://docs.audius.org/
+- https://github.com/AudiusProject
 plans:
-- id: audius-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: audius-public
+  name: Public API
+  type: free
+  description: Free, unauthenticated public REST API for read access to the Audius catalog.
   entries:
   - label: API Access
     name: api_access
     type: flat
-    metric: varies
+    metric: requests
     limit: -1
     timeFrame: usage
     geo: global
     unit: 1
-    price: see https://audius.co/
+    price: 0
     userMultiplied: false
   elements:
-  - name: Pending Reconciliation
+  - name: No API key for read endpoints
+  - name: App-name header recommended for attribution
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

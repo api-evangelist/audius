@@ -9,27 +9,33 @@ reconciled: false
 tags:
 - Music
 - Streaming
-- Web3
 - Decentralized
+- Web3
+- Open Source
 - Blockchain
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for Audius. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: >-
+  Audius hosts apply rate limits at the discovery-node level to prevent abuse, but the network is
+  decentralized and individual host operators set their own thresholds. There is no documented global
+  rate limit. Clients are encouraged to send an app-name header for attribution.
+notes: Rate limits are per discovery node; not centrally documented. Use the SDK's host selection to spread load.
 sources:
-- https://audius.co/
+- https://docs.audius.org/developers/api
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+- name: Per discovery node
+  scope: host
+  metric: requests
+  limit: host-defined
+  notes: Each network node sets its own limits.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+- name: App Name Header
+  description: Send the app_name query parameter on every request for attribution and to reduce throttling risk.
+- name: Host Rotation
+  description: Use the SDK or /health-check to rotate across discovery nodes.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
