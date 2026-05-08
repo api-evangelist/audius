@@ -1,0 +1,29 @@
+aid: audius
+url: https://raw.githubusercontent.com/api-evangelist/audius/refs/heads/main/apis.yml
+name: Audius
+x-type: company
+description: >-
+  Audius is a decentralized music streaming protocol owned by artists and fans. APIs cover tracks, playlists, users, and content discovery.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Music
+  - Streaming
+  - Web3
+  - Decentralized
+  - Blockchain
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://audius.co/
+  - type: Plans
+    url: plans/audius-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/audius-rate-limits.yml
+  - type: FinOps
+    url: finops/audius-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
