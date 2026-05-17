@@ -1,7 +1,7 @@
 aid: audius
 url: https://raw.githubusercontent.com/api-evangelist/audius/refs/heads/main/apis.yml
 name: Audius
-x-type: company
+kind: company
 description: >-
   Audius is a decentralized open-source music streaming platform built on the Open Audio Protocol. It
   exposes a public REST API for tracks, users, playlists, search, and resolve, plus a JavaScript SDK.
