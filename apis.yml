@@ -40,6 +40,8 @@ apis:
       - type: OpenSource
         url: https://github.com/AudiusProject
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/audius-project
   - type: Website
     url: https://audius.co/
   - type: DeveloperPortal
