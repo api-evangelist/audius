@@ -52,6 +52,8 @@ common:
     url: rate-limits/audius-rate-limits.yml
   - type: FinOps
     url: finops/audius-finops.yml
+  - type: LLMsTxt
+    url: https://audius.co/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
