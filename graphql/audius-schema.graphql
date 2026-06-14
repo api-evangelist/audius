@@ -1,0 +1,794 @@
+"""
+Audius GraphQL Schema
+Conceptual schema derived from the Audius decentralized music streaming REST API.
+Source: https://docs.audius.org/developers/api
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar URL
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum TrackGenre {
+  ALL
+  ELECTRONIC
+  ROCK
+  METAL
+  ALTERNATIVE
+  HIP_HOP_RAP
+  EXPERIMENTAL
+  PUNK
+  FOLK
+  POP
+  AMBIENT
+  SOUNDTRACK
+  WORLD
+  JAZZ
+  ACOUSTIC
+  FUNK
+  R_AND_B_SOUL
+  DEVOTIONAL
+  CLASSICAL
+  REGGAE
+  PODCASTS
+  COUNTRY
+  SPOKEN_WORD
+  COMEDY
+  BLUES
+  KIDS
+  AUDIOBOOKS
+  LATIN
+  LOFI
+  HYPERPOP
+  DANCEHALL
+  DRUM_AND_BASS
+  DUBSTEP
+  GLITCH_HOP
+  TRAP
+  TRANCE
+  MOOMBAHTON
+  BASS
+  TECHNO
+  HOUSE
+  DEEP_HOUSE
+  DISCO
+  ELECTRO
+  JUNGLE
+  PROGRESSIVE_HOUSE
+  GLITCH
+  BREAKS
+  UKG
+  VAPORWAVE
+  FUTURE_BASS
+  INDIE_POP
+  GARAGE
+}
+
+enum TrackMood {
+  PEACEFUL
+  ROMANTIC
+  SENTIMENTAL
+  TENDER
+  EASYGOING
+  YEARNING
+  SOPHISTICATED
+  SENSUAL
+  COOL
+  GRITTY
+  MELANCHOLIC
+  SERIOUS
+  BROODING
+  FIERY
+  DEFIANT
+  AGGRESSIVE
+  ROWDY
+  EXCITED
+  ENERGIZING
+  EMPOWERING
+  STIRRING
+  UPBEAT
+  OTHER
+}
+
+enum PlaylistType {
+  PLAYLIST
+  ALBUM
+}
+
+enum ReactionType {
+  HEART
+  FIRE
+  SAD
+  REPOST
+}
+
+enum TrendingTimeRange {
+  DAY
+  WEEK
+  MONTH
+  ALL_TIME
+}
+
+enum FeedFilter {
+  ALL
+  ORIGINAL
+  REPOST
+}
+
+enum ExploreType {
+  TOP_TRACKS
+  UNDERGROUND
+  FEEL_GOOD_TRACKS
+  BEST_NEW_RELEASES
+  MOST_LOVED
+  REMIXABLES
+  MOOD_TRACKS
+}
+
+enum TransactionStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+}
+
+enum NFTChain {
+  ETH
+  SOL
+}
+
+# ---------------------------------------------------------------------------
+# Interfaces
+# ---------------------------------------------------------------------------
+
+interface Node {
+  id: ID!
+}
+
+interface Timestamped {
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Types — Track
+# ---------------------------------------------------------------------------
+
+type TrackArtwork {
+  small: URL
+  medium: URL
+  large: URL
+  _150x150: URL
+  _480x480: URL
+  _1000x1000: URL
+}
+
+type TrackTitle {
+  id: ID!
+  title: String!
+  permalink: String
+}
+
+type TrackGenreInfo {
+  genre: TrackGenre
+  genreLabel: String
+}
+
+type TrackMoodInfo {
+  mood: TrackMood
+  moodLabel: String
+}
+
+type TrackDuration {
+  seconds: Int!
+  formatted: String
+}
+
+type TrackPlayCount {
+  trackId: ID!
+  count: Int!
+  uniqueListeners: Int
+}
+
+type TrackFavoriteCount {
+  trackId: ID!
+  count: Int!
+}
+
+type TrackRepostCount {
+  trackId: ID!
+  count: Int!
+}
+
+type TrackTags {
+  trackId: ID!
+  tags: [String!]!
+}
+
+type TrackActivity {
+  trackId: ID!
+  timestamp: DateTime!
+  playCount: Int
+  favoriteCount: Int
+  repostCount: Int
+}
+
+type TrackDetails implements Node & Timestamped {
+  id: ID!
+  title: String!
+  permalink: String
+  artwork: TrackArtwork
+  genre: TrackGenre
+  mood: TrackMood
+  duration: Int
+  playCount: Int
+  favoriteCount: Int
+  repostCount: Int
+  tags: [String!]
+  description: String
+  isDownloadable: Boolean
+  isStreamable: Boolean
+  isPublic: Boolean
+  hasCurrentUserReposted: Boolean
+  hasCurrentUserSaved: Boolean
+  user: UserDetails
+  remixOf: RemixDetails
+  fieldVisibility: FieldVisibility
+  createdAt: DateTime!
+  updatedAt: DateTime
+  releaseDate: DateTime
+  trackSegments: [TrackSegment!]
+  downloadURL: URL
+}
+
+type Track implements Node {
+  id: ID!
+  details: TrackDetails
+  title: TrackTitle
+  genre: TrackGenreInfo
+  mood: TrackMoodInfo
+  duration: TrackDuration
+  playCount: TrackPlayCount
+  favoriteCount: TrackFavoriteCount
+  repostCount: TrackRepostCount
+  tags: TrackTags
+  activity: TrackActivity
+  stream: StreamDetails
+  nft: NFTTrack
+}
+
+type TrackSegment {
+  duration: Float!
+  multihash: String!
+}
+
+type RemixDetails {
+  tracks: [TrackDetails!]
+}
+
+type FieldVisibility {
+  mood: Boolean
+  tags: Boolean
+  genre: Boolean
+  share: Boolean
+  playCount: Boolean
+  remixes: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Types — Playlist / Album
+# ---------------------------------------------------------------------------
+
+type PlaylistArtwork {
+  small: URL
+  medium: URL
+  large: URL
+  _150x150: URL
+  _480x480: URL
+  _1000x1000: URL
+}
+
+type PlaylistTrack {
+  trackId: ID!
+  track: TrackDetails
+  metadata: JSON
+}
+
+type PlaylistDetails implements Node & Timestamped {
+  id: ID!
+  playlistName: String!
+  permalink: String
+  description: String
+  isAlbum: Boolean!
+  isPrivate: Boolean
+  playlistImageMultihash: String
+  playlistContents: [PlaylistTrack!]!
+  trackCount: Int
+  totalPlayCount: Int
+  favoriteCount: Int
+  repostCount: Int
+  user: UserDetails
+  artwork: PlaylistArtwork
+  hasCurrentUserReposted: Boolean
+  hasCurrentUserSaved: Boolean
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type PlaylistType {
+  id: ID!
+  type: PlaylistType
+  details: PlaylistDetails
+}
+
+type Playlist implements Node {
+  id: ID!
+  details: PlaylistDetails
+  artwork: PlaylistArtwork
+  tracks: [PlaylistTrack!]
+  type: PlaylistType
+}
+
+type AlbumTracks {
+  albumId: ID!
+  tracks: [TrackDetails!]!
+  totalCount: Int!
+}
+
+type AlbumDetails implements Node & Timestamped {
+  id: ID!
+  albumName: String!
+  permalink: String
+  description: String
+  isPrivate: Boolean
+  artwork: PlaylistArtwork
+  tracks: AlbumTracks
+  trackCount: Int
+  totalPlayCount: Int
+  favoriteCount: Int
+  repostCount: Int
+  user: UserDetails
+  releaseDate: DateTime
+  upc: String
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type Album implements Node {
+  id: ID!
+  details: AlbumDetails
+  tracks: AlbumTracks
+  artwork: PlaylistArtwork
+}
+
+# ---------------------------------------------------------------------------
+# Types — User
+# ---------------------------------------------------------------------------
+
+type UserHandle {
+  userId: ID!
+  handle: String!
+  verified: Boolean!
+}
+
+type UserBio {
+  userId: ID!
+  bio: String
+  website: URL
+  donationURL: URL
+}
+
+type UserLocation {
+  userId: ID!
+  location: String
+}
+
+type UserBadges {
+  userId: ID!
+  isVerified: Boolean!
+  isDeactivated: Boolean!
+  supportsAudioFeatures: Boolean
+}
+
+type UserProfilePicture {
+  small: URL
+  medium: URL
+  large: URL
+  _150x150: URL
+  _480x480: URL
+  _1000x1000: URL
+}
+
+type UserCoverPhoto {
+  _640x: URL
+  _2000x: URL
+}
+
+type UserDetails implements Node & Timestamped {
+  id: ID!
+  name: String!
+  handle: String!
+  bio: String
+  location: String
+  website: URL
+  donationURL: URL
+  profilePicture: UserProfilePicture
+  coverPhoto: UserCoverPhoto
+  isVerified: Boolean!
+  isDeactivated: Boolean!
+  followerCount: Int!
+  followeeCount: Int!
+  trackCount: Int!
+  playlistCount: Int!
+  albumCount: Int!
+  repostCount: Int!
+  totalAudioBalance: Float
+  supporterCount: Int
+  supportingCount: Int
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+type User implements Node {
+  id: ID!
+  details: UserDetails
+  handle: UserHandle
+  bio: UserBio
+  location: UserLocation
+  badges: UserBadges
+}
+
+type FollowerDetails {
+  userId: ID!
+  followers: [UserDetails!]!
+  totalCount: Int!
+  nextOffset: Int
+}
+
+type FollowingDetails {
+  userId: ID!
+  following: [UserDetails!]!
+  totalCount: Int!
+  nextOffset: Int
+}
+
+# ---------------------------------------------------------------------------
+# Types — Feed
+# ---------------------------------------------------------------------------
+
+type FeedItem {
+  id: ID!
+  type: String!
+  timestamp: DateTime!
+  track: TrackDetails
+  playlist: PlaylistDetails
+  user: UserDetails
+}
+
+type FeedActivity {
+  userId: ID!
+  activityType: String!
+  timestamp: DateTime!
+  item: FeedItem
+}
+
+type FeedDetails {
+  userId: ID!
+  items: [FeedItem!]!
+  totalCount: Int!
+  nextOffset: Int
+  filter: FeedFilter
+}
+
+type Feed {
+  userId: ID!
+  details: FeedDetails
+  activity: [FeedActivity!]
+}
+
+# ---------------------------------------------------------------------------
+# Types — Explore
+# ---------------------------------------------------------------------------
+
+type ExplorePlaylist {
+  id: ID!
+  playlist: PlaylistDetails
+  rank: Int
+  score: Float
+}
+
+type ExploreDetails {
+  type: ExploreType!
+  playlists: [ExplorePlaylist!]
+  tracks: [TrackDetails!]
+  description: String
+}
+
+type Explore {
+  type: ExploreType!
+  details: ExploreDetails
+  playlists: [ExplorePlaylist!]
+}
+
+# ---------------------------------------------------------------------------
+# Types — Trending
+# ---------------------------------------------------------------------------
+
+type TrendingTrack {
+  rank: Int!
+  track: TrackDetails!
+  score: Float
+  genre: TrackGenre
+  timeRange: TrendingTimeRange
+}
+
+type TrendingPlaylist {
+  rank: Int!
+  playlist: PlaylistDetails!
+  score: Float
+  timeRange: TrendingTimeRange
+}
+
+type TrendingDetails {
+  timeRange: TrendingTimeRange!
+  genre: TrackGenre
+  tracks: [TrendingTrack!]
+  playlists: [TrendingPlaylist!]
+  generatedAt: DateTime
+}
+
+type Trending {
+  timeRange: TrendingTimeRange!
+  details: TrendingDetails
+  tracks: [TrendingTrack!]
+  playlists: [TrendingPlaylist!]
+}
+
+# ---------------------------------------------------------------------------
+# Types — Stream
+# ---------------------------------------------------------------------------
+
+type StreamURL {
+  trackId: ID!
+  url: URL!
+  expiresAt: DateTime
+  quality: String
+}
+
+type StreamDetails {
+  trackId: ID!
+  streamURL: StreamURL
+  duration: Int
+  isStreamable: Boolean!
+  requiresAuth: Boolean
+}
+
+type Stream {
+  trackId: ID!
+  details: StreamDetails
+  url: StreamURL
+}
+
+# ---------------------------------------------------------------------------
+# Types — Resolve
+# ---------------------------------------------------------------------------
+
+type ResolveEndpoint {
+  inputURL: URL!
+  kind: String!
+  id: ID!
+  track: TrackDetails
+  user: UserDetails
+  playlist: PlaylistDetails
+  album: AlbumDetails
+}
+
+# ---------------------------------------------------------------------------
+# Types — Tips & Reactions
+# ---------------------------------------------------------------------------
+
+type TipDetails {
+  id: ID!
+  sender: UserDetails!
+  receiver: UserDetails!
+  amount: Float!
+  usdcAmount: Float
+  createdAt: DateTime!
+  specialMessage: String
+  reacted: Boolean
+}
+
+type Tip implements Node {
+  id: ID!
+  details: TipDetails
+  transaction: BlockchainTransaction
+}
+
+type ReactionDetails {
+  id: ID!
+  reactionValue: ReactionType!
+  reactionOf: JSON
+  sender: UserDetails!
+  createdAt: DateTime!
+}
+
+type Reaction implements Node {
+  id: ID!
+  type: ReactionType!
+  details: ReactionDetails
+}
+
+# ---------------------------------------------------------------------------
+# Types — Blockchain / Solana
+# ---------------------------------------------------------------------------
+
+type BlockchainTransaction {
+  signature: String!
+  slot: Int
+  blockTime: DateTime
+  status: TransactionStatus!
+  chain: NFTChain!
+  fee: Float
+  feePayer: String
+}
+
+type SolanaTransaction {
+  signature: String!
+  slot: Int
+  blockTime: DateTime
+  status: TransactionStatus!
+  instructions: [JSON!]
+  logs: [String!]
+  fee: Float
+}
+
+type NFTTrack implements Node {
+  id: ID!
+  chain: NFTChain!
+  contractAddress: String
+  tokenId: String
+  metadataUrl: URL
+  track: TrackDetails
+  owner: UserDetails
+  mintedAt: DateTime
+}
+
+type Token {
+  mintAddress: String!
+  symbol: String!
+  name: String
+  decimals: Int!
+  supply: Float
+  iconURL: URL
+}
+
+type APIKey {
+  key: String!
+  ownerId: ID!
+  description: String
+  createdAt: DateTime!
+  isActive: Boolean!
+  rateLimit: Int
+}
+
+# ---------------------------------------------------------------------------
+# Connections / Pagination
+# ---------------------------------------------------------------------------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+  nextOffset: Int
+}
+
+type TrackConnection {
+  tracks: [TrackDetails!]!
+  pageInfo: PageInfo!
+}
+
+type UserConnection {
+  users: [UserDetails!]!
+  pageInfo: PageInfo!
+}
+
+type PlaylistConnection {
+  playlists: [PlaylistDetails!]!
+  pageInfo: PageInfo!
+}
+
+type TipConnection {
+  tips: [TipDetails!]!
+  pageInfo: PageInfo!
+}
+
+# ---------------------------------------------------------------------------
+# Search results
+# ---------------------------------------------------------------------------
+
+type SearchResults {
+  tracks: [TrackDetails!]
+  users: [UserDetails!]
+  playlists: [PlaylistDetails!]
+  albums: [AlbumDetails!]
+}
+
+# ---------------------------------------------------------------------------
+# Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Tracks
+  track(id: ID!): TrackDetails
+  trackByPermalink(permalink: String!): TrackDetails
+  trendingTracks(genre: TrackGenre, timeRange: TrendingTimeRange, limit: Int, offset: Int): Trending
+  undergroundTrendingTracks(limit: Int, offset: Int): Trending
+
+  # Stream
+  streamTrack(id: ID!): StreamDetails
+
+  # Users
+  user(id: ID!): UserDetails
+  userByHandle(handle: String!): UserDetails
+  userFollowers(id: ID!, limit: Int, offset: Int): FollowerDetails
+  userFollowing(id: ID!, limit: Int, offset: Int): FollowingDetails
+  userTracks(id: ID!, limit: Int, offset: Int, sort: String): TrackConnection
+  userPlaylists(id: ID!, limit: Int, offset: Int): PlaylistConnection
+  userAlbums(id: ID!, limit: Int, offset: Int): PlaylistConnection
+  userReposts(id: ID!, limit: Int, offset: Int): TrackConnection
+  userFavorites(id: ID!, limit: Int, offset: Int): TrackConnection
+  userFeed(id: ID!, limit: Int, offset: Int, filter: FeedFilter): FeedDetails
+
+  # Tips
+  userTips(userId: ID!, limit: Int, offset: Int, receiverMinFollowers: Int, uniquenBy: String): TipConnection
+  userSupporters(id: ID!, limit: Int, offset: Int): TipConnection
+  userSupporting(id: ID!, limit: Int, offset: Int): TipConnection
+
+  # Playlists
+  playlist(id: ID!): PlaylistDetails
+  playlistTracks(id: ID!): AlbumTracks
+
+  # Albums
+  album(id: ID!): AlbumDetails
+  albumTracks(id: ID!): AlbumTracks
+
+  # Trending playlists
+  trendingPlaylists(timeRange: TrendingTimeRange, limit: Int, offset: Int): Trending
+
+  # Explore
+  explore(type: ExploreType!): ExploreDetails
+
+  # Feed
+  feed(userId: ID!, limit: Int, offset: Int, filter: FeedFilter): FeedDetails
+
+  # Search
+  search(query: String!, kind: String, limit: Int, offset: Int): SearchResults
+  searchTracks(query: String!, limit: Int, offset: Int): TrackConnection
+  searchUsers(query: String!, limit: Int, offset: Int): UserConnection
+  searchPlaylists(query: String!, limit: Int, offset: Int): PlaylistConnection
+
+  # Resolve
+  resolve(url: URL!): ResolveEndpoint
+
+  # Reactions
+  reactions(entityId: ID!): [Reaction!]
+
+  # Blockchain / NFT
+  nftTrack(id: ID!): NFTTrack
+  solanaTransaction(signature: String!): SolanaTransaction
+  blockchainTransaction(signature: String!): BlockchainTransaction
+
+  # Token
+  audioToken: Token
+
+  # API Key
+  apiKey(key: String!): APIKey
+}

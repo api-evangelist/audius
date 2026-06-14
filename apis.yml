@@ -2,58 +2,60 @@ aid: audius
 url: https://raw.githubusercontent.com/api-evangelist/audius/refs/heads/main/apis.yml
 name: Audius
 kind: company
-description: >-
-  Audius is a decentralized open-source music streaming platform built on the Open Audio Protocol. It
-  exposes a public REST API for tracks, users, playlists, search, and resolve, plus a JavaScript SDK.
-  The protocol layer is open-source on GitHub.
+description: Audius is a decentralized open-source music streaming platform built
+  on the Open Audio Protocol. It exposes a public REST API for tracks, users, playlists,
+  search, and resolve, plus a JavaScript SDK. The protocol layer is open-source on
+  GitHub.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Music
-  - Streaming
-  - Decentralized
-  - Web3
-  - Open Source
-  - Blockchain
+- Music
+- Streaming
+- Decentralized
+- Web3
+- Open Source
+- Blockchain
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
 apis:
-  - aid: audius:platform
-    name: Audius REST API
-    description: >-
-      Public REST API for the Audius network. Endpoints cover tracks (metadata, stream, trending), users
-      (profile, followers), playlists, search, and resolve (lookup by URL). API hosts are discovered
-      dynamically from the network; many host paths are accessible at /v1.
-    humanURL: https://docs.audius.org/developers/api
-    baseURL: https://api.audius.co
-    tags:
-      - Tracks
-      - Users
-      - Playlists
-      - Search
-      - Web3
-    properties:
-      - type: Documentation
-        url: https://docs.audius.org/developers/api
-      - type: SDK
-        url: https://docs.audius.org/developers/sdk
-      - type: OpenSource
-        url: https://github.com/AudiusProject
+- aid: audius:platform
+  name: Audius REST API
+  description: Public REST API for the Audius network. Endpoints cover tracks (metadata,
+    stream, trending), users (profile, followers), playlists, search, and resolve
+    (lookup by URL). API hosts are discovered dynamically from the network; many host
+    paths are accessible at /v1.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - Tracks
+  - Users
+  - Playlists
+  - Search
+  - Web3
+  properties:
+  - type: Documentation
+    url: https://docs.audius.org/developers/api
+  - type: SDK
+    url: https://docs.audius.org/developers/sdk
+  - type: OpenSource
+    url: https://github.com/AudiusProject
+  - url: graphql/audius-graphql.md
+    type: GraphQL
 common:
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/audius-project
-  - type: Website
-    url: https://audius.co/
-  - type: DeveloperPortal
-    url: https://docs.audius.org/
-  - type: Plans
-    url: plans/audius-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/audius-rate-limits.yml
-  - type: FinOps
-    url: finops/audius-finops.yml
-  - type: LLMsTxt
-    url: https://audius.co/llms.txt
+- type: LinkedIn
+  url: https://www.linkedin.com/company/audius-project
+- type: Website
+  url: https://audius.co/
+- type: DeveloperPortal
+  url: https://docs.audius.org/
+- type: Plans
+  url: plans/audius-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/audius-rate-limits.yml
+- type: FinOps
+  url: finops/audius-finops.yml
+- type: LLMsTxt
+  url: https://audius.co/llms.txt
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
