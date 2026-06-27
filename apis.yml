@@ -35,7 +35,7 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.audius.org/developers/api
-  - type: SDK
+  - type: SDKs
     url: https://docs.audius.org/developers/sdk
   - type: OpenSource
     url: https://github.com/AudiusProject
@@ -54,7 +54,7 @@ common:
   url: rate-limits/audius-rate-limits.yml
 - type: FinOps
   url: finops/audius-finops.yml
-- type: LLMsTxt
+- type: LlmsText
   url: https://audius.co/llms.txt
 maintainers:
 - FN: Kin Lane
