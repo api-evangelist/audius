@@ -42,6 +42,10 @@ apis:
   - url: graphql/audius-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/audius-domain-security.yml
+- type: Authentication
+  url: authentication/audius-authentication.yml
 - type: OAuthScopes
   url: scopes/audius-scopes.yml
 - type: LinkedIn

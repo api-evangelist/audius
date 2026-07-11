@@ -1,0 +1,57 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/audius-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/oauth/authorize
+    tokenUrl: /v1/oauth/token
+    scopes: 2
+  description: |-
+    OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+    Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+    **Scopes:**
+    - `read` — Read-only access to the user's public and private data.
+    - `write` — Read and write access, allowing mutations on behalf of the user.
+
+    **PKCE Required:**
+    All authorization code re
+  sources:
+  - openapi/audius-openapi.yml
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: |-
+    HTTP Basic Authentication with Ethereum private key for write operations.
+
+    **Authentication**
+
+    Use HTTP Basic Authentication where the password field contains your Ethereum private key:
+    ```
+    Authorization: Basic <base64(username:privatekey)>
+    ```
+
+    The username can be any value. The password must be your Ethereum private key in hex format (with or without 0x prefix).
+
+    Example:
+    ```
+    Authorization: Basi
+  sources:
+  - openapi/audius-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: The API bearer token or OAuth JWT token for the user.
+  sources:
+  - openapi/audius-openapi.yml
