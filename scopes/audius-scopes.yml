@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/audius-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/audius-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /v1/oauth/authorize
+    tokenUrl: /v1/oauth/token
+  description: |-
+    OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+    Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+    **Scopes:**
+    - `read` — Read-only access to the user's public and private data.
+    - `write` — Read and write access, allowing mutations on behalf of the user.
+
+    **PKCE Required:**
+    All authorization code requests must include `code_challenge` and `code_challenge_method=S256` parameters.
+scopes:
+- scope: read
+  description: Read-only access to user data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/audius-openapi.yml
+- scope: write
+  description: Read and write access on behalf of the user
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/audius-openapi.yml
