@@ -42,6 +42,8 @@ apis:
   - url: graphql/audius-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/audius-agentic-access.yml
 - type: DomainSecurity
   url: security/audius-domain-security.yml
 - type: Authentication
