@@ -1,0 +1,386 @@
+openapi: 3.0.1
+info:
+  title: Audius challenges events API
+  description: '## Overview
+
+
+    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
+
+
+    ## Key Capabilities
+
+
+    - **Users** — Profiles, followers, following, search
+
+    - **Tracks** — Search, trending, stream, favorites, reposts
+
+    - **Playlists** — Create, update, browse, curate
+
+    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
+
+    - **Explore** — Trending content, charts, discovery
+
+    - **Comments, Tips, Rewards** — Social features and engagement
+
+
+    ## Authentication
+
+
+    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
+
+    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
+
+
+    ## Resources
+
+
+    - [API Docs](https://docs.audius.co/api) — Full reference and guides
+
+    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
+
+    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
+
+    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
+
+    '
+  version: '1.0'
+  contact:
+    name: Audius
+    url: https://audius.co
+  x-logo:
+    url: https://audius.co/favicons/favicon.ico
+servers:
+- url: https://api.audius.co/v1
+  description: Production
+tags:
+- name: events
+  description: Events related operations
+paths:
+  /events:
+    get:
+      tags:
+      - events
+      description: Get a list of events by ID
+      operationId: Get Bulk Events
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: The ID of the event(s) to retrieve
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: event_type
+        in: query
+        description: The type of event to filter by
+        schema:
+          type: string
+          enum:
+          - remix_contest
+          - live_event
+          - new_release
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/events_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /events/all:
+    get:
+      tags:
+      - events
+      summary: Get all events
+      description: Get all events
+      operationId: Get All Events
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          default: newest
+          enum:
+          - newest
+          - timestamp
+      - name: event_type
+        in: query
+        description: The type of event to filter by
+        schema:
+          type: string
+          enum:
+          - remix_contest
+          - live_event
+          - new_release
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/events_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /events/entity:
+    get:
+      tags:
+      - events
+      summary: Get events for a specific entity
+      description: Get events for a specific entity
+      operationId: Get Entity Events
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: entity_id
+        in: query
+        description: The ID of the entity to get events for
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: entity_type
+        in: query
+        description: The type of entity to get events for
+        schema:
+          type: string
+          enum:
+          - track
+          - collection
+          - user
+      - name: filter_deleted
+        in: query
+        description: Whether to filter deleted events
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/events_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /events/unclaimed_id:
+    get:
+      tags:
+      - events
+      description: Gets an unclaimed blockchain event ID
+      operationId: Get unclaimed event ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unclaimed_id_response'
+        '500':
+          description: Server error
+          content: {}
+components:
+  schemas:
+    events_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/event'
+    event:
+      required:
+      - created_at
+      - event_data
+      - event_id
+      - event_type
+      - updated_at
+      - user_id
+      type: object
+      properties:
+        event_id:
+          type: string
+        event_type:
+          type: string
+          example: remix_contest
+          enum:
+          - remix_contest
+          - live_event
+          - new_release
+        user_id:
+          type: string
+        entity_type:
+          type: string
+          example: track
+          enum:
+          - track
+          - collection
+          - user
+        entity_id:
+          type: string
+        end_date:
+          type: string
+        is_deleted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        event_data:
+          type: object
+          properties: {}
+    unclaimed_id_response:
+      type: object
+      properties:
+        data:
+          type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: 'OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+
+        Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+
+        **Scopes:**
+
+        - `read` — Read-only access to the user''s public and private data.
+
+        - `write` — Read and write access, allowing mutations on behalf of the user.
+
+
+        **PKCE Required:**
+
+        All authorization code requests must include `code_challenge` and `code_challenge_method=S256` parameters.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/oauth/authorize
+          tokenUrl: /v1/oauth/token
+          scopes:
+            read: Read-only access to user data
+            write: Read and write access on behalf of the user
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication with Ethereum private key for write operations.
+
+
+        **Authentication**
+
+
+        Use HTTP Basic Authentication where the password field contains your Ethereum private key:
+
+        ```
+
+        Authorization: Basic <base64(username:privatekey)>
+
+        ```
+
+
+        The username can be any value. The password must be your Ethereum private key in hex format (with or without 0x prefix).
+
+
+        Example:
+
+        ```
+
+        Authorization: Basic dXNlcm5hbWU6MHgxMjM0NTY3ODkwYWJjZGVmLi4u
+
+        ```
+
+
+        **How it works:**
+
+        1. The API decodes the Basic Auth credentials
+
+        2. Extracts the private key from the password field
+
+        3. Derives the Ethereum address from the private key
+
+        4. Uses this address for authorization checks
+
+
+        **Authorization**
+
+
+        The derived wallet address must be either:
+
+        - The wallet of the user being acted upon (direct ownership)
+
+        - A wallet with an approved, non-revoked grant for the user (manager mode)
+
+        '
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The API bearer token or OAuth JWT token for the user.
+
+        '
+x-original-swagger-version: '2.0'

@@ -1,0 +1,7404 @@
+openapi: 3.0.1
+info:
+  title: Audius challenges users API
+  description: '## Overview
+
+
+    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
+
+
+    ## Key Capabilities
+
+
+    - **Users** — Profiles, followers, following, search
+
+    - **Tracks** — Search, trending, stream, favorites, reposts
+
+    - **Playlists** — Create, update, browse, curate
+
+    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
+
+    - **Explore** — Trending content, charts, discovery
+
+    - **Comments, Tips, Rewards** — Social features and engagement
+
+
+    ## Authentication
+
+
+    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
+
+    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
+
+
+    ## Resources
+
+
+    - [API Docs](https://docs.audius.co/api) — Full reference and guides
+
+    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
+
+    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
+
+    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
+
+    '
+  version: '1.0'
+  contact:
+    name: Audius
+    url: https://audius.co
+  x-logo:
+    url: https://audius.co/favicons/favicon.ico
+servers:
+- url: https://api.audius.co/v1
+  description: Production
+tags:
+- name: users
+  description: User related operations
+paths:
+  /users:
+    get:
+      tags:
+      - users
+      description: Gets a list of users by ID
+      operationId: Get Bulk Users
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: The ID of the user(s)
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    post:
+      tags:
+      - users
+      description: Creates a new user
+      operationId: Create User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      requestBody:
+        x-codegen-request-body-name: metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_user_request_body'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/create_user_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/address:
+    get:
+      tags:
+      - users
+      description: Gets User IDs from any Ethereum wallet address or Solana account address associated with their Audius account.
+      operationId: Get User IDs by Addresses
+      parameters:
+      - name: address
+        in: query
+        description: Wallet address
+        required: true
+        style: form
+        explode: true
+        example:
+        - '0x1234567890abcdef1234567890abcdef12345678'
+        - E2LCbKdo2L3ikt1gK6pwp1pDLuhAfHBNf6fEQXpAqrf9
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_ids_addresses_response'
+  /users/handle/{handle}:
+    get:
+      tags:
+      - users
+      description: Gets a single user by their handle
+      operationId: Get User by Handle
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: handle
+        in: path
+        description: A User handle
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response_single'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/handle/{handle}/tracks:
+    get:
+      tags:
+      - users
+      description: Gets the tracks created by a user using the user's handle
+      operationId: Get Tracks by User Handle
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: handle
+        in: path
+        description: A User handle
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: '[Deprecated] Field to sort by'
+        schema:
+          type: string
+          default: date
+          enum:
+          - date
+          - plays
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: filter_tracks
+        in: query
+        description: Filter by public tracks
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - public
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracks'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/handle/{handle}/tracks/ai_attributed:
+    get:
+      tags:
+      - users
+      description: Gets the AI generated tracks attributed to a user using the user's handle
+      operationId: Get AI Attributed Tracks by User Handle
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: handle
+        in: path
+        description: A User handle
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: '[Deprecated] Field to sort by'
+        schema:
+          type: string
+          default: date
+          enum:
+          - date
+          - plays
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: filter_tracks
+        in: query
+        description: Filter by public tracks
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - public
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracks'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/search:
+    get:
+      tags:
+      - users
+      description: Search for users that match the given query
+      operationId: Search Users
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: query
+        in: query
+        description: The search query
+        schema:
+          type: string
+      - name: genre
+        in: query
+        description: The genres to filter by
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - relevant
+          - popular
+          - recent
+      - name: is_verified
+        in: query
+        description: Only include verified users in the user results
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_search'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/verify_token:
+    get:
+      tags:
+      - users
+      description: Verify if the given jwt ID token was signed by the subject (user) in the payload
+      operationId: Verify ID Token
+      parameters:
+      - name: token
+        in: query
+        description: JWT to verify
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/verify_token'
+        '400':
+          description: Bad input
+          content: {}
+        '404':
+          description: ID token not valid
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}:
+    get:
+      tags:
+      - users
+      description: Gets a single user by their user ID
+      operationId: Get User
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response_single'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    put:
+      tags:
+      - users
+      description: Updates an existing user profile
+      operationId: Update User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      requestBody:
+        x-codegen-request-body-name: metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_user_request_body'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/albums:
+    get:
+      tags:
+      - users
+      description: Gets the albums created by a user using their user ID
+      operationId: Get Albums by User
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          default: recent
+          enum:
+          - recent
+          - popular
+      - name: query
+        in: query
+        description: Filter albums by name
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/albums_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/authorized_apps:
+    get:
+      tags:
+      - users
+      description: Get the apps that user has authorized to write to their account
+      operationId: Get Authorized Apps
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authorized_apps'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /grantees/{address}/users:
+    get:
+      tags:
+      - users
+      description: Get all users who have authorized a particular grantee (developer app) identified by their wallet address. Supports pagination.
+      operationId: Get Grantee Users
+      parameters:
+      - name: address
+        in: path
+        description: The wallet address of the grantee (developer app)
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: is_approved
+        in: query
+        description: If true, only return users where the grant has been approved. If false, only return users where the grant was not approved. If omitted, returns all users regardless of approval status.
+        schema:
+          type: boolean
+      - name: is_revoked
+        in: query
+        description: If true, only return users where the grant has been revoked. Defaults to false.
+        schema:
+          type: boolean
+          default: false
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/followers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/balance/history:
+    get:
+      tags:
+      - users
+      description: Get the user's historical portfolio balance data
+      operationId: Get User Balance History
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        description: Start time for the balance history query (ISO 8601 format). Defaults to 7 days ago.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: end_time
+        in: query
+        description: End time for the balance history query (ISO 8601 format). Defaults to now.
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: granularity
+        in: query
+        description: Data granularity. 'hourly' returns hourly data points, 'daily' returns daily aggregated data. Defaults to 'hourly'.
+        required: false
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/balance_history_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/challenges:
+    get:
+      tags:
+      - users
+      description: Gets all challenges for the given user
+      operationId: Get User Challenges
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: show_historical
+        in: query
+        description: Whether to show challenges that are inactive but completed
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_challenges'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/coins:
+    get:
+      tags:
+      - users
+      description: Gets a list of the coins owned by the user and their balances
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+          maximum: 100
+      operationId: Get User Coins
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_coins_response'
+  /users/{id}/coins/{mint}:
+    get:
+      tags:
+      - users
+      description: Gets information about a specific coin owned by the user and their wallets
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: mint
+        in: path
+        description: The mint address of the coin
+        required: true
+        schema:
+          type: string
+          example: Dez1g5f3h4j5k6l7m8n9o0p1q2r3s4t5u6v7w8x9y0z
+      operationId: Get User Coin
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_coin_response'
+  /users/{id}/collectibles:
+    get:
+      tags:
+      - users
+      description: Get the User's indexed collectibles data
+      operationId: Get User Collectibles
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collectibles_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/comments:
+    get:
+      tags:
+      - users
+      description: Get user comment history
+      operationId: Get User Comments
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_comments_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/connected_wallets:
+    get:
+      tags:
+      - users
+      description: Get the User's ERC and SPL connected wallets
+      operationId: Get connected wallets
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connected_wallets_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/favorites:
+    get:
+      tags:
+      - users
+      description: Gets a user's favorite tracks
+      operationId: Get User Favorites
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/favorites_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/followers:
+    get:
+      tags:
+      - users
+      description: All users that follow the provided user
+      operationId: Get Followers
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/followers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/follow:
+    post:
+      tags:
+      - users
+      description: Follow a user
+      operationId: Follow User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User followed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    delete:
+      tags:
+      - users
+      description: Unfollow a user
+      operationId: Unfollow User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User unfollowed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/grants:
+    post:
+      tags:
+      - users
+      description: Create a grant (authorize an app to act on the user's behalf)
+      operationId: Create Grant
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: The user ID (grantor)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_grant_request_body'
+      responses:
+        '200':
+          description: Grant created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden (user ID does not match)
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/grants/{address}:
+    delete:
+      tags:
+      - users
+      description: Revoke a grant (remove app authorization)
+      operationId: Revoke Grant
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: The user ID (grantor)
+        required: true
+        schema:
+          type: string
+      - name: address
+        in: path
+        description: The app API key (grantee address) to revoke
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Grant revoked successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/grants/approve:
+    post:
+      tags:
+      - users
+      description: Approve a manager request (manager approves being added by the child user)
+      operationId: Approve Grant
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: The user ID of the manager (grantee) approving the request
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/approve_grant_request_body'
+      responses:
+        '200':
+          description: Grant approved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/managers:
+    post:
+      tags:
+      - users
+      description: Add a manager (authorize another user to act on your behalf)
+      operationId: Add Manager
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: The user ID (child user adding the manager)
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/add_manager_request_body'
+      responses:
+        '200':
+          description: Manager added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    get:
+      tags:
+      - users
+      description: Gets a list of users managing the given user
+      operationId: Get Managers
+      parameters:
+      - name: id
+        in: path
+        description: An id for the managed user
+        required: true
+        schema:
+          type: string
+      - name: is_approved
+        in: query
+        description: If true, only show users where the management request has been accepted. If false, only show those where the request was rejected. If omitted, shows all users regardless of approval status.
+        schema:
+          type: boolean
+      - name: is_revoked
+        in: query
+        description: If true, only show users where the management request has been revoked. If false, only show those with a pending or accepted request. Defaults to false.
+        schema:
+          type: boolean
+          default: false
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/managers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/managers/{managerUserId}:
+    delete:
+      tags:
+      - users
+      description: Remove a manager (revoke user-to-user grant). Can be called by the child user or the manager.
+      operationId: Remove Manager
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: The user ID (child user whose manager is being removed)
+        required: true
+        schema:
+          type: string
+      - name: managerUserId
+        in: path
+        description: The user ID of the manager to remove
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Manager removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/following:
+    get:
+      tags:
+      - users
+      description: All users that the provided user follows
+      operationId: Get Following
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/following_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/history/tracks:
+    get:
+      tags:
+      - users
+      description: Get the tracks the user recently listened to.
+      operationId: Get User's Track History
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/history_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/listen_counts_monthly:
+    get:
+      tags:
+      - users
+      description: Gets the listen data for a user by month and track within a given time frame.
+      operationId: Get User Monthly Track Listens
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: start_time
+        in: query
+        description: Start time from which to start results for user listen count data (inclusive).
+        required: true
+        schema:
+          type: string
+      - name: end_time
+        in: query
+        description: End time until which to cut off results of listen count data (not inclusive).
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_track_listen_counts_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/muted:
+    get:
+      tags:
+      - users
+      description: Gets users muted by the given user
+      operationId: Get Muted Users
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    post:
+      tags:
+      - users
+      description: Mute a user
+      operationId: Mute User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User muted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    delete:
+      tags:
+      - users
+      description: Unmute a user
+      operationId: Unmute User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User unmuted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/mutuals:
+    get:
+      tags:
+      - users
+      description: Get intersection of users that follow followeeUserId and users that are followed by followerUserId
+      operationId: Get Mutual Followers
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mutual_followers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/playlists:
+    get:
+      tags:
+      - users
+      description: Gets the playlists created by a user using their user ID
+      operationId: Get Playlists by User
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          default: recent
+          enum:
+          - recent
+          - popular
+      - name: query
+        in: query
+        description: Filter playlists by name
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playlists_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/purchasers:
+    get:
+      tags:
+      - users
+      description: Gets the list of unique users who have purchased content by the given user
+      operationId: Get purchasers
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: content_type
+        in: query
+        description: Type of content to filter by (track or album)
+        schema:
+          type: string
+      - name: content_id
+        in: query
+        description: Filters for users who have purchased the given track or album ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchasers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/purchases/download:
+    get:
+      tags:
+      - users
+      description: Downloads the purchases the user has made as a CSV file
+      operationId: Download Purchases as CSV
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content: {}
+  /users/{id}/recommended-tracks:
+    get:
+      tags:
+      - users
+      description: Gets the recommended tracks for the user
+      operationId: Get User Recommended Tracks
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: time_range
+        in: query
+        description: The time range for the recommended tracks
+        schema:
+          type: string
+          default: week
+          enum:
+          - week
+          - month
+          - allTime
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracks'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/related:
+    get:
+      tags:
+      - users
+      description: Gets a list of users that might be of interest to followers of this user.
+      operationId: Get Related Users
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: filter_followed
+        in: query
+        description: If true, filters out artists that the current user already follows
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/related_artist_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/remixers:
+    get:
+      tags:
+      - users
+      description: Gets the list of unique users who have remixed tracks by the given user, or a specific track by that user if provided
+      operationId: Get remixers
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: track_id
+        in: query
+        description: Filters for remixers who have remixed the given track ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/remixers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/reposts:
+    get:
+      tags:
+      - users
+      description: Gets the given user's reposts
+      operationId: Get Reposts
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reposts'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/sales/aggregate:
+    get:
+      tags:
+      - users
+      description: Gets the aggregated sales data for the user
+      operationId: Get Sales Aggregate
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sales_aggregate_response'
+  /users/{id}/sales/download:
+    get:
+      tags:
+      - users
+      description: Downloads the sales the user has made as a CSV file
+      operationId: Download Sales as CSV
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content: {}
+  /users/{id}/sales/download/json:
+    get:
+      tags:
+      - users
+      description: Gets the sales data for the user in JSON format
+      operationId: Download Sales as JSON
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: grantee_user_id
+        in: query
+        description: Optional receiving user ID for email decryption
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sales_json_response'
+  /users/{id}/subscribers:
+    get:
+      tags:
+      - users
+      description: All users that subscribe to the provided user
+      operationId: Get Subscribers
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscribers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    post:
+      tags:
+      - users
+      description: Subscribe to a user
+      operationId: Subscribe to User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Subscribed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    delete:
+      tags:
+      - users
+      description: Unsubscribe from a user
+      operationId: Unsubscribe from User
+      security:
+      - BearerAuth: []
+      - BasicAuth: []
+      - OAuth2:
+        - write
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Unsubscribed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/write_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/supporters:
+    get:
+      tags:
+      - users
+      description: Gets the supporters of the given user
+      operationId: Get Supporters
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_supporters'
+  /users/{id}/supporting:
+    get:
+      tags:
+      - users
+      description: Gets the users that the given user supports
+      operationId: Get Supported Users
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_supported_users'
+  /users/{id}/tags:
+    get:
+      tags:
+      - users
+      summary: Fetch most used tags in a user's tracks
+      description: Gets the most used track tags by a user.
+      operationId: Get Top Track Tags
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tags_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/tracks:
+    get:
+      tags:
+      - users
+      description: Gets the tracks created by a user using their user ID
+      operationId: Get Tracks by User
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: '[Deprecated] Field to sort by'
+        schema:
+          type: string
+          default: date
+          enum:
+          - date
+          - plays
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: filter_tracks
+        in: query
+        description: Filter by public tracks
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - public
+      - name: gate_condition
+        in: query
+        description: Filter by gate conditions (can be repeated)
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ungated
+            - usdc_purchase
+            - follow
+            - tip
+            - nft
+            - token
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracks'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/tracks/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of tracks created by a user
+      operationId: Get Tracks Count by User
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: filter_tracks
+        in: query
+        description: Filter by public tracks
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - public
+      - name: gate_condition
+        in: query
+        description: Filter by gate conditions (can be repeated)
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - ungated
+            - usdc_purchase
+            - follow
+            - tip
+            - nft
+            - token
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracks_count_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/tracks/download_count:
+    get:
+      tags:
+      - users
+      description: Gets the total download count for all tracks (and stems) owned by the user. Use for dashboard "Downloads" tile.
+      operationId: Get User Tracks Download Count
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_tracks_download_count_response'
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/tracks/remixed:
+    get:
+      tags:
+      - users
+      description: Gets tracks owned by the user which have been remixed by another track
+      operationId: Get User Tracks Remixed
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          default: 0
+          type: integer
+          minimum: 0
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_tracks_remixed_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/withdrawals/download:
+    get:
+      tags:
+      - users
+      description: Downloads the USDC withdrawals the user has made as a CSV file
+      operationId: Download USDC Withdrawals as CSV
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content: {}
+  /users/{receiving_user_id}/emails/{grantor_user_id}/key:
+    get:
+      tags:
+      - users
+      description: Gets the encrypted key for email access between the receiving user and granting user.
+      operationId: Get User Email Key
+      parameters:
+      - name: receiving_user_id
+        in: path
+        description: ID of user receiving email access
+        required: true
+        schema:
+          type: string
+      - name: grantor_user_id
+        in: path
+        description: ID of user granting email access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/email_access_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/account/{wallet}:
+    get:
+      tags:
+      - users
+      description: Gets the account for a given user
+      operationId: Get User Account
+      parameters:
+      - name: wallet
+        in: path
+        description: Wallet address for the account
+        required: true
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_account_response'
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '404':
+          description: Not Found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/genre/top:
+    get:
+      tags:
+      - users
+      description: Get the Top Users for a Given Genre
+      operationId: Get Top Users In Genre
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: genre
+        in: query
+        description: List of Genres
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/top_genre_users_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/handle/{handle}/reposts:
+    get:
+      tags:
+      - users
+      description: Gets the user's reposts by the user handle
+      operationId: Get Reposts by Handle
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: handle
+        in: path
+        description: A User handle
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reposts'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/subscribers:
+    get:
+      tags:
+      - users
+      description: All users that subscribe to the provided users
+      operationId: Bulk Get Subscribers
+      parameters:
+      - name: ids
+        in: query
+        description: User IDs to fetch subscribers for
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulk_subscribers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+    post:
+      tags:
+      - users
+      description: Get all users that subscribe to the users listed in the JSON request
+      operationId: Bulk Get Subscribers via JSON request
+      parameters:
+      - name: ids
+        in: query
+        description: User IDs to fetch subscribers for
+        required: true
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulk_subscribers_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/top:
+    get:
+      tags:
+      - users
+      description: Get the Top Users having at least one track by follower count
+      operationId: Get Top Users
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/top_users_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/favorites/tracks:
+    get:
+      tags:
+      - users
+      description: Gets a user's favorite tracks
+      operationId: Get User Favorite Tracks
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track_library_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/feed:
+    get:
+      tags:
+      - users
+      description: Gets the feed for the user
+      operationId: Get User Feed
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: Controls whether the feed is limited to reposts, original content, or all items
+        schema:
+          type: string
+          default: all
+          enum:
+          - all
+          - repost
+          - original
+      - name: tracks_only
+        in: query
+        description: Limit feed to only tracks
+        schema:
+          type: boolean
+      - name: with_users
+        in: query
+        description: Include user data with feed items
+        schema:
+          type: boolean
+      - name: followee_user_id
+        in: query
+        description: A list of followed users to prioritize in feed generation
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_feed_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/library/albums:
+    get:
+      tags:
+      - users
+      summary: Fetch a user's full library playlists
+      description: Gets a user's saved/reposted/purchased/all albums
+      operationId: Get User Library Albums
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A user ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: type
+        in: query
+        description: 'The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite'
+        schema:
+          type: string
+          default: favorite
+          enum:
+          - all
+          - repost
+          - favorite
+          - purchase
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - added_date
+          - reposts
+          - saves
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collection_library_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/library/playlists:
+    get:
+      tags:
+      - users
+      summary: Fetch a user's full library playlists
+      description: Gets a user's saved/reposted/purchased/all playlists
+      operationId: Get User Library Playlists
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A user ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: type
+        in: query
+        description: 'The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite'
+        schema:
+          type: string
+          default: favorite
+          enum:
+          - all
+          - repost
+          - favorite
+          - purchase
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - added_date
+          - reposts
+          - saves
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/collection_library_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/library/tracks:
+    get:
+      tags:
+      - users
+      summary: Fetch a user's full library tracks
+      description: Gets a user's saved/reposted/purchased/all tracks
+      operationId: Get User Library Tracks
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A user ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: query
+        in: query
+        description: The filter query
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          enum:
+          - title
+          - artist_name
+          - release_date
+          - last_listen_date
+          - added_date
+          - plays
+          - reposts
+          - saves
+          - most_listens_by_user
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: type
+        in: query
+        description: 'The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite'
+        schema:
+          type: string
+          default: favorite
+          enum:
+          - all
+          - repost
+          - favorite
+          - purchase
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track_library_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/managed_users:
+    get:
+      tags:
+      - users
+      description: Gets a list of users managed by the given user
+      operationId: Get Managed Users
+      parameters:
+      - name: id
+        in: path
+        description: A user id for the manager
+        required: true
+        schema:
+          type: string
+      - name: is_approved
+        in: query
+        description: If true, only show users where the management request has been accepted. If false, only show those where the request was rejected. If omitted, shows all users regardless of approval status.
+        schema:
+          type: boolean
+      - name: is_revoked
+        in: query
+        description: If true, only show users where the management request has been revoked. If false, only show those with a pending or accepted request. Defaults to false.
+        schema:
+          type: boolean
+          default: false
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/managed_users_response'
+        '400':
+          description: Bad request
+          content: {}
+        '401':
+          description: Unauthorized
+          content: {}
+        '403':
+          description: Forbidden
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/purchasers/count:
+    get:
+      tags:
+      - users
+      description: Gets the list of users who have purchased content by the given user
+      operationId: Get purchasers count
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: content_type
+        in: query
+        description: Type of content to filter by (track or album)
+        schema:
+          type: string
+      - name: content_id
+        in: query
+        description: Filters for users who have purchased the given track or album ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchasers_count_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/purchases:
+    get:
+      tags:
+      - users
+      description: Gets the purchases the user has made
+      operationId: Get Purchases
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - content_title
+          - artist_name
+          - buyer_name
+          - date
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: content_ids
+        in: query
+        description: Filters purchases by track or album IDs
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchases_response'
+  /users/{id}/purchases/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of purchases the user has made
+      operationId: Get Purchases Count
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: content_ids
+        in: query
+        description: Filters purchases by track or album IDs
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchases_count_response'
+  /users/{id}/remixers/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of unique users who have remixed tracks by the given user, or a specific track by that user if provided
+      operationId: Get remixers count
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: track_id
+        in: query
+        description: Filters for remixers who have remixed the given track ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/remixers_count_response'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /users/{id}/sales:
+    get:
+      tags:
+      - users
+      description: Gets the sales the user has made
+      operationId: Get Sales
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: sort_method
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - content_title
+          - artist_name
+          - buyer_name
+          - date
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - name: content_ids
+        in: query
+        description: Filters purchases by track or album IDs
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchases_response'
+  /users/{id}/sales/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of sales the user has made
+      operationId: Get Sales Count
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      - name: content_ids
+        in: query
+        description: Filters purchases by track or album IDs
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/purchases_count_response'
+  /users/{id}/supporters/{supporter_user_id}:
+    get:
+      tags:
+      - users
+      description: Gets the specified supporter of the given user
+      operationId: Get Supporter
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: supporter_user_id
+        in: path
+        description: A User ID of a supporter
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_supporter'
+  /users/{id}/supporting/{supported_user_id}:
+    get:
+      tags:
+      - users
+      description: Gets the support from the given user to the supported user
+      operationId: Get Supporting
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: supported_user_id
+        in: path
+        description: A User ID of a supported user
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user making the request
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_supporting'
+  /users/{id}/transactions/audio:
+    get:
+      tags:
+      - users
+      description: Gets the user's $AUDIO transaction history within the App
+      operationId: Get Audio Transactions
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          default: date
+          enum:
+          - date
+          - transaction_type
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          default: desc
+          enum:
+          - asc
+          - desc
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_history_response'
+  /users/{id}/transactions/audio/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of the user's $AUDIO transaction history within the App
+      operationId: Get Audio Transaction Count
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_history_count_response'
+  /users/{id}/transactions/usdc:
+    get:
+      tags:
+      - users
+      description: Gets the user's $USDC transaction history within the App
+      operationId: Get USDC Transactions
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: sort_method
+        in: query
+        description: The sort method
+        schema:
+          type: string
+          default: date
+          enum:
+          - date
+          - transaction_type
+      - name: sort_direction
+        in: query
+        description: The sort direction
+        schema:
+          type: string
+          default: desc
+          enum:
+          - asc
+          - desc
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filters the type of transactions to show
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - purchase_content
+            - transfer
+            - internal_transfer
+            - prepare_withdrawal
+            - recover_withdrawal
+            - withdrawal
+            - purchase_stripe
+      - name: include_system_transactions
+        in: query
+        description: Include intermediate system transactions in the results
+        schema:
+          type: boolean
+          default: false
+      - name: method
+        in: query
+        description: Filters the method (sent/received) of transactions to show
+        schema:
+          type: string
+          enum:
+          - send
+          - receive
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_history_response'
+  /users/{id}/transactions/usdc/count:
+    get:
+      tags:
+      - users
+      description: Gets the count of the user's $USDC transaction history within the App
+      operationId: Get USDC Transaction Count
+      parameters:
+      - name: id
+        in: path
+        description: A User ID
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filters the type of transactions to show
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - purchase_content
+            - transfer
+            - internal_transfer
+            - prepare_withdrawal
+            - recover_withdrawal
+            - withdrawal
+            - purchase_stripe
+      - name: include_system_transactions
+        in: query
+        description: Include intermediate system transactions in the results
+        schema:
+          type: boolean
+          default: false
+      - name: method
+        in: query
+        description: Filters the method (sent/received) of transactions to show
+        schema:
+          type: string
+          enum:
+          - send
+          - receive
+      - name: Encoded-Data-Message
+        in: header
+        description: The data that was signed by the user for signature recovery
+        schema:
+          type: string
+      - name: Encoded-Data-Signature
+        in: header
+        description: The signature of data, used for signature recovery
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_history_count_response'
+  /me:
+    get:
+      tags:
+      - users
+      summary: Get authenticated user
+      description: Returns the full profile of the currently authenticated user based on the Bearer access token obtained via OAuth.
+      operationId: Get Me
+      security:
+      - OAuth2:
+        - read
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user_response_single'
+        '401':
+          description: Missing or invalid access token
+          content: {}
+        '404':
+          description: User not found
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+components:
+  schemas:
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    track:
+      required:
+      - access
+      - artwork
+      - blocknumber
+      - comment_count
+      - cover_art_sizes
+      - created_at
+      - download
+      - duration
+      - favorite_count
+      - field_visibility
+      - followee_favorites
+      - followee_reposts
+      - genre
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_available
+      - is_delete
+      - is_download_gated
+      - is_downloadable
+      - is_original_available
+      - is_owned_by_user
+      - is_scheduled_release
+      - is_stream_gated
+      - is_unlisted
+      - permalink
+      - play_count
+      - preview
+      - remix_of
+      - repost_count
+      - route_id
+      - stream
+      - title
+      - track_segments
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/track_artwork'
+        description:
+          type: string
+        genre:
+          type: string
+        id:
+          type: string
+        track_cid:
+          type: string
+        preview_cid:
+          type: string
+        orig_file_cid:
+          type: string
+        orig_filename:
+          type: string
+        is_original_available:
+          type: boolean
+        mood:
+          type: string
+        release_date:
+          type: string
+          format: date
+        remix_of:
+          $ref: '#/components/schemas/remix_parent'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        comment_count:
+          type: integer
+        tags:
+          type: string
+        title:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        duration:
+          type: integer
+        is_downloadable:
+          type: boolean
+        play_count:
+          type: integer
+        permalink:
+          type: string
+        is_streamable:
+          type: boolean
+        ddex_app:
+          type: string
+        playlists_containing_track:
+          type: array
+          items:
+            type: integer
+        pinned_comment_id:
+          type: integer
+        album_backlink:
+          $ref: '#/components/schemas/album_backlink'
+        access:
+          type: object
+          description: Describes what access the given user has
+          allOf:
+          - $ref: '#/components/schemas/access'
+        blocknumber:
+          type: integer
+          description: The blocknumber this track was last updated
+        create_date:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/cover_art'
+        created_at:
+          type: string
+        credits_splits:
+          type: string
+        isrc:
+          type: string
+        license:
+          type: string
+        iswc:
+          type: string
+        field_visibility:
+          $ref: '#/components/schemas/field_visibility'
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        has_current_user_reposted:
+          type: boolean
+        is_scheduled_release:
+          type: boolean
+        is_unlisted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        route_id:
+          type: string
+        stem_of:
+          $ref: '#/components/schemas/stem_parent'
+        track_segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_segment'
+        updated_at:
+          type: string
+        user_id:
+          type: string
+        is_delete:
+          type: boolean
+        cover_art:
+          type: string
+        is_available:
+          type: boolean
+        ai_attribution_user_id:
+          type: integer
+        allowed_api_keys:
+          type: array
+          items:
+            type: string
+        audio_upload_id:
+          type: string
+        preview_start_seconds:
+          type: number
+        bpm:
+          type: number
+        is_custom_bpm:
+          type: boolean
+        musical_key:
+          type: string
+        is_custom_musical_key:
+          type: boolean
+        audio_analysis_error_count:
+          type: integer
+        comments_disabled:
+          type: boolean
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        resource_contributors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ddex_resource_contributor'
+        indirect_resource_contributors:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ddex_resource_contributor'
+        rights_controller:
+          nullable: true
+          $ref: '#/components/schemas/ddex_rights_controller'
+        copyright_line:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+        producer_copyright_line:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+        parental_warning_type:
+          type: string
+          nullable: true
+        is_stream_gated:
+          type: boolean
+          description: Whether or not the owner has restricted streaming behind an access gate
+        access_authorities:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_download_gated:
+          type: boolean
+          description: Whether or not the owner has restricted downloading behind an access gate
+        download_conditions:
+          type: object
+          description: How to unlock the track download
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        cover_original_song_title:
+          type: string
+        cover_original_artist:
+          type: string
+        is_owned_by_user:
+          type: boolean
+          description: Indicates whether the track is owned by the user for MRI sake
+        stream:
+          $ref: '#/components/schemas/url_with_mirrors'
+        download:
+          $ref: '#/components/schemas/url_with_mirrors'
+        preview:
+          $ref: '#/components/schemas/url_with_mirrors'
+    access:
+      required:
+      - download
+      - stream
+      type: object
+      properties:
+        stream:
+          type: boolean
+        download:
+          type: boolean
+    email_access:
+      required:
+      - created_at
+      - email_owner_user_id
+      - encrypted_key
+      - grantor_user_id
+      - id
+      - is_initial
+      - receiving_user_id
+      - updated_at
+      type: object
+      properties:
+        id:
+          type: integer
+        email_owner_user_id:
+          type: integer
+        receiving_user_id:
+          type: integer
+        grantor_user_id:
+          type: integer
+        encrypted_key:
+          type: string
+        is_initial:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    connected_wallets_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/connected_wallets'
+    field_visibility:
+      required:
+      - genre
+      - mood
+      - play_count
+      - remixes
+      - share
+      - tags
+      type: object
+      properties:
+        mood:
+          type: boolean
+        tags:
+          type: boolean
+        genre:
+          type: boolean
+        share:
+          type: boolean
+        play_count:
+          type: boolean
+        remixes:
+          type: boolean
+    user_feed_item:
+      oneOf:
+      - $ref: '#/components/schemas/track_feed_item'
+      - $ref: '#/components/schemas/playlist_feed_item'
+      discriminator:
+        propertyName: type
+        mapping:
+          track: '#/components/schemas/track_feed_item'
+          playlist: '#/components/schemas/playlist_feed_item'
+    playlist_library_explore_playlist_identifier:
+      type: object
+      description: Reference to an explore playlist
+      required:
+      - type
+      - playlist_id
+      properties:
+        type:
+          type: string
+          enum:
+          - explore_playlist
+        playlist_id:
+          type: string
+          description: Explore playlist identifier
+    following_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    activity:
+      required:
+      - class
+      - item
+      - item_type
+      - timestamp
+      type: object
+      properties:
+        timestamp:
+          type: string
+        item_type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+        item:
+          type: object
+          properties: {}
+        class:
+          type: string
+      discriminator:
+        propertyName: class
+    user_account_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/account'
+    user_coin_with_accounts:
+      type: object
+      required:
+      - mint
+      - ticker
+      - decimals
+      - balance
+      - balance_usd
+      - accounts
+      properties:
+        mint:
+          type: string
+          description: The coin mint address
+          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
+        ticker:
+          type: string
+          description: The coin symbol
+          example: $AUDIO
+        decimals:
+          type: integer
+          description: The number of decimals for the coin
+          example: 8
+        logo_uri:
+          type: string
+          nullable: true
+          description: URL to the coin's logo image
+          example: https://example.com/logo.png
+        balance:
+          type: integer
+          description: The total balance of the coin in the user's account (in wei)
+          example: 1000000000
+        balance_usd:
+          type: number
+          description: The total balance of the coin in the user's account in USD
+          example: 1.23
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_coin_account'
+    sales_json_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/sales_json_content'
+    tracks_count_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: integer
+          description: The total number of tracks matching the filter criteria
+          example: 15
+    remix_parent:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix'
+    playlist_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    get_supporters:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporter'
+    supporting:
+      required:
+      - amount
+      - rank
+      - receiver
+      type: object
+      properties:
+        rank:
+          type: integer
+        amount:
+          type: string
+        receiver:
+          $ref: '#/components/schemas/user'
+    track_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    user_comments_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment'
+        related:
+          $ref: '#/components/schemas/related'
+    connected_wallets:
+      required:
+      - erc_wallets
+      - spl_wallets
+      type: object
+      properties:
+        erc_wallets:
+          type: array
+          items:
+            type: string
+        spl_wallets:
+          type: array
+          items:
+            type: string
+    collection_library_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/collection_activity_without_tracks'
+    reposts:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/activity'
+    transaction_details:
+      required:
+      - balance
+      - change
+      - metadata
+      - method
+      - signature
+      - transaction_date
+      - transaction_type
+      - user_bank
+      type: object
+      properties:
+        transaction_date:
+          type: string
+        transaction_type:
+          type: string
+        method:
+          type: string
+        signature:
+          type: string
+        user_bank:
+          type: string
+        change:
+          type: string
+        balance:
+          type: string
+        metadata:
+          type: object
+          properties: {}
+      discriminator:
+        propertyName: transaction_type
+    favorites_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+    sales_aggregate:
+      required:
+      - content_id
+      - content_type
+      - purchase_count
+      type: object
+      properties:
+        content_type:
+          type: string
+        content_id:
+          type: string
+        purchase_count:
+          type: integer
+    supporter:
+      required:
+      - amount
+      - rank
+      - sender
+      type: object
+      properties:
+        rank:
+          type: integer
+        amount:
+          type: string
+        sender:
+          $ref: '#/components/schemas/user'
+    subscribers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    ddex_rights_controller:
+      type: object
+      description: DDEX rights controller
+      required:
+      - name
+      - roles
+      properties:
+        name:
+          type: string
+          minLength: 1
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+        rights_share_unknown:
+          type: string
+          description: Optional
+    user_feed_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_feed_item'
+    user_track_listen_counts_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/wild_month_model'
+    token_gate:
+      required:
+      - token_gate
+      type: object
+      properties:
+        token_gate:
+          type: object
+          description: Must hold an NFT of the given collection to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_token_gate'
+    comment:
+      required:
+      - created_at
+      - entity_id
+      - entity_type
+      - id
+      - is_edited
+      - message
+      - react_count
+      - reply_count
+      type: object
+      properties:
+        id:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          $ref: '#/components/schemas/comment_entity_type'
+        user_id:
+          type: string
+        message:
+          type: string
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention'
+        track_timestamp_s:
+          type: integer
+        react_count:
+          type: integer
+        reply_count:
+          type: integer
+        is_edited:
+          type: boolean
+        is_current_user_reacted:
+          type: boolean
+        is_artist_reacted:
+          type: boolean
+        is_tombstone:
+          type: boolean
+        is_muted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/reply_comment'
+        parent_comment_id:
+          type: integer
+    tip_gate:
+      required:
+      - tip_user_id
+      type: object
+      properties:
+        tip_user_id:
+          type: integer
+          description: Must tip the given user ID to unlock
+    user_response_single:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/user'
+    usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+          description: The price in USDC needed to unlock
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_split'
+    album_backlink:
+      required:
+      - permalink
+      - playlist_id
+      - playlist_name
+      type: object
+      properties:
+        playlist_id:
+          type: integer
+        playlist_name:
+          type: string
+        permalink:
+          type: string
+    managers_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_manager'
+    payment_split:
+      required:
+      - user_id
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+    authorized_app:
+      required:
+      - address
+      - grant_created_at
+      - grant_updated_at
+      - grantor_user_id
+      - name
+      type: object
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
+        grantor_user_id:
+          type: string
+        grant_created_at:
+          type: string
+        grant_updated_at:
+          type: string
+    sales_aggregate_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/sales_aggregate'
+    playlist_feed_item:
+      required:
+      - item
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          $ref: '#/components/schemas/playlist'
+    track_feed_item:
+      required:
+      - item
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          $ref: '#/components/schemas/track'
+    sales_json_content:
+      type: object
+      properties:
+        sales:
+          type: array
+          items:
+            $ref: '#/components/schemas/sale_json'
+    remix:
+      required:
+      - has_remix_author_reposted
+      - has_remix_author_saved
+      - parent_track_id
+      - user
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        has_remix_author_reposted:
+          type: boolean
+        has_remix_author_saved:
+          type: boolean
+    create_grant_request_body:
+      type: object
+      required:
+      - app_api_key
+      properties:
+        app_api_key:
+          type: string
+          description: The developer app address (API key) to grant authorization to
+    update_user_request_body:
+      type: object
+      description: Request body for updating user profile. All fields are optional.
+      properties:
+        handle:
+          type: string
+          description: User handle. Can only be set if the user does not already have a handle.
+        name:
+          type: string
+          description: Display name
+        bio:
+          type: string
+          description: User bio
+          maxLength: 256
+        location:
+          type: string
+          description: User location
+        website:
+          type: string
+          description: Website URL
+          format: uri
+        donation:
+          type: string
+          description: Donation link
+        twitter_handle:
+          type: string
+          description: Twitter handle (without @)
+        instagram_handle:
+          type: string
+          description: Instagram handle (without @)
+        tiktok_handle:
+          type: string
+          description: TikTok handle (without @)
+        profile_picture:
+          type: string
+          description: Profile picture CID or URL
+        profile_picture_sizes:
+          type: string
+          description: Profile picture sizes metadata
+        cover_photo:
+          type: string
+          description: Cover photo CID or URL
+        cover_photo_sizes:
+          type: string
+          description: Cover photo sizes metadata
+        profile_type:
+          type: string
+          nullable: true
+          enum:
+          - label
+          description: Type of profile (e.g., 'label' for record labels)
+        is_deactivated:
+          type: boolean
+          description: Whether the user is deactivated
+        artist_pick_track_id:
+          type: string
+          description: Track hash ID to feature as artist pick
+          example: x5pJ3Az
+        allow_ai_attribution:
+          type: boolean
+          description: Whether to allow AI attribution
+        spl_usdc_payout_wallet:
+          type: string
+          description: Solana USDC payout wallet address
+        coin_flair_mint:
+          type: string
+          description: Coin flair mint address
+        playlist_library:
+          $ref: '#/components/schemas/user_playlist_library'
+        events:
+          type: object
+          description: User events for tracking referrals and mobile users
+          properties:
+            referrer:
+              type: string
+              description: Hash ID of the user who referred this user
+              example: k9Xm5Pz
+            is_mobile_user:
+              type: boolean
+              description: Whether the user is on mobile
+    managed_user:
+      required:
+      - grant
+      - user
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+        grant:
+          $ref: '#/components/schemas/grant'
+    user_search:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    managed_users_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/managed_user'
+    collectibles:
+      type: object
+      properties:
+        data:
+          type: object
+          properties: {}
+          description: Raw collectibles JSON structure generated by client
+    authorized_apps:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/authorized_app'
+    access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    bulk_subscribers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_subscribers'
+    wild_month_model:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/monthly_aggregate_play'
+    challenge_response:
+      required:
+      - amount
+      - challenge_id
+      - challenge_type
+      - disbursed_amount
+      - is_active
+      - is_complete
+      - is_disbursed
+      - metadata
+      - user_id
+      type: object
+      properties:
+        challenge_id:
+          type: string
+        user_id:
+          type: string
+        specifier:
+          type: string
+        is_complete:
+          type: boolean
+        is_active:
+          type: boolean
+        is_disbursed:
+          type: boolean
+        current_step_count:
+          type: integer
+        max_steps:
+          type: integer
+        challenge_type:
+          type: string
+        amount:
+          type: string
+        disbursed_amount:
+          type: integer
+        cooldown_days:
+          type: integer
+        metadata:
+          type: object
+          properties: {}
+    mutual_followers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    user_coin:
+      required:
+      - mint
+      - ticker
+      - decimals
+      - owner_id
+      - balance
+      - has_discord
+      - balance_usd
+      type: object
+      properties:
+        mint:
+          type: string
+          description: The coin mint address
+          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
+        ticker:
+          type: string
+          description: The coin symbol
+          example: $AUDIO
+        decimals:
+          type: integer
+          description: The number of decimals for the coin
+          example: 8
+        owner_id:
+          type: string
+          description: The ID of the user associated with the coin
+          example: 7eP5n
+        logo_uri:
+          type: string
+          nullable: true
+          description: URL to the coin's logo image
+          example: https://example.com/logo.png
+        banner_image_url:
+          type: string
+          nullable: true
+          description: URL to the coin's banner image
+          example: https://example.com/banner.png
+        has_discord:
+          type: boolean
+          description: Whether the coin has a Discord server
+          example: true
+        balance:
+          type: integer
+          description: The balance of the coin in the user's account (in wei)
+          example: 1000000000
+        balance_usd:
+          type: number
+          description: The balance of the coin in the user's account in USD
+          example: 1.23
+    reply_comment:
+      required:
+      - created_at
+      - entity_id
+      - entity_type
+      - id
+      - is_edited
+      - message
+      - react_count
+      - user_id
+      type: object
+      properties:
+        id:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          $ref: '#/components/schemas/comment_entity_type'
+        user_id:
+          type: string
+        message:
+          type: string
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention'
+        track_timestamp_s:
+          type: integer
+        react_count:
+          type: integer
+        is_edited:
+          type: boolean
+        is_current_user_reacted:
+          type: boolean
+        is_artist_reacted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        parent_comment_id:
+          type: integer
+    user_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    user_ids_addresses_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_id_address'
+    purchasers_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    decoded_user_token:
+      required:
+      - apiKey
+      - email
+      - handle
+      - iat
+      - name
+      - sub
+      - userId
+      - verified
+      type: object
+      properties:
+        apiKey:
+          type: string
+        userId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        handle:
+          type: string
+        verified:
+          type: boolean
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        sub:
+          type: string
+        iat:
+          type: string
+    user_coins_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_coin'
+    comment_entity_type:
+      type: string
+      description: Type of entity that can be commented on
+      enum:
+      - Track
+    collection_activity_without_tracks:
+      allOf:
+      - $ref: '#/components/schemas/activity'
+      - required:
+        - item
+        - item_type
+        type: object
+        properties:
+          item_type:
+            type: string
+            example: playlist
+            enum:
+            - playlist
+          item:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    stem_parent:
+      required:
+      - category
+      - parent_track_id
+      type: object
+      properties:
+        category:
+          type: string
+        parent_track_id:
+          type: integer
+    ddex_copyright:
+      type: object
+      required:
+      - year
+      - text
+      properties:
+        year:
+          type: string
+          minLength: 4
+          maxLength: 4
+          description: Copyright year (4 characters)
+        text:
+          type: string
+          minLength: 1
+          description: Copyright text
+    get_supported_users:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporting'
+    get_supporter:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/supporter'
+    track_library_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_activity'
+    extended_token_gate:
+      required:
+      - token_mint
+      - token_amount
+      type: object
+      properties:
+        token_mint:
+          type: string
+          description: The mint of the token needed to unlock
+        token_amount:
+          type: integer
+          description: The amount of the token needed to unlock
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+    balance_history_data_point:
+      type: object
+      required:
+      - timestamp
+      - balance_usd
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp in seconds
+          example: 1704067200
+        balance_usd:
+          type: number
+          format: double
+          description: Total portfolio balance in USD at this timestamp
+          example: 1234.56
+    ddex_resource_contributor:
+      type: object
+      required:
+      - name
+      - roles
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Contributor name
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Contributor roles
+        sequence_number:
+          type: integer
+          minimum: 0
+          description: Sequence number for ordering
+    comment_mention:
+      required:
+      - handle
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: integer
+        handle:
+          type: string
+    playlist:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
+          type: string
+        permalink:
+          type: string
+        id:
+          type: string
+        is_album:
+          type: boolean
+        is_image_autogenerated:
+          type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+          format: date
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type: string
+          nullable: true
+    top_users_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    related_artist_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    favorite:
+      required:
+      - created_at
+      - favorite_item_id
+      - favorite_type
+      - user_id
+      type: object
+      properties:
+        favorite_item_id:
+          type: string
+        favorite_type:
+          type: string
+        user_id:
+          type: string
+        created_at:
+          type: string
+    account_collection_user:
+      required:
+      - handle
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+        handle:
+          type: string
+        is_deactivated:
+          type: boolean
+    listen_count:
+      type: object
+      properties:
+        trackId:
+          type: integer
+        date:
+          type: string
+        listens:
+          type: integer
+    user_coin_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/user_coin_with_accounts'
+    followers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    albums_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    playlist_library_playlist_identifier:
+      type: object
+      description: Reference to a playlist
+      required:
+      - type
+      - playlist_id
+      properties:
+        type:
+          type: string
+          enum:
+          - playlist
+        playlist_id:
+          type: integer
+          description: Playlist ID
+          example: 1234
+    playlists_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    remixers_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    get_supporting:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/supporting'
+    account:
+      required:
+      - playlists
+      - track_save_count
+      - user
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+        playlists:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_collection'
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        track_save_count:
+          type: integer
+    cover_art:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    remixers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    top_genre_users_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    purchasers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    user_tracks_remixed_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/remixed_track_aggregate'
+    approve_grant_request_body:
+      type: object
+      required:
+      - grantor_user_id
+      properties:
+        grantor_user_id:
+          type: string
+          description: The user ID of the child user who proposed the manager (grantor)
+    account_collection:
+      required:
+      - id
+      - is_album
+      - name
+      - permalink
+      - user
+      type: object
+      properties:
+        id:
+          type: string
+        is_album:
+          type: boolean
+        name:
+          type: string
+        permalink:
+          type: string
+        user:
+          $ref: '#/components/schemas/account_collection_user'
+    create_user_request_body:
+      type: object
+      required:
+      - handle
+      - wallet
+      properties:
+        user_id:
+          type: string
+          description: Optional user hash ID (will be generated if not provided)
+          example: p9Km2Lx
+        handle:
+          type: string
+          description: User handle (unique username)
+          example: newartist
+        wallet:
+          type: string
+          description: Wallet address (required)
+          example: 0x1234...
+        name:
+          type: string
+          description: Display name
+          example: New Artist
+        bio:
+          type: string
+          description: User bio
+          maxLength: 256
+        location:
+          type: string
+          description: User location
+        website:
+          type: string
+          description: Website URL
+          format: uri
+        donation:
+          type: string
+          description: Donation link
+        twitter_handle:
+          type: string
+          description: Twitter handle (without @)
+        instagram_handle:
+          type: string
+          description: Instagram handle (without @)
+        tiktok_handle:
+          type: string
+          description: TikTok handle (without @)
+        profile_picture:
+          type: string
+          description: Profile picture CID or URL
+        profile_picture_sizes:
+          type: string
+          description: Profile picture sizes metadata
+        cover_photo:
+          type: string
+          description: Cover photo CID or URL
+        cover_photo_sizes:
+          type: string
+          description: Cover photo sizes metadata
+        profile_type:
+          type: string
+          nullable: true
+          enum:
+          - label
+          description: Type of profile (e.g., 'label' for record labels)
+        allow_ai_attribution:
+          type: boolean
+          description: Whether to allow AI attribution
+        spl_usdc_payout_wallet:
+          type: string
+          description: Solana USDC payout wallet address
+        playlist_library:
+          $ref: '#/components/schemas/user_playlist_library'
+        events:
+          type: object
+          description: User events for tracking referrals and mobile users
+          properties:
+            referrer:
+              type: string
+              description: Hash ID of the user who referred this user
+              example: k9Xm5Pz
+            is_mobile_user:
+              type: boolean
+              description: Whether the user is on mobile
+    user_subscribers:
+      required:
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
+        subscriber_ids:
+          type: array
+          items:
+            type: string
+    user_manager:
+      required:
+      - grant
+      - manager
+      type: object
+      properties:
+        manager:
+          $ref: '#/components/schemas/user'
+        grant:
+          $ref: '#/components/schemas/grant'
+    playlist_added_timestamp:
+      required:
+      - timestamp
+      - track_id
+      type: object
+      properties:
+        metadata_timestamp:
+          type: integer
+          description: Optional. Metadata timestamp for when the track was added to the playlist.
+        timestamp:
+          type: integer
+        track_id:
+          type: string
+    remixed_track_aggregate:
+      required:
+      - remix_count
+      - title
+      - track_id
+      type: object
+      properties:
+        track_id:
+          type: string
+        title:
+          type: string
+        remix_count:
+          type: integer
+    get_challenges:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/challenge_response'
+    email_access_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/email_access'
+    track_activity:
+      allOf:
+      - $ref: '#/components/schemas/activity'
+      - required:
+        - item
+        - item_type
+        type: object
+        properties:
+          item_type:
+            type: string
+            example: track
+            enum:
+            - track
+          item:
+            $ref: '#/components/schemas/track'
+    purchase_split:
+      required:
+      - amount
+      - payout_wallet
+      type: object
+      properties:
+        user_id:
+          type: integer
+        payout_wallet:
+          type: string
+        amount:
+          type: string
+    verify_token:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/decoded_user_token'
+    track_segment:
+      required:
+      - duration
+      - multihash
+      type: object
+      properties:
+        duration:
+          type: number
+        multihash:
+          type: string
+    playlist_without_tracks:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
+          type: string
+        permalink:
+          type: string
+        id:
+          type: string
+        is_album:
+          type: boolean
+        is_image_autogenerated:
+          type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type: string
+          nullable: true
+    purchase_gate:
+      required:
+      - usdc_purchase
+      type: object
+      properties:
+        usdc_purchase:
+          type: object
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/usdc_gate'
+    purchases_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    related:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        playlists:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist'
+    purchase:
+      required:
+      - access
+      - amount
+      - buyer_user_id
+      - content_id
+      - content_type
+      - created_at
+      - extra_amount
+      - seller_user_id
+      - signature
+      - slot
+      - splits
+      - updated_at
+      type: object
+      properties:
+        slot:
+          type: integer
+        signature:
+          type: string
+        seller_user_id:
+          type: string
+        buyer_user_id:
+          type: string
+        amount:
+          type: string
+        extra_amount:
+          type: string
+        content_type:
+          type: string
+        content_id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        access:
+          type: string
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/purchase_split'
+      discriminator:
+        propertyName: content_type
+    transaction_history_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction_details'
+    url_with_mirrors:
+      required:
+      - mirrors
+      type: object
+      properties:
+        url:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    user_tracks_download_count_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: integer
+          format: int64
+          description: Total download count for all tracks (and stems) owned by the user
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    user_coin_account:
+      type: object
+      required:
+      - account
+      - owner
+      - balance
+      - balance_usd
+      - is_in_app_wallet
+      properties:
+        account:
+          type: string
+          description: The token account address
+          example: CTyFguG69kwYrzk24P3UuBvY1rR5atu9kf2S6XEwAU8X
+        owner:
+          type: string
+          description: The owner wallet of the token account
+          example: HzZ3EKACbH6XEHs59Rt1adVzUKv5cTDE9o9YWFaMhwpF
+        balance:
+          type: integer
+          description: The balance of the coin in the user's account (in wei)
+          example: 1000000000
+        balance_usd:
+          type: number
+          description: The balance of the coin in the user's account in USD
+          example: 1.23
+        is_in_app_wallet:
+          type: boolean
+          description: Whether the account is in the user's in-app wallet
+          example: true
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+    user_id_address:
+      type: object
+      required:
+      - user_id
+      - address
+      properties:
+        user_id:
+          type: string
+        address:
+          type: string
+    add_manager_request_body:
+      type: object
+      required:
+      - manager_user_id
+      properties:
+        manager_user_id:
+          type: string
+          description: The user ID of the user to add as manager
+    balance_history_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/balance_history_data_point'
+    purchases_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/purchase'
+    create_user_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+        user_id:
+          type: string
+          description: The ID of the created user
+    user_playlist_library:
+      type: object
+      description: User's playlist library with support for folders and playlists
+      required:
+      - contents
+      properties:
+        contents:
+          type: array
+          description: Array of folders and playlist identifiers
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/playlist_library_folder'
+            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
+            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
+    collectibles_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/collectibles'
+    user:
+      required:
+      - album_count
+      - allow_ai_attribution
+      - artist_coin_badge
+      - associated_sol_wallets_balance
+      - associated_wallets_balance
+      - balance
+      - blocknumber
+      - created_at
+      - current_user_followee_follow_count
+      - does_current_user_follow
+      - does_current_user_subscribe
+      - does_follow_current_user
+      - erc_wallet
+      - followee_count
+      - follower_count
+      - handle
+      - handle_lc
+      - has_collectibles
+      - id
+      - is_available
+      - is_deactivated
+      - is_storage_v2
+      - is_verified
+      - name
+      - playlist_count
+      - repost_count
+      - spl_wallet
+      - spl_usdc_wallet
+      - supporter_count
+      - supporting_count
+      - total_audio_balance
+      - total_balance
+      - track_count
+      - updated_at
+      - verified_with_instagram
+      - verified_with_tiktok
+      - verified_with_twitter
+      - wallet
+      - waudio_balance
+      type: object
+      properties:
+        album_count:
+          type: integer
+        artist_pick_track_id:
+          type: string
+        artist_coin_badge:
+          type: object
+          properties:
+            mint:
+              type: string
+            logo_uri:
+              type: string
+            banner_image_url:
+              type: string
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+        coin_flair_mint:
+          type: string
+        bio:
+          type: string
+        cover_photo:
+          $ref: '#/components/schemas/cover_photo'
+        followee_count:
+          type: integer
+        follower_count:
+          type: integer
+        handle:
+          type: string
+        id:
+          type: string
+        is_verified:
+          type: boolean
+        twitter_handle:
+          type: string
+        instagram_handle:
+          type: string
+        tiktok_handle:
+          type: string
+        verified_with_twitter:
+          type: boolean
+        verified_with_instagram:
+          type: boolean
+        verified_with_tiktok:
+          type: boolean
+        website:
+          type: string
+        donation:
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        playlist_count:
+          type: integer
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        repost_count:
+          type: integer
+        track_count:
+          type: integer
+        is_deactivated:
+          type: boolean
+        is_available:
+          type: boolean
+        erc_wallet:
+          type: string
+        spl_wallet:
+          type: string
+        spl_usdc_wallet:
+          type: string
+        spl_usdc_payout_wallet:
+          type: string
+        supporter_count:
+          type: integer
+        supporting_count:
+          type: integer
+        total_audio_balance:
+          type: integer
+        wallet:
+          type: string
+          description: The user's Ethereum wallet address for their account
+        balance:
+          type: string
+        associated_wallets_balance:
+          type: string
+        total_balance:
+          type: string
+        waudio_balance:
+          type: string
+        associated_sol_wallets_balance:
+          type: string
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        is_storage_v2:
+          type: boolean
+        creator_node_endpoint:
+          type: string
+        current_user_followee_follow_count:
+          type: integer
+        does_current_user_follow:
+          type: boolean
+        does_current_user_subscribe:
+          type: boolean
+        does_follow_current_user:
+          type: boolean
+        handle_lc:
+          type: string
+        updated_at:
+          type: string
+        cover_photo_sizes:
+          type: string
+        cover_photo_cids:
+          $ref: '#/components/schemas/cover_photo'
+        cover_photo_legacy:
+          type: string
+        profile_picture_sizes:
+          type: string
+        profile_picture_cids:
+          $ref: '#/components/schemas/profile_picture'
+        profile_picture_legacy:
+          type: string
+        has_collectibles:
+          type: boolean
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        allow_ai_attribution:
+          type: boolean
+        profile_type:
+          type: string
+    follow_gate:
+      required:
+      - follow_user_id
+      type: object
+      properties:
+        follow_user_id:
+          type: integer
+          description: Must follow the given user ID to unlock
+    sale_json:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the content (track/album/playlist)
+        link:
+          type: string
+          description: URL link to the content
+        purchased_by:
+          type: string
+          description: Name of the buyer
+        buyer_user_id:
+          type: integer
+          description: User ID of the buyer
+        date:
+          type: string
+          description: ISO format date string of when the sale occurred
+        sale_price:
+          type: number
+          description: Base sale price in USDC
+        network_fee:
+          type: number
+          description: Network fee deducted from sale in USDC
+        pay_extra:
+          type: number
+          description: Extra amount paid by buyer in USDC
+        total:
+          type: number
+          description: Total amount received by seller in USDC
+        country:
+          type: string
+          description: Country code where purchase was made
+        encrypted_email:
+          type: string
+          description: Encrypted email of buyer if available
+        encrypted_key:
+          type: string
+          description: Encrypted key for decrypting the buyer's email
+        is_initial:
+          type: boolean
+          description: Whether this is an initial encryption from the backfill
+        pubkey_base64:
+          type: string
+          description: Base64 encoded public key of the buyer
+    transaction_history_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    repost:
+      required:
+      - repost_item_id
+      - repost_type
+      - user_id
+      type: object
+      properties:
+        repost_item_id:
+          type: string
+        repost_type:
+          type: string
+        user_id:
+          type: string
+    grant:
+      required:
+      - created_at
+      - grantee_address
+      - is_approved
+      - is_revoked
+      - updated_at
+      - user_id
+      type: object
+      properties:
+        grantee_address:
+          type: string
+        user_id:
+          type: string
+        is_revoked:
+          type: boolean
+        is_approved:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    playlist_library_folder:
+      type: object
+      description: Folder containing nested playlists and folders
+      required:
+      - id
+      - type
+      - name
+      - contents
+      properties:
+        id:
+          type: string
+          description: Unique folder identifier
+        type:
+          type: string
+          enum:
+          - folder
+        name:
+          type: string
+          description: Folder name
+        contents:
+          type: array
+          description: Nested folders and playlist identifiers
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/playlist_library_folder'
+            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
+            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
+    tracks:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+    history_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_activity'
+    monthly_aggregate_play:
+      type: object
+      properties:
+        totalListens:
+          type: integer
+        trackIds:
+          type: array
+          items:
+            type: integer
+        listenCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/listen_count'
+    tags_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: 'OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+
+        Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+
+        **Scopes:**
+
+        - `read` — Read-only access to the user''s public and private data.
+
+        - `write` — Read and write access, allowing mutations on behalf of the user.
+
+
+        **PKCE Required:**
+
+        All authorization code requests must include `code_challenge` and `code_challenge_method=S256` parameters.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/oauth/authorize
+          tokenUrl: /v1/oauth/token
+          scopes:
+            read: Read-only access to user data
+            write: Read and write access on behalf of the user
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication with Ethereum private key for write operations.
+
+
+        **Authentication**
+
+
+        Use HTTP Basic Authentication where the password field contains your Ethereum private key:
+
+        ```
+
+        Authorization: Basic <base64(username:privatekey)>
+
+        ```
+
+
+        The username can be any value. The password must be your Ethereum private key in hex format (with or without 0x prefix).
+
+
+        Example:
+
+        ```
+
+        Authorization: Basic dXNlcm5hbWU6MHgxMjM0NTY3ODkwYWJjZGVmLi4u
+
+        ```
+
+
+        **How it works:**
+
+        1. The API decodes the Basic Auth credentials
+
+        2. Extracts the private key from the password field
+
+        3. Derives the Ethereum address from the private key
+
+        4. Uses this address for authorization checks
+
+
+        **Authorization**
+
+
+        The derived wallet address must be either:
+
+        - The wallet of the user being acted upon (direct ownership)
+
+        - A wallet with an approved, non-revoked grant for the user (manager mode)
+
+        '
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The API bearer token or OAuth JWT token for the user.
+
+        '
+x-original-swagger-version: '2.0'

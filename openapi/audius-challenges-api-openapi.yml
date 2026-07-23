@@ -1,0 +1,345 @@
+openapi: 3.0.1
+info:
+  title: Audius challenges API
+  description: '## Overview
+
+
+    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
+
+
+    ## Key Capabilities
+
+
+    - **Users** — Profiles, followers, following, search
+
+    - **Tracks** — Search, trending, stream, favorites, reposts
+
+    - **Playlists** — Create, update, browse, curate
+
+    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
+
+    - **Explore** — Trending content, charts, discovery
+
+    - **Comments, Tips, Rewards** — Social features and engagement
+
+
+    ## Authentication
+
+
+    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
+
+    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
+
+
+    ## Resources
+
+
+    - [API Docs](https://docs.audius.co/api) — Full reference and guides
+
+    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
+
+    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
+
+    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
+
+    '
+  version: '1.0'
+  contact:
+    name: Audius
+    url: https://audius.co
+  x-logo:
+    url: https://audius.co/favicons/favicon.ico
+servers:
+- url: https://api.audius.co/v1
+  description: Production
+tags:
+- name: challenges
+  description: Challenge related operations
+paths:
+  /challenges/undisbursed:
+    get:
+      tags:
+      - challenges
+      description: Get all undisbursed challenges
+      operationId: Get Undisbursed Challenges
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: A User ID to filter the undisbursed challenges to a particular user
+        schema:
+          type: string
+      - name: completed_blocknumber
+        in: query
+        description: Starting blocknumber to retrieve completed undisbursed challenges
+        schema:
+          type: integer
+      - name: challenge_id
+        in: query
+        description: A challenge ID to filter the undisbursed challenges to a particular challenge
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/undisbursed_challenges'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /challenges/undisbursed/{user_id}:
+    get:
+      tags:
+      - challenges
+      description: Get all undisbursed challenges for a user
+      operationId: Get Undisbursed Challenges For User
+      parameters:
+      - name: user_id
+        in: path
+        description: A User ID to filter the undisbursed challenges to a particular user
+        required: true
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: The number of items to skip. Useful for pagination (page number * limit)
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The number of items to fetch
+        schema:
+          type: integer
+      - name: completed_blocknumber
+        in: query
+        description: Starting blocknumber to retrieve completed undisbursed challenges
+        schema:
+          type: integer
+      - name: challenge_id
+        in: query
+        description: A challenge ID to filter the undisbursed challenges to a particular challenge
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/undisbursed_challenges'
+        '400':
+          description: Bad request
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /challenges/{challenge_id}/attest:
+    get:
+      tags:
+      - challenges
+      description: Produces an attestation that a given user has completed a challenge, or errors.
+      operationId: Get Challenge Attestation
+      security:
+      - {}
+      - OAuth2:
+        - read
+      parameters:
+      - name: challenge_id
+        in: path
+        description: The challenge ID of the user challenge requiring the attestation
+        required: true
+        schema:
+          type: string
+      - name: oracle
+        in: query
+        description: The address of a valid, registered Anti-Abuse Oracle
+        required: true
+        schema:
+          type: string
+      - name: specifier
+        in: query
+        description: The specifier of the user challenge requiring the attestation
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: The user ID of the user challenge requiring the attestation
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/attestation_reponse'
+        '400':
+          description: The attestation request was invalid (eg. The user didn't complete that challenge yet)
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+components:
+  schemas:
+    attestation_reponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/attestation'
+    attestation:
+      required:
+      - attestation
+      - owner_wallet
+      type: object
+      properties:
+        owner_wallet:
+          type: string
+        attestation:
+          type: string
+    undisbursed_challenge:
+      required:
+      - amount
+      - challenge_id
+      - completed_at
+      - completed_blocknumber
+      - created_at
+      - handle
+      - specifier
+      - user_id
+      - wallet
+      type: object
+      properties:
+        challenge_id:
+          type: string
+        user_id:
+          type: string
+        specifier:
+          type: string
+        amount:
+          type: string
+        completed_blocknumber:
+          type: integer
+        handle:
+          type: string
+        wallet:
+          type: string
+        created_at:
+          type: string
+        completed_at:
+          type: string
+        cooldown_days:
+          type: integer
+    undisbursed_challenges:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/undisbursed_challenge'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: 'OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+
+        Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+
+        **Scopes:**
+
+        - `read` — Read-only access to the user''s public and private data.
+
+        - `write` — Read and write access, allowing mutations on behalf of the user.
+
+
+        **PKCE Required:**
+
+        All authorization code requests must include `code_challenge` and `code_challenge_method=S256` parameters.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/oauth/authorize
+          tokenUrl: /v1/oauth/token
+          scopes:
+            read: Read-only access to user data
+            write: Read and write access on behalf of the user
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication with Ethereum private key for write operations.
+
+
+        **Authentication**
+
+
+        Use HTTP Basic Authentication where the password field contains your Ethereum private key:
+
+        ```
+
+        Authorization: Basic <base64(username:privatekey)>
+
+        ```
+
+
+        The username can be any value. The password must be your Ethereum private key in hex format (with or without 0x prefix).
+
+
+        Example:
+
+        ```
+
+        Authorization: Basic dXNlcm5hbWU6MHgxMjM0NTY3ODkwYWJjZGVmLi4u
+
+        ```
+
+
+        **How it works:**
+
+        1. The API decodes the Basic Auth credentials
+
+        2. Extracts the private key from the password field
+
+        3. Derives the Ethereum address from the private key
+
+        4. Uses this address for authorization checks
+
+
+        **Authorization**
+
+
+        The derived wallet address must be either:
+
+        - The wallet of the user being acted upon (direct ownership)
+
+        - A wallet with an approved, non-revoked grant for the user (manager mode)
+
+        '
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The API bearer token or OAuth JWT token for the user.
+
+        '
+x-original-swagger-version: '2.0'

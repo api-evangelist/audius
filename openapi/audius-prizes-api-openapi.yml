@@ -1,0 +1,359 @@
+openapi: 3.0.1
+info:
+  title: Audius challenges prizes API
+  description: '## Overview
+
+
+    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
+
+
+    ## Key Capabilities
+
+
+    - **Users** — Profiles, followers, following, search
+
+    - **Tracks** — Search, trending, stream, favorites, reposts
+
+    - **Playlists** — Create, update, browse, curate
+
+    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
+
+    - **Explore** — Trending content, charts, discovery
+
+    - **Comments, Tips, Rewards** — Social features and engagement
+
+
+    ## Authentication
+
+
+    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
+
+    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
+
+
+    ## Resources
+
+
+    - [API Docs](https://docs.audius.co/api) — Full reference and guides
+
+    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
+
+    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
+
+    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
+
+    '
+  version: '1.0'
+  contact:
+    name: Audius
+    url: https://audius.co
+  x-logo:
+    url: https://audius.co/favicons/favicon.ico
+servers:
+- url: https://api.audius.co/v1
+  description: Production
+tags:
+- name: prizes
+  description: Prize claiming related operations
+paths:
+  /prizes:
+    get:
+      tags:
+      - prizes
+      operationId: Get Prizes
+      description: Gets a list of active prizes available for claiming. Excludes sensitive information like download URLs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prizes_response'
+        '500':
+          description: Server error
+          content: {}
+  /prizes/claim:
+    post:
+      tags:
+      - prizes
+      operationId: Claim Prize
+      description: Claims a prize by verifying a Solana transaction. User must send exactly 2 YAK to the prize receiver address. Returns the prize won and any redeem codes/URLs.
+      requestBody:
+        x-codegen-request-body-name: claim
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prize_claim_request_body'
+      responses:
+        '200':
+          description: Success - Prize claimed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prize_claim_response'
+        '400':
+          description: Bad request - Transaction not found, invalid, or signature already used
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+  /wallet/{wallet}/prizes:
+    get:
+      tags:
+      - prizes
+      operationId: Get Wallet Prizes
+      description: Gets all claimed prizes for a wallet. Public endpoint - no authentication required. Excludes sensitive action_data for security.
+      parameters:
+      - name: wallet
+        in: path
+        description: The wallet address to get prizes for
+        required: true
+        schema:
+          type: string
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/claimed_prizes_response'
+        '400':
+          description: Bad request - Missing wallet parameter
+          content: {}
+        '500':
+          description: Server error
+          content: {}
+components:
+  schemas:
+    claimed_prize:
+      type: object
+      required:
+      - id
+      - wallet
+      - signature
+      - mint
+      - amount
+      - prize_id
+      - prize_name
+      - created_at
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the claimed prize record
+          example: 1
+        wallet:
+          type: string
+          description: The wallet address that claimed the prize
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+        signature:
+          type: string
+          description: The transaction signature used to claim the prize
+          example: 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+        mint:
+          type: string
+          description: The coin mint address used for the claim
+          example: ZDaUDL4XFdEct7UgeztrFQAptsvh4ZdhyZDZ1RpxYAK
+        amount:
+          type: integer
+          description: The amount paid to claim the prize (in smallest unit, e.g., lamports)
+          example: 2000000000
+        prize_id:
+          type: string
+          description: The unique identifier of the prize won
+          example: prize_1_yak_airdrop
+        prize_name:
+          type: string
+          description: The name of the prize won
+          example: 1 YAK Airdrop
+        prize_type:
+          type: string
+          description: The type of prize (e.g., "coin_airdrop", "download")
+          example: coin_airdrop
+        created_at:
+          type: string
+          format: date-time
+          description: When the prize was claimed
+          example: '2024-01-15T10:30:00Z'
+    prize_claim_request_body:
+      type: object
+      required:
+      - signature
+      - wallet
+      properties:
+        signature:
+          type: string
+          description: The Solana transaction signature for the 2 YAK payment
+          example: 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+        wallet:
+          type: string
+          description: The wallet address that sent the transaction
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+    claimed_prizes_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/claimed_prize'
+          description: List of claimed prizes for the wallet (action_data excluded for security)
+    prizes_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/prize_public'
+          description: List of active prizes available for claiming
+    prize_public:
+      type: object
+      required:
+      - prize_id
+      - name
+      - weight
+      properties:
+        prize_id:
+          type: string
+          description: The unique identifier of the prize
+          example: prize_1_yak_airdrop
+        name:
+          type: string
+          description: The name of the prize
+          example: 1 YAK Airdrop
+        description:
+          type: string
+          description: Description of the prize
+          example: Win 1 YAK coin airdrop
+        weight:
+          type: integer
+          description: Weight for random selection (higher = more likely)
+          example: 1
+        metadata:
+          type: object
+          description: Sanitized metadata (excludes sensitive URLs)
+          additionalProperties: true
+          example:
+            type: coin_airdrop
+            amount: 1000000000
+    prize_claim_response:
+      type: object
+      required:
+      - prize_id
+      - prize_name
+      - wallet
+      properties:
+        prize_id:
+          type: string
+          description: The unique identifier of the prize won
+          example: prize_1_yak_airdrop
+        prize_name:
+          type: string
+          description: The name of the prize won
+          example: 1 YAK Airdrop
+        wallet:
+          type: string
+          description: The wallet address that claimed the prize
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+        prize_type:
+          type: string
+          description: The type of prize (e.g., "coin_airdrop", "download")
+          example: coin_airdrop
+        action_data:
+          type: object
+          description: Prize-specific action data (e.g., redeem code/URL for coin airdrops, download URL for downloads)
+          additionalProperties: true
+          example:
+            code: aB3d5F
+            url: /coins/YAK/redeem/aB3d5F
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: 'OAuth 2.0 Authorization Code flow with PKCE for third-party applications.
+
+
+        Allows apps to authenticate users and obtain access tokens scoped to read or read+write permissions on behalf of the user.
+
+
+        **Scopes:**
+
+        - `read` — Read-only access to the user''s public and private data.
+
+        - `write` — Read and write access, allowing mutations on behalf of the user.
+
+
+        **PKCE Required:**
+
+        All authorization code requests must include `code_challenge` and `code_challenge_method=S256` parameters.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /v1/oauth/authorize
+          tokenUrl: /v1/oauth/token
+          scopes:
+            read: Read-only access to user data
+            write: Read and write access on behalf of the user
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: 'HTTP Basic Authentication with Ethereum private key for write operations.
+
+
+        **Authentication**
+
+
+        Use HTTP Basic Authentication where the password field contains your Ethereum private key:
+
+        ```
+
+        Authorization: Basic <base64(username:privatekey)>
+
+        ```
+
+
+        The username can be any value. The password must be your Ethereum private key in hex format (with or without 0x prefix).
+
+
+        Example:
+
+        ```
+
+        Authorization: Basic dXNlcm5hbWU6MHgxMjM0NTY3ODkwYWJjZGVmLi4u
+
+        ```
+
+
+        **How it works:**
+
+        1. The API decodes the Basic Auth credentials
+
+        2. Extracts the private key from the password field
+
+        3. Derives the Ethereum address from the private key
+
+        4. Uses this address for authorization checks
+
+
+        **Authorization**
+
+
+        The derived wallet address must be either:
+
+        - The wallet of the user being acted upon (direct ownership)
+
+        - A wallet with an approved, non-revoked grant for the user (manager mode)
+
+        '
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'The API bearer token or OAuth JWT token for the user.
+
+        '
+x-original-swagger-version: '2.0'
