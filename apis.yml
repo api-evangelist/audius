@@ -6,7 +6,20 @@ description: Audius is a decentralized open-source music streaming platform buil
   on the Open Audio Protocol. It exposes a public REST API for tracks, users, playlists,
   search, and resolve, plus a JavaScript SDK. The protocol layer is open-source on
   GitHub.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/audius.png
 tags:
 - Music
 - Streaming
@@ -20,10 +33,10 @@ specificationVersion: '0.19'
 apis:
 - aid: audius:platform
   name: Audius REST API
-  description: Public REST API for the Audius network. Endpoints cover tracks (metadata,
-    stream, trending), users (profile, followers), playlists, search, and resolve
-    (lookup by URL). API hosts are discovered dynamically from the network; many host
-    paths are accessible at /v1.
+  description: >-
+    Public REST API for the Audius network. Endpoints cover tracks (metadata, stream, trending), users
+    (profile, followers), playlists, search, and resolve (lookup by URL). API hosts are discovered dynamically
+    from the network; many host paths are accessible at /v1.
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
@@ -41,6 +54,206 @@ apis:
     url: https://github.com/AudiusProject
   - url: graphql/audius-graphql.md
     type: GraphQL
+- aid: audius:audius-challenges-api
+  name: Audius challenges API
+  description: Challenge related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - challenges
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-challenges-api-openapi.yml
+- aid: audius:audius-cid-data-api
+  name: Audius cid_data API
+  description: The cid_data API from Audius — 1 operation(s) for cid_data.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - cid_data
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-cid-data-api-openapi.yml
+- aid: audius:audius-coins-api
+  name: Audius coins API
+  description: The coins API from Audius — 9 operation(s) for coins.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - coins
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-coins-api-openapi.yml
+- aid: audius:audius-comments-api
+  name: Audius comments API
+  description: Comment related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - comments
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-comments-api-openapi.yml
+- aid: audius:audius-dashboard-wallet-users-api
+  name: Audius dashboard_wallet_users API
+  description: Protocol dashboard wallet users related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - dashboard_wallet_users
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-dashboard-wallet-users-api-openapi.yml
+- aid: audius:audius-developer-apps-api
+  name: Audius developer_apps API
+  description: Developer app related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - developer_apps
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-developer-apps-api-openapi.yml
+- aid: audius:audius-events-api
+  name: Audius events API
+  description: Events related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-events-api-openapi.yml
+- aid: audius:audius-explore-api
+  name: Audius explore API
+  description: Explore related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - explore
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-explore-api-openapi.yml
+- aid: audius:audius-notifications-api
+  name: Audius notifications API
+  description: The notifications API from Audius — 2 operation(s) for notifications.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-notifications-api-openapi.yml
+- aid: audius:audius-playlists-api
+  name: Audius playlists API
+  description: Playlist related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - playlists
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-playlists-api-openapi.yml
+- aid: audius:audius-prizes-api
+  name: Audius prizes API
+  description: Prize claiming related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - prizes
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-prizes-api-openapi.yml
+- aid: audius:audius-reactions-api
+  name: Audius reactions API
+  description: The reactions API from Audius — 1 operation(s) for reactions.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - reactions
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-reactions-api-openapi.yml
+- aid: audius:audius-resolve-api
+  name: Audius resolve API
+  description: Audius Canonical URL resolver
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - resolve
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-resolve-api-openapi.yml
+- aid: audius:audius-rewards-api
+  name: Audius rewards API
+  description: Rewards related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-rewards-api-openapi.yml
+- aid: audius:audius-search-api
+  name: Audius search API
+  description: The search API from Audius — 3 operation(s) for search.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-search-api-openapi.yml
+- aid: audius:audius-tips-api
+  name: Audius tips API
+  description: Tip related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - tips
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-tips-api-openapi.yml
+- aid: audius:audius-tracks-api
+  name: Audius tracks API
+  description: Track related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - tracks
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-tracks-api-openapi.yml
+- aid: audius:audius-transactions-api
+  name: Audius transactions API
+  description: The transactions API from Audius — 2 operation(s) for transactions.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-transactions-api-openapi.yml
+- aid: audius:audius-users-api
+  name: Audius users API
+  description: User related operations
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-users-api-openapi.yml
+- aid: audius:audius-wallet-api
+  name: Audius wallet API
+  description: The wallet API from Audius — 1 operation(s) for wallet.
+  humanURL: https://docs.audius.org/developers/api
+  baseURL: https://api.audius.co
+  tags:
+  - wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/audius-wallet-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/audius-agentic-access.yml
