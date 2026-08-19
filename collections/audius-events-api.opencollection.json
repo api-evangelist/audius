@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges events API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bulk Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/events",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the event(s) to retrieve"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event to filter by"
+              }
+            ]
+          },
+          "docs": "Get a list of events by ID"
+        },
+        {
+          "info": {
+            "name": "Get all events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/events/all",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event to filter by"
+              }
+            ]
+          },
+          "docs": "Get all events"
+        },
+        {
+          "info": {
+            "name": "Get events for a specific entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/events/entity",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the entity to get events for"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of entity to get events for"
+              },
+              {
+                "name": "filter_deleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether to filter deleted events"
+              }
+            ]
+          },
+          "docs": "Get events for a specific entity"
+        },
+        {
+          "info": {
+            "name": "Get unclaimed event ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/events/unclaimed_id"
+          },
+          "docs": "Gets an unclaimed blockchain event ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

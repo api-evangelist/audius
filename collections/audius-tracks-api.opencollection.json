@@ -1,0 +1,1742 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges tracks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tracks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bulk Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "permalink",
+                "value": "",
+                "type": "query",
+                "description": "The permalink of the track(s)"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the track(s)"
+              },
+              {
+                "name": "isrc",
+                "value": "",
+                "type": "query",
+                "description": "The ISRC code of the track(s)"
+              }
+            ]
+          },
+          "docs": "Gets a list of tracks using their IDs or permalinks"
+        },
+        {
+          "info": {
+            "name": "Create Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/tracks",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new track"
+        },
+        {
+          "info": {
+            "name": "Get Track Download Counts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/download_counts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Track ID(s)"
+              }
+            ]
+          },
+          "docs": "Gets download counts for tracks by ID. Use this instead of loading full track objects when only download counts are needed."
+        },
+        {
+          "info": {
+            "name": "Inspects the details of the files for multiple tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/inspect",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "List of track IDs to inspect"
+              },
+              {
+                "name": "original",
+                "value": "",
+                "type": "query",
+                "description": "Optional - if set to true inspects the original file quality"
+              }
+            ]
+          },
+          "docs": "Inspect multiple tracks"
+        },
+        {
+          "info": {
+            "name": "Get Recent Premium Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/recent-premium",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the most recently listed premium tracks"
+        },
+        {
+          "info": {
+            "name": "Get Recommended Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/recommended",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              },
+              {
+                "name": "exclusion_list",
+                "value": "",
+                "type": "query",
+                "description": "List of track ids to exclude"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get recommended tracks"
+        },
+        {
+          "info": {
+            "name": "Get Recommended Tracks With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/recommended/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to use"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              },
+              {
+                "name": "exclusion_list",
+                "value": "",
+                "type": "query",
+                "description": "List of track ids to exclude"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get recommended tracks using the given trending strategy version"
+        },
+        {
+          "info": {
+            "name": "Get Feeling Lucky Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/feeling-lucky",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tracks to fetch"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Boolean to include user info with tracks"
+              },
+              {
+                "name": "min_followers",
+                "value": "",
+                "type": "query",
+                "description": "Fetch tracks from users with at least this number of followers"
+              }
+            ]
+          },
+          "docs": "Gets random tracks found on the \"Feeling Lucky\" smart playlist"
+        },
+        {
+          "info": {
+            "name": "Get Tracks With Recent Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/recent-comments",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tracks to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              }
+            ]
+          },
+          "docs": "Gets the most recent tracks with active discussion"
+        },
+        {
+          "info": {
+            "name": "Get Most Shared Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/most-shared",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tracks to fetch"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "time_range",
+                "value": "",
+                "type": "query",
+                "description": "The time range to consider"
+              }
+            ]
+          },
+          "docs": "Gets the most shared tracks for a given time range"
+        },
+        {
+          "info": {
+            "name": "Get Trending USDC Purchase Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/usdc-purchase",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              }
+            ]
+          },
+          "docs": "Gets the top trending (most popular) USDC purchase tracks on Audius"
+        },
+        {
+          "info": {
+            "name": "Get Trending USDC Purchase Tracks With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/usdc-purchase/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to use"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              }
+            ]
+          },
+          "docs": "Gets the top trending (most popular) USDC purchase tracks on Audius using a given trending strategy version"
+        },
+        {
+          "info": {
+            "name": "Search Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/search",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "mood",
+                "value": "",
+                "type": "query",
+                "description": "The moods to filter by"
+              },
+              {
+                "name": "only_downloadable",
+                "value": "",
+                "type": "query",
+                "description": "Return only downloadable tracks"
+              },
+              {
+                "name": "includePurchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to include purchaseable content"
+              },
+              {
+                "name": "is_purchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Only include purchaseable tracks and albums in the track and album results"
+              },
+              {
+                "name": "has_downloads",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have downloads in the track results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that match the musical key"
+              },
+              {
+                "name": "bpm_min",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm greater than or equal to"
+              },
+              {
+                "name": "bpm_max",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm less than or equal to"
+              }
+            ]
+          },
+          "docs": "Search for a track or tracks"
+        },
+        {
+          "info": {
+            "name": "Get Trending Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              }
+            ]
+          },
+          "docs": "Gets the top 100 trending (most popular) tracks on Audius"
+        },
+        {
+          "info": {
+            "name": "Get Trending Winners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/winners",
+            "params": [
+              {
+                "name": "week",
+                "value": "",
+                "type": "query",
+                "description": "Target week in YYYY-MM-DD format. Defaults to the most recent week with data."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets weekly trending winners from the trending_results table. Returns track objects for the specified week. Defaults to the most recent week with data when no week is provided."
+        },
+        {
+          "info": {
+            "name": "Get Trending Tracks With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to use"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              }
+            ]
+          },
+          "docs": "Gets the top 100 trending (most popular) tracks on Audius using a given trending strategy version"
+        },
+        {
+          "info": {
+            "name": "Get Trending Track IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/ids",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              }
+            ]
+          },
+          "docs": "Gets the track IDs of the top trending tracks on Audius"
+        },
+        {
+          "info": {
+            "name": "Get Trending Tracks IDs With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/ids/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to use"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "Filter trending to a specified genre"
+              }
+            ]
+          },
+          "docs": "Gets the track IDs of the top trending tracks on Audius based on the given trending strategy version"
+        },
+        {
+          "info": {
+            "name": "Get Underground Trending Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/underground",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the top 100 trending underground tracks on Audius"
+        },
+        {
+          "info": {
+            "name": "Get Trending Underground Winners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/underground/winners",
+            "params": [
+              {
+                "name": "week",
+                "value": "",
+                "type": "query",
+                "description": "Target week in YYYY-MM-DD format. Defaults to the most recent week with data."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets weekly trending underground winners from the trending_results table. Returns track objects for the specified week. Defaults to the most recent week with data when no week is provided."
+        },
+        {
+          "info": {
+            "name": "Get Underground Trending Tracks With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/trending/underground/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to user"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the top 100 trending underground tracks on Audius using a given trending strategy version"
+        },
+        {
+          "info": {
+            "name": "Get Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets a track by ID."
+        },
+        {
+          "info": {
+            "name": "Update Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.audius.co/v1/tracks/:track_id",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing track"
+        },
+        {
+          "info": {
+            "name": "Delete Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/tracks/:track_id",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a track"
+        },
+        {
+          "info": {
+            "name": "Get Track Download Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/download_count",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              }
+            ]
+          },
+          "docs": "Gets the download count for a single track. Full track + all stems (parent) or stem-only (stem)."
+        },
+        {
+          "info": {
+            "name": "Get Track Access Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/access-info",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the information necessary to access the track and what access the given user has."
+        },
+        {
+          "info": {
+            "name": "Get Track Comment Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/comment_count",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the comment count for a track"
+        },
+        {
+          "info": {
+            "name": "Get Track Comment Notification Setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/comment_notification_setting",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the comment notification setting for a track"
+        },
+        {
+          "info": {
+            "name": "Get Track Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/comments",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Get a list of comments for a track"
+        },
+        {
+          "info": {
+            "name": "Get Users From Favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/favorites",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get users that favorited a track"
+        },
+        {
+          "info": {
+            "name": "Favorite Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/tracks/:track_id/favorites",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Favorite a track"
+        },
+        {
+          "info": {
+            "name": "Unfavorite Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/tracks/:track_id/favorites",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unfavorite a track"
+        },
+        {
+          "info": {
+            "name": "Get Track Remixes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/remixes",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method to use"
+              },
+              {
+                "name": "only_cosigns",
+                "value": "",
+                "type": "query",
+                "description": "Only remixes cosigned by the original artist"
+              },
+              {
+                "name": "only_contest_entries",
+                "value": "",
+                "type": "query",
+                "description": "Only entries to a remix contest"
+              }
+            ]
+          },
+          "docs": "Get all tracks that remix the given track"
+        },
+        {
+          "info": {
+            "name": "Get Track Remix Parents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/remixing",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets all the tracks that the given track remixes"
+        },
+        {
+          "info": {
+            "name": "Get Users From Reposts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/reposts",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the users that reposted a track"
+        },
+        {
+          "info": {
+            "name": "Repost Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/tracks/:track_id/reposts",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Repost a track"
+        },
+        {
+          "info": {
+            "name": "Unrepost Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/tracks/:track_id/reposts",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unrepost a track"
+        },
+        {
+          "info": {
+            "name": "Download the original or MP3 file of a track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/download",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "user_signature",
+                "value": "",
+                "type": "query",
+                "description": "Optional - signature from the requesting user's wallet.\n        This is needed to authenticate the user and verify access in case the track is gated."
+              },
+              {
+                "name": "user_data",
+                "value": "",
+                "type": "query",
+                "description": "Optional - data which was used to generate the optional signature argument."
+              },
+              {
+                "name": "nft_access_signature",
+                "value": "",
+                "type": "query",
+                "description": "Optional - nft access signature for this track which was previously generated by a registered DN.\n        We perform checks on it and pass it through to CN."
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "query",
+                "description": "Optional - name of file to download. If not provided, defaults to track original filename or title."
+              }
+            ]
+          },
+          "docs": "Download an original or mp3 track"
+        },
+        {
+          "info": {
+            "name": "Inspects the details of the file for a track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/inspect",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "original",
+                "value": "",
+                "type": "query",
+                "description": "Optional - if set to true inspects the original file quality"
+              }
+            ]
+          },
+          "docs": "Inspect a track"
+        },
+        {
+          "info": {
+            "name": "Get Track Stems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/stems",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              }
+            ]
+          },
+          "docs": "Get the remixable stems of a track"
+        },
+        {
+          "info": {
+            "name": "Share Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/tracks/:track_id/shares",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "User ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record a track share event"
+        },
+        {
+          "info": {
+            "name": "Record Track Download",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/tracks/:track_id/downloads",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record a track download event"
+        },
+        {
+          "info": {
+            "name": "Get the streamable MP3 file of a track",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/stream",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Optional - true if streaming track preview"
+              },
+              {
+                "name": "user_signature",
+                "value": "",
+                "type": "query",
+                "description": "Optional - signature from the requesting user's wallet.\n        This is needed to authenticate the user and verify access in case the track is gated."
+              },
+              {
+                "name": "user_data",
+                "value": "",
+                "type": "query",
+                "description": "Optional - data which was used to generate the optional signature argument."
+              },
+              {
+                "name": "nft_access_signature",
+                "value": "",
+                "type": "query",
+                "description": "Optional - gated content signature for this track which was previously generated by a registered DN.\n        We perform checks on it and pass it through to CN."
+              },
+              {
+                "name": "skip_play_count",
+                "value": "",
+                "type": "query",
+                "description": "Optional - boolean that disables tracking of play counts."
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "Optional - API key for third party apps. This is required for tracks that only allow specific API keys."
+              },
+              {
+                "name": "skip_check",
+                "value": "",
+                "type": "query",
+                "description": "Optional - POC to skip node 'double dip' health check"
+              },
+              {
+                "name": "no_redirect",
+                "value": "",
+                "type": "query",
+                "description": "Optional - If true will not return a 302 and instead will return the stream url in JSON"
+              }
+            ]
+          },
+          "docs": "Stream an mp3 track\nThis endpoint accepts the Range header for streaming.\nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/Range_requests"
+        },
+        {
+          "info": {
+            "name": "Get Track Top Listeners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/:track_id/top_listeners",
+            "params": [
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "path",
+                "description": "A Track ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the users that have listened to a track the most"
+        },
+        {
+          "info": {
+            "name": "Get Best New Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/best_new_releases",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "The window from now() to look back over"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tracks to get"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Boolean to include user info with tracks"
+              }
+            ]
+          },
+          "docs": "Gets the tracks found on the \"Best New Releases\" smart playlist"
+        },
+        {
+          "info": {
+            "name": "Get Most Loved Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/most_loved",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of tracks to fetch"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Boolean to include user info with tracks"
+              }
+            ]
+          },
+          "docs": "Gets the tracks found on the \"Most Loved\" smart playlist"
+        },
+        {
+          "info": {
+            "name": "Get Remixable Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/remixables",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Boolean to include user info with tracks"
+              }
+            ]
+          },
+          "docs": "Gets a list of tracks that have stems available for remixing"
+        },
+        {
+          "info": {
+            "name": "Get Under the Radar Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/tracks/under_the_radar",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filters for activity that is original vs reposts"
+              },
+              {
+                "name": "tracks_only",
+                "value": "",
+                "type": "query",
+                "description": "Whether to only include tracks"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Boolean to include user info with tracks"
+              }
+            ]
+          },
+          "docs": "Gets the tracks found on the \"Under the Radar\" smart playlist"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

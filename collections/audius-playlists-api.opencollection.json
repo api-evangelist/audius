@@ -1,0 +1,593 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges playlists API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "playlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bulk Playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the playlist(s)"
+              },
+              {
+                "name": "permalink",
+                "value": "",
+                "type": "query",
+                "description": "The permalink(s) of the playlist(s)"
+              },
+              {
+                "name": "upc",
+                "value": "",
+                "type": "query",
+                "description": "The UPC of the playlist(s)"
+              }
+            ]
+          },
+          "docs": "Gets a list of playlists by ID, UPC, or permalink"
+        },
+        {
+          "info": {
+            "name": "Create Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/playlists",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new playlist or album"
+        },
+        {
+          "info": {
+            "name": "Search Playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/search",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "mood",
+                "value": "",
+                "type": "query",
+                "description": "The moods to filter by"
+              },
+              {
+                "name": "includePurchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to include purchaseable content"
+              },
+              {
+                "name": "has_downloads",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have downloads in the track results"
+              }
+            ]
+          },
+          "docs": "Search for a playlist"
+        },
+        {
+          "info": {
+            "name": "Get Trending Playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/trending",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of content to filter by"
+              },
+              {
+                "name": "omit_tracks",
+                "value": "",
+                "type": "query",
+                "description": "Whether to omit tracks from the response"
+              }
+            ]
+          },
+          "docs": "Returns trending playlists for a time period"
+        },
+        {
+          "info": {
+            "name": "Get Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get a playlist by ID"
+        },
+        {
+          "info": {
+            "name": "Update Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing playlist or album"
+        },
+        {
+          "info": {
+            "name": "Delete Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a playlist or album"
+        },
+        {
+          "info": {
+            "name": "Get Playlist Access Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/access-info",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the information necessary to access the playlist and what access the given user has."
+        },
+        {
+          "info": {
+            "name": "Get Playlist Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/tracks",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              }
+            ]
+          },
+          "docs": "Fetch tracks within a playlist."
+        },
+        {
+          "info": {
+            "name": "Get Users From Playlist Favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/favorites",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get users that favorited a playlist"
+        },
+        {
+          "info": {
+            "name": "Favorite Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/favorites",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Favorite a playlist"
+        },
+        {
+          "info": {
+            "name": "Unfavorite Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/favorites",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unfavorite a playlist"
+        },
+        {
+          "info": {
+            "name": "Get Users From Playlist Reposts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/reposts",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get users that reposted a playlist"
+        },
+        {
+          "info": {
+            "name": "Repost Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/reposts",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Repost a playlist"
+        },
+        {
+          "info": {
+            "name": "Unrepost Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/reposts",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unrepost a playlist"
+        },
+        {
+          "info": {
+            "name": "Share Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/playlists/:playlist_id/shares",
+            "params": [
+              {
+                "name": "playlist_id",
+                "value": "",
+                "type": "path",
+                "description": "A Playlist ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record a playlist share event"
+        },
+        {
+          "info": {
+            "name": "Get Trending Playlists With Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/playlists/trending/:version",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The strategy version of trending to use"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "time",
+                "value": "",
+                "type": "query",
+                "description": "Calculate trending over a specified time range"
+              }
+            ]
+          },
+          "docs": "Returns trending playlists for a time period based on the given trending version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

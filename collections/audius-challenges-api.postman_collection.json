@@ -1,0 +1,732 @@
+{
+  "item": [
+    {
+      "id": "326b56cc-c982-4789-afbb-10d96239e469",
+      "name": "challenges",
+      "description": {
+        "content": "Challenge related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f370c7dc-f772-4de9-8980-b566c2d6f06f",
+          "name": "Get Undisbursed Challenges",
+          "request": {
+            "name": "Get Undisbursed Challenges",
+            "description": {
+              "content": "Get all undisbursed challenges",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "challenges",
+                "undisbursed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "A User ID to filter the undisbursed challenges to a particular user"
+                },
+                {
+                  "disabled": false,
+                  "key": "completed_blocknumber",
+                  "value": "<integer>",
+                  "description": "Starting blocknumber to retrieve completed undisbursed challenges"
+                },
+                {
+                  "disabled": false,
+                  "key": "challenge_id",
+                  "value": "<string>",
+                  "description": "A challenge ID to filter the undisbursed challenges to a particular challenge"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "be745c4e-6adb-4b39-94d2-67e94417b168",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"amount\": \"string\",\n      \"challenge_id\": \"string\",\n      \"completed_at\": \"string\",\n      \"completed_blocknumber\": 2850,\n      \"created_at\": \"string\",\n      \"handle\": \"string\",\n      \"specifier\": \"string\",\n      \"user_id\": \"string\",\n      \"wallet\": \"string\",\n      \"cooldown_days\": 3607\n    },\n    {\n      \"amount\": \"string\",\n      \"challenge_id\": \"string\",\n      \"completed_at\": \"string\",\n      \"completed_blocknumber\": 2028,\n      \"created_at\": \"string\",\n      \"handle\": \"string\",\n      \"specifier\": \"string\",\n      \"user_id\": \"string\",\n      \"wallet\": \"string\",\n      \"cooldown_days\": 6464\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64fd2e05-02be-45aa-9600-8be90e640656",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6a52a3c-9542-4099-b217-3b7085dda5b8",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86a2cdcb-b039-4fcd-85a2-7776e0632398",
+          "name": "Get Undisbursed Challenges For User",
+          "request": {
+            "name": "Get Undisbursed Challenges For User",
+            "description": {
+              "content": "Get all undisbursed challenges for a user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "challenges",
+                "undisbursed",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "completed_blocknumber",
+                  "value": "<integer>",
+                  "description": "Starting blocknumber to retrieve completed undisbursed challenges"
+                },
+                {
+                  "disabled": false,
+                  "key": "challenge_id",
+                  "value": "<string>",
+                  "description": "A challenge ID to filter the undisbursed challenges to a particular challenge"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) A User ID to filter the undisbursed challenges to a particular user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cca2beb0-2194-4a4e-8975-1d2642bc1e08",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) A User ID to filter the undisbursed challenges to a particular user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"amount\": \"string\",\n      \"challenge_id\": \"string\",\n      \"completed_at\": \"string\",\n      \"completed_blocknumber\": 772,\n      \"created_at\": \"string\",\n      \"handle\": \"string\",\n      \"specifier\": \"string\",\n      \"user_id\": \"string\",\n      \"wallet\": \"string\",\n      \"cooldown_days\": 3732\n    },\n    {\n      \"amount\": \"string\",\n      \"challenge_id\": \"string\",\n      \"completed_at\": \"string\",\n      \"completed_blocknumber\": 1195,\n      \"created_at\": \"string\",\n      \"handle\": \"string\",\n      \"specifier\": \"string\",\n      \"user_id\": \"string\",\n      \"wallet\": \"string\",\n      \"cooldown_days\": 3528\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "035326f4-7ae1-4fd3-9ef7-ecfdb079458f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) A User ID to filter the undisbursed challenges to a particular user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38b700bd-8c77-45f1-ab7a-8fba1eadf88d",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    "undisbursed",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "completed_blocknumber",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "challenge_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) A User ID to filter the undisbursed challenges to a particular user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b774f711-dc0d-4a40-8763-4b874773a124",
+          "name": "Get Challenge Attestation",
+          "request": {
+            "name": "Get Challenge Attestation",
+            "description": {
+              "content": "Produces an attestation that a given user has completed a challenge, or errors.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "challenges",
+                ":challenge_id",
+                "attest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oracle",
+                  "value": "<string>",
+                  "description": "(Required) The address of a valid, registered Anti-Abuse Oracle"
+                },
+                {
+                  "disabled": false,
+                  "key": "specifier",
+                  "value": "<string>",
+                  "description": "(Required) The specifier of the user challenge requiring the attestation"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user challenge requiring the attestation"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "challenge_id",
+                  "description": "(Required) The challenge ID of the user challenge requiring the attestation"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "b714360e-d912-4f2c-96f6-1fbb82a74560",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    ":challenge_id",
+                    "attest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oracle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "challenge_id",
+                      "description": "(Required) The challenge ID of the user challenge requiring the attestation"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"attestation\": \"string\",\n    \"owner_wallet\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a77ec2c-d29e-48bc-8112-76d056390d59",
+              "name": "The attestation request was invalid (eg. The user didn't complete that challenge yet)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    ":challenge_id",
+                    "attest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oracle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "challenge_id",
+                      "description": "(Required) The challenge ID of the user challenge requiring the attestation"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0f233a0e-536f-4484-9bb8-aedce96a3704",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "challenges",
+                    ":challenge_id",
+                    "attest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oracle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "challenge_id",
+                      "description": "(Required) The challenge ID of the user challenge requiring the attestation"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0c85c3b7-477f-46e6-b787-fdb97eb7d7fe",
+    "name": "Audius challenges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges wallet API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Wallet Coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/wallet/:walletId/coins",
+            "params": [
+              {
+                "name": "walletId",
+                "value": "",
+                "type": "path",
+                "description": "A Solana wallet address"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              }
+            ]
+          },
+          "docs": "Gets a list of the coins held by a wallet address and their balances"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

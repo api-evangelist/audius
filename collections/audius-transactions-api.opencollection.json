@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges transactions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Gets the user's $AUDIO transaction history within the App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/transactions",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              }
+            ]
+          },
+          "docs": "Deprecated: Use `/users/{id}/transactions/audio` or `sdk.full.users.getAudioTransactions()` instead."
+        },
+        {
+          "info": {
+            "name": "Gets the count of the user's $AUDIO transaction history within the App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/transactions/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deprecated: Use `/users/{id}/transactions/audio/count` or `sdk.full.users.getAudioTransactionCount()` instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

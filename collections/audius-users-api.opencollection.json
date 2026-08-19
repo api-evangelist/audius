@@ -1,0 +1,3272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges users API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bulk Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user(s)"
+              }
+            ]
+          },
+          "docs": "Gets a list of users by ID"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new user"
+        },
+        {
+          "info": {
+            "name": "Get User IDs by Addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/address",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x1234567890abcdef1234567890abcdef12345678,E2LCbKdo2L3ikt1gK6pwp1pDLuhAfHBNf6fEQXpAqrf9",
+                "type": "query",
+                "description": "Wallet address"
+              }
+            ]
+          },
+          "docs": "Gets User IDs from any Ethereum wallet address or Solana account address associated with their Audius account."
+        },
+        {
+          "info": {
+            "name": "Get User by Handle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/handle/:handle",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "A User handle"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets a single user by their handle"
+        },
+        {
+          "info": {
+            "name": "Get Tracks by User Handle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/handle/:handle/tracks",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "A User handle"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "[Deprecated] Field to sort by"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "filter_tracks",
+                "value": "",
+                "type": "query",
+                "description": "Filter by public tracks"
+              }
+            ]
+          },
+          "docs": "Gets the tracks created by a user using the user's handle"
+        },
+        {
+          "info": {
+            "name": "Get AI Attributed Tracks by User Handle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/handle/:handle/tracks/ai_attributed",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "A User handle"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "[Deprecated] Field to sort by"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "filter_tracks",
+                "value": "",
+                "type": "query",
+                "description": "Filter by public tracks"
+              }
+            ]
+          },
+          "docs": "Gets the AI generated tracks attributed to a user using the user's handle"
+        },
+        {
+          "info": {
+            "name": "Search Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/search",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "is_verified",
+                "value": "",
+                "type": "query",
+                "description": "Only include verified users in the user results"
+              }
+            ]
+          },
+          "docs": "Search for users that match the given query"
+        },
+        {
+          "info": {
+            "name": "Verify ID Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/verify_token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "JWT to verify"
+              }
+            ]
+          },
+          "docs": "Verify if the given jwt ID token was signed by the subject (user) in the payload"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets a single user by their user ID"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.audius.co/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing user profile"
+        },
+        {
+          "info": {
+            "name": "Get Albums by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/albums",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filter albums by name"
+              }
+            ]
+          },
+          "docs": "Gets the albums created by a user using their user ID"
+        },
+        {
+          "info": {
+            "name": "Get Authorized Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/authorized_apps",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Get the apps that user has authorized to write to their account"
+        },
+        {
+          "info": {
+            "name": "Get Grantee Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/grantees/:address/users",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The wallet address of the grantee (developer app)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "is_approved",
+                "value": "",
+                "type": "query",
+                "description": "If true, only return users where the grant has been approved. If false, only return users where the grant was not approved. If omitted, returns all users regardless of approval status."
+              },
+              {
+                "name": "is_revoked",
+                "value": "",
+                "type": "query",
+                "description": "If true, only return users where the grant has been revoked. Defaults to false."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get all users who have authorized a particular grantee (developer app) identified by their wallet address. Supports pagination."
+        },
+        {
+          "info": {
+            "name": "Get User Balance History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/balance/history",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Start time for the balance history query (ISO 8601 format). Defaults to 7 days ago."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "End time for the balance history query (ISO 8601 format). Defaults to now."
+              },
+              {
+                "name": "granularity",
+                "value": "",
+                "type": "query",
+                "description": "Data granularity. 'hourly' returns hourly data points, 'daily' returns daily aggregated data. Defaults to 'hourly'."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the user's historical portfolio balance data"
+        },
+        {
+          "info": {
+            "name": "Get User Challenges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/challenges",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "show_historical",
+                "value": "",
+                "type": "query",
+                "description": "Whether to show challenges that are inactive but completed"
+              }
+            ]
+          },
+          "docs": "Gets all challenges for the given user"
+        },
+        {
+          "info": {
+            "name": "Get User Coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/coins",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              }
+            ]
+          },
+          "docs": "Gets a list of the coins owned by the user and their balances"
+        },
+        {
+          "info": {
+            "name": "Get User Coin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/coins/:mint",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              }
+            ]
+          },
+          "docs": "Gets information about a specific coin owned by the user and their wallets"
+        },
+        {
+          "info": {
+            "name": "Get User Collectibles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/collectibles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Get the User's indexed collectibles data"
+        },
+        {
+          "info": {
+            "name": "Get User Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get user comment history"
+        },
+        {
+          "info": {
+            "name": "Get connected wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/connected_wallets",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Get the User's ERC and SPL connected wallets"
+        },
+        {
+          "info": {
+            "name": "Get User Favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/favorites",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Gets a user's favorite tracks"
+        },
+        {
+          "info": {
+            "name": "Get Followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/followers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "All users that follow the provided user"
+        },
+        {
+          "info": {
+            "name": "Follow User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/follow",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Follow a user"
+        },
+        {
+          "info": {
+            "name": "Unfollow User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/users/:id/follow",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unfollow a user"
+        },
+        {
+          "info": {
+            "name": "Create Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/grants",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID (grantor)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a grant (authorize an app to act on the user's behalf)"
+        },
+        {
+          "info": {
+            "name": "Revoke Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/users/:id/grants/:address",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID (grantor)"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "The app API key (grantee address) to revoke"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Revoke a grant (remove app authorization)"
+        },
+        {
+          "info": {
+            "name": "Approve Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/grants/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the manager (grantee) approving the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approve a manager request (manager approves being added by the child user)"
+        },
+        {
+          "info": {
+            "name": "Get Managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/managers",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "An id for the managed user"
+              },
+              {
+                "name": "is_approved",
+                "value": "",
+                "type": "query",
+                "description": "If true, only show users where the management request has been accepted. If false, only show those where the request was rejected. If omitted, shows all users regardless of approval status."
+              },
+              {
+                "name": "is_revoked",
+                "value": "",
+                "type": "query",
+                "description": "If true, only show users where the management request has been revoked. If false, only show those with a pending or accepted request. Defaults to false."
+              }
+            ]
+          },
+          "docs": "Gets a list of users managing the given user"
+        },
+        {
+          "info": {
+            "name": "Add Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/managers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID (child user adding the manager)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add a manager (authorize another user to act on your behalf)"
+        },
+        {
+          "info": {
+            "name": "Remove Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/users/:id/managers/:managerUserId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID (child user whose manager is being removed)"
+              },
+              {
+                "name": "managerUserId",
+                "value": "",
+                "type": "path",
+                "description": "The user ID of the manager to remove"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Remove a manager (revoke user-to-user grant). Can be called by the child user or the manager."
+        },
+        {
+          "info": {
+            "name": "Get Following",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/following",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "All users that the provided user follows"
+        },
+        {
+          "info": {
+            "name": "Get User's Track History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/history/tracks",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the tracks the user recently listened to."
+        },
+        {
+          "info": {
+            "name": "Get User Monthly Track Listens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/listen_counts_monthly",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Start time from which to start results for user listen count data (inclusive)."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "End time until which to cut off results of listen count data (not inclusive)."
+              }
+            ]
+          },
+          "docs": "Gets the listen data for a user by month and track within a given time frame."
+        },
+        {
+          "info": {
+            "name": "Get Muted Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/muted",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Gets users muted by the given user"
+        },
+        {
+          "info": {
+            "name": "Mute User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/muted",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Mute a user"
+        },
+        {
+          "info": {
+            "name": "Unmute User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/users/:id/muted",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unmute a user"
+        },
+        {
+          "info": {
+            "name": "Get Mutual Followers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/mutuals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get intersection of users that follow followeeUserId and users that are followed by followerUserId"
+        },
+        {
+          "info": {
+            "name": "Get Playlists by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/playlists",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Filter playlists by name"
+              }
+            ]
+          },
+          "docs": "Gets the playlists created by a user using their user ID"
+        },
+        {
+          "info": {
+            "name": "Get purchasers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/purchasers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of content to filter by (track or album)"
+              },
+              {
+                "name": "content_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters for users who have purchased the given track or album ID"
+              }
+            ]
+          },
+          "docs": "Gets the list of unique users who have purchased content by the given user"
+        },
+        {
+          "info": {
+            "name": "Download Purchases as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/purchases/download",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Downloads the purchases the user has made as a CSV file"
+        },
+        {
+          "info": {
+            "name": "Get User Recommended Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/recommended-tracks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "time_range",
+                "value": "",
+                "type": "query",
+                "description": "The time range for the recommended tracks"
+              }
+            ]
+          },
+          "docs": "Gets the recommended tracks for the user"
+        },
+        {
+          "info": {
+            "name": "Get Related Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/related",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "filter_followed",
+                "value": "",
+                "type": "query",
+                "description": "If true, filters out artists that the current user already follows"
+              }
+            ]
+          },
+          "docs": "Gets a list of users that might be of interest to followers of this user."
+        },
+        {
+          "info": {
+            "name": "Get remixers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/remixers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters for remixers who have remixed the given track ID"
+              }
+            ]
+          },
+          "docs": "Gets the list of unique users who have remixed tracks by the given user, or a specific track by that user if provided"
+        },
+        {
+          "info": {
+            "name": "Get Reposts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/reposts",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the given user's reposts"
+        },
+        {
+          "info": {
+            "name": "Get Sales Aggregate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/sales/aggregate",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the aggregated sales data for the user"
+        },
+        {
+          "info": {
+            "name": "Download Sales as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/sales/download",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Downloads the sales the user has made as a CSV file"
+        },
+        {
+          "info": {
+            "name": "Download Sales as JSON",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/sales/download/json",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "grantee_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Optional receiving user ID for email decryption"
+              }
+            ]
+          },
+          "docs": "Gets the sales data for the user in JSON format"
+        },
+        {
+          "info": {
+            "name": "Get Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/subscribers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "All users that subscribe to the provided user"
+        },
+        {
+          "info": {
+            "name": "Subscribe to User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/:id/subscribers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Subscribe to a user"
+        },
+        {
+          "info": {
+            "name": "Unsubscribe from User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/users/:id/subscribers",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unsubscribe from a user"
+        },
+        {
+          "info": {
+            "name": "Get Supporters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/supporters",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the supporters of the given user"
+        },
+        {
+          "info": {
+            "name": "Get Supported Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/supporting",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the users that the given user supports"
+        },
+        {
+          "info": {
+            "name": "Fetch most used tags in a user's tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the most used track tags by a user."
+        },
+        {
+          "info": {
+            "name": "Get Tracks by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/tracks",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "[Deprecated] Field to sort by"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "filter_tracks",
+                "value": "",
+                "type": "query",
+                "description": "Filter by public tracks"
+              },
+              {
+                "name": "gate_condition",
+                "value": "",
+                "type": "query",
+                "description": "Filter by gate conditions (can be repeated)"
+              }
+            ]
+          },
+          "docs": "Gets the tracks created by a user using their user ID"
+        },
+        {
+          "info": {
+            "name": "Get Tracks Count by User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/tracks/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "filter_tracks",
+                "value": "",
+                "type": "query",
+                "description": "Filter by public tracks"
+              },
+              {
+                "name": "gate_condition",
+                "value": "",
+                "type": "query",
+                "description": "Filter by gate conditions (can be repeated)"
+              }
+            ]
+          },
+          "docs": "Gets the count of tracks created by a user"
+        },
+        {
+          "info": {
+            "name": "Get User Tracks Download Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/tracks/download_count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Gets the total download count for all tracks (and stems) owned by the user. Use for dashboard \"Downloads\" tile."
+        },
+        {
+          "info": {
+            "name": "Get User Tracks Remixed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/tracks/remixed",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets tracks owned by the user which have been remixed by another track"
+        },
+        {
+          "info": {
+            "name": "Download USDC Withdrawals as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/withdrawals/download",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Downloads the USDC withdrawals the user has made as a CSV file"
+        },
+        {
+          "info": {
+            "name": "Get User Email Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:receiving_user_id/emails/:grantor_user_id/key",
+            "params": [
+              {
+                "name": "receiving_user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of user receiving email access"
+              },
+              {
+                "name": "grantor_user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of user granting email access"
+              }
+            ]
+          },
+          "docs": "Gets the encrypted key for email access between the receiving user and granting user."
+        },
+        {
+          "info": {
+            "name": "Get User Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/account/:wallet",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "wallet",
+                "value": "",
+                "type": "path",
+                "description": "Wallet address for the account"
+              }
+            ]
+          },
+          "docs": "Gets the account for a given user"
+        },
+        {
+          "info": {
+            "name": "Get Top Users In Genre",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/genre/top",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "List of Genres"
+              }
+            ]
+          },
+          "docs": "Get the Top Users for a Given Genre"
+        },
+        {
+          "info": {
+            "name": "Get Reposts by Handle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/handle/:handle/reposts",
+            "params": [
+              {
+                "name": "handle",
+                "value": "",
+                "type": "path",
+                "description": "A User handle"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the user's reposts by the user handle"
+        },
+        {
+          "info": {
+            "name": "Bulk Get Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/subscribers",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "User IDs to fetch subscribers for"
+              }
+            ]
+          },
+          "docs": "All users that subscribe to the provided users"
+        },
+        {
+          "info": {
+            "name": "Bulk Get Subscribers via JSON request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/users/subscribers",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "User IDs to fetch subscribers for"
+              }
+            ]
+          },
+          "docs": "Get all users that subscribe to the users listed in the JSON request"
+        },
+        {
+          "info": {
+            "name": "Get Top Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/top",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Get the Top Users having at least one track by follower count"
+        },
+        {
+          "info": {
+            "name": "Get User Favorite Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/favorites/tracks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              }
+            ]
+          },
+          "docs": "Gets a user's favorite tracks"
+        },
+        {
+          "info": {
+            "name": "Get User Feed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/feed",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Controls whether the feed is limited to reposts, original content, or all items"
+              },
+              {
+                "name": "tracks_only",
+                "value": "",
+                "type": "query",
+                "description": "Limit feed to only tracks"
+              },
+              {
+                "name": "with_users",
+                "value": "",
+                "type": "query",
+                "description": "Include user data with feed items"
+              },
+              {
+                "name": "followee_user_id",
+                "value": "",
+                "type": "query",
+                "description": "A list of followed users to prioritize in feed generation"
+              }
+            ]
+          },
+          "docs": "Gets the feed for the user"
+        },
+        {
+          "info": {
+            "name": "Fetch a user's full library playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/library/albums",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A user ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Gets a user's saved/reposted/purchased/all albums"
+        },
+        {
+          "info": {
+            "name": "Fetch a user's full library playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/library/playlists",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A user ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Gets a user's saved/reposted/purchased/all playlists"
+        },
+        {
+          "info": {
+            "name": "Fetch a user's full library tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/library/tracks",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A user ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The filter query"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of entity to return: favorited, reposted, purchased, or all. Defaults to favorite"
+              }
+            ]
+          },
+          "docs": "Gets a user's saved/reposted/purchased/all tracks"
+        },
+        {
+          "info": {
+            "name": "Get Managed Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/managed_users",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A user id for the manager"
+              },
+              {
+                "name": "is_approved",
+                "value": "",
+                "type": "query",
+                "description": "If true, only show users where the management request has been accepted. If false, only show those where the request was rejected. If omitted, shows all users regardless of approval status."
+              },
+              {
+                "name": "is_revoked",
+                "value": "",
+                "type": "query",
+                "description": "If true, only show users where the management request has been revoked. If false, only show those with a pending or accepted request. Defaults to false."
+              }
+            ]
+          },
+          "docs": "Gets a list of users managed by the given user"
+        },
+        {
+          "info": {
+            "name": "Get purchasers count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/purchasers/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of content to filter by (track or album)"
+              },
+              {
+                "name": "content_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters for users who have purchased the given track or album ID"
+              }
+            ]
+          },
+          "docs": "Gets the list of users who have purchased content by the given user"
+        },
+        {
+          "info": {
+            "name": "Get Purchases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/purchases",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "content_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters purchases by track or album IDs"
+              }
+            ]
+          },
+          "docs": "Gets the purchases the user has made"
+        },
+        {
+          "info": {
+            "name": "Get Purchases Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/purchases/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "content_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters purchases by track or album IDs"
+              }
+            ]
+          },
+          "docs": "Gets the count of purchases the user has made"
+        },
+        {
+          "info": {
+            "name": "Get remixers count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/remixers/count",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "track_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters for remixers who have remixed the given track ID"
+              }
+            ]
+          },
+          "docs": "Gets the count of unique users who have remixed tracks by the given user, or a specific track by that user if provided"
+        },
+        {
+          "info": {
+            "name": "Get Sales",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/sales",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "content_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters purchases by track or album IDs"
+              }
+            ]
+          },
+          "docs": "Gets the sales the user has made"
+        },
+        {
+          "info": {
+            "name": "Get Sales Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/sales/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "content_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters purchases by track or album IDs"
+              }
+            ]
+          },
+          "docs": "Gets the count of sales the user has made"
+        },
+        {
+          "info": {
+            "name": "Get Supporter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/supporters/:supporter_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "supporter_user_id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID of a supporter"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the specified supporter of the given user"
+        },
+        {
+          "info": {
+            "name": "Get Supporting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/supporting/:supported_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "supported_user_id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID of a supported user"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets the support from the given user to the supported user"
+        },
+        {
+          "info": {
+            "name": "Get Audio Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/transactions/audio",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              }
+            ]
+          },
+          "docs": "Gets the user's $AUDIO transaction history within the App"
+        },
+        {
+          "info": {
+            "name": "Get Audio Transaction Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/transactions/audio/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Gets the count of the user's $AUDIO transaction history within the App"
+        },
+        {
+          "info": {
+            "name": "Get USDC Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/transactions/usdc",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters the type of transactions to show"
+              },
+              {
+                "name": "include_system_transactions",
+                "value": "",
+                "type": "query",
+                "description": "Include intermediate system transactions in the results"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filters the method (sent/received) of transactions to show"
+              }
+            ]
+          },
+          "docs": "Gets the user's $USDC transaction history within the App"
+        },
+        {
+          "info": {
+            "name": "Get USDC Transaction Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/transactions/usdc/count",
+            "headers": [
+              {
+                "name": "Encoded-Data-Message",
+                "value": ""
+              },
+              {
+                "name": "Encoded-Data-Signature",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filters the type of transactions to show"
+              },
+              {
+                "name": "include_system_transactions",
+                "value": "",
+                "type": "query",
+                "description": "Include intermediate system transactions in the results"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filters the method (sent/received) of transactions to show"
+              }
+            ]
+          },
+          "docs": "Gets the count of the user's $USDC transaction history within the App"
+        },
+        {
+          "info": {
+            "name": "Get authenticated user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/me",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/v1/oauth/authorize",
+              "accessTokenUrl": "/v1/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the full profile of the currently authenticated user based on the Bearer access token obtained via OAuth."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

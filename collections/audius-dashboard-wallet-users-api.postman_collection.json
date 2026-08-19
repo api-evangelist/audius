@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "b9f621dd-b054-4b78-a0f8-3737bbd94616",
+      "name": "dashboard_wallet_users",
+      "description": {
+        "content": "Protocol dashboard wallet users related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e913837c-5fe2-4be0-bcc7-8dadf8f96e19",
+          "name": "Bulk get dashboard wallet users",
+          "request": {
+            "name": "Bulk get dashboard wallet users",
+            "description": {
+              "content": "Gets Audius user profiles connected to given dashboard wallet addresses",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dashboard_wallet_users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wallets",
+                  "value": "<string>,<string>",
+                  "description": "(Required) The wallets for which to fetch connected Audius user profiles."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e977176f-dbae-47ae-9a29-e5b8e9da7938",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboard_wallet_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wallets",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"user\": {\n        \"album_count\": 8385,\n        \"allow_ai_attribution\": true,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 177,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 5239,\n        \"does_current_user_follow\": true,\n        \"does_current_user_subscribe\": false,\n        \"does_follow_current_user\": true,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 7950,\n        \"follower_count\": 6681,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": true,\n        \"id\": \"string\",\n        \"is_available\": false,\n        \"is_deactivated\": true,\n        \"is_storage_v2\": false,\n        \"is_verified\": false,\n        \"name\": \"string\",\n        \"playlist_count\": 6550,\n        \"repost_count\": 4492,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 176,\n        \"supporting_count\": 7317,\n        \"total_audio_balance\": 1705,\n        \"total_balance\": \"string\",\n        \"track_count\": 1893,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": true,\n        \"verified_with_tiktok\": false,\n        \"verified_with_twitter\": false,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      },\n      \"wallet\": \"string\"\n    },\n    {\n      \"user\": {\n        \"album_count\": 15,\n        \"allow_ai_attribution\": true,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 7067,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 6525,\n        \"does_current_user_follow\": false,\n        \"does_current_user_subscribe\": false,\n        \"does_follow_current_user\": false,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 8618,\n        \"follower_count\": 3901,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": false,\n        \"id\": \"string\",\n        \"is_available\": false,\n        \"is_deactivated\": true,\n        \"is_storage_v2\": false,\n        \"is_verified\": true,\n        \"name\": \"string\",\n        \"playlist_count\": 6435,\n        \"repost_count\": 7044,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 2493,\n        \"supporting_count\": 264,\n        \"total_audio_balance\": 7509,\n        \"total_balance\": \"string\",\n        \"track_count\": 9274,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": true,\n        \"verified_with_tiktok\": false,\n        \"verified_with_twitter\": false,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      },\n      \"wallet\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d9590b5-80bd-4b07-85b5-8900c4fa897f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboard_wallet_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wallets",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b91beb3a-9ddb-49dd-bb6b-afc51c7f53b5",
+              "name": "No such dashboard wallets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboard_wallet_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wallets",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1aea8e12-7351-405d-8451-bec174ea9d27",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboard_wallet_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wallets",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74e1f9b0-ae36-4a25-a835-bf8c02f868d0",
+    "name": "Audius challenges dashboard_wallet_users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

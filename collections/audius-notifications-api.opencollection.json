@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges notifications API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/notifications/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "The timestamp from which to paginate"
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "The group_id form which to paginate"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of notifications to return"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Additional valid notification types to return"
+              }
+            ]
+          },
+          "docs": "Get notifications for user ID"
+        },
+        {
+          "info": {
+            "name": "Get Playlist Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/notifications/:user_id/playlist_updates",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID"
+              }
+            ]
+          },
+          "docs": "Get playlists the user has saved that have been updated for user ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

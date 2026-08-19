@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges cid_data API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cid_data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/cid_data/:metadata_id",
+            "params": [
+              {
+                "name": "metadata_id",
+                "value": "",
+                "type": "path",
+                "description": "A Metdata CID"
+              }
+            ]
+          },
+          "docs": "Get a metadata by CID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges resolve API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "resolve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Resolves and redirects a provided Audius app URL to the API resource URL it represents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/resolve",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "URL to resolve. Either fully formed URL (https://audius.co) or just the absolute path"
+              }
+            ]
+          },
+          "docs": "This endpoint allows you to lookup and access API resources when you only know the\naudius.co URL.\nTracks, Playlists, and Users are supported."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

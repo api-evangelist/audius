@@ -1,0 +1,832 @@
+{
+  "item": [
+    {
+      "id": "c3b8b084-2b55-4f8d-95d9-7aa41563c1ba",
+      "name": "events",
+      "description": {
+        "content": "Events related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3f3d48e-6947-4c04-84f9-ce782da2448e",
+          "name": "Get Bulk Events",
+          "request": {
+            "name": "Get Bulk Events",
+            "description": {
+              "content": "Get a list of events by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The user ID of the user making the request"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "The ID of the event(s) to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "The ID of the event(s) to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "The type of event to filter by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "54d02642-a359-4521-b2f8-231ac20752c7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": true\n    },\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82cfb9f5-3dc0-4150-8982-dd63818e655a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22d070f2-bfa3-4540-a2ef-f7d8a1f524be",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaec128e-7379-4489-8281-d38820faf512",
+          "name": "Get all events",
+          "request": {
+            "name": "Get all events",
+            "description": {
+              "content": "Get all events",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The user ID of the user making the request"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_method",
+                  "value": "newest",
+                  "description": "The sort method"
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "The type of event to filter by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "e6b34c63-e7ba-4a56-942a-ab63a2cebe3c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_method",
+                      "value": "newest"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": true\n    },\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06aaac3b-6b8c-420c-916c-309820806a7a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_method",
+                      "value": "newest"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "841552d0-a0ce-4f0e-a348-052ffaeb618c",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_method",
+                      "value": "newest"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09d2841f-e945-4c33-8f13-7f74ecd6a229",
+          "name": "Get events for a specific entity",
+          "request": {
+            "name": "Get events for a specific entity",
+            "description": {
+              "content": "Get events for a specific entity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "entity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The user ID of the user making the request"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the entity to get events for"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the entity to get events for"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_type",
+                  "value": "<string>",
+                  "description": "The type of entity to get events for"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_deleted",
+                  "value": "true",
+                  "description": "Whether to filter deleted events"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "c69dd34b-f07b-4644-8bb9-ef723e524e18",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_deleted",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": true\n    },\n    {\n      \"created_at\": \"string\",\n      \"event_data\": {},\n      \"event_id\": \"string\",\n      \"event_type\": \"remix_contest\",\n      \"updated_at\": \"string\",\n      \"user_id\": \"string\",\n      \"entity_type\": \"track\",\n      \"entity_id\": \"string\",\n      \"end_date\": \"string\",\n      \"is_deleted\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a699ca4-99e4-4750-9a10-798c038f84bb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_deleted",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9819ddca-424e-45a3-a53d-9433f8a79c6b",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter_deleted",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b89913c-453a-4b7c-9a47-6591e30314bb",
+          "name": "Get unclaimed event ID",
+          "request": {
+            "name": "Get unclaimed event ID",
+            "description": {
+              "content": "Gets an unclaimed blockchain event ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "unclaimed_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2a2a0eb-6ec8-4545-929d-cefc596ddf16",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "unclaimed_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a304acf-a727-46a7-a43c-4fc8a37cd62b",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "unclaimed_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b55ad754-8496-445b-9d7a-59dcfea4601a",
+    "name": "Audius challenges events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

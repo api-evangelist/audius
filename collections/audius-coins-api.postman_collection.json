@@ -1,0 +1,2042 @@
+{
+  "item": [
+    {
+      "id": "62f7d336-4307-42ad-a1d7-4d2302242f4b",
+      "name": "coins",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91f3aa8f-a031-452b-b0bc-a22e09df7c75",
+          "name": "Get Coins",
+          "request": {
+            "name": "Get Coins",
+            "description": {
+              "content": "Gets a list of coins with optional filtering",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "Filter by coin ticker(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ticker",
+                  "value": "<string>",
+                  "description": "Filter by coin ticker(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mint",
+                  "value": "<string>",
+                  "description": "Filter by coin mint address(es)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mint",
+                  "value": "<string>",
+                  "description": "Filter by coin mint address(es)"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner_id",
+                  "value": "<string>",
+                  "description": "Filter by owner user ID(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner_id",
+                  "value": "<string>",
+                  "description": "Filter by owner user ID(s)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of results to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Number of results to skip"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query for ticker, name, or handle"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_method",
+                  "value": "market_cap",
+                  "description": "Sort method"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "desc",
+                  "description": "Sort direction"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b2c9d7b-bfa6-4566-b183-e1440e5c94fb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ticker",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mint",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mint",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_method",
+                      "value": "market_cap"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n      \"ticker\": \"BEAR\",\n      \"decimals\": 9,\n      \"name\": \"BEAR\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"logo_uri\": \"https://example.com/logo.png\",\n      \"banner_image_url\": \"https://example.com/banner.png\",\n      \"description\": \"A majestic bear token for wildlife conservation\",\n      \"x_handle\": \"bear_token\",\n      \"instagram_handle\": \"bear_token\",\n      \"tiktok_handle\": \"bear_token\",\n      \"website\": \"https://bear-token.com\",\n      \"link_1\": \"https://x.com/bear_token\",\n      \"link_2\": \"https://instagram.com/bear_token\",\n      \"link_3\": \"https://tiktok.com/@bear_token\",\n      \"link_4\": \"https://bear-token.com\",\n      \"has_discord\": false,\n      \"updated_at\": \"2024-01-15T10:30:00Z\",\n      \"owner_id\": \"7eP5n\",\n      \"escrow_recipient\": \"DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263\",\n      \"dynamicBondingCurve\": {\n        \"address\": \"string\",\n        \"price\": 7917.301378980449,\n        \"priceUSD\": 3755.5297869068295,\n        \"curveProgress\": 3569.4480195564106,\n        \"isMigrated\": false,\n        \"creatorQuoteFee\": 6255.560923132945,\n        \"totalTradingQuoteFee\": 6165.444188641574,\n        \"creatorWalletAddress\": \"string\"\n      },\n      \"artist_locker\": {\n        \"address\": \"string\",\n        \"locked\": 4812.082488712362,\n        \"unlocked\": 3738.0795004794463,\n        \"claimable\": 582.2774849784118\n      },\n      \"artist_fees\": {\n        \"unclaimed_fees\": 5785.250773798819,\n        \"total_fees\": 1201.5799179669496\n      },\n      \"reward_pool\": {\n        \"address\": \"string\",\n        \"balance\": 1634.186778252601\n      },\n      \"price\": 2151.050615737101,\n      \"marketCap\": 9705.787680918065,\n      \"totalVolumeUSD\": 3909.9339196542846,\n      \"holder\": 3216,\n      \"totalSupply\": 9171.965428260779,\n      \"liquidity\": 3756.7132135092384,\n      \"circulatingSupply\": 8198.37157801057,\n      \"priceChange24hPercent\": 3047.484010632423,\n      \"displayPrice\": 6453.4280338196595,\n      \"displayMarketCap\": 5876.010821082815\n    },\n    {\n      \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n      \"ticker\": \"BEAR\",\n      \"decimals\": 9,\n      \"name\": \"BEAR\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"logo_uri\": \"https://example.com/logo.png\",\n      \"banner_image_url\": \"https://example.com/banner.png\",\n      \"description\": \"A majestic bear token for wildlife conservation\",\n      \"x_handle\": \"bear_token\",\n      \"instagram_handle\": \"bear_token\",\n      \"tiktok_handle\": \"bear_token\",\n      \"website\": \"https://bear-token.com\",\n      \"link_1\": \"https://x.com/bear_token\",\n      \"link_2\": \"https://instagram.com/bear_token\",\n      \"link_3\": \"https://tiktok.com/@bear_token\",\n      \"link_4\": \"https://bear-token.com\",\n      \"has_discord\": false,\n      \"updated_at\": \"2024-01-15T10:30:00Z\",\n      \"owner_id\": \"7eP5n\",\n      \"escrow_recipient\": \"DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263\",\n      \"dynamicBondingCurve\": {\n        \"address\": \"string\",\n        \"price\": 3750.3494848214036,\n        \"priceUSD\": 2149.7186390421275,\n        \"curveProgress\": 9059.345556548707,\n        \"isMigrated\": false,\n        \"creatorQuoteFee\": 698.9880440541884,\n        \"totalTradingQuoteFee\": 787.1461341358488,\n        \"creatorWalletAddress\": \"string\"\n      },\n      \"artist_locker\": {\n        \"address\": \"string\",\n        \"locked\": 8091.826944781495,\n        \"unlocked\": 3267.535350451137,\n        \"claimable\": 9918.987004416938\n      },\n      \"artist_fees\": {\n        \"unclaimed_fees\": 802.5608145761231,\n        \"total_fees\": 8075.8022849999525\n      },\n      \"reward_pool\": {\n        \"address\": \"string\",\n        \"balance\": 5163.8302587362305\n      },\n      \"price\": 4998.6238624497255,\n      \"marketCap\": 4441.475819296933,\n      \"totalVolumeUSD\": 8040.900352806403,\n      \"holder\": 2147,\n      \"totalSupply\": 6818.406378333452,\n      \"liquidity\": 7387.712989108543,\n      \"circulatingSupply\": 979.7190069367789,\n      \"priceChange24hPercent\": 4265.113319270202,\n      \"displayPrice\": 3270.9937538776358,\n      \"displayMarketCap\": 7925.040187045912\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06d3b34f-8034-457f-9b85-1db3570d71e0",
+          "name": "Create Coin",
+          "request": {
+            "name": "Create Coin",
+            "description": {
+              "content": "Creates a new artist coin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID to create a coin"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mint\": \"<string>\",\n  \"ticker\": \"<string>\",\n  \"decimals\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"logo_uri\": \"<string>\",\n  \"banner_image_url\": \"<uri>\",\n  \"description\": \"<string>\",\n  \"link_1\": \"<uri>\",\n  \"link_2\": \"<uri>\",\n  \"link_3\": \"<uri>\",\n  \"link_4\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "655a9695-6c69-4993-b0d0-c97e485081af",
+              "name": "Success - Coin created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n  \"ticker\": \"BEAR\",\n  \"decimals\": 9,\n  \"name\": \"BEAR\",\n  \"logo_uri\": \"https://example.com/logo.png\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"description\": \"A majestic bear token for wildlife conservation\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n    \"ticker\": \"BEAR\",\n    \"user_id\": 1,\n    \"decimals\": 9,\n    \"name\": \"BEAR\",\n    \"created_at\": \"2024-01-15T10:30:00Z\",\n    \"logo_uri\": \"https://example.com/logo.png\",\n    \"banner_image_url\": \"https://example.com/banner.png\",\n    \"description\": \"A majestic bear token for wildlife conservation\",\n    \"link_1\": \"https://x.com/bear_token\",\n    \"link_2\": \"https://instagram.com/bear_token\",\n    \"link_3\": \"https://tiktok.com/@bear_token\",\n    \"link_4\": \"https://bear-token.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27d30566-ad7c-4d64-a35d-fa5f8f7ab07c",
+              "name": "Bad request - Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n  \"ticker\": \"BEAR\",\n  \"decimals\": 9,\n  \"name\": \"BEAR\",\n  \"logo_uri\": \"https://example.com/logo.png\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"description\": \"A majestic bear token for wildlife conservation\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd83d2a9-3381-438b-95b7-2c8e10fa9cb7",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n  \"ticker\": \"BEAR\",\n  \"decimals\": 9,\n  \"name\": \"BEAR\",\n  \"logo_uri\": \"https://example.com/logo.png\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"description\": \"A majestic bear token for wildlife conservation\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bf3e530-861d-4877-9f02-ae6adb4eaca3",
+          "name": "Get Coin",
+          "request": {
+            "name": "Get Coin",
+            "description": {
+              "content": "Gets information about a specific coin by its mint address",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42664135-b968-45c0-9d8d-839795cde21e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n    \"ticker\": \"BEAR\",\n    \"decimals\": 9,\n    \"name\": \"BEAR\",\n    \"created_at\": \"2024-01-15T10:30:00Z\",\n    \"logo_uri\": \"https://example.com/logo.png\",\n    \"banner_image_url\": \"https://example.com/banner.png\",\n    \"description\": \"A majestic bear token for wildlife conservation\",\n    \"x_handle\": \"bear_token\",\n    \"instagram_handle\": \"bear_token\",\n    \"tiktok_handle\": \"bear_token\",\n    \"website\": \"https://bear-token.com\",\n    \"link_1\": \"https://x.com/bear_token\",\n    \"link_2\": \"https://instagram.com/bear_token\",\n    \"link_3\": \"https://tiktok.com/@bear_token\",\n    \"link_4\": \"https://bear-token.com\",\n    \"has_discord\": false,\n    \"updated_at\": \"2024-01-15T10:30:00Z\",\n    \"owner_id\": \"7eP5n\",\n    \"escrow_recipient\": \"DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263\",\n    \"dynamicBondingCurve\": {\n      \"address\": \"string\",\n      \"price\": 495.0721052419904,\n      \"priceUSD\": 4124.064308821995,\n      \"curveProgress\": 7658.098727098862,\n      \"isMigrated\": false,\n      \"creatorQuoteFee\": 3877.5963787444302,\n      \"totalTradingQuoteFee\": 6739.378983347234,\n      \"creatorWalletAddress\": \"string\"\n    },\n    \"artist_locker\": {\n      \"address\": \"string\",\n      \"locked\": 8829.939993911474,\n      \"unlocked\": 3472.5296329658418,\n      \"claimable\": 8091.24267203272\n    },\n    \"artist_fees\": {\n      \"unclaimed_fees\": 4940.459307664935,\n      \"total_fees\": 806.7086392879419\n    },\n    \"reward_pool\": {\n      \"address\": \"string\",\n      \"balance\": 347.6322992593861\n    },\n    \"price\": 1919.735888268733,\n    \"marketCap\": 4193.933810000041,\n    \"totalVolumeUSD\": 4172.599349275613,\n    \"holder\": 8519,\n    \"totalSupply\": 7176.111902242726,\n    \"liquidity\": 6060.34060858971,\n    \"circulatingSupply\": 143.9324531363273,\n    \"priceChange24hPercent\": 9136.563871174676,\n    \"displayPrice\": 9390.044696774716,\n    \"displayMarketCap\": 9276.674988426314\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ec525d6-a02b-4617-9883-efd9b85721ac",
+          "name": "Update Coin",
+          "request": {
+            "name": "Update Coin",
+            "description": {
+              "content": "Updates information about a specific coin by its mint address",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID making the update (must be the coin owner)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"banner_image_url\": \"<uri>\",\n  \"link_1\": \"<uri>\",\n  \"link_2\": \"<uri>\",\n  \"link_3\": \"<uri>\",\n  \"link_4\": \"<uri>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f0e734b9-d3bd-4d1f-851b-e7db5219da67",
+              "name": "Success - Coin updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Updated description for the bear token\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "468c69f5-3fdf-4ab6-8701-dda62865bf48",
+              "name": "Bad request - Invalid parameters or no fields provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Updated description for the bear token\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a437aca6-74e6-43a7-ac8e-1110fcdbee78",
+              "name": "Forbidden - User does not own the coin",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Updated description for the bear token\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b42607c1-27b0-4ef9-a631-97e9c943ff3a",
+              "name": "Not found - Coin does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Updated description for the bear token\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ecd07e7-33a7-4ac8-a0cf-98036b6f330b",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "7eP5n"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Updated description for the bear token\",\n  \"banner_image_url\": \"https://example.com/banner.png\",\n  \"link_1\": \"https://x.com/bear_token\",\n  \"link_2\": \"https://instagram.com/bear_token\",\n  \"link_3\": \"https://tiktok.com/@bear_token\",\n  \"link_4\": \"https://bear-token.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b841590c-a03f-47ca-92e9-52608fcd671a",
+          "name": "Get Coin By Ticker",
+          "request": {
+            "name": "Get Coin By Ticker",
+            "description": {
+              "content": "Gets information about a specific coin by its ticker",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "ticker",
+                ":ticker"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticker",
+                  "description": "(Required) The ticker symbol of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbb9be04-0714-45cb-beb9-b8286227f339",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "ticker",
+                    ":ticker"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticker",
+                      "description": "(Required) The ticker symbol of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mint\": \"bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj\",\n    \"ticker\": \"BEAR\",\n    \"decimals\": 9,\n    \"name\": \"BEAR\",\n    \"created_at\": \"2024-01-15T10:30:00Z\",\n    \"logo_uri\": \"https://example.com/logo.png\",\n    \"banner_image_url\": \"https://example.com/banner.png\",\n    \"description\": \"A majestic bear token for wildlife conservation\",\n    \"x_handle\": \"bear_token\",\n    \"instagram_handle\": \"bear_token\",\n    \"tiktok_handle\": \"bear_token\",\n    \"website\": \"https://bear-token.com\",\n    \"link_1\": \"https://x.com/bear_token\",\n    \"link_2\": \"https://instagram.com/bear_token\",\n    \"link_3\": \"https://tiktok.com/@bear_token\",\n    \"link_4\": \"https://bear-token.com\",\n    \"has_discord\": false,\n    \"updated_at\": \"2024-01-15T10:30:00Z\",\n    \"owner_id\": \"7eP5n\",\n    \"escrow_recipient\": \"DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263\",\n    \"dynamicBondingCurve\": {\n      \"address\": \"string\",\n      \"price\": 495.0721052419904,\n      \"priceUSD\": 4124.064308821995,\n      \"curveProgress\": 7658.098727098862,\n      \"isMigrated\": false,\n      \"creatorQuoteFee\": 3877.5963787444302,\n      \"totalTradingQuoteFee\": 6739.378983347234,\n      \"creatorWalletAddress\": \"string\"\n    },\n    \"artist_locker\": {\n      \"address\": \"string\",\n      \"locked\": 8829.939993911474,\n      \"unlocked\": 3472.5296329658418,\n      \"claimable\": 8091.24267203272\n    },\n    \"artist_fees\": {\n      \"unclaimed_fees\": 4940.459307664935,\n      \"total_fees\": 806.7086392879419\n    },\n    \"reward_pool\": {\n      \"address\": \"string\",\n      \"balance\": 347.6322992593861\n    },\n    \"price\": 1919.735888268733,\n    \"marketCap\": 4193.933810000041,\n    \"totalVolumeUSD\": 4172.599349275613,\n    \"holder\": 8519,\n    \"totalSupply\": 7176.111902242726,\n    \"liquidity\": 6060.34060858971,\n    \"circulatingSupply\": 143.9324531363273,\n    \"priceChange24hPercent\": 9136.563871174676,\n    \"displayPrice\": 9390.044696774716,\n    \"displayMarketCap\": 9276.674988426314\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd2df91c-2d2b-46c0-bb50-622b9662e54d",
+          "name": "Get Coin Insights",
+          "request": {
+            "name": "Get Coin Insights",
+            "description": {
+              "content": "Gets insights about a specific coin by its mint address",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "insights"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "933294e5-e465-45cc-acca-9a71f15e53ea",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "insights"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"marketCap\": 2625779824.994664,\n    \"fdv\": 2625779824.994664,\n    \"liquidity\": 18977326.389274083,\n    \"lastTradeUnixTime\": 1752620592,\n    \"lastTradeHumanTime\": \"2025-07-15T23:03:12\",\n    \"price\": 0.000029571022098881748,\n    \"history24hPrice\": 0.000027195701160436288,\n    \"priceChange24hPercent\": 8.73417796596848,\n    \"uniqueWallet24h\": 20242,\n    \"uniqueWalletHistory24h\": 21155,\n    \"uniqueWallet24hChangePercent\": -4.315764594658473,\n    \"totalSupply\": 88795707372386.03,\n    \"circulatingSupply\": 88795707372386.03,\n    \"holder\": 957291,\n    \"trade24h\": 449987,\n    \"tradeHistory24h\": 390400,\n    \"trade24hChangePercent\": 15.263063524590164,\n    \"sell24h\": 223845,\n    \"sellHistory24h\": 191979,\n    \"sell24hChangePercent\": 16.598690481771445,\n    \"buy24h\": 226142,\n    \"buyHistory24h\": 198421,\n    \"buy24hChangePercent\": 13.970799461750522,\n    \"v24h\": 2456470915352.043,\n    \"v24hUSD\": 69961943.60091284,\n    \"vHistory24h\": 1849367819551.6223,\n    \"totalVolume\": 158766463.26959822,\n    \"totalVolumeUSD\": 20188521260.405678,\n    \"volumeBuy\": 78227859.16098201,\n    \"volumeBuyUSD\": 20188521260.405678,\n    \"volumeSell\": 80538604.1086162,\n    \"volumeSellUSD\": 20188521260.405678,\n    \"totalTrade\": 258522892,\n    \"buy\": 87829497,\n    \"sell\": 170693395,\n    \"dynamicBondingCurve\": {\n      \"address\": \"2AAsAwNPTNBk5N466xyPiwqdgbc5WLbDTdnn9gVuDKaN\",\n      \"price\": 0.0028402095736478586,\n      \"priceUSD\": 0.000029571022098881748,\n      \"curveProgress\": 0.75,\n      \"creatorQuoteFee\": 0.05,\n      \"totalTradingQuoteFee\": 0.001,\n      \"creatorWalletAddress\": \"2AAsAwNPTNBk5N466xyPiwqdgbc5WLbDTdnn9gVuDKaN\",\n      \"isMigrated\": false\n    },\n    \"address\": \"DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263\",\n    \"decimals\": 5,\n    \"symbol\": \"BONK\",\n    \"name\": \"Bonk\",\n    \"extensions\": {\n      \"coingeckoId\": \"bonk\",\n      \"description\": \"The Official Bonk Inu token\",\n      \"twitter\": \"https://twitter.com/bonk_inu\",\n      \"website\": \"https://www.bonkcoin.com/\",\n      \"discord\": \"https://discord.gg/ubqvDDFUhf\"\n    },\n    \"vHistory24hUSD\": 49529721.91224754,\n    \"v24hChangePercent\": 32.82760137718911,\n    \"vBuy24h\": 1267704208631.2197,\n    \"vBuy24hUSD\": 35985775.23314727,\n    \"vBuyHistory24h\": 926415751610.5529,\n    \"vBuyHistory24hUSD\": 24916558.31987226,\n    \"vBuy24hChangePercent\": 36.83966474310746,\n    \"vSell24h\": 1188766706720.8232,\n    \"vSell24hUSD\": 33976168.367765576,\n    \"vSellHistory24h\": 922952067941.0695,\n    \"vSellHistory24hUSD\": 24613163.592375275,\n    \"vSell24hChangePercent\": 28.800481413161105,\n    \"numberMarkets\": 317\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df2fd2fc-db1e-49ac-a56c-1fe0c0ca3191",
+          "name": "Get Coin Members",
+          "request": {
+            "name": "Get Coin Members",
+            "description": {
+              "content": "Gets a list of Audius users with a non-zero balance of a specific coin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "desc",
+                  "description": "The sort direction for the results"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ff48f6f-7425-4062-b9d6-5b0e9dc1e333",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"balance\": 100000,\n      \"user_id\": \"7eP5n\"\n    },\n    {\n      \"balance\": 100000,\n      \"user_id\": \"7eP5n\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46d529f7-5a5d-418a-acf9-3f024e1d754c",
+          "name": "Get Coin Members Count",
+          "request": {
+            "name": "Get Coin Members Count",
+            "description": {
+              "content": "Gets the total number of Audius users with a non-zero balance of a specific coin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "members",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58f0874f-e056-48cf-8f9f-42342edf8c2e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "members",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": 42\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f50d00d2-77b9-4088-a4d3-e2fc213dbbd3",
+          "name": "Get Volume Leaders",
+          "request": {
+            "name": "Get Volume Leaders",
+            "description": {
+              "content": "Gets top coin<>AUDIO trading addresses by volume",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                "volume-leaders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "(most recent midnight UTC)",
+                  "description": "Beginning of time range to query over (RFC3339 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "(most recent midnight UTC + 24hrs)",
+                  "description": "End of time range to query over (RFC3339 format)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "The number of items to fetch"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2102df68-3930-4b79-9799-67272860dc6e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "volume-leaders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2006-01-02T15:04:05Z"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2006-01-02T15:04:05Z"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"address\": \"string\",\n      \"volume\": 244.5308607608465,\n      \"user\": {\n        \"album_count\": 9598,\n        \"allow_ai_attribution\": false,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 8808,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 588,\n        \"does_current_user_follow\": true,\n        \"does_current_user_subscribe\": false,\n        \"does_follow_current_user\": true,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 4901,\n        \"follower_count\": 6622,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": true,\n        \"id\": \"string\",\n        \"is_available\": true,\n        \"is_deactivated\": false,\n        \"is_storage_v2\": false,\n        \"is_verified\": true,\n        \"name\": \"string\",\n        \"playlist_count\": 7699,\n        \"repost_count\": 2378,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 4775,\n        \"supporting_count\": 8979,\n        \"total_audio_balance\": 3743,\n        \"total_balance\": \"string\",\n        \"track_count\": 7203,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": false,\n        \"verified_with_tiktok\": true,\n        \"verified_with_twitter\": false,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      }\n    },\n    {\n      \"address\": \"string\",\n      \"volume\": 626.3117161974163,\n      \"user\": {\n        \"album_count\": 6537,\n        \"allow_ai_attribution\": true,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 52,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 7694,\n        \"does_current_user_follow\": true,\n        \"does_current_user_subscribe\": false,\n        \"does_follow_current_user\": false,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 8696,\n        \"follower_count\": 1250,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": true,\n        \"id\": \"string\",\n        \"is_available\": false,\n        \"is_deactivated\": true,\n        \"is_storage_v2\": false,\n        \"is_verified\": true,\n        \"name\": \"string\",\n        \"playlist_count\": 6541,\n        \"repost_count\": 3633,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 5530,\n        \"supporting_count\": 6966,\n        \"total_audio_balance\": 3535,\n        \"total_balance\": \"string\",\n        \"track_count\": 6170,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": true,\n        \"verified_with_tiktok\": false,\n        \"verified_with_twitter\": true,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d414069-a7a3-4cba-a78d-5175183be463",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    "volume-leaders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2006-01-02T15:04:05Z"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2006-01-02T15:04:05Z"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c276fd5d-e371-4815-8463-861f056e76f2",
+          "name": "Get Coin Redeem Amount",
+          "request": {
+            "name": "Get Coin Redeem Amount",
+            "description": {
+              "content": "Gets the availability indicator for reward codes for a specific coin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "redeem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8cd6d78f-4b9d-47a9-8b85-7bb7c6a0d8f0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"amount\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ace7437-7b50-4ccf-bfed-21fb1cfc1c15",
+          "name": "Claim Coin Reward",
+          "request": {
+            "name": "Claim Coin Reward",
+            "description": {
+              "content": "Claims a coin reward for a given mint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "redeem"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72397e68-9599-4ff8-8343-ea3109ab5d8f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    },\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a957099f-1198-4813-a875-6b45adffba3a",
+              "name": "Bad request - No coin reward available or already claimed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"used\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de1b1b1a-06d5-4917-a045-b531affc549a",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d551f78-3473-415c-8c6d-56ba10b60d0d",
+          "name": "Get Reward Code",
+          "request": {
+            "name": "Get Reward Code",
+            "description": {
+              "content": "Gets information about a specific reward code for a coin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "redeem",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The reward code to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36fe6e10-b867-4c61-a9fe-9cee0f295b86",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The reward code to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"XYZ123\",\n  \"amount\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4698c75b-cb84-4974-97e8-ac4da0effb82",
+              "name": "Bad request - Code is invalid or already used",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The reward code to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"used\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c65c6163-5a01-4238-b6b7-350a21924a52",
+          "name": "Claim Coin Reward Code",
+          "request": {
+            "name": "Claim Coin Reward Code",
+            "description": {
+              "content": "Claims a coin reward using a given code",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "coins",
+                ":mint",
+                "redeem",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mint",
+                  "description": "(Required) The mint address of the coin"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) The reward code to claim"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd71c5a2-59e1-4252-81a6-86d0ff4a1c37",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The reward code to claim"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    },\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c29e282a-84f1-46ff-91d0-f38ea66c2d14",
+              "name": "Bad request - Code is invalid or already used",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The reward code to claim"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"used\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb91bc4c-8509-4250-a92f-2a3524cef8c8",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "coins",
+                    ":mint",
+                    "redeem",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mint",
+                      "description": "(Required) The mint address of the coin"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) The reward code to claim"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a33fd170-a7ad-4eba-9d5a-ce977278d83e",
+    "name": "Audius challenges coins API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges developer_apps API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "developer_apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Developer App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/developer-apps",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user creating the developer app"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new developer app. Indexer validates grants."
+        },
+        {
+          "info": {
+            "name": "Get Developer App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/developer-apps/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "A developer app address (API Key)"
+              }
+            ]
+          },
+          "docs": "Gets developer app matching given address (API key)"
+        },
+        {
+          "info": {
+            "name": "Update Developer App",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.audius.co/v1/developer-apps/:address",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user who owns the developer app"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Developer app address (API Key)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a developer app. Indexer validates grants."
+        },
+        {
+          "info": {
+            "name": "Delete Developer App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/developer-apps/:address",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user who owns the developer app"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Developer app address (API Key)"
+              }
+            ]
+          },
+          "docs": "Deletes a developer app. Indexer validates grants."
+        },
+        {
+          "info": {
+            "name": "Register Developer App API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/developer-apps/:address/register-api-key",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user who owns the developer app"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Developer app address (API key)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Register api_key and api_secret in api_keys table for developer apps created via entity manager transactions. Use when the client sends raw ManageEntity tx instead of POST /developer-apps. Inserts with rps=10, rpm=500000. Requires the app to exist in developer_apps and belong to the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Deactivate Developer App Access Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/developer-apps/:address/access-keys/deactivate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user who owns the developer app"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Developer app address (API Key)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivate a bearer token (API access key) for a developer app. Indexer validates grants."
+        },
+        {
+          "info": {
+            "name": "Create Developer App Access Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/developer-apps/:address/access-keys",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user who owns the developer app"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "path",
+                "description": "Developer app address (API Key)"
+              }
+            ]
+          },
+          "docs": "Create a new bearer token (API access key) for a developer app. Indexer validates grants."
+        },
+        {
+          "info": {
+            "name": "Get Developer Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/users/:id/developer-apps",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID whose developer apps to list"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Include metrics when set to \"metrics\""
+              }
+            ]
+          },
+          "docs": "Get developer apps for the user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

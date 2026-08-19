@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges prizes API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "prizes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Prizes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/prizes"
+          },
+          "docs": "Gets a list of active prizes available for claiming. Excludes sensitive information like download URLs."
+        },
+        {
+          "info": {
+            "name": "Claim Prize",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/prizes/claim",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Claims a prize by verifying a Solana transaction. User must send exactly 2 YAK to the prize receiver address. Returns the prize won and any redeem codes/URLs."
+        },
+        {
+          "info": {
+            "name": "Get Wallet Prizes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/wallet/:wallet/prizes",
+            "params": [
+              {
+                "name": "wallet",
+                "value": "",
+                "type": "path",
+                "description": "The wallet address to get prizes for"
+              }
+            ]
+          },
+          "docs": "Gets all claimed prizes for a wallet. Public endpoint - no authentication required. Excludes sensitive action_data for security."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

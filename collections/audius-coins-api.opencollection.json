@@ -1,0 +1,381 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges coins API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "coins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Coins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins",
+            "params": [
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by coin ticker(s)"
+              },
+              {
+                "name": "mint",
+                "value": "",
+                "type": "query",
+                "description": "Filter by coin mint address(es)"
+              },
+              {
+                "name": "owner_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by owner user ID(s)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query for ticker, name, or handle"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "Sort method"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction"
+              }
+            ]
+          },
+          "docs": "Gets a list of coins with optional filtering"
+        },
+        {
+          "info": {
+            "name": "Create Coin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/coins",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID to create a coin"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new artist coin"
+        },
+        {
+          "info": {
+            "name": "Get Coin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              }
+            ]
+          },
+          "docs": "Gets information about a specific coin by its mint address"
+        },
+        {
+          "info": {
+            "name": "Update Coin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/coins/:mint",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID making the update (must be the coin owner)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information about a specific coin by its mint address"
+        },
+        {
+          "info": {
+            "name": "Get Coin By Ticker",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/ticker/:ticker",
+            "params": [
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "path",
+                "description": "The ticker symbol of the coin"
+              }
+            ]
+          },
+          "docs": "Gets information about a specific coin by its ticker"
+        },
+        {
+          "info": {
+            "name": "Get Coin Insights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint/insights",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              }
+            ]
+          },
+          "docs": "Gets insights about a specific coin by its mint address"
+        },
+        {
+          "info": {
+            "name": "Get Coin Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint/members",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "The sort direction for the results"
+              }
+            ]
+          },
+          "docs": "Gets a list of Audius users with a non-zero balance of a specific coin"
+        },
+        {
+          "info": {
+            "name": "Get Coin Members Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint/members/count",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              }
+            ]
+          },
+          "docs": "Gets the total number of Audius users with a non-zero balance of a specific coin"
+        },
+        {
+          "info": {
+            "name": "Get Volume Leaders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/volume-leaders",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Beginning of time range to query over (RFC3339 format)"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End of time range to query over (RFC3339 format)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              }
+            ]
+          },
+          "docs": "Gets top coin<>AUDIO trading addresses by volume"
+        },
+        {
+          "info": {
+            "name": "Get Coin Redeem Amount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint/redeem",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              }
+            ]
+          },
+          "docs": "Gets the availability indicator for reward codes for a specific coin"
+        },
+        {
+          "info": {
+            "name": "Claim Coin Reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/coins/:mint/redeem",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Claims a coin reward for a given mint"
+        },
+        {
+          "info": {
+            "name": "Get Reward Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/coins/:mint/redeem/:code",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "The reward code to retrieve"
+              }
+            ]
+          },
+          "docs": "Gets information about a specific reward code for a coin"
+        },
+        {
+          "info": {
+            "name": "Claim Coin Reward Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/coins/:mint/redeem/:code",
+            "params": [
+              {
+                "name": "mint",
+                "value": "",
+                "type": "path",
+                "description": "The mint address of the coin"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path",
+                "description": "The reward code to claim"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Claims a coin reward using a given code"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

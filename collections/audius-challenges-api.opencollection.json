@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "challenges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Undisbursed Challenges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/challenges/undisbursed",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "A User ID to filter the undisbursed challenges to a particular user"
+              },
+              {
+                "name": "completed_blocknumber",
+                "value": "",
+                "type": "query",
+                "description": "Starting blocknumber to retrieve completed undisbursed challenges"
+              },
+              {
+                "name": "challenge_id",
+                "value": "",
+                "type": "query",
+                "description": "A challenge ID to filter the undisbursed challenges to a particular challenge"
+              }
+            ]
+          },
+          "docs": "Get all undisbursed challenges"
+        },
+        {
+          "info": {
+            "name": "Get Undisbursed Challenges For User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/challenges/undisbursed/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "A User ID to filter the undisbursed challenges to a particular user"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "completed_blocknumber",
+                "value": "",
+                "type": "query",
+                "description": "Starting blocknumber to retrieve completed undisbursed challenges"
+              },
+              {
+                "name": "challenge_id",
+                "value": "",
+                "type": "query",
+                "description": "A challenge ID to filter the undisbursed challenges to a particular challenge"
+              }
+            ]
+          },
+          "docs": "Get all undisbursed challenges for a user"
+        },
+        {
+          "info": {
+            "name": "Get Challenge Attestation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/challenges/:challenge_id/attest",
+            "params": [
+              {
+                "name": "challenge_id",
+                "value": "",
+                "type": "path",
+                "description": "The challenge ID of the user challenge requiring the attestation"
+              },
+              {
+                "name": "oracle",
+                "value": "",
+                "type": "query",
+                "description": "The address of a valid, registered Anti-Abuse Oracle"
+              },
+              {
+                "name": "specifier",
+                "value": "",
+                "type": "query",
+                "description": "The specifier of the user challenge requiring the attestation"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user challenge requiring the attestation"
+              }
+            ]
+          },
+          "docs": "Produces an attestation that a given user has completed a challenge, or errors."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

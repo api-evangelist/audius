@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges dashboard_wallet_users API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dashboard_wallet_users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk get dashboard wallet users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/dashboard_wallet_users",
+            "params": [
+              {
+                "name": "wallets",
+                "value": "",
+                "type": "query",
+                "description": "The wallets for which to fetch connected Audius user profiles."
+              }
+            ]
+          },
+          "docs": "Gets Audius user profiles connected to given dashboard wallet addresses"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

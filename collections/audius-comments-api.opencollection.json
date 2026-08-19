@@ -1,0 +1,335 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges comments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get unclaimed comment ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/comments/unclaimed_id"
+          },
+          "docs": "Gets an unclaimed blockchain comment ID"
+        },
+        {
+          "info": {
+            "name": "Create Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/comments",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new comment"
+        },
+        {
+          "info": {
+            "name": "Get Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              }
+            ]
+          },
+          "docs": "Gets a comment by ID"
+        },
+        {
+          "info": {
+            "name": "Update Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.audius.co/v1/comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a comment"
+        },
+        {
+          "info": {
+            "name": "Delete Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/comments/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a comment"
+        },
+        {
+          "info": {
+            "name": "React to Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/comments/:comment_id/react",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "React to a comment"
+        },
+        {
+          "info": {
+            "name": "Unreact to Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/comments/:comment_id/react",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unreact to a comment"
+        },
+        {
+          "info": {
+            "name": "Pin Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/comments/:comment_id/pin",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Pin a comment"
+        },
+        {
+          "info": {
+            "name": "Unpin Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.audius.co/v1/comments/:comment_id/pin",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unpin a comment"
+        },
+        {
+          "info": {
+            "name": "Report Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/comments/:comment_id/report",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Report a comment"
+        },
+        {
+          "info": {
+            "name": "Get Comment Replies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/comments/:comment_id/replies",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "A Comment ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              }
+            ]
+          },
+          "docs": "Gets replies to a parent comment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

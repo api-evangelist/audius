@@ -1,0 +1,327 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges search API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Users/Tracks/Playlists/Albums that best match the search query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/search/autocomplete",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "The type of response, one of: all, users, tracks, playlists, or albums"
+              },
+              {
+                "name": "includePurchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to include purchaseable content"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "mood",
+                "value": "",
+                "type": "query",
+                "description": "The moods to filter by"
+              },
+              {
+                "name": "is_verified",
+                "value": "",
+                "type": "query",
+                "description": "Only include verified users in the user results"
+              },
+              {
+                "name": "has_downloads",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have downloads in the track results"
+              },
+              {
+                "name": "is_purchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Only include purchaseable tracks and albums in the track and album results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that match the musical key"
+              },
+              {
+                "name": "bpm_min",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm greater than or equal to"
+              },
+              {
+                "name": "bpm_max",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm less than or equal to"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Same as search but optimized for quicker response at the cost of some entity information."
+        },
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/search/full",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "The type of response, one of: all, users, tracks, playlists, or albums"
+              },
+              {
+                "name": "includePurchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to include purchaseable content"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "mood",
+                "value": "",
+                "type": "query",
+                "description": "The moods to filter by"
+              },
+              {
+                "name": "is_verified",
+                "value": "",
+                "type": "query",
+                "description": "Only include verified users in the user results"
+              },
+              {
+                "name": "has_downloads",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have downloads in the track results"
+              },
+              {
+                "name": "is_purchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Only include purchaseable tracks and albums in the track and album results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that match the musical key"
+              },
+              {
+                "name": "bpm_min",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm greater than or equal to"
+              },
+              {
+                "name": "bpm_max",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm less than or equal to"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Get Users/Tracks/Playlists/Albums that best match the search query"
+        },
+        {
+          "info": {
+            "name": "SearchTags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.audius.co/v1/search/tags",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to skip. Useful for pagination (page number * limit)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to fetch"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The user ID of the user making the request"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "The type of response, one of: all, users, tracks, playlists, or albums"
+              },
+              {
+                "name": "includePurchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not to include purchaseable content"
+              },
+              {
+                "name": "genre",
+                "value": "",
+                "type": "query",
+                "description": "The genres to filter by"
+              },
+              {
+                "name": "mood",
+                "value": "",
+                "type": "query",
+                "description": "The moods to filter by"
+              },
+              {
+                "name": "is_verified",
+                "value": "",
+                "type": "query",
+                "description": "Only include verified users in the user results"
+              },
+              {
+                "name": "has_downloads",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have downloads in the track results"
+              },
+              {
+                "name": "is_purchaseable",
+                "value": "",
+                "type": "query",
+                "description": "Only include purchaseable tracks and albums in the track and album results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that match the musical key"
+              },
+              {
+                "name": "bpm_min",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm greater than or equal to"
+              },
+              {
+                "name": "bpm_max",
+                "value": "",
+                "type": "query",
+                "description": "Only include tracks that have a bpm less than or equal to"
+              },
+              {
+                "name": "sort_method",
+                "value": "",
+                "type": "query",
+                "description": "The sort method"
+              }
+            ]
+          },
+          "docs": "Get Users/Tracks/Playlists/Albums that best match the provided tag"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2938 @@
+{
+  "item": [
+    {
+      "id": "7978f409-4371-4558-8c5d-5d7ba3c18224",
+      "name": "comments",
+      "description": {
+        "content": "Comment related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "abe9b27d-d3f0-49a8-9c58-db494b814eaf",
+          "name": "Get unclaimed comment ID",
+          "request": {
+            "name": "Get unclaimed comment ID",
+            "description": {
+              "content": "Gets an unclaimed blockchain comment ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                "unclaimed_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cba2356-4ddb-4337-8c8b-a9988401f99a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "unclaimed_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eeae82e8-28c1-4951-b85b-82b788eae226",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "unclaimed_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb9512b5-4b94-4d43-8004-5d04c657a36b",
+          "name": "Create Comment",
+          "request": {
+            "name": "Create Comment",
+            "description": {
+              "content": "Creates a new comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\",\n  \"body\": \"<string>\",\n  \"commentId\": \"<integer>\",\n  \"parentId\": \"<integer>\",\n  \"trackTimestampS\": \"<integer>\",\n  \"mentions\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c729d2da-fba8-48aa-b9cf-c69515a419c5",
+              "name": "Comment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"Great track!\",\n  \"commentId\": 98765,\n  \"parentId\": 54321,\n  \"trackTimestampS\": \"<integer>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 6296,\n  \"comment_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d497b5b-4cfe-4190-b8e7-69c11d0df12b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"Great track!\",\n  \"commentId\": 98765,\n  \"parentId\": 54321,\n  \"trackTimestampS\": \"<integer>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e43bd76-9544-4401-986b-cb4f261e200f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"Great track!\",\n  \"commentId\": 98765,\n  \"parentId\": 54321,\n  \"trackTimestampS\": \"<integer>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84259167-db87-484d-a90b-ffacf174ef78",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"Great track!\",\n  \"commentId\": 98765,\n  \"parentId\": 54321,\n  \"trackTimestampS\": \"<integer>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81f56243-fa85-415d-8000-b7ab5c9b7568",
+          "name": "Get Comment",
+          "request": {
+            "name": "Get Comment",
+            "description": {
+              "content": "Gets a comment by ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00a4fe10-ac95-4a5d-8d17-489404a33798",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"created_at\": \"string\",\n      \"entity_id\": \"string\",\n      \"entity_type\": \"<string>\",\n      \"id\": \"string\",\n      \"is_edited\": false,\n      \"message\": \"string\",\n      \"react_count\": 3439,\n      \"reply_count\": 2677,\n      \"user_id\": \"string\",\n      \"mentions\": [\n        {\n          \"handle\": \"string\",\n          \"user_id\": 5638\n        },\n        {\n          \"handle\": \"string\",\n          \"user_id\": 7761\n        }\n      ],\n      \"track_timestamp_s\": 3172,\n      \"is_current_user_reacted\": true,\n      \"is_artist_reacted\": false,\n      \"is_tombstone\": false,\n      \"is_muted\": false,\n      \"updated_at\": \"string\",\n      \"replies\": [\n        {\n          \"created_at\": \"string\",\n          \"entity_id\": \"string\",\n          \"entity_type\": \"<string>\",\n          \"id\": \"string\",\n          \"is_edited\": false,\n          \"message\": \"string\",\n          \"react_count\": 9958,\n          \"user_id\": \"string\",\n          \"mentions\": [\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"track_timestamp_s\": 6113,\n          \"is_current_user_reacted\": true,\n          \"is_artist_reacted\": false,\n          \"updated_at\": \"string\",\n          \"parent_comment_id\": 2444\n        },\n        {\n          \"created_at\": \"string\",\n          \"entity_id\": \"string\",\n          \"entity_type\": \"<string>\",\n          \"id\": \"string\",\n          \"is_edited\": false,\n          \"message\": \"string\",\n          \"react_count\": 7433,\n          \"user_id\": \"string\",\n          \"mentions\": [\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"track_timestamp_s\": 7394,\n          \"is_current_user_reacted\": false,\n          \"is_artist_reacted\": true,\n          \"updated_at\": \"string\",\n          \"parent_comment_id\": 6502\n        }\n      ],\n      \"parent_comment_id\": 4826\n    },\n    {\n      \"created_at\": \"string\",\n      \"entity_id\": \"string\",\n      \"entity_type\": \"<string>\",\n      \"id\": \"string\",\n      \"is_edited\": true,\n      \"message\": \"string\",\n      \"react_count\": 8222,\n      \"reply_count\": 4339,\n      \"user_id\": \"string\",\n      \"mentions\": [\n        {\n          \"handle\": \"string\",\n          \"user_id\": 9938\n        },\n        {\n          \"handle\": \"string\",\n          \"user_id\": 8578\n        }\n      ],\n      \"track_timestamp_s\": 752,\n      \"is_current_user_reacted\": true,\n      \"is_artist_reacted\": true,\n      \"is_tombstone\": true,\n      \"is_muted\": true,\n      \"updated_at\": \"string\",\n      \"replies\": [\n        {\n          \"created_at\": \"string\",\n          \"entity_id\": \"string\",\n          \"entity_type\": \"<string>\",\n          \"id\": \"string\",\n          \"is_edited\": true,\n          \"message\": \"string\",\n          \"react_count\": 446,\n          \"user_id\": \"string\",\n          \"mentions\": [\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"track_timestamp_s\": 1408,\n          \"is_current_user_reacted\": false,\n          \"is_artist_reacted\": true,\n          \"updated_at\": \"string\",\n          \"parent_comment_id\": 2738\n        },\n        {\n          \"created_at\": \"string\",\n          \"entity_id\": \"string\",\n          \"entity_type\": \"<string>\",\n          \"id\": \"string\",\n          \"is_edited\": false,\n          \"message\": \"string\",\n          \"react_count\": 1509,\n          \"user_id\": \"string\",\n          \"mentions\": [\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"handle\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"track_timestamp_s\": 243,\n          \"is_current_user_reacted\": true,\n          \"is_artist_reacted\": true,\n          \"updated_at\": \"string\",\n          \"parent_comment_id\": 2714\n        }\n      ],\n      \"parent_comment_id\": 4720\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24da2b4a-1acc-4f32-ade0-d96b1f6be51a",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9d1d7f2-6813-4bf6-ba27-77bd5a790fb9",
+          "name": "Update Comment",
+          "request": {
+            "name": "Update Comment",
+            "description": {
+              "content": "Updates a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\",\n  \"body\": \"<string>\",\n  \"mentions\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e37577ed-174a-4c3e-a2c7-38eb23ae7471",
+              "name": "Comment updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"<string>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379a68f1-535f-469c-989a-6b3dca755b4a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"<string>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68f77d5c-9d10-409b-b146-e6b447071092",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"<string>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5a00ad6-3696-47ff-9965-ec2c1969b459",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345,\n  \"body\": \"<string>\",\n  \"mentions\": [\n    67890,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8afe0599-0a26-4532-8cce-d985e88a8164",
+          "name": "Delete Comment",
+          "request": {
+            "name": "Delete Comment",
+            "description": {
+              "content": "Deletes a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "788db1be-c4d8-433e-85fb-abffb63603ac",
+              "name": "Comment deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d122eb-db39-4aa0-b61d-bb735c3b2dcd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf741ba7-792b-4b93-8dda-fbb6c4dbbafe",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1af076f2-1681-4229-8491-1db5612ce272",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef2fdfc3-3e87-4b58-b247-f704a052219e",
+          "name": "React to Comment",
+          "request": {
+            "name": "React to Comment",
+            "description": {
+              "content": "React to a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "react"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba196df8-446e-442a-a171-1d401167f511",
+              "name": "Comment reacted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afbf0633-b6ba-4211-ba30-575ebd4f3a6d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42dea3d6-4df8-41ff-8e78-5c110668eed1",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1afcad7a-d1ae-425d-a0e7-ce550756233c",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "614f0635-9a02-4a8d-a612-0e412a159c52",
+          "name": "Unreact to Comment",
+          "request": {
+            "name": "Unreact to Comment",
+            "description": {
+              "content": "Unreact to a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "react"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1fdd20a2-4c01-4f06-a268-9c08d47ea99b",
+              "name": "Comment unreacted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80d6ca6d-2464-4b46-bef6-9e27f576c7d6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "541adaff-77b2-4b4d-838e-c9c3cbeb857e",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa6adee9-8b07-4c64-ab20-d2ef374414a3",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "react"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e072304-f2e6-4a71-97ec-73d28b79b5d4",
+          "name": "Pin Comment",
+          "request": {
+            "name": "Pin Comment",
+            "description": {
+              "content": "Pin a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "pin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49b6d5d8-9145-4b3a-9ae6-dcc4bacaf6c9",
+              "name": "Comment pinned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a47684f-ce43-4092-adf8-d7fc96fd97d5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23dc83be-af5c-40e3-b6e3-e4f01c2dd8b8",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c3875bc-2d7d-4759-bcb7-e2fb6428a16a",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06f5240b-8907-4bb6-add0-393277cd71dc",
+          "name": "Unpin Comment",
+          "request": {
+            "name": "Unpin Comment",
+            "description": {
+              "content": "Unpin a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "pin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entityType\": \"<string>\",\n  \"entityId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c88ba2c-42c0-4171-9abd-970b54fd3072",
+              "name": "Comment unpinned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d58c8f6-aa36-4657-a2ae-79bcf9d8f266",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2cba59b-032a-47ce-9a35-912c66fe8c7e",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc77a27f-e917-4c84-9a07-b25d5f6c4802",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entityType\": \"Track\",\n  \"entityId\": 12345\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e296e86-d1e0-40fe-926c-c09f22f28592",
+          "name": "Report Comment",
+          "request": {
+            "name": "Report Comment",
+            "description": {
+              "content": "Report a comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "(Required) The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a1119a45-6505-4688-9c54-cdb84ed90169",
+              "name": "Comment reported successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_hash\": \"string\",\n  \"block_hash\": \"string\",\n  \"block_number\": 3822\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4991e51-8181-43cd-b0ec-71389ec6938c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01c1b38c-6e2b-48f1-ab67-4fbb030fa5f2",
+              "name": "Comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d0ac3e98-ec98-4889-84c4-cdc164e2f41b",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f30c0cb8-7e6c-44ba-bb70-b8847e1e98af",
+          "name": "Get Comment Replies",
+          "request": {
+            "name": "Get Comment Replies",
+            "description": {
+              "content": "Gets replies to a parent comment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":comment_id",
+                "replies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "The number of items to skip. Useful for pagination (page number * limit)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of items to fetch"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The user ID of the user making the request"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "comment_id",
+                  "description": "(Required) A Comment ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "28461170-5083-4db6-aa36-16ac61e05c00",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "replies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"latest_chain_block\": 5088,\n  \"latest_chain_slot_plays\": 2260,\n  \"latest_indexed_block\": 4969,\n  \"latest_indexed_slot_plays\": 9900,\n  \"signature\": \"string\",\n  \"timestamp\": \"string\",\n  \"version\": {\n    \"service\": \"string\",\n    \"version\": \"string\"\n  },\n  \"data\": [\n    {\n      \"created_at\": \"string\",\n      \"entity_id\": \"string\",\n      \"entity_type\": \"<string>\",\n      \"id\": \"string\",\n      \"is_edited\": true,\n      \"message\": \"string\",\n      \"react_count\": 1247,\n      \"user_id\": \"string\",\n      \"mentions\": [\n        {\n          \"handle\": \"string\",\n          \"user_id\": 7753\n        },\n        {\n          \"handle\": \"string\",\n          \"user_id\": 7335\n        }\n      ],\n      \"track_timestamp_s\": 5313,\n      \"is_current_user_reacted\": false,\n      \"is_artist_reacted\": true,\n      \"updated_at\": \"string\",\n      \"parent_comment_id\": 7361\n    },\n    {\n      \"created_at\": \"string\",\n      \"entity_id\": \"string\",\n      \"entity_type\": \"<string>\",\n      \"id\": \"string\",\n      \"is_edited\": false,\n      \"message\": \"string\",\n      \"react_count\": 3252,\n      \"user_id\": \"string\",\n      \"mentions\": [\n        {\n          \"handle\": \"string\",\n          \"user_id\": 5661\n        },\n        {\n          \"handle\": \"string\",\n          \"user_id\": 5663\n        }\n      ],\n      \"track_timestamp_s\": 6578,\n      \"is_current_user_reacted\": false,\n      \"is_artist_reacted\": false,\n      \"updated_at\": \"string\",\n      \"parent_comment_id\": 6041\n    }\n  ],\n  \"related\": {\n    \"users\": [\n      {\n        \"album_count\": 9547,\n        \"allow_ai_attribution\": false,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 6780,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 7328,\n        \"does_current_user_follow\": false,\n        \"does_current_user_subscribe\": true,\n        \"does_follow_current_user\": true,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 7080,\n        \"follower_count\": 6999,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": false,\n        \"id\": \"string\",\n        \"is_available\": true,\n        \"is_deactivated\": true,\n        \"is_storage_v2\": true,\n        \"is_verified\": false,\n        \"name\": \"string\",\n        \"playlist_count\": 950,\n        \"repost_count\": 658,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 7405,\n        \"supporting_count\": 873,\n        \"total_audio_balance\": 9064,\n        \"total_balance\": \"string\",\n        \"track_count\": 9114,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": false,\n        \"verified_with_tiktok\": true,\n        \"verified_with_twitter\": false,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      },\n      {\n        \"album_count\": 6120,\n        \"allow_ai_attribution\": false,\n        \"artist_coin_badge\": {\n          \"mint\": \"string\",\n          \"logo_uri\": \"string\",\n          \"banner_image_url\": \"string\",\n          \"ticker\": \"string\"\n        },\n        \"associated_sol_wallets_balance\": \"string\",\n        \"associated_wallets_balance\": \"string\",\n        \"balance\": \"string\",\n        \"blocknumber\": 2812,\n        \"created_at\": \"string\",\n        \"current_user_followee_follow_count\": 8686,\n        \"does_current_user_follow\": false,\n        \"does_current_user_subscribe\": true,\n        \"does_follow_current_user\": false,\n        \"erc_wallet\": \"string\",\n        \"followee_count\": 6667,\n        \"follower_count\": 7073,\n        \"handle\": \"string\",\n        \"handle_lc\": \"string\",\n        \"has_collectibles\": true,\n        \"id\": \"string\",\n        \"is_available\": true,\n        \"is_deactivated\": false,\n        \"is_storage_v2\": true,\n        \"is_verified\": false,\n        \"name\": \"string\",\n        \"playlist_count\": 4353,\n        \"repost_count\": 2650,\n        \"spl_wallet\": \"string\",\n        \"spl_usdc_wallet\": \"string\",\n        \"supporter_count\": 9101,\n        \"supporting_count\": 7734,\n        \"total_audio_balance\": 502,\n        \"total_balance\": \"string\",\n        \"track_count\": 6113,\n        \"updated_at\": \"string\",\n        \"verified_with_instagram\": true,\n        \"verified_with_tiktok\": true,\n        \"verified_with_twitter\": false,\n        \"wallet\": \"string\",\n        \"waudio_balance\": \"string\",\n        \"artist_pick_track_id\": \"string\",\n        \"coin_flair_mint\": \"string\",\n        \"bio\": \"string\",\n        \"cover_photo\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"twitter_handle\": \"string\",\n        \"instagram_handle\": \"string\",\n        \"tiktok_handle\": \"string\",\n        \"website\": \"string\",\n        \"donation\": \"string\",\n        \"location\": \"string\",\n        \"profile_picture\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"spl_usdc_payout_wallet\": \"string\",\n        \"creator_node_endpoint\": \"string\",\n        \"cover_photo_sizes\": \"string\",\n        \"cover_photo_cids\": {\n          \"640x\": \"string\",\n          \"2000x\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"cover_photo_legacy\": \"string\",\n        \"profile_picture_sizes\": \"string\",\n        \"profile_picture_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"profile_picture_legacy\": \"string\",\n        \"playlist_library\": {},\n        \"profile_type\": \"string\"\n      }\n    ],\n    \"tracks\": [\n      {\n        \"access\": {\n          \"download\": true,\n          \"stream\": false\n        },\n        \"artwork\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"blocknumber\": 3588,\n        \"comment_count\": 5334,\n        \"cover_art_sizes\": \"string\",\n        \"created_at\": \"string\",\n        \"download\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"duration\": 3957,\n        \"favorite_count\": 1164,\n        \"field_visibility\": {\n          \"genre\": true,\n          \"mood\": true,\n          \"play_count\": true,\n          \"remixes\": false,\n          \"share\": true,\n          \"tags\": true\n        },\n        \"followee_favorites\": [\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"followee_reposts\": [\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"genre\": \"string\",\n        \"has_current_user_reposted\": true,\n        \"has_current_user_saved\": false,\n        \"id\": \"string\",\n        \"is_available\": false,\n        \"is_delete\": true,\n        \"is_download_gated\": true,\n        \"is_downloadable\": false,\n        \"is_original_available\": true,\n        \"is_owned_by_user\": false,\n        \"is_scheduled_release\": true,\n        \"is_stream_gated\": true,\n        \"is_unlisted\": true,\n        \"permalink\": \"string\",\n        \"play_count\": 1913,\n        \"preview\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"remix_of\": {\n          \"tracks\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"repost_count\": 601,\n        \"route_id\": \"string\",\n        \"stream\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"title\": \"string\",\n        \"track_segments\": [\n          {\n            \"duration\": 6411.640867878059,\n            \"multihash\": \"string\"\n          },\n          {\n            \"duration\": 733.2206943034824,\n            \"multihash\": \"string\"\n          }\n        ],\n        \"updated_at\": \"string\",\n        \"user\": {\n          \"album_count\": 7288,\n          \"allow_ai_attribution\": false,\n          \"artist_coin_badge\": {\n            \"mint\": \"string\",\n            \"logo_uri\": \"string\",\n            \"banner_image_url\": \"string\",\n            \"ticker\": \"string\"\n          },\n          \"associated_sol_wallets_balance\": \"string\",\n          \"associated_wallets_balance\": \"string\",\n          \"balance\": \"string\",\n          \"blocknumber\": 9834,\n          \"created_at\": \"string\",\n          \"current_user_followee_follow_count\": 8984,\n          \"does_current_user_follow\": false,\n          \"does_current_user_subscribe\": false,\n          \"does_follow_current_user\": true,\n          \"erc_wallet\": \"string\",\n          \"followee_count\": 3046,\n          \"follower_count\": 7130,\n          \"handle\": \"string\",\n          \"handle_lc\": \"string\",\n          \"has_collectibles\": true,\n          \"id\": \"string\",\n          \"is_available\": true,\n          \"is_deactivated\": true,\n          \"is_storage_v2\": true,\n          \"is_verified\": false,\n          \"name\": \"string\",\n          \"playlist_count\": 7234,\n          \"repost_count\": 5753,\n          \"spl_wallet\": \"string\",\n          \"spl_usdc_wallet\": \"string\",\n          \"supporter_count\": 25,\n          \"supporting_count\": 4365,\n          \"total_audio_balance\": 223,\n          \"total_balance\": \"string\",\n          \"track_count\": 7792,\n          \"updated_at\": \"string\",\n          \"verified_with_instagram\": true,\n          \"verified_with_tiktok\": false,\n          \"verified_with_twitter\": false,\n          \"wallet\": \"string\",\n          \"waudio_balance\": \"string\",\n          \"artist_pick_track_id\": \"string\",\n          \"coin_flair_mint\": \"string\",\n          \"bio\": \"string\",\n          \"cover_photo\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"twitter_handle\": \"string\",\n          \"instagram_handle\": \"string\",\n          \"tiktok_handle\": \"string\",\n          \"website\": \"string\",\n          \"donation\": \"string\",\n          \"location\": \"string\",\n          \"profile_picture\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"spl_usdc_payout_wallet\": \"string\",\n          \"creator_node_endpoint\": \"string\",\n          \"cover_photo_sizes\": \"string\",\n          \"cover_photo_cids\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cover_photo_legacy\": \"string\",\n          \"profile_picture_sizes\": \"string\",\n          \"profile_picture_cids\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_picture_legacy\": \"string\",\n          \"playlist_library\": {\n            \"contents\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_type\": \"string\"\n        },\n        \"user_id\": \"string\",\n        \"description\": \"string\",\n        \"track_cid\": \"string\",\n        \"preview_cid\": \"string\",\n        \"orig_file_cid\": \"string\",\n        \"orig_filename\": \"string\",\n        \"mood\": \"string\",\n        \"release_date\": \"2017-06-23\",\n        \"tags\": \"string\",\n        \"is_streamable\": false,\n        \"ddex_app\": \"string\",\n        \"playlists_containing_track\": [\n          7762,\n          7515\n        ],\n        \"pinned_comment_id\": 2885,\n        \"album_backlink\": {\n          \"permalink\": \"string\",\n          \"playlist_id\": 7145,\n          \"playlist_name\": \"string\"\n        },\n        \"create_date\": \"string\",\n        \"cover_art_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"credits_splits\": \"string\",\n        \"isrc\": \"string\",\n        \"license\": \"string\",\n        \"iswc\": \"string\",\n        \"stem_of\": {\n          \"category\": \"string\",\n          \"parent_track_id\": 3628\n        },\n        \"cover_art\": \"string\",\n        \"ai_attribution_user_id\": 8137,\n        \"allowed_api_keys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"audio_upload_id\": \"string\",\n        \"preview_start_seconds\": 7484.030790457729,\n        \"bpm\": 198.11997731804644,\n        \"is_custom_bpm\": false,\n        \"musical_key\": \"string\",\n        \"is_custom_musical_key\": true,\n        \"audio_analysis_error_count\": 9367,\n        \"comments_disabled\": false,\n        \"ddex_release_ids\": {},\n        \"resource_contributors\": [\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 3568\n          },\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 381\n          }\n        ],\n        \"indirect_resource_contributors\": [\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 8900\n          },\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 6670\n          }\n        ],\n        \"rights_controller\": {\n          \"name\": \"string\",\n          \"roles\": [\n            \"string\"\n          ],\n          \"rights_share_unknown\": \"string\"\n        },\n        \"copyright_line\": {\n          \"year\": \"stri\",\n          \"text\": \"string\"\n        },\n        \"producer_copyright_line\": {\n          \"year\": \"stri\",\n          \"text\": \"string\"\n        },\n        \"parental_warning_type\": \"string\",\n        \"access_authorities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream_conditions\": {},\n        \"download_conditions\": {},\n        \"cover_original_song_title\": \"string\",\n        \"cover_original_artist\": \"string\"\n      },\n      {\n        \"access\": {\n          \"download\": false,\n          \"stream\": true\n        },\n        \"artwork\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"blocknumber\": 5654,\n        \"comment_count\": 4643,\n        \"cover_art_sizes\": \"string\",\n        \"created_at\": \"string\",\n        \"download\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"duration\": 4147,\n        \"favorite_count\": 8268,\n        \"field_visibility\": {\n          \"genre\": true,\n          \"mood\": false,\n          \"play_count\": false,\n          \"remixes\": true,\n          \"share\": false,\n          \"tags\": true\n        },\n        \"followee_favorites\": [\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"followee_reposts\": [\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"genre\": \"string\",\n        \"has_current_user_reposted\": false,\n        \"has_current_user_saved\": true,\n        \"id\": \"string\",\n        \"is_available\": true,\n        \"is_delete\": false,\n        \"is_download_gated\": false,\n        \"is_downloadable\": true,\n        \"is_original_available\": true,\n        \"is_owned_by_user\": false,\n        \"is_scheduled_release\": true,\n        \"is_stream_gated\": true,\n        \"is_unlisted\": true,\n        \"permalink\": \"string\",\n        \"play_count\": 5234,\n        \"preview\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"remix_of\": {\n          \"tracks\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"repost_count\": 7920,\n        \"route_id\": \"string\",\n        \"stream\": {\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ],\n          \"url\": \"string\"\n        },\n        \"title\": \"string\",\n        \"track_segments\": [\n          {\n            \"duration\": 236.83829667637158,\n            \"multihash\": \"string\"\n          },\n          {\n            \"duration\": 4882.496664080665,\n            \"multihash\": \"string\"\n          }\n        ],\n        \"updated_at\": \"string\",\n        \"user\": {\n          \"album_count\": 245,\n          \"allow_ai_attribution\": false,\n          \"artist_coin_badge\": {\n            \"mint\": \"string\",\n            \"logo_uri\": \"string\",\n            \"banner_image_url\": \"string\",\n            \"ticker\": \"string\"\n          },\n          \"associated_sol_wallets_balance\": \"string\",\n          \"associated_wallets_balance\": \"string\",\n          \"balance\": \"string\",\n          \"blocknumber\": 8567,\n          \"created_at\": \"string\",\n          \"current_user_followee_follow_count\": 4538,\n          \"does_current_user_follow\": true,\n          \"does_current_user_subscribe\": true,\n          \"does_follow_current_user\": false,\n          \"erc_wallet\": \"string\",\n          \"followee_count\": 4846,\n          \"follower_count\": 14,\n          \"handle\": \"string\",\n          \"handle_lc\": \"string\",\n          \"has_collectibles\": false,\n          \"id\": \"string\",\n          \"is_available\": true,\n          \"is_deactivated\": false,\n          \"is_storage_v2\": true,\n          \"is_verified\": false,\n          \"name\": \"string\",\n          \"playlist_count\": 1928,\n          \"repost_count\": 9876,\n          \"spl_wallet\": \"string\",\n          \"spl_usdc_wallet\": \"string\",\n          \"supporter_count\": 2503,\n          \"supporting_count\": 1066,\n          \"total_audio_balance\": 6786,\n          \"total_balance\": \"string\",\n          \"track_count\": 3397,\n          \"updated_at\": \"string\",\n          \"verified_with_instagram\": false,\n          \"verified_with_tiktok\": false,\n          \"verified_with_twitter\": false,\n          \"wallet\": \"string\",\n          \"waudio_balance\": \"string\",\n          \"artist_pick_track_id\": \"string\",\n          \"coin_flair_mint\": \"string\",\n          \"bio\": \"string\",\n          \"cover_photo\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"twitter_handle\": \"string\",\n          \"instagram_handle\": \"string\",\n          \"tiktok_handle\": \"string\",\n          \"website\": \"string\",\n          \"donation\": \"string\",\n          \"location\": \"string\",\n          \"profile_picture\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"spl_usdc_payout_wallet\": \"string\",\n          \"creator_node_endpoint\": \"string\",\n          \"cover_photo_sizes\": \"string\",\n          \"cover_photo_cids\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cover_photo_legacy\": \"string\",\n          \"profile_picture_sizes\": \"string\",\n          \"profile_picture_cids\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_picture_legacy\": \"string\",\n          \"playlist_library\": {\n            \"contents\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_type\": \"string\"\n        },\n        \"user_id\": \"string\",\n        \"description\": \"string\",\n        \"track_cid\": \"string\",\n        \"preview_cid\": \"string\",\n        \"orig_file_cid\": \"string\",\n        \"orig_filename\": \"string\",\n        \"mood\": \"string\",\n        \"release_date\": \"1958-05-07\",\n        \"tags\": \"string\",\n        \"is_streamable\": false,\n        \"ddex_app\": \"string\",\n        \"playlists_containing_track\": [\n          7618,\n          5153\n        ],\n        \"pinned_comment_id\": 990,\n        \"album_backlink\": {\n          \"permalink\": \"string\",\n          \"playlist_id\": 8252,\n          \"playlist_name\": \"string\"\n        },\n        \"create_date\": \"string\",\n        \"cover_art_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"credits_splits\": \"string\",\n        \"isrc\": \"string\",\n        \"license\": \"string\",\n        \"iswc\": \"string\",\n        \"stem_of\": {\n          \"category\": \"string\",\n          \"parent_track_id\": 303\n        },\n        \"cover_art\": \"string\",\n        \"ai_attribution_user_id\": 7462,\n        \"allowed_api_keys\": [\n          \"string\",\n          \"string\"\n        ],\n        \"audio_upload_id\": \"string\",\n        \"preview_start_seconds\": 2226.2706386392474,\n        \"bpm\": 4149.3513582877185,\n        \"is_custom_bpm\": false,\n        \"musical_key\": \"string\",\n        \"is_custom_musical_key\": false,\n        \"audio_analysis_error_count\": 2878,\n        \"comments_disabled\": true,\n        \"ddex_release_ids\": {},\n        \"resource_contributors\": [\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 8224\n          },\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 948\n          }\n        ],\n        \"indirect_resource_contributors\": [\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 1720\n          },\n          {\n            \"name\": \"string\",\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"sequence_number\": 1522\n          }\n        ],\n        \"rights_controller\": {\n          \"name\": \"string\",\n          \"roles\": [\n            \"string\"\n          ],\n          \"rights_share_unknown\": \"string\"\n        },\n        \"copyright_line\": {\n          \"year\": \"stri\",\n          \"text\": \"stri\"\n        },\n        \"producer_copyright_line\": {\n          \"year\": \"stri\",\n          \"text\": \"string\"\n        },\n        \"parental_warning_type\": \"string\",\n        \"access_authorities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"stream_conditions\": {},\n        \"download_conditions\": {},\n        \"cover_original_song_title\": \"string\",\n        \"cover_original_artist\": \"string\"\n      }\n    ],\n    \"playlists\": [\n      {\n        \"access\": {\n          \"download\": false,\n          \"stream\": true\n        },\n        \"added_timestamps\": [\n          {\n            \"timestamp\": 805,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 9642\n          },\n          {\n            \"timestamp\": 1109,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 3891\n          }\n        ],\n        \"blocknumber\": 9936,\n        \"created_at\": \"string\",\n        \"favorite_count\": 4845,\n        \"followee_favorites\": [\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"followee_reposts\": [\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"has_current_user_reposted\": true,\n        \"has_current_user_saved\": false,\n        \"id\": \"string\",\n        \"is_album\": true,\n        \"is_delete\": false,\n        \"is_image_autogenerated\": true,\n        \"is_private\": true,\n        \"is_scheduled_release\": false,\n        \"is_stream_gated\": true,\n        \"permalink\": \"string\",\n        \"playlist_contents\": [\n          {\n            \"timestamp\": 7914,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 2851\n          },\n          {\n            \"timestamp\": 9176,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 1016\n          }\n        ],\n        \"playlist_name\": \"string\",\n        \"repost_count\": 2104,\n        \"total_play_count\": 4024,\n        \"track_count\": 1620,\n        \"updated_at\": \"string\",\n        \"user\": {\n          \"album_count\": 401,\n          \"allow_ai_attribution\": true,\n          \"artist_coin_badge\": {\n            \"mint\": \"string\",\n            \"logo_uri\": \"string\",\n            \"banner_image_url\": \"string\",\n            \"ticker\": \"string\"\n          },\n          \"associated_sol_wallets_balance\": \"string\",\n          \"associated_wallets_balance\": \"string\",\n          \"balance\": \"string\",\n          \"blocknumber\": 1323,\n          \"created_at\": \"string\",\n          \"current_user_followee_follow_count\": 5164,\n          \"does_current_user_follow\": false,\n          \"does_current_user_subscribe\": false,\n          \"does_follow_current_user\": true,\n          \"erc_wallet\": \"string\",\n          \"followee_count\": 4608,\n          \"follower_count\": 7542,\n          \"handle\": \"string\",\n          \"handle_lc\": \"string\",\n          \"has_collectibles\": true,\n          \"id\": \"string\",\n          \"is_available\": false,\n          \"is_deactivated\": false,\n          \"is_storage_v2\": true,\n          \"is_verified\": false,\n          \"name\": \"string\",\n          \"playlist_count\": 5276,\n          \"repost_count\": 8164,\n          \"spl_wallet\": \"string\",\n          \"spl_usdc_wallet\": \"string\",\n          \"supporter_count\": 5546,\n          \"supporting_count\": 6076,\n          \"total_audio_balance\": 4568,\n          \"total_balance\": \"string\",\n          \"track_count\": 7770,\n          \"updated_at\": \"string\",\n          \"verified_with_instagram\": false,\n          \"verified_with_tiktok\": true,\n          \"verified_with_twitter\": false,\n          \"wallet\": \"string\",\n          \"waudio_balance\": \"string\",\n          \"artist_pick_track_id\": \"string\",\n          \"coin_flair_mint\": \"string\",\n          \"bio\": \"string\",\n          \"cover_photo\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"twitter_handle\": \"string\",\n          \"instagram_handle\": \"string\",\n          \"tiktok_handle\": \"string\",\n          \"website\": \"string\",\n          \"donation\": \"string\",\n          \"location\": \"string\",\n          \"profile_picture\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"spl_usdc_payout_wallet\": \"string\",\n          \"creator_node_endpoint\": \"string\",\n          \"cover_photo_sizes\": \"string\",\n          \"cover_photo_cids\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cover_photo_legacy\": \"string\",\n          \"profile_picture_sizes\": \"string\",\n          \"profile_picture_cids\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_picture_legacy\": \"string\",\n          \"playlist_library\": {\n            \"contents\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_type\": \"string\"\n        },\n        \"user_id\": \"string\",\n        \"artwork\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"description\": \"string\",\n        \"ddex_app\": \"string\",\n        \"upc\": \"string\",\n        \"tracks\": [\n          {\n            \"access\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"artwork\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"blocknumber\": 4341,\n            \"comment_count\": 8127,\n            \"cover_art_sizes\": \"string\",\n            \"created_at\": \"string\",\n            \"download\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"duration\": 7757,\n            \"favorite_count\": 9656,\n            \"field_visibility\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"followee_favorites\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"followee_reposts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"genre\": \"string\",\n            \"has_current_user_reposted\": false,\n            \"has_current_user_saved\": false,\n            \"id\": \"string\",\n            \"is_available\": false,\n            \"is_delete\": true,\n            \"is_download_gated\": true,\n            \"is_downloadable\": false,\n            \"is_original_available\": false,\n            \"is_owned_by_user\": false,\n            \"is_scheduled_release\": true,\n            \"is_stream_gated\": false,\n            \"is_unlisted\": false,\n            \"permalink\": \"string\",\n            \"play_count\": 322,\n            \"preview\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remix_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"repost_count\": 5515,\n            \"route_id\": \"string\",\n            \"stream\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"string\",\n            \"track_segments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"updated_at\": \"string\",\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user_id\": \"string\",\n            \"description\": \"string\",\n            \"track_cid\": \"string\",\n            \"preview_cid\": \"string\",\n            \"orig_file_cid\": \"string\",\n            \"orig_filename\": \"string\",\n            \"mood\": \"string\",\n            \"release_date\": \"1958-12-09\",\n            \"tags\": \"string\",\n            \"is_streamable\": true,\n            \"ddex_app\": \"string\",\n            \"playlists_containing_track\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"pinned_comment_id\": 5438,\n            \"album_backlink\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"create_date\": \"string\",\n            \"cover_art_cids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"credits_splits\": \"string\",\n            \"isrc\": \"string\",\n            \"license\": \"string\",\n            \"iswc\": \"string\",\n            \"stem_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_art\": \"string\",\n            \"ai_attribution_user_id\": 1598,\n            \"allowed_api_keys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"audio_upload_id\": \"string\",\n            \"preview_start_seconds\": 350.46564825344626,\n            \"bpm\": 1759.16413881951,\n            \"is_custom_bpm\": true,\n            \"musical_key\": \"string\",\n            \"is_custom_musical_key\": true,\n            \"audio_analysis_error_count\": 5507,\n            \"comments_disabled\": true,\n            \"ddex_release_ids\": {},\n            \"artists\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"indirect_resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rights_controller\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"producer_copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parental_warning_type\": \"string\",\n            \"access_authorities\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"stream_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"download_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_original_song_title\": \"string\",\n            \"cover_original_artist\": \"string\"\n          },\n          {\n            \"access\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"artwork\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"blocknumber\": 9239,\n            \"comment_count\": 5575,\n            \"cover_art_sizes\": \"string\",\n            \"created_at\": \"string\",\n            \"download\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"duration\": 9070,\n            \"favorite_count\": 1644,\n            \"field_visibility\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"followee_favorites\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"followee_reposts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"genre\": \"string\",\n            \"has_current_user_reposted\": true,\n            \"has_current_user_saved\": true,\n            \"id\": \"string\",\n            \"is_available\": true,\n            \"is_delete\": false,\n            \"is_download_gated\": false,\n            \"is_downloadable\": false,\n            \"is_original_available\": false,\n            \"is_owned_by_user\": false,\n            \"is_scheduled_release\": true,\n            \"is_stream_gated\": true,\n            \"is_unlisted\": false,\n            \"permalink\": \"string\",\n            \"play_count\": 4975,\n            \"preview\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remix_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"repost_count\": 6103,\n            \"route_id\": \"string\",\n            \"stream\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"string\",\n            \"track_segments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"updated_at\": \"string\",\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user_id\": \"string\",\n            \"description\": \"string\",\n            \"track_cid\": \"string\",\n            \"preview_cid\": \"string\",\n            \"orig_file_cid\": \"string\",\n            \"orig_filename\": \"string\",\n            \"mood\": \"string\",\n            \"release_date\": \"2022-08-14\",\n            \"tags\": \"string\",\n            \"is_streamable\": false,\n            \"ddex_app\": \"string\",\n            \"playlists_containing_track\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"pinned_comment_id\": 8274,\n            \"album_backlink\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"create_date\": \"string\",\n            \"cover_art_cids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"credits_splits\": \"string\",\n            \"isrc\": \"string\",\n            \"license\": \"string\",\n            \"iswc\": \"string\",\n            \"stem_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_art\": \"string\",\n            \"ai_attribution_user_id\": 5693,\n            \"allowed_api_keys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"audio_upload_id\": \"string\",\n            \"preview_start_seconds\": 197.47338252699475,\n            \"bpm\": 4640.716452909552,\n            \"is_custom_bpm\": false,\n            \"musical_key\": \"string\",\n            \"is_custom_musical_key\": false,\n            \"audio_analysis_error_count\": 146,\n            \"comments_disabled\": false,\n            \"ddex_release_ids\": {},\n            \"artists\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"indirect_resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rights_controller\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"producer_copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parental_warning_type\": \"string\",\n            \"access_authorities\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"stream_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"download_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_original_song_title\": \"string\",\n            \"cover_original_artist\": \"string\"\n          }\n        ],\n        \"cover_art\": \"string\",\n        \"cover_art_sizes\": \"string\",\n        \"cover_art_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"stream_conditions\": {},\n        \"release_date\": \"2017-12-24\",\n        \"ddex_release_ids\": {},\n        \"copyright_line\": {},\n        \"producer_copyright_line\": {},\n        \"parental_warning_type\": \"string\"\n      },\n      {\n        \"access\": {\n          \"download\": true,\n          \"stream\": true\n        },\n        \"added_timestamps\": [\n          {\n            \"timestamp\": 89,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 8733\n          },\n          {\n            \"timestamp\": 2871,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 9112\n          }\n        ],\n        \"blocknumber\": 3734,\n        \"created_at\": \"string\",\n        \"favorite_count\": 3273,\n        \"followee_favorites\": [\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"created_at\": \"string\",\n            \"favorite_item_id\": \"string\",\n            \"favorite_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"followee_reposts\": [\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          },\n          {\n            \"repost_item_id\": \"string\",\n            \"repost_type\": \"string\",\n            \"user_id\": \"string\"\n          }\n        ],\n        \"has_current_user_reposted\": false,\n        \"has_current_user_saved\": false,\n        \"id\": \"string\",\n        \"is_album\": false,\n        \"is_delete\": false,\n        \"is_image_autogenerated\": false,\n        \"is_private\": true,\n        \"is_scheduled_release\": true,\n        \"is_stream_gated\": true,\n        \"permalink\": \"string\",\n        \"playlist_contents\": [\n          {\n            \"timestamp\": 8785,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 3487\n          },\n          {\n            \"timestamp\": 6792,\n            \"track_id\": \"string\",\n            \"metadata_timestamp\": 1659\n          }\n        ],\n        \"playlist_name\": \"string\",\n        \"repost_count\": 3318,\n        \"total_play_count\": 47,\n        \"track_count\": 3647,\n        \"updated_at\": \"string\",\n        \"user\": {\n          \"album_count\": 9470,\n          \"allow_ai_attribution\": false,\n          \"artist_coin_badge\": {\n            \"mint\": \"string\",\n            \"logo_uri\": \"string\",\n            \"banner_image_url\": \"string\",\n            \"ticker\": \"string\"\n          },\n          \"associated_sol_wallets_balance\": \"string\",\n          \"associated_wallets_balance\": \"string\",\n          \"balance\": \"string\",\n          \"blocknumber\": 7178,\n          \"created_at\": \"string\",\n          \"current_user_followee_follow_count\": 8783,\n          \"does_current_user_follow\": true,\n          \"does_current_user_subscribe\": true,\n          \"does_follow_current_user\": false,\n          \"erc_wallet\": \"string\",\n          \"followee_count\": 7856,\n          \"follower_count\": 9341,\n          \"handle\": \"string\",\n          \"handle_lc\": \"string\",\n          \"has_collectibles\": false,\n          \"id\": \"string\",\n          \"is_available\": false,\n          \"is_deactivated\": false,\n          \"is_storage_v2\": false,\n          \"is_verified\": false,\n          \"name\": \"string\",\n          \"playlist_count\": 4172,\n          \"repost_count\": 2619,\n          \"spl_wallet\": \"string\",\n          \"spl_usdc_wallet\": \"string\",\n          \"supporter_count\": 6205,\n          \"supporting_count\": 5343,\n          \"total_audio_balance\": 7794,\n          \"total_balance\": \"string\",\n          \"track_count\": 5998,\n          \"updated_at\": \"string\",\n          \"verified_with_instagram\": true,\n          \"verified_with_tiktok\": true,\n          \"verified_with_twitter\": true,\n          \"wallet\": \"string\",\n          \"waudio_balance\": \"string\",\n          \"artist_pick_track_id\": \"string\",\n          \"coin_flair_mint\": \"string\",\n          \"bio\": \"string\",\n          \"cover_photo\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"twitter_handle\": \"string\",\n          \"instagram_handle\": \"string\",\n          \"tiktok_handle\": \"string\",\n          \"website\": \"string\",\n          \"donation\": \"string\",\n          \"location\": \"string\",\n          \"profile_picture\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"spl_usdc_payout_wallet\": \"string\",\n          \"creator_node_endpoint\": \"string\",\n          \"cover_photo_sizes\": \"string\",\n          \"cover_photo_cids\": {\n            \"640x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"2000x\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cover_photo_legacy\": \"string\",\n          \"profile_picture_sizes\": \"string\",\n          \"profile_picture_cids\": {\n            \"150x150\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"480x480\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"1000x1000\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mirrors\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_picture_legacy\": \"string\",\n          \"playlist_library\": {\n            \"contents\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"profile_type\": \"string\"\n        },\n        \"user_id\": \"string\",\n        \"artwork\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"description\": \"string\",\n        \"ddex_app\": \"string\",\n        \"upc\": \"string\",\n        \"tracks\": [\n          {\n            \"access\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"artwork\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"blocknumber\": 403,\n            \"comment_count\": 1822,\n            \"cover_art_sizes\": \"string\",\n            \"created_at\": \"string\",\n            \"download\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"duration\": 5681,\n            \"favorite_count\": 4788,\n            \"field_visibility\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"followee_favorites\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"followee_reposts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"genre\": \"string\",\n            \"has_current_user_reposted\": true,\n            \"has_current_user_saved\": true,\n            \"id\": \"string\",\n            \"is_available\": false,\n            \"is_delete\": true,\n            \"is_download_gated\": false,\n            \"is_downloadable\": true,\n            \"is_original_available\": true,\n            \"is_owned_by_user\": true,\n            \"is_scheduled_release\": false,\n            \"is_stream_gated\": true,\n            \"is_unlisted\": false,\n            \"permalink\": \"string\",\n            \"play_count\": 2142,\n            \"preview\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remix_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"repost_count\": 6334,\n            \"route_id\": \"string\",\n            \"stream\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"string\",\n            \"track_segments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"updated_at\": \"string\",\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user_id\": \"string\",\n            \"description\": \"string\",\n            \"track_cid\": \"string\",\n            \"preview_cid\": \"string\",\n            \"orig_file_cid\": \"string\",\n            \"orig_filename\": \"string\",\n            \"mood\": \"string\",\n            \"release_date\": \"2021-02-27\",\n            \"tags\": \"string\",\n            \"is_streamable\": false,\n            \"ddex_app\": \"string\",\n            \"playlists_containing_track\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"pinned_comment_id\": 2637,\n            \"album_backlink\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"create_date\": \"string\",\n            \"cover_art_cids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"credits_splits\": \"string\",\n            \"isrc\": \"string\",\n            \"license\": \"string\",\n            \"iswc\": \"string\",\n            \"stem_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_art\": \"string\",\n            \"ai_attribution_user_id\": 7406,\n            \"allowed_api_keys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"audio_upload_id\": \"string\",\n            \"preview_start_seconds\": 8346.959062195981,\n            \"bpm\": 7135.566715666899,\n            \"is_custom_bpm\": false,\n            \"musical_key\": \"string\",\n            \"is_custom_musical_key\": true,\n            \"audio_analysis_error_count\": 1602,\n            \"comments_disabled\": false,\n            \"ddex_release_ids\": {},\n            \"artists\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"indirect_resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rights_controller\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"producer_copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parental_warning_type\": \"string\",\n            \"access_authorities\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"stream_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"download_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_original_song_title\": \"string\",\n            \"cover_original_artist\": \"string\"\n          },\n          {\n            \"access\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"artwork\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"blocknumber\": 6237,\n            \"comment_count\": 6929,\n            \"cover_art_sizes\": \"string\",\n            \"created_at\": \"string\",\n            \"download\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"duration\": 4211,\n            \"favorite_count\": 6357,\n            \"field_visibility\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"followee_favorites\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"followee_reposts\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"genre\": \"string\",\n            \"has_current_user_reposted\": true,\n            \"has_current_user_saved\": true,\n            \"id\": \"string\",\n            \"is_available\": false,\n            \"is_delete\": false,\n            \"is_download_gated\": false,\n            \"is_downloadable\": true,\n            \"is_original_available\": true,\n            \"is_owned_by_user\": true,\n            \"is_scheduled_release\": true,\n            \"is_stream_gated\": true,\n            \"is_unlisted\": true,\n            \"permalink\": \"string\",\n            \"play_count\": 2185,\n            \"preview\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"remix_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"repost_count\": 5554,\n            \"route_id\": \"string\",\n            \"stream\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"string\",\n            \"track_segments\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"updated_at\": \"string\",\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user_id\": \"string\",\n            \"description\": \"string\",\n            \"track_cid\": \"string\",\n            \"preview_cid\": \"string\",\n            \"orig_file_cid\": \"string\",\n            \"orig_filename\": \"string\",\n            \"mood\": \"string\",\n            \"release_date\": \"2006-08-13\",\n            \"tags\": \"string\",\n            \"is_streamable\": true,\n            \"ddex_app\": \"string\",\n            \"playlists_containing_track\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"pinned_comment_id\": 4375,\n            \"album_backlink\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"create_date\": \"string\",\n            \"cover_art_cids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"credits_splits\": \"string\",\n            \"isrc\": \"string\",\n            \"license\": \"string\",\n            \"iswc\": \"string\",\n            \"stem_of\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_art\": \"string\",\n            \"ai_attribution_user_id\": 1293,\n            \"allowed_api_keys\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"audio_upload_id\": \"string\",\n            \"preview_start_seconds\": 5497.438507622631,\n            \"bpm\": 5163.918780185405,\n            \"is_custom_bpm\": false,\n            \"musical_key\": \"string\",\n            \"is_custom_musical_key\": false,\n            \"audio_analysis_error_count\": 556,\n            \"comments_disabled\": false,\n            \"ddex_release_ids\": {},\n            \"artists\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"indirect_resource_contributors\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rights_controller\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"producer_copyright_line\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parental_warning_type\": \"string\",\n            \"access_authorities\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"stream_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"download_conditions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cover_original_song_title\": \"string\",\n            \"cover_original_artist\": \"string\"\n          }\n        ],\n        \"cover_art\": \"string\",\n        \"cover_art_sizes\": \"string\",\n        \"cover_art_cids\": {\n          \"150x150\": \"string\",\n          \"480x480\": \"string\",\n          \"1000x1000\": \"string\",\n          \"mirrors\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        \"stream_conditions\": {},\n        \"release_date\": \"1992-05-21\",\n        \"ddex_release_ids\": {},\n        \"copyright_line\": {},\n        \"producer_copyright_line\": {},\n        \"parental_warning_type\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79e7bcc0-0961-413e-880e-45b682160710",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "replies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7a8780a-aa76-4027-ac48-7385e36d3250",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":comment_id",
+                    "replies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "comment_id",
+                      "description": "(Required) A Comment ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "67cd7d97-d0fe-47c9-974f-1dca49bd7117",
+    "name": "Audius challenges comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

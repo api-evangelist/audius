@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audius challenges rewards API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Claim Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/rewards/claim",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Claims all the filtered undisbursed rewards for a user"
+        },
+        {
+          "info": {
+            "name": "Create Reward Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.audius.co/v1/rewards/code",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new reward code with Solana signature verification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

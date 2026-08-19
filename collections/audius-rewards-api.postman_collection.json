@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "5090e86f-2f0c-4e61-95e9-312c4486155c",
+      "name": "rewards",
+      "description": {
+        "content": "Rewards related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0e3adda-4d3f-4427-8127-6574c3674bfd",
+          "name": "Claim Rewards",
+          "request": {
+            "name": "Claim Rewards",
+            "description": {
+              "content": "Claims all the filtered undisbursed rewards for a user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "claim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"<string>\",\n  \"challengeId\": \"<string>\",\n  \"specifier\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5464f96f-ccd2-4410-9578-3d53fa399cbb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"7eP5n\",\n  \"challengeId\": \"u\",\n  \"specifier\": \"7eP5n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    },\n    {\n      \"challengeId\": \"u\",\n      \"specifier\": \"7eP5n\",\n      \"amount\": \"1000000000\",\n      \"signatures\": [\n        \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\"\n      ],\n      \"error\": \"Insufficient balance\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "995a8571-427d-429f-b232-67ee6198f672",
+              "name": "Bad request - No rewards to claim or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"7eP5n\",\n  \"challengeId\": \"u\",\n  \"specifier\": \"7eP5n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd32d2a1-98c1-4220-8e47-759aa0b19462",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": \"7eP5n\",\n  \"challengeId\": \"u\",\n  \"specifier\": \"7eP5n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92fcd4a6-b084-4fcc-8463-d22319600ab4",
+          "name": "Create Reward Code",
+          "request": {
+            "name": "Create Reward Code",
+            "description": {
+              "content": "Creates a new reward code with Solana signature verification",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"mint\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d310c9a-10a6-41e5-8d63-2e63d5a115df",
+              "name": "Created - Reward code successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"3fG7xQh2L8vK9pN4mR5sT6uW7vX8yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9k=\",\n  \"mint\": \"9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM\",\n  \"amount\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"aB3d5F\",\n  \"mint\": \"9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM\",\n  \"reward_address\": \"9XeZbswbSSUU4AHVArQbTQjAEjAPhVweGU5cogBVkvh4\",\n  \"amount\": 100\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3104707f-bcc5-4200-b3d8-aa1f9cae2797",
+              "name": "Bad request - Invalid signature format or missing required fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"3fG7xQh2L8vK9pN4mR5sT6uW7vX8yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9k=\",\n  \"mint\": \"9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM\",\n  \"amount\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "109b9305-8092-474c-a8ce-36b1802f43e7",
+              "name": "Forbidden - Signature verification failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"3fG7xQh2L8vK9pN4mR5sT6uW7vX8yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9k=\",\n  \"mint\": \"9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM\",\n  \"amount\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "47e2bd1e-890c-473c-a60a-9b4598007fce",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"3fG7xQh2L8vK9pN4mR5sT6uW7vX8yZ1aB2cD3eF4gH5iJ6kL7mN8oP9qR0sT1uV2wX3yZ4aB5cD6eF7gH8iJ9k=\",\n  \"mint\": \"9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM\",\n  \"amount\": 100\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eaf6633d-6e10-4772-8445-b0b8d25feb24",
+    "name": "Audius challenges rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}

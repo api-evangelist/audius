@@ -1,0 +1,468 @@
+{
+  "item": [
+    {
+      "id": "dc5511c6-b0ea-4350-9257-b25ed570aa30",
+      "name": "prizes",
+      "description": {
+        "content": "Prize claiming related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e786473-7143-4271-9183-fdba7a9ed0eb",
+          "name": "Get Prizes",
+          "request": {
+            "name": "Get Prizes",
+            "description": {
+              "content": "Gets a list of active prizes available for claiming. Excludes sensitive information like download URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prizes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb99183f-7347-4637-bd8c-6726f3501e4e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"prize_id\": \"prize_1_yak_airdrop\",\n      \"name\": \"1 YAK Airdrop\",\n      \"weight\": 1,\n      \"description\": \"Win 1 YAK coin airdrop\",\n      \"metadata\": {\n        \"type\": \"coin_airdrop\",\n        \"amount\": 1000000000\n      }\n    },\n    {\n      \"prize_id\": \"prize_1_yak_airdrop\",\n      \"name\": \"1 YAK Airdrop\",\n      \"weight\": 1,\n      \"description\": \"Win 1 YAK coin airdrop\",\n      \"metadata\": {\n        \"type\": \"coin_airdrop\",\n        \"amount\": 1000000000\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "872879cd-9eb0-4cde-92f8-981ebb6ddea9",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb85efba-1ff7-44d2-ba23-1e7052375792",
+          "name": "Claim Prize",
+          "request": {
+            "name": "Claim Prize",
+            "description": {
+              "content": "Claims a prize by verifying a Solana transaction. User must send exactly 2 YAK to the prize receiver address. Returns the prize won and any redeem codes/URLs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prizes",
+                "claim"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signature\": \"<string>\",\n  \"wallet\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f85f078-8a91-4a9e-88cc-4eebbfb67e10",
+              "name": "Success - Prize claimed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prizes",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\",\n  \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prize_id\": \"prize_1_yak_airdrop\",\n  \"prize_name\": \"1 YAK Airdrop\",\n  \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\",\n  \"prize_type\": \"coin_airdrop\",\n  \"action_data\": {\n    \"code\": \"aB3d5F\",\n    \"url\": \"/coins/YAK/redeem/aB3d5F\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e60a6d9-6a21-4a44-bef2-c529a9d41cb7",
+              "name": "Bad request - Transaction not found, invalid, or signature already used",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prizes",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\",\n  \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "023ef72b-7543-4e44-8ee1-4b9df7c3cfdc",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prizes",
+                    "claim"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"signature\": \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\",\n  \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6b7ecd6-211c-4e84-aeb3-c6678c9d4ee3",
+          "name": "Get Wallet Prizes",
+          "request": {
+            "name": "Get Wallet Prizes",
+            "description": {
+              "content": "Gets all claimed prizes for a wallet. Public endpoint - no authentication required. Excludes sensitive action_data for security.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "wallet",
+                ":wallet",
+                "prizes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "wallet",
+                  "description": "(Required) The wallet address to get prizes for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "346dfd4a-6b85-4c37-a11a-bacee922a55a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wallet",
+                    ":wallet",
+                    "prizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) The wallet address to get prizes for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\",\n      \"signature\": \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\",\n      \"mint\": \"ZDaUDL4XFdEct7UgeztrFQAptsvh4ZdhyZDZ1RpxYAK\",\n      \"amount\": 2000000000,\n      \"prize_id\": \"prize_1_yak_airdrop\",\n      \"prize_name\": \"1 YAK Airdrop\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"prize_type\": \"coin_airdrop\"\n    },\n    {\n      \"id\": 1,\n      \"wallet\": \"HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC\",\n      \"signature\": \"5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA\",\n      \"mint\": \"ZDaUDL4XFdEct7UgeztrFQAptsvh4ZdhyZDZ1RpxYAK\",\n      \"amount\": 2000000000,\n      \"prize_id\": \"prize_1_yak_airdrop\",\n      \"prize_name\": \"1 YAK Airdrop\",\n      \"created_at\": \"2024-01-15T10:30:00Z\",\n      \"prize_type\": \"coin_airdrop\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a64ab0ad-a345-4324-8abc-946513ecc744",
+              "name": "Bad request - Missing wallet parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wallet",
+                    ":wallet",
+                    "prizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) The wallet address to get prizes for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "64ff18c0-7d01-40fd-ae1b-e368a0fd4b7a",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wallet",
+                    ":wallet",
+                    "prizes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wallet",
+                      "description": "(Required) The wallet address to get prizes for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.audius.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cab9e8a7-1074-4b9f-9a94-b87f4ffbf635",
+    "name": "Audius challenges prizes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Overview\n\nThe Audius API provides REST access to the world's largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.\n\n## Key Capabilities\n\n- **Users** — Profiles, followers, following, search\n- **Tracks** — Search, trending, stream, favorites, reposts\n- **Playlists** — Create, update, browse, curate\n- **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)\n- **Explore** — Trending content, charts, discovery\n- **Comments, Tips, Rewards** — Social features and engagement\n\n## Authentication\n\n- **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.\n- **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).\n\n## Resources\n\n- [API Docs](https://docs.audius.co/api) — Full reference and guides\n- [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)\n- [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions\n- [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser\n\n\nContact Support:\n Name: Audius",
+      "type": "text/plain"
+    }
+  }
+}
