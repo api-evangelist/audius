@@ -25,6 +25,13 @@ tags:
 - Streaming
 - Decentralized
 - Web3
+- Open-Source
+- Blockchain
+tags_raw:
+- Music
+- Streaming
+- Decentralized
+- Web3
 - Open Source
 - Blockchain
 created: '2026-05-08'
@@ -40,6 +47,12 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Tracks
+  - User
+  - Playlists
+  - Search
+  - Web3
+  tags_raw:
   - Tracks
   - Users
   - Playlists
@@ -60,6 +73,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Challenges
+  tags_raw:
   - challenges
   properties:
   - type: OpenAPI
@@ -69,7 +84,8 @@ apis:
   description: The cid_data API from Audius — 1 operation(s) for cid_data.
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
-  tags:
+  tags: []
+  tags_raw:
   - cid_data
   properties:
   - type: OpenAPI
@@ -80,6 +96,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Coins
+  tags_raw:
   - coins
   properties:
   - type: OpenAPI
@@ -90,6 +108,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Comments
+  tags_raw:
   - comments
   properties:
   - type: OpenAPI
@@ -99,7 +119,8 @@ apis:
   description: Protocol dashboard wallet users related operations
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
-  tags:
+  tags: []
+  tags_raw:
   - dashboard_wallet_users
   properties:
   - type: OpenAPI
@@ -110,6 +131,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Developer Apps
+  tags_raw:
   - developer_apps
   properties:
   - type: OpenAPI
@@ -120,6 +143,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -130,6 +155,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Explore
+  tags_raw:
   - explore
   properties:
   - type: OpenAPI
@@ -140,6 +167,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Notification
+  tags_raw:
   - notifications
   properties:
   - type: OpenAPI
@@ -150,6 +179,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Playlists
+  tags_raw:
   - playlists
   properties:
   - type: OpenAPI
@@ -170,6 +201,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Reactions
+  tags_raw:
   - reactions
   properties:
   - type: OpenAPI
@@ -180,6 +213,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Resolve
+  tags_raw:
   - resolve
   properties:
   - type: OpenAPI
@@ -190,6 +225,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Rewards
+  tags_raw:
   - rewards
   properties:
   - type: OpenAPI
@@ -200,6 +237,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -210,6 +249,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Tips
+  tags_raw:
   - tips
   properties:
   - type: OpenAPI
@@ -220,6 +261,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Tracks
+  tags_raw:
   - tracks
   properties:
   - type: OpenAPI
@@ -230,6 +273,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Transaction
+  tags_raw:
   - transactions
   properties:
   - type: OpenAPI
@@ -240,6 +285,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -250,6 +297,8 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
+  - Wallets
+  tags_raw:
   - wallet
   properties:
   - type: OpenAPI
