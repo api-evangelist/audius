@@ -85,7 +85,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Challenges
+  - challenges
   tags_raw:
   - challenges
   properties:
@@ -108,7 +108,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Coins
+  - coins
   tags_raw:
   - coins
   properties:
@@ -142,8 +142,7 @@ apis:
   description: Developer app related operations
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
-  tags:
-  - Developer Apps
+  tags: []
   tags_raw:
   - developer_apps
   properties:
@@ -191,7 +190,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Playlists
+  - playlists
   tags_raw:
   - playlists
   properties:
@@ -213,7 +212,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Reactions
+  - reactions
   tags_raw:
   - reactions
   properties:
@@ -225,7 +224,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Resolve
+  - resolve
   tags_raw:
   - resolve
   properties:
@@ -261,7 +260,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Tips
+  - tips
   tags_raw:
   - tips
   properties:
@@ -273,7 +272,7 @@ apis:
   humanURL: https://docs.audius.org/developers/api
   baseURL: https://api.audius.co
   tags:
-  - Tracks
+  - tracks
   tags_raw:
   - tracks
   properties:
