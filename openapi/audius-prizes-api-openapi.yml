@@ -1,48 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Audius challenges prizes API
+  title: Audius Prizes API
   description: '## Overview
 
 
-    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
-
-
-    ## Key Capabilities
-
-
-    - **Users** — Profiles, followers, following, search
-
-    - **Tracks** — Search, trending, stream, favorites, reposts
-
-    - **Playlists** — Create, update, browse, curate
-
-    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
-
-    - **Explore** — Trending content, charts, discovery
-
-    - **Comments, Tips, Rewards** — Social features and engagement
-
-
-    ## Authentication
-
-
-    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
-
-    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
-
-
-    ## Resources
-
-
-    - [API Docs](https://docs.audius.co/api) — Full reference and guides
-
-    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
-
-    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
-
-    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
-
-    '
+    The Audius API provides REST access to the world''s largest open music catalog, built on the Open Audio Protocol.'
   version: '1.0'
   contact:
     name: Audius
@@ -72,6 +34,8 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get prizes
+      x-summary-source: derived
   /prizes/claim:
     post:
       tags:
@@ -98,6 +62,8 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Claim prize
+      x-summary-source: derived
   /wallet/{wallet}/prizes:
     get:
       tags:
@@ -125,8 +91,60 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get wallet prizes
+      x-summary-source: derived
 components:
   schemas:
+    prizes_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/prize_public'
+          description: List of active prizes available for claiming
+    claimed_prizes_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/claimed_prize'
+          description: List of claimed prizes for the wallet (action_data excluded for security)
+    prize_public:
+      type: object
+      required:
+      - prize_id
+      - name
+      - weight
+      properties:
+        prize_id:
+          type: string
+          description: The unique identifier of the prize
+          example: prize_1_yak_airdrop
+        name:
+          type: string
+          description: The name of the prize
+          example: 1 YAK Airdrop
+        description:
+          type: string
+          description: Description of the prize
+          example: Win 1 YAK coin airdrop
+        weight:
+          type: integer
+          description: Weight for random selection (higher = more likely)
+          example: 1
+        metadata:
+          type: object
+          description: Sanitized metadata (excludes sensitive URLs)
+          additionalProperties: true
+          example:
+            type: coin_airdrop
+            amount: 1000000000
     claimed_prize:
       type: object
       required:
@@ -190,56 +208,6 @@ components:
           type: string
           description: The wallet address that sent the transaction
           example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
-    claimed_prizes_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/claimed_prize'
-          description: List of claimed prizes for the wallet (action_data excluded for security)
-    prizes_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/prize_public'
-          description: List of active prizes available for claiming
-    prize_public:
-      type: object
-      required:
-      - prize_id
-      - name
-      - weight
-      properties:
-        prize_id:
-          type: string
-          description: The unique identifier of the prize
-          example: prize_1_yak_airdrop
-        name:
-          type: string
-          description: The name of the prize
-          example: 1 YAK Airdrop
-        description:
-          type: string
-          description: Description of the prize
-          example: Win 1 YAK coin airdrop
-        weight:
-          type: integer
-          description: Weight for random selection (higher = more likely)
-          example: 1
-        metadata:
-          type: object
-          description: Sanitized metadata (excludes sensitive URLs)
-          additionalProperties: true
-          example:
-            type: coin_airdrop
-            amount: 1000000000
     prize_claim_response:
       type: object
       required:

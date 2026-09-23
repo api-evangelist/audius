@@ -1,48 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Audius challenges coins API
+  title: Audius Coins API
   description: '## Overview
 
 
-    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
-
-
-    ## Key Capabilities
-
-
-    - **Users** — Profiles, followers, following, search
-
-    - **Tracks** — Search, trending, stream, favorites, reposts
-
-    - **Playlists** — Create, update, browse, curate
-
-    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
-
-    - **Explore** — Trending content, charts, discovery
-
-    - **Comments, Tips, Rewards** — Social features and engagement
-
-
-    ## Authentication
-
-
-    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
-
-    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
-
-
-    ## Resources
-
-
-    - [API Docs](https://docs.audius.co/api) — Full reference and guides
-
-    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
-
-    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
-
-    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
-
-    '
+    The Audius API provides REST access to the world''s largest open music catalog, built on the Open Audio Protocol.'
   version: '1.0'
   contact:
     name: Audius
@@ -53,12 +15,12 @@ servers:
 - url: https://api.audius.co/v1
   description: Production
 tags:
-- name: coins
+- name: Coins
 paths:
   /coins:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coins
       description: Gets a list of coins with optional filtering
       parameters:
@@ -137,9 +99,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coins_response'
+      summary: Get coins
+      x-summary-source: derived
     post:
       tags:
-      - coins
+      - Coins
       operationId: Create Coin
       description: Creates a new artist coin
       parameters:
@@ -169,10 +133,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Create coin
+      x-summary-source: derived
   /coins/{mint}:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin
       description: Gets information about a specific coin by its mint address
       parameters:
@@ -190,9 +156,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coin_response'
+      summary: Get coin
+      x-summary-source: derived
     post:
       tags:
-      - coins
+      - Coins
       operationId: Update Coin
       description: Updates information about a specific coin by its mint address
       parameters:
@@ -235,10 +203,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Update coin
+      x-summary-source: derived
   /coins/ticker/{ticker}:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin By Ticker
       description: Gets information about a specific coin by its ticker
       parameters:
@@ -256,10 +226,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coin_response'
+      summary: Get coin by ticker
+      x-summary-source: derived
   /coins/{mint}/insights:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin Insights
       description: Gets insights about a specific coin by its mint address
       parameters:
@@ -277,10 +249,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coin_insights_response'
+      summary: Get coin insights
+      x-summary-source: derived
   /coins/{mint}/members:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin Members
       description: Gets a list of Audius users with a non-zero balance of a specific coin
       parameters:
@@ -322,10 +296,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coin_members_response'
+      summary: Get coin members
+      x-summary-source: derived
   /coins/{mint}/members/count:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin Members Count
       description: Gets the total number of Audius users with a non-zero balance of a specific coin
       parameters:
@@ -343,10 +319,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/coin_members_count_response'
+      summary: Get coin members count
+      x-summary-source: derived
   /coins/volume-leaders:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Volume Leaders
       description: Gets top coin<>AUDIO trading addresses by volume
       parameters:
@@ -389,10 +367,12 @@ paths:
                 $ref: '#/components/schemas/coins_volume_leaders_response'
         '400':
           description: Bad Request
+      summary: Get volume leaders
+      x-summary-source: derived
   /coins/{mint}/redeem:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Coin Redeem Amount
       description: Gets the availability indicator for reward codes for a specific coin
       parameters:
@@ -410,9 +390,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/redeem_amount_response'
+      summary: Get coin redeem amount
+      x-summary-source: derived
     post:
       tags:
-      - coins
+      - Coins
       operationId: Claim Coin Reward
       description: Claims a coin reward for a given mint
       parameters:
@@ -445,10 +427,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Claim coin reward
+      x-summary-source: derived
   /coins/{mint}/redeem/{code}:
     get:
       tags:
-      - coins
+      - Coins
       operationId: Get Reward Code
       description: Gets information about a specific reward code for a coin
       parameters:
@@ -479,9 +463,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/reward_code_error_response'
+      summary: Get reward code
+      x-summary-source: derived
     post:
       tags:
-      - coins
+      - Coins
       operationId: Claim Coin Reward Code
       description: Claims a coin reward using a given code
       parameters:
@@ -521,6 +507,8 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Claim coin reward code
+      x-summary-source: derived
 components:
   schemas:
     artist_locker:
@@ -539,74 +527,24 @@ components:
         claimable:
           type: number
           description: Claimable amount
-    playlist_library:
+    update_coin_response:
       type: object
       properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    create_coin_request:
+        success:
+          type: boolean
+          description: Indicates if the update was successful
+          example: true
+    coin_response:
       type: object
-      required:
-      - mint
-      - ticker
-      - decimals
-      - name
       properties:
-        mint:
-          type: string
-          description: The mint address of the coin
-          example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
-        ticker:
-          type: string
-          description: The coin symbol/ticker
-          example: BEAR
-        decimals:
-          type: integer
-          description: The number of decimals for the coin (0-18)
-          minimum: 0
-          maximum: 18
-          example: 9
-        name:
-          type: string
-          description: The coin name
-          example: BEAR
-        logo_uri:
-          type: string
-          description: The URI for the coin's logo image
-          example: https://example.com/logo.png
-        banner_image_url:
-          type: string
-          description: The URI for the coin's banner image
-          example: https://example.com/banner.png
-          format: uri
-        description:
-          type: string
-          description: The description of the coin
-          example: A majestic bear token for wildlife conservation
-        link_1:
-          type: string
-          description: Generic link URL for the coin
-          example: https://x.com/bear_token
-          format: uri
-        link_2:
-          type: string
-          description: Generic link URL for the coin
-          example: https://instagram.com/bear_token
-          format: uri
-        link_3:
-          type: string
-          description: Generic link URL for the coin
-          example: https://tiktok.com/@bear_token
-          format: uri
-        link_4:
-          type: string
-          description: Generic link URL for the coin
-          example: https://bear-token.com
-          format: uri
-    coins_volume_leaders_response:
+        data:
+          $ref: '#/components/schemas/coin'
+    coin_insights_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/coin_insights'
+    coin_members_response:
       type: object
       required:
       - data
@@ -614,26 +552,7 @@ components:
         data:
           type: array
           items:
-            type: object
-            required:
-            - address
-            - volume
-            properties:
-              address:
-                type: string
-              volume:
-                type: number
-              user:
-                $ref: '#/components/schemas/user'
-    coins_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/coin'
+            $ref: '#/components/schemas/coin_member'
     artist_coin_fees:
       type: object
       description: Artist coin fee info (unclaimed/total)
@@ -644,6 +563,29 @@ components:
         total_fees:
           type: number
           description: Total fees
+    reward_code_response:
+      type: object
+      required:
+      - code
+      - amount
+      properties:
+        code:
+          type: string
+          description: The reward code
+          example: XYZ123
+        amount:
+          type: integer
+          description: The amount of coins rewarded by this code
+          example: 100
+    coins_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/coin'
     coin_insights:
       type: object
       description: 'Additional token information from Birdeye''s defi token overview API.
@@ -966,65 +908,6 @@ components:
               type: string
               description: Address of the pool creator's wallet
               example: 2AAsAwNPTNBk5N466xyPiwqdgbc5WLbDTdnn9gVuDKaN
-    profile_picture:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    claim_rewards_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - challengeId
-            - specifier
-            properties:
-              challengeId:
-                type: string
-                description: The challenge ID
-                example: u
-              specifier:
-                type: string
-                description: The challenge specifier
-                example: 7eP5n
-              amount:
-                type: string
-                description: The reward amount
-                example: '1000000000'
-              signatures:
-                type: array
-                items:
-                  type: string
-                description: Transaction signatures
-                example:
-                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
-              error:
-                type: string
-                description: Error message if claim failed
-                example: Insufficient balance
-    reward_pool:
-      type: object
-      description: Reward pool for the coin
-      properties:
-        address:
-          type: string
-          description: Reward pool contract address
-        balance:
-          type: number
-          description: Reward pool balance
     update_coin_request:
       type: object
       description: Request body for updating coin information
@@ -1059,72 +942,6 @@ components:
           description: Generic link URL for the coin
           example: https://bear-token.com
           format: uri
-    create_coin_response:
-      type: object
-      properties:
-        data:
-          type: object
-          required:
-          - mint
-          - ticker
-          - user_id
-          - decimals
-          - name
-          - created_at
-          properties:
-            mint:
-              type: string
-              description: The mint address of the coin
-              example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
-            ticker:
-              type: string
-              description: The coin symbol/ticker
-              example: BEAR
-            user_id:
-              type: integer
-              description: The user ID who created the coin
-              example: 1
-            decimals:
-              type: integer
-              description: The number of decimals for the coin
-              example: 9
-            name:
-              type: string
-              description: The coin name
-              example: BEAR
-            logo_uri:
-              type: string
-              description: The URI for the coin's logo image
-              example: https://example.com/logo.png
-            banner_image_url:
-              type: string
-              description: The URI for the coin's banner image
-              example: https://example.com/banner.png
-            description:
-              type: string
-              description: The description of the coin
-              example: A majestic bear token for wildlife conservation
-            link_1:
-              type: string
-              description: Generic link URL for the coin
-              example: https://x.com/bear_token
-            link_2:
-              type: string
-              description: Generic link URL for the coin
-              example: https://instagram.com/bear_token
-            link_3:
-              type: string
-              description: Generic link URL for the coin
-              example: https://tiktok.com/@bear_token
-            link_4:
-              type: string
-              description: Generic link URL for the coin
-              example: https://bear-token.com
-            created_at:
-              type: string
-              format: date-time
-              description: The date and time when the coin was created
-              example: '2024-01-15T10:30:00Z'
     coin:
       type: object
       description: A coin object
@@ -1283,6 +1100,62 @@ components:
         creatorWalletAddress:
           type: string
           description: Address of the pool creator's wallet
+    coin_member:
+      type: object
+      required:
+      - balance
+      - user_id
+      properties:
+        balance:
+          type: integer
+          description: The user's balance of the specific coin (in wei)
+          example: 100000
+        user_id:
+          type: string
+          description: The ID of the user with a non-zero balance
+          example: 7eP5n
+    coins_volume_leaders_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - address
+            - volume
+            properties:
+              address:
+                type: string
+              volume:
+                type: number
+              user:
+                $ref: '#/components/schemas/user'
+    reward_pool:
+      type: object
+      description: Reward pool for the coin
+      properties:
+        address:
+          type: string
+          description: Reward pool contract address
+        balance:
+          type: number
+          description: Reward pool balance
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
     cover_photo:
       type: object
       properties:
@@ -1294,6 +1167,65 @@ components:
           type: array
           items:
             type: string
+    create_coin_request:
+      type: object
+      required:
+      - mint
+      - ticker
+      - decimals
+      - name
+      properties:
+        mint:
+          type: string
+          description: The mint address of the coin
+          example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
+        ticker:
+          type: string
+          description: The coin symbol/ticker
+          example: BEAR
+        decimals:
+          type: integer
+          description: The number of decimals for the coin (0-18)
+          minimum: 0
+          maximum: 18
+          example: 9
+        name:
+          type: string
+          description: The coin name
+          example: BEAR
+        logo_uri:
+          type: string
+          description: The URI for the coin's logo image
+          example: https://example.com/logo.png
+        banner_image_url:
+          type: string
+          description: The URI for the coin's banner image
+          example: https://example.com/banner.png
+          format: uri
+        description:
+          type: string
+          description: The description of the coin
+          example: A majestic bear token for wildlife conservation
+        link_1:
+          type: string
+          description: Generic link URL for the coin
+          example: https://x.com/bear_token
+          format: uri
+        link_2:
+          type: string
+          description: Generic link URL for the coin
+          example: https://instagram.com/bear_token
+          format: uri
+        link_3:
+          type: string
+          description: Generic link URL for the coin
+          example: https://tiktok.com/@bear_token
+          format: uri
+        link_4:
+          type: string
+          description: Generic link URL for the coin
+          example: https://bear-token.com
+          format: uri
     reward_code_error_response:
       type: object
       properties:
@@ -1304,6 +1236,51 @@ components:
           enum:
           - used
           - invalid
+    claim_rewards_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - challengeId
+            - specifier
+            properties:
+              challengeId:
+                type: string
+                description: The challenge ID
+                example: u
+              specifier:
+                type: string
+                description: The challenge specifier
+                example: 7eP5n
+              amount:
+                type: string
+                description: The reward amount
+                example: '1000000000'
+              signatures:
+                type: array
+                items:
+                  type: string
+                description: Transaction signatures
+                example:
+                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+              error:
+                type: string
+                description: Error message if claim failed
+                example: Insufficient balance
+    redeem_amount_response:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: integer
+          description: Static amount indicator (always 1)
+          example: 1
     user:
       required:
       - album_count
@@ -1478,69 +1455,6 @@ components:
           type: boolean
         profile_type:
           type: string
-    redeem_amount_response:
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          type: integer
-          description: Static amount indicator (always 1)
-          example: 1
-    coin_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/coin'
-    reward_code_response:
-      type: object
-      required:
-      - code
-      - amount
-      properties:
-        code:
-          type: string
-          description: The reward code
-          example: XYZ123
-        amount:
-          type: integer
-          description: The amount of coins rewarded by this code
-          example: 100
-    coin_member:
-      type: object
-      required:
-      - balance
-      - user_id
-      properties:
-        balance:
-          type: integer
-          description: The user's balance of the specific coin (in wei)
-          example: 100000
-        user_id:
-          type: string
-          description: The ID of the user with a non-zero balance
-          example: 7eP5n
-    update_coin_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Indicates if the update was successful
-          example: true
-    coin_members_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/coin_member'
-    coin_insights_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/coin_insights'
     coin_members_count_response:
       type: object
       required:
@@ -1550,6 +1464,80 @@ components:
           type: integer
           description: The total number of users with a non-zero balance of the specific coin
           example: 42
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    create_coin_response:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - mint
+          - ticker
+          - user_id
+          - decimals
+          - name
+          - created_at
+          properties:
+            mint:
+              type: string
+              description: The mint address of the coin
+              example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+              example: BEAR
+            user_id:
+              type: integer
+              description: The user ID who created the coin
+              example: 1
+            decimals:
+              type: integer
+              description: The number of decimals for the coin
+              example: 9
+            name:
+              type: string
+              description: The coin name
+              example: BEAR
+            logo_uri:
+              type: string
+              description: The URI for the coin's logo image
+              example: https://example.com/logo.png
+            banner_image_url:
+              type: string
+              description: The URI for the coin's banner image
+              example: https://example.com/banner.png
+            description:
+              type: string
+              description: The description of the coin
+              example: A majestic bear token for wildlife conservation
+            link_1:
+              type: string
+              description: Generic link URL for the coin
+              example: https://x.com/bear_token
+            link_2:
+              type: string
+              description: Generic link URL for the coin
+              example: https://instagram.com/bear_token
+            link_3:
+              type: string
+              description: Generic link URL for the coin
+              example: https://tiktok.com/@bear_token
+            link_4:
+              type: string
+              description: Generic link URL for the coin
+              example: https://bear-token.com
+            created_at:
+              type: string
+              format: date-time
+              description: The date and time when the coin was created
+              example: '2024-01-15T10:30:00Z'
   securitySchemes:
     OAuth2:
       type: oauth2

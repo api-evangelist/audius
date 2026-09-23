@@ -1,48 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Audius challenges tracks API
+  title: Audius Tracks API
   description: '## Overview
 
 
-    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
-
-
-    ## Key Capabilities
-
-
-    - **Users** — Profiles, followers, following, search
-
-    - **Tracks** — Search, trending, stream, favorites, reposts
-
-    - **Playlists** — Create, update, browse, curate
-
-    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
-
-    - **Explore** — Trending content, charts, discovery
-
-    - **Comments, Tips, Rewards** — Social features and engagement
-
-
-    ## Authentication
-
-
-    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
-
-    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
-
-
-    ## Resources
-
-
-    - [API Docs](https://docs.audius.co/api) — Full reference and guides
-
-    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
-
-    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
-
-    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
-
-    '
+    The Audius API provides REST access to the world''s largest open music catalog, built on the Open Audio Protocol.'
   version: '1.0'
   contact:
     name: Audius
@@ -53,13 +15,13 @@ servers:
 - url: https://api.audius.co/v1
   description: Production
 tags:
-- name: tracks
+- name: Tracks
   description: Track related operations
 paths:
   /tracks:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets a list of tracks using their IDs or permalinks
       operationId: Get Bulk Tracks
       security:
@@ -106,9 +68,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get bulk tracks
+      x-summary-source: derived
     post:
       tags:
-      - tracks
+      - Tracks
       description: Creates a new track
       operationId: Create Track
       security:
@@ -146,10 +110,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Create track
+      x-summary-source: derived
   /tracks/download_counts:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets download counts for tracks by ID. Use this instead of loading full track objects when only download counts are needed.
       operationId: Get Track Download Counts
       security:
@@ -174,10 +140,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/track_download_counts_response'
+      summary: Get track download counts
+      x-summary-source: derived
   /tracks/inspect:
     get:
       tags:
-      - tracks
+      - Tracks
       summary: Inspects the details of the files for multiple tracks
       description: Inspect multiple tracks
       operationId: Inspect Tracks
@@ -214,7 +182,7 @@ paths:
   /tracks/recent-premium:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the most recently listed premium tracks
       operationId: Get Recent Premium Tracks
       security:
@@ -244,11 +212,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get recent premium tracks
+      x-summary-source: derived
   /tracks/recommended:
     get:
       tags:
-      - tracks
-      description: Get recommended tracks
+      - Tracks
       operationId: Get Recommended Tracks
       security:
       - {}
@@ -296,10 +265,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get recommended tracks
+      x-summary-source: derived
   /tracks/recommended/{version}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get recommended tracks using the given trending strategy version
       operationId: Get Recommended Tracks With Version
       security:
@@ -354,10 +325,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get recommended tracks with version
+      x-summary-source: derived
   /tracks/feeling-lucky:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets random tracks found on the "Feeling Lucky" smart playlist
       operationId: Get Feeling Lucky Tracks
       security:
@@ -401,10 +374,12 @@ paths:
         '400':
           description: Bad request
           content: {}
+      summary: Get feeling lucky tracks
+      x-summary-source: derived
   /tracks/recent-comments:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the most recent tracks with active discussion
       operationId: Get Tracks With Recent Comments
       security:
@@ -442,10 +417,12 @@ paths:
         '400':
           description: Bad request
           content: {}
+      summary: Get tracks with recent comments
+      x-summary-source: derived
   /tracks/most-shared:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the most shared tracks for a given time range
       operationId: Get Most Shared Tracks
       security:
@@ -496,10 +473,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get most shared tracks
+      x-summary-source: derived
   /tracks/usdc-purchase:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top trending (most popular) USDC purchase tracks on Audius
       operationId: Get Trending USDC Purchase Tracks
       security:
@@ -550,10 +529,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending USDC purchase tracks
+      x-summary-source: derived
   /tracks/usdc-purchase/{version}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top trending (most popular) USDC purchase tracks on Audius using a given trending strategy version
       operationId: Get Trending USDC Purchase Tracks With Version
       security:
@@ -604,10 +585,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get trending USDC purchase tracks with version
+      x-summary-source: derived
   /tracks/search:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Search for a track or tracks
       operationId: Search Tracks
       parameters:
@@ -706,10 +689,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Search tracks
+      x-summary-source: derived
   /tracks/trending:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top 100 trending (most popular) tracks on Audius
       operationId: Get Trending Tracks
       security:
@@ -760,10 +745,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending tracks
+      x-summary-source: derived
   /tracks/trending/winners:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets weekly trending winners from the trending_results table. Returns track objects for the specified week. Defaults to the most recent week with data when no week is provided.
       operationId: Get Trending Winners
       security:
@@ -795,10 +782,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending winners
+      x-summary-source: derived
   /tracks/trending/{version}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top 100 trending (most popular) tracks on Audius using a given trending strategy version
       operationId: Get Trending Tracks With Version
       security:
@@ -849,10 +838,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get trending tracks with version
+      x-summary-source: derived
   /tracks/trending/ids:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the track IDs of the top trending tracks on Audius
       operationId: Get Trending Track IDs
       parameters:
@@ -884,10 +875,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending track IDs
+      x-summary-source: derived
   /tracks/trending/ids/{version}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the track IDs of the top trending tracks on Audius based on the given trending strategy version
       operationId: Get Trending Tracks IDs With Version
       parameters:
@@ -925,10 +918,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending tracks IDs with version
+      x-summary-source: derived
   /tracks/trending/underground:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top 100 trending underground tracks on Audius
       operationId: Get Underground Trending Tracks
       security:
@@ -958,10 +953,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get underground trending tracks
+      x-summary-source: derived
   /tracks/trending/underground/winners:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets weekly trending underground winners from the trending_results table. Returns track objects for the specified week. Defaults to the most recent week with data when no week is provided.
       operationId: Get Trending Underground Winners
       security:
@@ -993,10 +990,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get trending underground winners
+      x-summary-source: derived
   /tracks/trending/underground/{version}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the top 100 trending underground tracks on Audius using a given trending strategy version
       operationId: Get Underground Trending Tracks With Version
       security:
@@ -1032,10 +1031,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get underground trending tracks with version
+      x-summary-source: derived
   /tracks/{track_id}:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets a track by ID.
       operationId: Get Track
       security:
@@ -1061,9 +1062,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/track_response'
+      summary: Get track
+      x-summary-source: derived
     put:
       tags:
-      - tracks
+      - Tracks
       description: Updates an existing track
       operationId: Update Track
       security:
@@ -1110,9 +1113,11 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Update track
+      x-summary-source: derived
     delete:
       tags:
-      - tracks
+      - Tracks
       description: Deletes a track
       operationId: Delete Track
       security:
@@ -1149,10 +1154,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Delete track
+      x-summary-source: derived
   /tracks/{track_id}/download_count:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the download count for a single track. Full track + all stems (parent) or stem-only (stem).
       operationId: Get Track Download Count
       security:
@@ -1173,10 +1180,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/track_download_count_response'
+      summary: Get track download count
+      x-summary-source: derived
   /tracks/{track_id}/access-info:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the information necessary to access the track and what access the given user has.
       operationId: Get Track Access Info
       security:
@@ -1202,10 +1211,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/access_info_response'
+      summary: Get track access info
+      x-summary-source: derived
   /tracks/{track_id}/comment_count:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get the comment count for a track
       operationId: Get Track Comment Count
       security:
@@ -1237,10 +1248,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get track comment count
+      x-summary-source: derived
   /tracks/{track_id}/comment_notification_setting:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get the comment notification setting for a track
       operationId: Get Track Comment Notification Setting
       security:
@@ -1272,10 +1285,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get track comment notification setting
+      x-summary-source: derived
   /tracks/{track_id}/comments:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get a list of comments for a track
       operationId: Get Track Comments
       security:
@@ -1327,10 +1342,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get track comments
+      x-summary-source: derived
   /tracks/{track_id}/favorites:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get users that favorited a track
       operationId: Get Users From Favorites
       security:
@@ -1372,9 +1389,11 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get users from favorites
+      x-summary-source: derived
     post:
       tags:
-      - tracks
+      - Tracks
       description: Favorite a track
       operationId: Favorite Track
       security:
@@ -1418,9 +1437,11 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Favorite track
+      x-summary-source: derived
     delete:
       tags:
-      - tracks
+      - Tracks
       description: Unfavorite a track
       operationId: Unfavorite Track
       security:
@@ -1457,10 +1478,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Unfavorite track
+      x-summary-source: derived
   /tracks/{track_id}/remixes:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get all tracks that remix the given track
       operationId: Get Track Remixes
       security:
@@ -1516,10 +1539,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/remixes_response'
+      summary: Get track remixes
+      x-summary-source: derived
   /tracks/{track_id}/remixing:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets all the tracks that the given track remixes
       operationId: Get Track Remix Parents
       security:
@@ -1555,10 +1580,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/remixing_response'
+      summary: Get track remix parents
+      x-summary-source: derived
   /tracks/{track_id}/reposts:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get the users that reposted a track
       operationId: Get Users From Reposts
       security:
@@ -1600,9 +1627,11 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get users from reposts
+      x-summary-source: derived
     post:
       tags:
-      - tracks
+      - Tracks
       description: Repost a track
       operationId: Repost Track
       security:
@@ -1645,9 +1674,11 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Repost track
+      x-summary-source: derived
     delete:
       tags:
-      - tracks
+      - Tracks
       description: Unrepost a track
       operationId: Unrepost Track
       security:
@@ -1684,10 +1715,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Unrepost track
+      x-summary-source: derived
   /tracks/{track_id}/download:
     get:
       tags:
-      - tracks
+      - Tracks
       summary: Download the original or MP3 file of a track
       description: Download an original or mp3 track
       operationId: Download Track
@@ -1746,7 +1779,7 @@ paths:
   /tracks/{track_id}/inspect:
     get:
       tags:
-      - tracks
+      - Tracks
       summary: Inspects the details of the file for a track
       description: Inspect a track
       operationId: Inspect Track
@@ -1779,7 +1812,7 @@ paths:
   /tracks/{track_id}/stems:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get the remixable stems of a track
       operationId: Get Track Stems
       parameters:
@@ -1796,10 +1829,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/stems_response'
+      summary: Get track stems
+      x-summary-source: derived
   /tracks/{track_id}/shares:
     post:
       tags:
-      - tracks
+      - Tracks
       description: Record a track share event
       operationId: Share Track
       security:
@@ -1836,10 +1871,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Share track
+      x-summary-source: derived
   /tracks/{track_id}/downloads:
     post:
       tags:
-      - tracks
+      - Tracks
       description: Record a track download event
       operationId: Record Track Download
       security:
@@ -1882,10 +1919,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Record track download
+      x-summary-source: derived
   /tracks/{track_id}/stream:
     get:
       tags:
-      - tracks
+      - Tracks
       summary: Get the streamable MP3 file of a track
       description: 'Stream an mp3 track
 
@@ -1973,7 +2012,7 @@ paths:
   /tracks/{track_id}/top_listeners:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Get the users that have listened to a track the most
       operationId: Get Track Top Listeners
       security:
@@ -2015,10 +2054,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get track top listeners
+      x-summary-source: derived
   /tracks/best_new_releases:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the tracks found on the "Best New Releases" smart playlist
       operationId: Get Best New Releases
       security:
@@ -2059,10 +2100,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get best new releases
+      x-summary-source: derived
   /tracks/most_loved:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the tracks found on the "Most Loved" smart playlist
       operationId: Get Most Loved Tracks
       security:
@@ -2093,10 +2136,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get most loved tracks
+      x-summary-source: derived
   /tracks/remixables:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets a list of tracks that have stems available for remixing
       operationId: Get Remixable Tracks
       security:
@@ -2132,10 +2177,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Get remixable tracks
+      x-summary-source: derived
   /tracks/under_the_radar:
     get:
       tags:
-      - tracks
+      - Tracks
       description: Gets the tracks found on the "Under the Radar" smart playlist
       operationId: Get Under the Radar Tracks
       security:
@@ -2185,18 +2232,520 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/tracks_response'
+      summary: Get under the radar tracks
+      x-summary-source: derived
 components:
   schemas:
-    access:
+    url_with_mirrors:
       required:
-      - download
-      - stream
+      - mirrors
       type: object
       properties:
-        stream:
+        url:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    genre:
+      type: string
+      description: Music genre
+      enum:
+      - Electronic
+      - Rock
+      - Metal
+      - Alternative
+      - Hip-Hop/Rap
+      - Experimental
+      - Punk
+      - Folk
+      - Pop
+      - Ambient
+      - Soundtrack
+      - World
+      - Jazz
+      - Acoustic
+      - Funk
+      - R&B/Soul
+      - Devotional
+      - Classical
+      - Reggae
+      - Podcasts
+      - Country
+      - Spoken Word
+      - Comedy
+      - Blues
+      - Kids
+      - Audiobooks
+      - Latin
+      - Lo-Fi
+      - Hyperpop
+      - Dancehall
+      - Techno
+      - Trap
+      - House
+      - Tech House
+      - Deep House
+      - Disco
+      - Electro
+      - Jungle
+      - Progressive House
+      - Hardstyle
+      - Glitch Hop
+      - Trance
+      - Future Bass
+      - Future House
+      - Tropical House
+      - Downtempo
+      - Drum & Bass
+      - Dubstep
+      - Jersey Club
+      - Vaporwave
+      - Moombahton
+    follow_gate:
+      required:
+      - follow_user_id
+      type: object
+      properties:
+        follow_user_id:
+          type: integer
+          description: Must follow the given user ID to unlock
+    repost:
+      required:
+      - repost_item_id
+      - repost_type
+      - user_id
+      type: object
+      properties:
+        repost_item_id:
+          type: string
+        repost_type:
+          type: string
+        user_id:
+          type: string
+    playlist:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
+          type: string
+        permalink:
+          type: string
+        id:
+          type: string
+        is_album:
           type: boolean
-        download:
+        is_image_autogenerated:
           type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+          format: date
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+    tracks_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+    track_access_info:
+      required:
+      - blocknumber
+      - user_id
+      type: object
+      properties:
+        access:
+          type: object
+          description: Describes what access the given user has
+          allOf:
+          - $ref: '#/components/schemas/access'
+        user_id:
+          type: string
+          description: The user ID of the owner of this track
+        blocknumber:
+          type: integer
+          description: The blocknumber this track was last updated
+        is_stream_gated:
+          type: boolean
+          description: Whether or not the owner has restricted streaming behind an access gate
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/extended_access_gate'
+        is_download_gated:
+          type: boolean
+          description: Whether or not the owner has restricted downloading behind an access gate
+        download_conditions:
+          type: object
+          description: How to unlock the track download
+          allOf:
+          - $ref: '#/components/schemas/extended_access_gate'
+    track_comments_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment'
+        related:
+          $ref: '#/components/schemas/related'
+    track_download_request_body:
+      type: object
+      properties:
+        city:
+          type: string
+          description: City where the download occurred
+        region:
+          type: string
+          description: Region where the download occurred
+        country:
+          type: string
+          description: Country where the download occurred
+    stem_parent:
+      required:
+      - category
+      - parent_track_id
+      type: object
+      properties:
+        category:
+          type: string
+        parent_track_id:
+          type: integer
+    extended_purchase_gate:
+      required:
+      - usdc_purchase
+      type: object
+      properties:
+        usdc_purchase:
+          type: object
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_usdc_gate'
+    mood:
+      type: string
+      description: Music mood
+      enum:
+      - Peaceful
+      - Romantic
+      - Sentimental
+      - Tender
+      - Easygoing
+      - Yearning
+      - Sophisticated
+      - Sensual
+      - Cool
+      - Gritty
+      - Melancholy
+      - Serious
+      - Brooding
+      - Fiery
+      - Defiant
+      - Aggressive
+      - Rowdy
+      - Excited
+      - Energizing
+      - Empowering
+      - Stirring
+      - Upbeat
+      - Other
+    remix_parent:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix'
+    usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+          description: The price in USDC needed to unlock
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_split'
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    remix:
+      required:
+      - has_remix_author_reposted
+      - has_remix_author_saved
+      - parent_track_id
+      - user
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        has_remix_author_reposted:
+          type: boolean
+        has_remix_author_saved:
+          type: boolean
+    trending_times_ids:
+      type: object
+      properties:
+        week:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_id'
+        month:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_id'
+        year:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_id'
+    stems_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/stem'
+    track_download_count_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          required:
+          - id
+          - download_count
+          properties:
+            id:
+              type: string
+              description: Track ID (hash)
+            download_count:
+              type: integer
+              description: Full track + all stems (parent) or stem-only (stem)
+    comment_entity_type:
+      type: string
+      description: Type of entity that can be commented on
+      enum:
+      - Track
+    remix_parent_write:
+      type: object
+      required:
+      - tracks
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_element_write'
+    ddex_copyright:
+      type: object
+      required:
+      - year
+      - text
+      properties:
+        year:
+          type: string
+          minLength: 4
+          maxLength: 4
+          description: Copyright year (4 characters)
+        text:
+          type: string
+          minLength: 1
+          description: Copyright text
     track:
       required:
       - access
@@ -2386,35 +2935,36 @@ components:
             type: object
             properties: {}
         resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         indirect_resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         rights_controller:
-          nullable: true
           $ref: '#/components/schemas/ddex_rights_controller'
         copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         producer_copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         parental_warning_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_stream_gated:
           type: boolean
           description: Whether or not the owner has restricted streaming behind an access gate
         access_authorities:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
@@ -2444,15 +2994,20 @@ components:
           $ref: '#/components/schemas/url_with_mirrors'
         preview:
           $ref: '#/components/schemas/url_with_mirrors'
-    playlist_library:
+    cover_art:
       type: object
       properties:
-        contents:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
           type: array
           items:
-            type: object
-            properties: {}
-    track_comments_response:
+            type: string
+    remixing_response:
       required:
       - latest_chain_block
       - latest_chain_slot_plays
@@ -2480,153 +3035,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/comment'
-        related:
-          $ref: '#/components/schemas/related'
-    field_visibility:
-      required:
-      - genre
-      - mood
-      - play_count
-      - remixes
-      - share
-      - tags
-      type: object
-      properties:
-        mood:
-          type: boolean
-        tags:
-          type: boolean
-        genre:
-          type: boolean
-        share:
-          type: boolean
-        play_count:
-          type: boolean
-        remixes:
-          type: boolean
-    track_inspect:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/blob_info'
-    track_access_info:
-      required:
-      - blocknumber
-      - user_id
-      type: object
-      properties:
-        access:
-          type: object
-          description: Describes what access the given user has
-          allOf:
-          - $ref: '#/components/schemas/access'
-        user_id:
-          type: string
-          description: The user ID of the owner of this track
-        blocknumber:
-          type: integer
-          description: The blocknumber this track was last updated
-        is_stream_gated:
-          type: boolean
-          description: Whether or not the owner has restricted streaming behind an access gate
-        stream_conditions:
-          type: object
-          description: How to unlock stream access to the track
-          allOf:
-          - $ref: '#/components/schemas/extended_access_gate'
-        is_download_gated:
-          type: boolean
-          description: Whether or not the owner has restricted downloading behind an access gate
-        download_conditions:
-          type: object
-          description: How to unlock the track download
-          allOf:
-          - $ref: '#/components/schemas/extended_access_gate'
-    track_reposts_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    remix_parent:
-      type: object
-      properties:
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/remix'
-    trending_times_ids:
-      type: object
-      properties:
-        week:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_id'
-        month:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_id'
-        year:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_id'
-    track_id:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-    playlist_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    track_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
+            $ref: '#/components/schemas/track'
     update_track_request_body:
       type: object
       description: Request body for updating track information. All fields are optional.
@@ -2637,37 +3046,43 @@ components:
         genre:
           $ref: '#/components/schemas/genre'
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Track description
           maxLength: 1000
         mood:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/mood'
         bpm:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Beats per minute (tempo)
         musical_key:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Musical key of the track
         tags:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Comma-separated tags
         license:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: License type
         isrc:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: International Standard Recording Code
         iswc:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: International Standard Musical Work Code
         release_date:
           type: string
@@ -2708,17 +3123,16 @@ components:
           type: boolean
           description: Whether streaming is restricted behind an access gate
         access_authorities:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
         stream_conditions:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/access_gate'
         download_conditions:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/access_gate'
         field_visibility:
@@ -2731,196 +3145,77 @@ components:
         remix_of:
           $ref: '#/components/schemas/remix_parent_write'
         ddex_app:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: DDEX application identifier
         parental_warning_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Parental warning type
-    track_favorites_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
+    track_inspect:
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    create_track_response:
+          $ref: '#/components/schemas/blob_info'
+    access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    playlist_artwork:
       type: object
       properties:
-        transaction_hash:
+        150x150:
           type: string
-          description: The blockchain transaction hash
-        block_hash:
+        480x480:
           type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-        track_id:
+        1000x1000:
           type: string
-          description: The ID of the created track
-    ddex_rights_controller:
-      type: object
-      description: DDEX rights controller
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-        roles:
+        mirrors:
           type: array
-          minItems: 1
           items:
             type: string
-            minLength: 1
-        rights_share_unknown:
-          type: string
-          description: Optional
-    comment_notification_setting:
-      required:
-      - is_muted
+    track_comment_count_response:
       type: object
       properties:
-        is_muted:
-          type: boolean
-    token_gate:
-      required:
-      - token_gate
-      type: object
-      properties:
-        token_gate:
-          type: object
-          description: Must hold an NFT of the given collection to unlock
-          allOf:
-          - $ref: '#/components/schemas/extended_token_gate'
-    remixing_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-    comment:
-      required:
-      - created_at
-      - entity_id
-      - entity_type
-      - id
-      - is_edited
-      - message
-      - react_count
-      - reply_count
+          type: integer
+    cover_photo:
       type: object
       properties:
-        id:
+        640x:
           type: string
-        entity_id:
+        2000x:
           type: string
-        entity_type:
-          $ref: '#/components/schemas/comment_entity_type'
-        user_id:
-          type: string
-        message:
-          type: string
-        mentions:
+        mirrors:
           type: array
           items:
-            $ref: '#/components/schemas/comment_mention'
-        track_timestamp_s:
-          type: integer
-        react_count:
-          type: integer
-        reply_count:
-          type: integer
-        is_edited:
-          type: boolean
-        is_current_user_reacted:
-          type: boolean
-        is_artist_reacted:
-          type: boolean
-        is_tombstone:
-          type: boolean
-        is_muted:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        replies:
-          type: array
-          items:
-            $ref: '#/components/schemas/reply_comment'
-        parent_comment_id:
-          type: integer
-    tip_gate:
+            type: string
+    field_visibility:
       required:
-      - tip_user_id
+      - genre
+      - mood
+      - play_count
+      - remixes
+      - share
+      - tags
       type: object
       properties:
-        tip_user_id:
-          type: integer
-          description: Must tip the given user ID to unlock
-    usdc_gate:
-      required:
-      - price
-      - splits
-      type: object
-      properties:
-        price:
-          type: integer
-          description: The price in USDC needed to unlock
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/payment_split'
+        mood:
+          type: boolean
+        tags:
+          type: boolean
+        genre:
+          type: boolean
+        share:
+          type: boolean
+        play_count:
+          type: boolean
+        remixes:
+          type: boolean
     album_backlink:
       required:
       - permalink
@@ -2934,190 +3229,11 @@ components:
           type: string
         permalink:
           type: string
-    payment_split:
-      required:
-      - user_id
-      - percentage
-      type: object
-      properties:
-        user_id:
-          type: integer
-          example: 1234
-        percentage:
-          type: number
-    remixes_response:
+    access_info_response:
       type: object
       properties:
         data:
-          type: object
-          required:
-          - count
-          properties:
-            count:
-              type: integer
-            tracks:
-              type: array
-              items:
-                $ref: '#/components/schemas/track'
-    extended_purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
-          type: object
-          description: Must pay the total price and split to the given addresses to unlock
-          allOf:
-          - $ref: '#/components/schemas/extended_usdc_gate'
-    extended_usdc_gate:
-      required:
-      - price
-      - splits
-      type: object
-      properties:
-        price:
-          type: integer
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/extended_payment_split'
-    remix:
-      required:
-      - has_remix_author_reposted
-      - has_remix_author_saved
-      - parent_track_id
-      - user
-      type: object
-      properties:
-        parent_track_id:
-          type: string
-        user:
-          $ref: '#/components/schemas/user'
-        has_remix_author_reposted:
-          type: boolean
-        has_remix_author_saved:
-          type: boolean
-    track_comment_count_response:
-      type: object
-      properties:
-        data:
-          type: integer
-    track_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/track'
-    access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
-    repost_request_body:
-      type: object
-      description: Optional metadata for repost operations
-      properties:
-        is_repost_of_repost:
-          type: boolean
-          description: Set to true when reposting an item that was reposted (used for notifications)
-    reply_comment:
-      required:
-      - created_at
-      - entity_id
-      - entity_type
-      - id
-      - is_edited
-      - message
-      - react_count
-      - user_id
-      type: object
-      properties:
-        id:
-          type: string
-        entity_id:
-          type: string
-        entity_type:
-          $ref: '#/components/schemas/comment_entity_type'
-        user_id:
-          type: string
-        message:
-          type: string
-        mentions:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment_mention'
-        track_timestamp_s:
-          type: integer
-        react_count:
-          type: integer
-        is_edited:
-          type: boolean
-        is_current_user_reacted:
-          type: boolean
-        is_artist_reacted:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        parent_comment_id:
-          type: integer
-    stream_url_response:
-      required:
-      - data
-      type: object
-      properties:
-        data:
-          type: string
-    mood:
-      type: string
-      description: Music mood
-      enum:
-      - Peaceful
-      - Romantic
-      - Sentimental
-      - Tender
-      - Easygoing
-      - Yearning
-      - Sophisticated
-      - Sensual
-      - Cool
-      - Gritty
-      - Melancholy
-      - Serious
-      - Brooding
-      - Fiery
-      - Defiant
-      - Aggressive
-      - Rowdy
-      - Excited
-      - Energizing
-      - Empowering
-      - Stirring
-      - Upbeat
-      - Other
+          $ref: '#/components/schemas/track_access_info'
     track_download_counts_response:
       type: object
       required:
@@ -3137,122 +3253,18 @@ components:
               download_count:
                 type: integer
                 description: Full track + all stems (parent) or stem-only (stem)
-    track_search:
+    trending_ids_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/trending_times_ids'
+    track_inspect_list:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/track'
-    top_listener:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/top_listener'
-    comment_entity_type:
-      type: string
-      description: Type of entity that can be commented on
-      enum:
-      - Track
-    stem_parent:
-      required:
-      - category
-      - parent_track_id
-      type: object
-      properties:
-        category:
-          type: string
-        parent_track_id:
-          type: integer
-    ddex_copyright:
-      type: object
-      required:
-      - year
-      - text
-      properties:
-        year:
-          type: string
-          minLength: 4
-          maxLength: 4
-          description: Copyright year (4 characters)
-        text:
-          type: string
-          minLength: 1
-          description: Copyright text
-    remixables_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-    extended_token_gate:
-      required:
-      - token_mint
-      - token_amount
-      type: object
-      properties:
-        token_mint:
-          type: string
-          description: The mint of the token needed to unlock
-        token_amount:
-          type: integer
-          description: The amount of the token needed to unlock
-    version_metadata:
-      required:
-      - service
-      - version
-      type: object
-      properties:
-        service:
-          type: string
-        version:
-          type: string
-    ddex_resource_contributor:
-      type: object
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Contributor name
-        roles:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-          description: Contributor roles
-        sequence_number:
-          type: integer
-          minimum: 0
-          description: Sequence number for ordering
+            $ref: '#/components/schemas/blob_info'
     track_element_write:
       required:
       - parent_track_id
@@ -3261,671 +3273,6 @@ components:
         parent_track_id:
           type: string
           example: x5pJ3Az
-    comment_mention:
-      required:
-      - handle
-      - user_id
-      type: object
-      properties:
-        user_id:
-          type: integer
-        handle:
-          type: string
-    playlist:
-      required:
-      - access
-      - added_timestamps
-      - blocknumber
-      - created_at
-      - favorite_count
-      - followee_favorites
-      - followee_reposts
-      - has_current_user_reposted
-      - has_current_user_saved
-      - id
-      - is_album
-      - is_delete
-      - is_image_autogenerated
-      - is_private
-      - is_scheduled_release
-      - is_stream_gated
-      - permalink
-      - playlist_contents
-      - playlist_name
-      - repost_count
-      - total_play_count
-      - track_count
-      - updated_at
-      - user
-      - user_id
-      type: object
-      properties:
-        artwork:
-          $ref: '#/components/schemas/playlist_artwork'
-        description:
-          type: string
-        permalink:
-          type: string
-        id:
-          type: string
-        is_album:
-          type: boolean
-        is_image_autogenerated:
-          type: boolean
-        playlist_name:
-          type: string
-        playlist_contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        repost_count:
-          type: integer
-        favorite_count:
-          type: integer
-        total_play_count:
-          type: integer
-        user:
-          $ref: '#/components/schemas/user'
-        ddex_app:
-          type: string
-        access:
-          $ref: '#/components/schemas/access'
-        upc:
-          type: string
-        track_count:
-          type: integer
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        followee_reposts:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost'
-        followee_favorites:
-          type: array
-          items:
-            $ref: '#/components/schemas/favorite'
-        has_current_user_reposted:
-          type: boolean
-        has_current_user_saved:
-          type: boolean
-        is_delete:
-          type: boolean
-        is_private:
-          type: boolean
-        updated_at:
-          type: string
-        added_timestamps:
-          type: array
-          description: DEPRECATED. Use playlist_contents instead.
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        user_id:
-          type: string
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        cover_art:
-          type: string
-        cover_art_sizes:
-          type: string
-        cover_art_cids:
-          $ref: '#/components/schemas/playlist_artwork'
-        is_stream_gated:
-          type: boolean
-        stream_conditions:
-          type: object
-          description: How to unlock stream access to the track
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        is_scheduled_release:
-          type: boolean
-        release_date:
-          type: string
-          format: date
-        ddex_release_ids:
-          type: object
-          properties: {}
-        artists:
-          type: array
-          items:
-            type: object
-            properties: {}
-        copyright_line:
-          type: object
-          properties: {}
-        producer_copyright_line:
-          type: object
-          properties: {}
-        parental_warning_type:
-          type: string
-          nullable: true
-    track_inspect_list:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/blob_info'
-    favorite:
-      required:
-      - created_at
-      - favorite_item_id
-      - favorite_type
-      - user_id
-      type: object
-      properties:
-        favorite_item_id:
-          type: string
-        favorite_type:
-          type: string
-        user_id:
-          type: string
-        created_at:
-          type: string
-    track_download_request_body:
-      type: object
-      properties:
-        city:
-          type: string
-          description: City where the download occurred
-        region:
-          type: string
-          description: Region where the download occurred
-        country:
-          type: string
-          description: Country where the download occurred
-    tracks_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    track_comment_notification_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/comment_notification_setting'
-    cover_art:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    playlist_added_timestamp:
-      required:
-      - timestamp
-      - track_id
-      type: object
-      properties:
-        metadata_timestamp:
-          type: integer
-          description: Optional. Metadata timestamp for when the track was added to the playlist.
-        timestamp:
-          type: integer
-        track_id:
-          type: string
-    access_info_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/track_access_info'
-    track_segment:
-      required:
-      - duration
-      - multihash
-      type: object
-      properties:
-        duration:
-          type: number
-        multihash:
-          type: string
-    favorite_request_body:
-      type: object
-      description: Optional metadata for favorite/save operations
-      properties:
-        is_save_of_repost:
-          type: boolean
-          description: Set to true when favoriting a reposted item (used for notifications)
-    extended_payment_split:
-      required:
-      - amount
-      - payout_wallet
-      - percentage
-      type: object
-      properties:
-        user_id:
-          type: integer
-          example: 1234
-        percentage:
-          type: number
-        eth_wallet:
-          type: string
-        payout_wallet:
-          type: string
-        amount:
-          type: integer
-    remix_parent_write:
-      type: object
-      required:
-      - tracks
-      properties:
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_element_write'
-    purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
-          type: object
-          description: Must pay the total price and split to the given addresses to unlock
-          allOf:
-          - $ref: '#/components/schemas/usdc_gate'
-    stem:
-      required:
-      - blocknumber
-      - category
-      - cid
-      - id
-      - orig_filename
-      - parent_id
-      - user_id
-      type: object
-      properties:
-        id:
-          type: string
-        parent_id:
-          type: string
-        category:
-          type: string
-        cid:
-          type: string
-        user_id:
-          type: string
-        blocknumber:
-          type: integer
-        orig_filename:
-          type: string
-    related:
-      type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        playlists:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist'
-    create_track_request_body:
-      type: object
-      required:
-      - title
-      - genre
-      - track_cid
-      properties:
-        track_id:
-          type: string
-          description: Optional track ID (will be generated if not provided)
-          example: x5pJ3Az
-        title:
-          type: string
-          description: Track title
-          example: My New Track
-        genre:
-          $ref: '#/components/schemas/genre'
-        description:
-          type: string
-          nullable: true
-          description: Track description
-          maxLength: 1000
-        mood:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/mood'
-        bpm:
-          type: number
-          nullable: true
-          description: Beats per minute (tempo)
-        musical_key:
-          type: string
-          nullable: true
-          description: Musical key of the track
-        tags:
-          type: string
-          nullable: true
-          description: Comma-separated tags
-        license:
-          type: string
-          nullable: true
-          description: License type
-        isrc:
-          type: string
-          nullable: true
-          description: International Standard Recording Code
-        iswc:
-          type: string
-          nullable: true
-          description: International Standard Musical Work Code
-        release_date:
-          type: string
-          format: date
-          description: Release date
-        track_cid:
-          type: string
-          description: CID for the track audio file (required)
-        orig_file_cid:
-          type: string
-          description: CID for the original track file
-        orig_filename:
-          type: string
-          description: Original filename of the track
-        cover_art_sizes:
-          type: string
-          description: CID for the track cover art
-        preview_cid:
-          type: string
-          description: CID for the track preview
-        preview_start_seconds:
-          type: number
-          format: float
-          description: Preview start time in seconds
-          minimum: 0
-        duration:
-          type: number
-          format: float
-          description: Track duration in seconds
-          minimum: 0
-        is_downloadable:
-          type: boolean
-          description: Whether the track is downloadable
-        is_unlisted:
-          type: boolean
-          description: Whether the track is unlisted
-        is_stream_gated:
-          type: boolean
-          nullable: true
-          description: Whether streaming is restricted behind an access gate
-        access_authorities:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
-        stream_conditions:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        download_conditions:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        field_visibility:
-          $ref: '#/components/schemas/field_visibility'
-        placement_hosts:
-          type: string
-          description: Placement hosts for the track
-        stem_of:
-          $ref: '#/components/schemas/stem_parent'
-        remix_of:
-          $ref: '#/components/schemas/remix_parent_write'
-        ddex_app:
-          type: string
-          nullable: true
-          description: DDEX application identifier
-        ddex_release_ids:
-          type: object
-          nullable: true
-          description: DDEX release identifiers
-        artists:
-          type: array
-          nullable: true
-          items:
-            type: object
-          description: DDEX resource contributors / artists
-        resource_contributors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/ddex_resource_contributor'
-          description: DDEX resource contributors
-        indirect_resource_contributors:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/ddex_resource_contributor'
-          description: DDEX indirect resource contributors
-        rights_controller:
-          nullable: true
-          $ref: '#/components/schemas/ddex_rights_controller'
-          description: DDEX rights controller
-        copyright_line:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/ddex_copyright'
-          description: DDEX copyright line
-        producer_copyright_line:
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/ddex_copyright'
-          description: DDEX producer copyright line
-        parental_warning_type:
-          type: string
-          nullable: true
-          description: Parental warning type
-        cover_original_song_title:
-          type: string
-          nullable: true
-          description: Original song title for cover tracks
-        cover_original_artist:
-          type: string
-          nullable: true
-          description: Original artist for cover tracks
-        is_owned_by_user:
-          type: boolean
-          description: Whether the track is owned by the user
-        territory_codes:
-          type: array
-          nullable: true
-          items:
-            type: string
-          description: Territory codes for distribution
-        no_ai_use:
-          type: boolean
-          description: Whether AI use is prohibited
-    url_with_mirrors:
-      required:
-      - mirrors
-      type: object
-      properties:
-        url:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    genre:
-      type: string
-      description: Music genre
-      enum:
-      - Electronic
-      - Rock
-      - Metal
-      - Alternative
-      - Hip-Hop/Rap
-      - Experimental
-      - Punk
-      - Folk
-      - Pop
-      - Ambient
-      - Soundtrack
-      - World
-      - Jazz
-      - Acoustic
-      - Funk
-      - R&B/Soul
-      - Devotional
-      - Classical
-      - Reggae
-      - Podcasts
-      - Country
-      - Spoken Word
-      - Comedy
-      - Blues
-      - Kids
-      - Audiobooks
-      - Latin
-      - Lo-Fi
-      - Hyperpop
-      - Dancehall
-      - Techno
-      - Trap
-      - House
-      - Tech House
-      - Deep House
-      - Disco
-      - Electro
-      - Jungle
-      - Progressive House
-      - Hardstyle
-      - Glitch Hop
-      - Trance
-      - Future Bass
-      - Future House
-      - Tropical House
-      - Downtempo
-      - Drum & Bass
-      - Dubstep
-      - Jersey Club
-      - Vaporwave
-      - Moombahton
-    profile_picture:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    trending_ids_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/trending_times_ids'
-    track_download_count_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: object
-          required:
-          - id
-          - download_count
-          properties:
-            id:
-              type: string
-              description: Track ID (hash)
-            download_count:
-              type: integer
-              description: Full track + all stems (parent) or stem-only (stem)
-    write_response:
-      type: object
-      properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-    stems_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/stem'
     user:
       required:
       - album_count
@@ -4100,27 +3447,285 @@ components:
           type: boolean
         profile_type:
           type: string
-    follow_gate:
-      required:
-      - follow_user_id
+    related:
       type: object
       properties:
-        follow_user_id:
-          type: integer
-          description: Must follow the given user ID to unlock
-    repost:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        playlists:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist'
+    comment_mention:
       required:
-      - repost_item_id
-      - repost_type
+      - handle
       - user_id
       type: object
       properties:
-        repost_item_id:
+        user_id:
+          type: integer
+        handle:
           type: string
-        repost_type:
+    track_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    stem:
+      required:
+      - blocknumber
+      - category
+      - cid
+      - id
+      - orig_filename
+      - parent_id
+      - user_id
+      type: object
+      properties:
+        id:
+          type: string
+        parent_id:
+          type: string
+        category:
+          type: string
+        cid:
           type: string
         user_id:
           type: string
+        blocknumber:
+          type: integer
+        orig_filename:
+          type: string
+    extended_usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/extended_payment_split'
+    access:
+      required:
+      - download
+      - stream
+      type: object
+      properties:
+        stream:
+          type: boolean
+        download:
+          type: boolean
+    track_favorites_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    tip_gate:
+      required:
+      - tip_user_id
+      type: object
+      properties:
+        tip_user_id:
+          type: integer
+          description: Must tip the given user ID to unlock
+    extended_access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/extended_purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    track_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/track'
+    favorite_request_body:
+      type: object
+      description: Optional metadata for favorite/save operations
+      properties:
+        is_save_of_repost:
+          type: boolean
+          description: Set to true when favoriting a reposted item (used for notifications)
+    playlist_added_timestamp:
+      required:
+      - timestamp
+      - track_id
+      type: object
+      properties:
+        metadata_timestamp:
+          type: integer
+          description: Optional. Metadata timestamp for when the track was added to the playlist.
+        timestamp:
+          type: integer
+        track_id:
+          type: string
+    remixables_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+    track_search:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+    top_listener:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/top_listener'
+    reply_comment:
+      required:
+      - created_at
+      - entity_id
+      - entity_type
+      - id
+      - is_edited
+      - message
+      - react_count
+      - user_id
+      type: object
+      properties:
+        id:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          $ref: '#/components/schemas/comment_entity_type'
+        user_id:
+          type: string
+        message:
+          type: string
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention'
+        track_timestamp_s:
+          type: integer
+        react_count:
+          type: integer
+        is_edited:
+          type: boolean
+        is_current_user_reacted:
+          type: boolean
+        is_artist_reacted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        parent_comment_id:
+          type: integer
+    ddex_rights_controller:
+      type: object
+      description: DDEX rights controller
+      required:
+      - name
+      - roles
+      properties:
+        name:
+          type: string
+          minLength: 1
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+        rights_share_unknown:
+          type: string
+          description: Optional
     blob_info:
       required:
       - content_type
@@ -4131,12 +3736,477 @@ components:
           type: integer
         content_type:
           type: string
-    extended_access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/extended_purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+    comment:
+      required:
+      - created_at
+      - entity_id
+      - entity_type
+      - id
+      - is_edited
+      - message
+      - react_count
+      - reply_count
+      type: object
+      properties:
+        id:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          $ref: '#/components/schemas/comment_entity_type'
+        user_id:
+          type: string
+        message:
+          type: string
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention'
+        track_timestamp_s:
+          type: integer
+        react_count:
+          type: integer
+        reply_count:
+          type: integer
+        is_edited:
+          type: boolean
+        is_current_user_reacted:
+          type: boolean
+        is_artist_reacted:
+          type: boolean
+        is_tombstone:
+          type: boolean
+        is_muted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/reply_comment'
+        parent_comment_id:
+          type: integer
+    track_comment_notification_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/comment_notification_setting'
+    favorite:
+      required:
+      - created_at
+      - favorite_item_id
+      - favorite_type
+      - user_id
+      type: object
+      properties:
+        favorite_item_id:
+          type: string
+        favorite_type:
+          type: string
+        user_id:
+          type: string
+        created_at:
+          type: string
+    repost_request_body:
+      type: object
+      description: Optional metadata for repost operations
+      properties:
+        is_repost_of_repost:
+          type: boolean
+          description: Set to true when reposting an item that was reposted (used for notifications)
+    ddex_resource_contributor:
+      type: object
+      required:
+      - name
+      - roles
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Contributor name
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Contributor roles
+        sequence_number:
+          type: integer
+          minimum: 0
+          description: Sequence number for ordering
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+    extended_token_gate:
+      required:
+      - token_mint
+      - token_amount
+      type: object
+      properties:
+        token_mint:
+          type: string
+          description: The mint of the token needed to unlock
+        token_amount:
+          type: integer
+          description: The amount of the token needed to unlock
+    track_segment:
+      required:
+      - duration
+      - multihash
+      type: object
+      properties:
+        duration:
+          type: number
+        multihash:
+          type: string
+    remixes_response:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - count
+          properties:
+            count:
+              type: integer
+            tracks:
+              type: array
+              items:
+                $ref: '#/components/schemas/track'
+    purchase_gate:
+      required:
+      - usdc_purchase
+      type: object
+      properties:
+        usdc_purchase:
+          type: object
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/usdc_gate'
+    extended_payment_split:
+      required:
+      - amount
+      - payout_wallet
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+        eth_wallet:
+          type: string
+        payout_wallet:
+          type: string
+        amount:
+          type: integer
+    track_id:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+    token_gate:
+      required:
+      - token_gate
+      type: object
+      properties:
+        token_gate:
+          type: object
+          description: Must hold an NFT of the given collection to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_token_gate'
+    track_reposts_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    stream_url_response:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          type: string
+    comment_notification_setting:
+      required:
+      - is_muted
+      type: object
+      properties:
+        is_muted:
+          type: boolean
+    payment_split:
+      required:
+      - user_id
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+    create_track_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+        track_id:
+          type: string
+          description: The ID of the created track
+    create_track_request_body:
+      type: object
+      required:
+      - title
+      - genre
+      - track_cid
+      properties:
+        track_id:
+          type: string
+          description: Optional track ID (will be generated if not provided)
+          example: x5pJ3Az
+        title:
+          type: string
+          description: Track title
+          example: My New Track
+        genre:
+          $ref: '#/components/schemas/genre'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Track description
+          maxLength: 1000
+        mood:
+          allOf:
+          - $ref: '#/components/schemas/mood'
+        bpm:
+          type:
+          - number
+          - 'null'
+          description: Beats per minute (tempo)
+        musical_key:
+          type:
+          - string
+          - 'null'
+          description: Musical key of the track
+        tags:
+          type:
+          - string
+          - 'null'
+          description: Comma-separated tags
+        license:
+          type:
+          - string
+          - 'null'
+          description: License type
+        isrc:
+          type:
+          - string
+          - 'null'
+          description: International Standard Recording Code
+        iswc:
+          type:
+          - string
+          - 'null'
+          description: International Standard Musical Work Code
+        release_date:
+          type: string
+          format: date
+          description: Release date
+        track_cid:
+          type: string
+          description: CID for the track audio file (required)
+        orig_file_cid:
+          type: string
+          description: CID for the original track file
+        orig_filename:
+          type: string
+          description: Original filename of the track
+        cover_art_sizes:
+          type: string
+          description: CID for the track cover art
+        preview_cid:
+          type: string
+          description: CID for the track preview
+        preview_start_seconds:
+          type: number
+          format: float
+          description: Preview start time in seconds
+          minimum: 0
+        duration:
+          type: number
+          format: float
+          description: Track duration in seconds
+          minimum: 0
+        is_downloadable:
+          type: boolean
+          description: Whether the track is downloadable
+        is_unlisted:
+          type: boolean
+          description: Whether the track is unlisted
+        is_stream_gated:
+          type:
+          - boolean
+          - 'null'
+          description: Whether streaming is restricted behind an access gate
+        access_authorities:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
+        stream_conditions:
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        download_conditions:
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        field_visibility:
+          $ref: '#/components/schemas/field_visibility'
+        placement_hosts:
+          type: string
+          description: Placement hosts for the track
+        stem_of:
+          $ref: '#/components/schemas/stem_parent'
+        remix_of:
+          $ref: '#/components/schemas/remix_parent_write'
+        ddex_app:
+          type:
+          - string
+          - 'null'
+          description: DDEX application identifier
+        ddex_release_ids:
+          type:
+          - object
+          - 'null'
+          description: DDEX release identifiers
+        artists:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+          description: DDEX resource contributors / artists
+        resource_contributors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ddex_resource_contributor'
+          description: DDEX resource contributors
+        indirect_resource_contributors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ddex_resource_contributor'
+          description: DDEX indirect resource contributors
+        rights_controller:
+          $ref: '#/components/schemas/ddex_rights_controller'
+          description: DDEX rights controller
+        copyright_line:
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+          description: DDEX copyright line
+        producer_copyright_line:
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+          description: DDEX producer copyright line
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+          description: Parental warning type
+        cover_original_song_title:
+          type:
+          - string
+          - 'null'
+          description: Original song title for cover tracks
+        cover_original_artist:
+          type:
+          - string
+          - 'null'
+          description: Original artist for cover tracks
+        is_owned_by_user:
+          type: boolean
+          description: Whether the track is owned by the user
+        territory_codes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Territory codes for distribution
+        no_ai_use:
+          type: boolean
+          description: Whether AI use is prohibited
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
   securitySchemes:
     OAuth2:
       type: oauth2

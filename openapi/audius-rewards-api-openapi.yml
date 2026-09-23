@@ -1,48 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Audius challenges rewards API
+  title: Audius Rewards API
   description: '## Overview
 
 
-    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
-
-
-    ## Key Capabilities
-
-
-    - **Users** — Profiles, followers, following, search
-
-    - **Tracks** — Search, trending, stream, favorites, reposts
-
-    - **Playlists** — Create, update, browse, curate
-
-    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
-
-    - **Explore** — Trending content, charts, discovery
-
-    - **Comments, Tips, Rewards** — Social features and engagement
-
-
-    ## Authentication
-
-
-    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
-
-    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
-
-
-    ## Resources
-
-
-    - [API Docs](https://docs.audius.co/api) — Full reference and guides
-
-    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
-
-    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
-
-    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
-
-    '
+    The Audius API provides REST access to the world''s largest open music catalog, built on the Open Audio Protocol.'
   version: '1.0'
   contact:
     name: Audius
@@ -53,13 +15,13 @@ servers:
 - url: https://api.audius.co/v1
   description: Production
 tags:
-- name: rewards
+- name: Rewards
   description: Rewards related operations
 paths:
   /rewards/claim:
     post:
       tags:
-      - rewards
+      - Rewards
       description: Claims all the filtered undisbursed rewards for a user
       operationId: Claim Rewards
       requestBody:
@@ -82,10 +44,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Claim rewards
+      x-summary-source: derived
   /rewards/code:
     post:
       tags:
-      - rewards
+      - Rewards
       description: Creates a new reward code with Solana signature verification
       operationId: Create Reward Code
       requestBody:
@@ -110,32 +74,10 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Create reward code
+      x-summary-source: derived
 components:
   schemas:
-    create_reward_code_response:
-      type: object
-      required:
-      - code
-      - mint
-      - reward_address
-      - amount
-      properties:
-        code:
-          type: string
-          description: The generated 6-character alphanumeric reward code
-          example: aB3d5F
-        mint:
-          type: string
-          description: The coin mint address
-          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
-        reward_address:
-          type: string
-          description: The reward address (authorized public key)
-          example: 9XeZbswbSSUU4AHVArQbTQjAEjAPhVweGU5cogBVkvh4
-        amount:
-          type: integer
-          description: The reward amount
-          example: 100
     claim_rewards_response:
       type: object
       required:
@@ -209,6 +151,30 @@ components:
           type: string
           description: The user ID to claim rewards for
           example: 7eP5n
+    create_reward_code_response:
+      type: object
+      required:
+      - code
+      - mint
+      - reward_address
+      - amount
+      properties:
+        code:
+          type: string
+          description: The generated 6-character alphanumeric reward code
+          example: aB3d5F
+        mint:
+          type: string
+          description: The coin mint address
+          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
+        reward_address:
+          type: string
+          description: The reward address (authorized public key)
+          example: 9XeZbswbSSUU4AHVArQbTQjAEjAPhVweGU5cogBVkvh4
+        amount:
+          type: integer
+          description: The reward amount
+          example: 100
   securitySchemes:
     OAuth2:
       type: oauth2

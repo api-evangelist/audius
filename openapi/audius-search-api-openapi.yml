@@ -1,48 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Audius challenges search API
+  title: Audius Search API
   description: '## Overview
 
 
-    The Audius API provides REST access to the world''s largest open music catalog, built on the [Open Audio Protocol](https://openaudio.org). Use it to query and stream tracks, users, playlists, and more—perfect for building music players, discovery apps, and audio-native products.
-
-
-    ## Key Capabilities
-
-
-    - **Users** — Profiles, followers, following, search
-
-    - **Tracks** — Search, trending, stream, favorites, reposts
-
-    - **Playlists** — Create, update, browse, curate
-
-    - **Resolve** — Look up content by Audius canonical URLs (e.g. `audius.co/artist/...`)
-
-    - **Explore** — Trending content, charts, discovery
-
-    - **Comments, Tips, Rewards** — Social features and engagement
-
-
-    ## Authentication
-
-
-    - **Read-only** — Most endpoints work without credentials. Use an API key for higher rate limits.
-
-    - **Writes** — Upload, favorite, repost, and other mutations require an API key and secret. Get keys at [api.audius.co/plans](https://api.audius.co/plans) or [audius.co/settings](https://audius.co/settings).
-
-
-    ## Resources
-
-
-    - [API Docs](https://docs.audius.co/api) — Full reference and guides
-
-    - [API Plans](https://api.audius.co/plans) — Get API keys (free tier available)
-
-    - [Log in with Audius](https://docs.audius.co/developers/guides/log-in-with-audius) — OAuth for user actions
-
-    - [JavaScript SDK](https://www.npmjs.com/package/@audius/sdk) — `@audius/sdk` for Node and browser
-
-    '
+    The Audius API provides REST access to the world''s largest open music catalog, built on the Open Audio Protocol.'
   version: '1.0'
   contact:
     name: Audius
@@ -53,12 +15,12 @@ servers:
 - url: https://api.audius.co/v1
   description: Production
 tags:
-- name: search
+- name: Search
 paths:
   /search/autocomplete:
     get:
       tags:
-      - search
+      - Search
       summary: Get Users/Tracks/Playlists/Albums that best match the search query
       description: Same as search but optimized for quicker response at the cost of some entity information.
       operationId: Search Autocomplete
@@ -181,7 +143,7 @@ paths:
   /search/full:
     get:
       tags:
-      - search
+      - Search
       description: Get Users/Tracks/Playlists/Albums that best match the search query
       operationId: Search
       security:
@@ -300,10 +262,12 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Search
+      x-summary-source: derived
   /search/tags:
     get:
       tags:
-      - search
+      - Search
       description: Get Users/Tracks/Playlists/Albums that best match the provided tag
       operationId: SearchTags
       security:
@@ -422,16 +386,52 @@ paths:
         '500':
           description: Server error
           content: {}
+      summary: Search tags
+      x-summary-source: derived
 components:
   schemas:
-    playlist_library:
+    url_with_mirrors:
+      required:
+      - mirrors
       type: object
       properties:
-        contents:
+        url:
+          type: string
+        mirrors:
           type: array
           items:
-            type: object
-            properties: {}
+            type: string
+    favorite:
+      required:
+      - created_at
+      - favorite_item_id
+      - favorite_type
+      - user_id
+      type: object
+      properties:
+        favorite_item_id:
+          type: string
+        favorite_type:
+          type: string
+        user_id:
+          type: string
+        created_at:
+          type: string
+    ddex_copyright:
+      type: object
+      required:
+      - year
+      - text
+      properties:
+        year:
+          type: string
+          minLength: 4
+          maxLength: 4
+          description: Copyright year (4 characters)
+        text:
+          type: string
+          minLength: 1
+          description: Copyright text
     track:
       required:
       - access
@@ -621,35 +621,36 @@ components:
             type: object
             properties: {}
         resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         indirect_resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         rights_controller:
-          nullable: true
           $ref: '#/components/schemas/ddex_rights_controller'
         copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         producer_copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         parental_warning_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_stream_gated:
           type: boolean
           description: Whether or not the owner has restricted streaming behind an access gate
         access_authorities:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: Wallet addresses that can sign to authorize stream access (programmable distribution). When empty or omitted, the track is public and validator/creator nodes can serve it.
@@ -679,91 +680,61 @@ components:
           $ref: '#/components/schemas/url_with_mirrors'
         preview:
           $ref: '#/components/schemas/url_with_mirrors'
-    search_model:
-      required:
-      - albums
-      - playlists
-      - tracks
-      - users
+    ddex_resource_contributor:
       type: object
-      properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-        followed_users:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_track'
-        saved_tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_track'
-        playlists:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_playlist'
-        saved_playlists:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_playlist'
-        albums:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_playlist'
-        saved_albums:
-          type: array
-          items:
-            $ref: '#/components/schemas/search_playlist'
-    access:
       required:
-      - download
-      - stream
-      type: object
+      - name
+      - roles
       properties:
-        stream:
-          type: boolean
-        download:
-          type: boolean
-    album_backlink:
-      required:
-      - permalink
-      - playlist_id
-      - playlist_name
-      type: object
-      properties:
-        playlist_id:
+        name:
+          type: string
+          minLength: 1
+          description: Contributor name
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Contributor roles
+        sequence_number:
           type: integer
-        playlist_name:
-          type: string
-        permalink:
-          type: string
-    field_visibility:
+          minimum: 0
+          description: Sequence number for ordering
+    repost:
       required:
-      - genre
-      - mood
-      - play_count
-      - remixes
-      - share
-      - tags
+      - repost_item_id
+      - repost_type
+      - user_id
       type: object
       properties:
-        mood:
-          type: boolean
-        tags:
-          type: boolean
-        genre:
-          type: boolean
-        share:
-          type: boolean
-        play_count:
-          type: boolean
-        remixes:
-          type: boolean
+        repost_item_id:
+          type: string
+        repost_type:
+          type: string
+        user_id:
+          type: string
+    follow_gate:
+      required:
+      - follow_user_id
+      type: object
+      properties:
+        follow_user_id:
+          type: integer
+          description: Must follow the given user ID to unlock
+    cover_art:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
     search_track:
       required:
       - access
@@ -951,29 +922,29 @@ components:
             type: object
             properties: {}
         resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         indirect_resource_contributors:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ddex_resource_contributor'
         rights_controller:
-          nullable: true
           $ref: '#/components/schemas/ddex_rights_controller'
         copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         producer_copyright_line:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/ddex_copyright'
         parental_warning_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         is_stream_gated:
           type: boolean
           description: Whether or not the owner has restricted streaming behind an access gate
@@ -1003,27 +974,6 @@ components:
           $ref: '#/components/schemas/url_with_mirrors'
         preview:
           $ref: '#/components/schemas/url_with_mirrors'
-    purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
-          type: object
-          description: Must pay the total price and split to the given addresses to unlock
-          allOf:
-          - $ref: '#/components/schemas/usdc_gate'
-    payment_split:
-      required:
-      - user_id
-      - percentage
-      type: object
-      properties:
-        user_id:
-          type: integer
-          example: 1234
-        percentage:
-          type: number
     extended_token_gate:
       required:
       - token_mint
@@ -1036,48 +986,256 @@ components:
         token_amount:
           type: integer
           description: The amount of the token needed to unlock
-    version_metadata:
+    track_segment:
       required:
-      - service
-      - version
+      - duration
+      - multihash
       type: object
       properties:
-        service:
+        duration:
+          type: number
+        multihash:
           type: string
-        version:
-          type: string
-    ddex_resource_contributor:
-      type: object
+    stem_parent:
       required:
-      - name
-      - roles
+      - category
+      - parent_track_id
+      type: object
       properties:
-        name:
+        category:
           type: string
-          minLength: 1
-          description: Contributor name
-        roles:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-          description: Contributor roles
-        sequence_number:
+        parent_track_id:
           type: integer
-          minimum: 0
-          description: Sequence number for ordering
-    url_with_mirrors:
+    purchase_gate:
       required:
-      - mirrors
+      - usdc_purchase
       type: object
       properties:
-        url:
+        usdc_purchase:
+          type: object
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/usdc_gate'
+    remix_parent:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix'
+    token_gate:
+      required:
+      - token_gate
+      type: object
+      properties:
+        token_gate:
+          type: object
+          description: Must hold an NFT of the given collection to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_token_gate'
+    access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    access:
+      required:
+      - download
+      - stream
+      type: object
+      properties:
+        stream:
+          type: boolean
+        download:
+          type: boolean
+    playlist_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
           type: string
         mirrors:
           type: array
           items:
             type: string
+    tip_gate:
+      required:
+      - tip_user_id
+      type: object
+      properties:
+        tip_user_id:
+          type: integer
+          description: Must tip the given user ID to unlock
+    usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+          description: The price in USDC needed to unlock
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_split'
+    playlist_added_timestamp:
+      required:
+      - timestamp
+      - track_id
+      type: object
+      properties:
+        metadata_timestamp:
+          type: integer
+          description: Optional. Metadata timestamp for when the track was added to the playlist.
+        timestamp:
+          type: integer
+        track_id:
+          type: string
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    remix:
+      required:
+      - has_remix_author_reposted
+      - has_remix_author_saved
+      - parent_track_id
+      - user
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        has_remix_author_reposted:
+          type: boolean
+        has_remix_author_saved:
+          type: boolean
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    field_visibility:
+      required:
+      - genre
+      - mood
+      - play_count
+      - remixes
+      - share
+      - tags
+      type: object
+      properties:
+        mood:
+          type: boolean
+        tags:
+          type: boolean
+        genre:
+          type: boolean
+        share:
+          type: boolean
+        play_count:
+          type: boolean
+        remixes:
+          type: boolean
+    payment_split:
+      required:
+      - user_id
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+    search_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/search_model'
+    album_backlink:
+      required:
+      - permalink
+      - playlist_id
+      - playlist_name
+      type: object
+      properties:
+        playlist_id:
+          type: integer
+        playlist_name:
+          type: string
+        permalink:
+          type: string
+    search_autocomplete_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/search_model'
     search_playlist:
       required:
       - access
@@ -1204,103 +1362,68 @@ components:
           type: object
           properties: {}
         parental_warning_type:
-          type: string
-          nullable: true
-    profile_picture:
+          type:
+          - string
+          - 'null'
+    ddex_rights_controller:
       type: object
+      description: DDEX rights controller
+      required:
+      - name
+      - roles
       properties:
-        150x150:
+        name:
           type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
+          minLength: 1
+        roles:
           type: array
+          minItems: 1
           items:
             type: string
-    remix:
-      required:
-      - has_remix_author_reposted
-      - has_remix_author_saved
-      - parent_track_id
-      - user
-      type: object
-      properties:
-        parent_track_id:
+            minLength: 1
+        rights_share_unknown:
           type: string
-        user:
-          $ref: '#/components/schemas/user'
-        has_remix_author_reposted:
-          type: boolean
-        has_remix_author_saved:
-          type: boolean
-    remix_parent:
+          description: Optional
+    search_model:
+      required:
+      - albums
+      - playlists
+      - tracks
+      - users
       type: object
       properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        followed_users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
         tracks:
           type: array
           items:
-            $ref: '#/components/schemas/remix'
-    favorite:
-      required:
-      - created_at
-      - favorite_item_id
-      - favorite_type
-      - user_id
-      type: object
-      properties:
-        favorite_item_id:
-          type: string
-        favorite_type:
-          type: string
-        user_id:
-          type: string
-        created_at:
-          type: string
-    playlist_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
+            $ref: '#/components/schemas/search_track'
+        saved_tracks:
           type: array
           items:
-            type: string
-    track_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
+            $ref: '#/components/schemas/search_track'
+        playlists:
           type: array
           items:
-            type: string
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
+            $ref: '#/components/schemas/search_playlist'
+        saved_playlists:
           type: array
           items:
-            type: string
-    access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
+            $ref: '#/components/schemas/search_playlist'
+        albums:
+          type: array
+          items:
+            $ref: '#/components/schemas/search_playlist'
+        saved_albums:
+          type: array
+          items:
+            $ref: '#/components/schemas/search_playlist'
     user:
       required:
       - album_count
@@ -1475,61 +1598,25 @@ components:
           type: boolean
         profile_type:
           type: string
-    search_autocomplete_response:
+    version_metadata:
       required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
+      - service
       - version
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
+        service:
           type: string
         version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/search_model'
-    search_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
+          type: string
+    playlist_library:
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/search_model'
-    cover_art:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    track_artwork:
       type: object
       properties:
         150x150:
@@ -1542,125 +1629,6 @@ components:
           type: array
           items:
             type: string
-    follow_gate:
-      required:
-      - follow_user_id
-      type: object
-      properties:
-        follow_user_id:
-          type: integer
-          description: Must follow the given user ID to unlock
-    ddex_rights_controller:
-      type: object
-      description: DDEX rights controller
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-        roles:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-        rights_share_unknown:
-          type: string
-          description: Optional
-    repost:
-      required:
-      - repost_item_id
-      - repost_type
-      - user_id
-      type: object
-      properties:
-        repost_item_id:
-          type: string
-        repost_type:
-          type: string
-        user_id:
-          type: string
-    playlist_added_timestamp:
-      required:
-      - timestamp
-      - track_id
-      type: object
-      properties:
-        metadata_timestamp:
-          type: integer
-          description: Optional. Metadata timestamp for when the track was added to the playlist.
-        timestamp:
-          type: integer
-        track_id:
-          type: string
-    token_gate:
-      required:
-      - token_gate
-      type: object
-      properties:
-        token_gate:
-          type: object
-          description: Must hold an NFT of the given collection to unlock
-          allOf:
-          - $ref: '#/components/schemas/extended_token_gate'
-    tip_gate:
-      required:
-      - tip_user_id
-      type: object
-      properties:
-        tip_user_id:
-          type: integer
-          description: Must tip the given user ID to unlock
-    usdc_gate:
-      required:
-      - price
-      - splits
-      type: object
-      properties:
-        price:
-          type: integer
-          description: The price in USDC needed to unlock
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/payment_split'
-    stem_parent:
-      required:
-      - category
-      - parent_track_id
-      type: object
-      properties:
-        category:
-          type: string
-        parent_track_id:
-          type: integer
-    ddex_copyright:
-      type: object
-      required:
-      - year
-      - text
-      properties:
-        year:
-          type: string
-          minLength: 4
-          maxLength: 4
-          description: Copyright year (4 characters)
-        text:
-          type: string
-          minLength: 1
-          description: Copyright text
-    track_segment:
-      required:
-      - duration
-      - multihash
-      type: object
-      properties:
-        duration:
-          type: number
-        multihash:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2
