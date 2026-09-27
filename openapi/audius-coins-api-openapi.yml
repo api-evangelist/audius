@@ -21,7 +21,7 @@ paths:
     get:
       tags:
       - Coins
-      operationId: Get Coins
+      operationId: GetCoins
       description: Gets a list of coins with optional filtering
       parameters:
       - name: ticker
@@ -101,10 +101,12 @@ paths:
                 $ref: '#/components/schemas/coins_response'
       summary: Get coins
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coins
     post:
       tags:
       - Coins
-      operationId: Create Coin
+      operationId: CreateCoin
       description: Creates a new artist coin
       parameters:
       - name: user_id
@@ -135,11 +137,13 @@ paths:
           content: {}
       summary: Create coin
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Coin
   /coins/{mint}:
     get:
       tags:
       - Coins
-      operationId: Get Coin
+      operationId: GetCoin
       description: Gets information about a specific coin by its mint address
       parameters:
       - name: mint
@@ -158,10 +162,12 @@ paths:
                 $ref: '#/components/schemas/coin_response'
       summary: Get coin
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin
     post:
       tags:
       - Coins
-      operationId: Update Coin
+      operationId: UpdateCoin
       description: Updates information about a specific coin by its mint address
       parameters:
       - name: mint
@@ -205,11 +211,13 @@ paths:
           content: {}
       summary: Update coin
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Coin
   /coins/ticker/{ticker}:
     get:
       tags:
       - Coins
-      operationId: Get Coin By Ticker
+      operationId: GetCoinByTicker
       description: Gets information about a specific coin by its ticker
       parameters:
       - name: ticker
@@ -228,11 +236,13 @@ paths:
                 $ref: '#/components/schemas/coin_response'
       summary: Get coin by ticker
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin By Ticker
   /coins/{mint}/insights:
     get:
       tags:
       - Coins
-      operationId: Get Coin Insights
+      operationId: GetCoinInsights
       description: Gets insights about a specific coin by its mint address
       parameters:
       - name: mint
@@ -251,11 +261,13 @@ paths:
                 $ref: '#/components/schemas/coin_insights_response'
       summary: Get coin insights
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin Insights
   /coins/{mint}/members:
     get:
       tags:
       - Coins
-      operationId: Get Coin Members
+      operationId: GetCoinMembers
       description: Gets a list of Audius users with a non-zero balance of a specific coin
       parameters:
       - name: mint
@@ -298,11 +310,13 @@ paths:
                 $ref: '#/components/schemas/coin_members_response'
       summary: Get coin members
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin Members
   /coins/{mint}/members/count:
     get:
       tags:
       - Coins
-      operationId: Get Coin Members Count
+      operationId: GetCoinMembersCount
       description: Gets the total number of Audius users with a non-zero balance of a specific coin
       parameters:
       - name: mint
@@ -321,11 +335,13 @@ paths:
                 $ref: '#/components/schemas/coin_members_count_response'
       summary: Get coin members count
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin Members Count
   /coins/volume-leaders:
     get:
       tags:
       - Coins
-      operationId: Get Volume Leaders
+      operationId: GetVolumeLeaders
       description: Gets top coin<>AUDIO trading addresses by volume
       parameters:
       - name: from
@@ -369,11 +385,13 @@ paths:
           description: Bad Request
       summary: Get volume leaders
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Volume Leaders
   /coins/{mint}/redeem:
     get:
       tags:
       - Coins
-      operationId: Get Coin Redeem Amount
+      operationId: GetCoinRedeemAmount
       description: Gets the availability indicator for reward codes for a specific coin
       parameters:
       - name: mint
@@ -392,10 +410,12 @@ paths:
                 $ref: '#/components/schemas/redeem_amount_response'
       summary: Get coin redeem amount
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Coin Redeem Amount
     post:
       tags:
       - Coins
-      operationId: Claim Coin Reward
+      operationId: ClaimCoinReward
       description: Claims a coin reward for a given mint
       parameters:
       - name: mint
@@ -429,11 +449,13 @@ paths:
           content: {}
       summary: Claim coin reward
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Claim Coin Reward
   /coins/{mint}/redeem/{code}:
     get:
       tags:
       - Coins
-      operationId: Get Reward Code
+      operationId: GetRewardCode
       description: Gets information about a specific reward code for a coin
       parameters:
       - name: mint
@@ -465,10 +487,12 @@ paths:
                 $ref: '#/components/schemas/reward_code_error_response'
       summary: Get reward code
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Reward Code
     post:
       tags:
       - Coins
-      operationId: Claim Coin Reward Code
+      operationId: ClaimCoinRewardCode
       description: Claims a coin reward using a given code
       parameters:
       - name: mint
@@ -509,8 +533,544 @@ paths:
           content: {}
       summary: Claim coin reward code
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Claim Coin Reward Code
 components:
   schemas:
+    coin_members_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/coin_member'
+    coin:
+      type: object
+      description: A coin object
+      required:
+      - mint
+      - ticker
+      - decimals
+      - name
+      - created_at
+      properties:
+        mint:
+          type: string
+          description: The mint address of the coin
+          example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
+        ticker:
+          type: string
+          description: The coin symbol/ticker
+          example: BEAR
+        decimals:
+          type: integer
+          description: The number of decimals for the coin
+          example: 9
+        name:
+          type: string
+          description: The coin name
+          example: BEAR
+        logo_uri:
+          type: string
+          description: The URI for the coin's logo image
+          example: https://example.com/logo.png
+        banner_image_url:
+          type: string
+          description: The URI for the coin's banner image
+          example: https://example.com/banner.png
+        description:
+          type: string
+          description: The description of the coin
+          example: A majestic bear token for wildlife conservation
+        x_handle:
+          type: string
+          description: X (Twitter) handle for the coin
+          example: bear_token
+        instagram_handle:
+          type: string
+          description: Instagram handle for the coin
+          example: bear_token
+        tiktok_handle:
+          type: string
+          description: TikTok handle for the coin
+          example: bear_token
+        website:
+          type: string
+          description: Website URL for the coin
+          example: https://bear-token.com
+        link_1:
+          type: string
+          description: Generic link URL for the coin
+          example: https://x.com/bear_token
+        link_2:
+          type: string
+          description: Generic link URL for the coin
+          example: https://instagram.com/bear_token
+        link_3:
+          type: string
+          description: Generic link URL for the coin
+          example: https://tiktok.com/@bear_token
+        link_4:
+          type: string
+          description: Generic link URL for the coin
+          example: https://bear-token.com
+        has_discord:
+          type: boolean
+          description: Whether the coin has a Discord server
+          example: false
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the coin was created
+          example: '2024-01-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the coin was last updated
+          example: '2024-01-15T10:30:00Z'
+        owner_id:
+          type: string
+          description: The user ID of the coin owner
+          example: 7eP5n
+        escrow_recipient:
+          type: string
+          description: The escrow recipient address for custom-created coins without DBCs
+          example: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263
+        dynamicBondingCurve:
+          $ref: '#/components/schemas/dynamic_bonding_curve_insights'
+        artist_locker:
+          $ref: '#/components/schemas/artist_locker'
+        artist_fees:
+          $ref: '#/components/schemas/artist_coin_fees'
+        reward_pool:
+          $ref: '#/components/schemas/reward_pool'
+        price:
+          type: number
+          description: Current price in USD
+        marketCap:
+          type: number
+          description: Market capitalization in USD
+        totalVolumeUSD:
+          type: number
+          description: Total volume traded in USD (all time)
+        holder:
+          type: integer
+          description: Number of holders
+        totalSupply:
+          type: number
+          description: Total supply of the token
+        liquidity:
+          type: number
+          description: Current liquidity in USD
+        circulatingSupply:
+          type: number
+          description: Circulating supply of the token
+        priceChange24hPercent:
+          type: number
+          description: 24h price change in percent
+        displayPrice:
+          type: number
+          description: Display price (client-computed, e.g. for display formatting)
+        displayMarketCap:
+          type: number
+          description: Display market cap (client-computed)
+    reward_pool:
+      type: object
+      description: Reward pool for the coin
+      properties:
+        address:
+          type: string
+          description: Reward pool contract address
+        balance:
+          type: number
+          description: Reward pool balance
+    user:
+      required:
+      - album_count
+      - allow_ai_attribution
+      - artist_coin_badge
+      - associated_sol_wallets_balance
+      - associated_wallets_balance
+      - balance
+      - blocknumber
+      - created_at
+      - current_user_followee_follow_count
+      - does_current_user_follow
+      - does_current_user_subscribe
+      - does_follow_current_user
+      - erc_wallet
+      - followee_count
+      - follower_count
+      - handle
+      - handle_lc
+      - has_collectibles
+      - id
+      - is_available
+      - is_deactivated
+      - is_storage_v2
+      - is_verified
+      - name
+      - playlist_count
+      - repost_count
+      - spl_wallet
+      - spl_usdc_wallet
+      - supporter_count
+      - supporting_count
+      - total_audio_balance
+      - total_balance
+      - track_count
+      - updated_at
+      - verified_with_instagram
+      - verified_with_tiktok
+      - verified_with_twitter
+      - wallet
+      - waudio_balance
+      type: object
+      properties:
+        album_count:
+          type: integer
+        artist_pick_track_id:
+          type: string
+        artist_coin_badge:
+          type: object
+          properties:
+            mint:
+              type: string
+            logo_uri:
+              type: string
+            banner_image_url:
+              type: string
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+        coin_flair_mint:
+          type: string
+        bio:
+          type: string
+        cover_photo:
+          $ref: '#/components/schemas/cover_photo'
+        followee_count:
+          type: integer
+        follower_count:
+          type: integer
+        handle:
+          type: string
+        id:
+          type: string
+        is_verified:
+          type: boolean
+        twitter_handle:
+          type: string
+        instagram_handle:
+          type: string
+        tiktok_handle:
+          type: string
+        verified_with_twitter:
+          type: boolean
+        verified_with_instagram:
+          type: boolean
+        verified_with_tiktok:
+          type: boolean
+        website:
+          type: string
+        donation:
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        playlist_count:
+          type: integer
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        repost_count:
+          type: integer
+        track_count:
+          type: integer
+        is_deactivated:
+          type: boolean
+        is_available:
+          type: boolean
+        erc_wallet:
+          type: string
+        spl_wallet:
+          type: string
+        spl_usdc_wallet:
+          type: string
+        spl_usdc_payout_wallet:
+          type: string
+        supporter_count:
+          type: integer
+        supporting_count:
+          type: integer
+        total_audio_balance:
+          type: integer
+        wallet:
+          type: string
+          description: The user's Ethereum wallet address for their account
+        balance:
+          type: string
+        associated_wallets_balance:
+          type: string
+        total_balance:
+          type: string
+        waudio_balance:
+          type: string
+        associated_sol_wallets_balance:
+          type: string
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        is_storage_v2:
+          type: boolean
+        creator_node_endpoint:
+          type: string
+        current_user_followee_follow_count:
+          type: integer
+        does_current_user_follow:
+          type: boolean
+        does_current_user_subscribe:
+          type: boolean
+        does_follow_current_user:
+          type: boolean
+        handle_lc:
+          type: string
+        updated_at:
+          type: string
+        cover_photo_sizes:
+          type: string
+        cover_photo_cids:
+          $ref: '#/components/schemas/cover_photo'
+        cover_photo_legacy:
+          type: string
+        profile_picture_sizes:
+          type: string
+        profile_picture_cids:
+          $ref: '#/components/schemas/profile_picture'
+        profile_picture_legacy:
+          type: string
+        has_collectibles:
+          type: boolean
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        allow_ai_attribution:
+          type: boolean
+        profile_type:
+          type: string
+    update_coin_response:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indicates if the update was successful
+          example: true
+    coins_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/coin'
+    coins_volume_leaders_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - address
+            - volume
+            properties:
+              address:
+                type: string
+              volume:
+                type: number
+              user:
+                $ref: '#/components/schemas/user'
+    reward_code_error_response:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message indicating why the code cannot be redeemed
+          example: used
+          enum:
+          - used
+          - invalid
+    coin_insights_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/coin_insights'
+    create_coin_response:
+      type: object
+      properties:
+        data:
+          type: object
+          required:
+          - mint
+          - ticker
+          - user_id
+          - decimals
+          - name
+          - created_at
+          properties:
+            mint:
+              type: string
+              description: The mint address of the coin
+              example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+              example: BEAR
+            user_id:
+              type: integer
+              description: The user ID who created the coin
+              example: 1
+            decimals:
+              type: integer
+              description: The number of decimals for the coin
+              example: 9
+            name:
+              type: string
+              description: The coin name
+              example: BEAR
+            logo_uri:
+              type: string
+              description: The URI for the coin's logo image
+              example: https://example.com/logo.png
+            banner_image_url:
+              type: string
+              description: The URI for the coin's banner image
+              example: https://example.com/banner.png
+            description:
+              type: string
+              description: The description of the coin
+              example: A majestic bear token for wildlife conservation
+            link_1:
+              type: string
+              description: Generic link URL for the coin
+              example: https://x.com/bear_token
+            link_2:
+              type: string
+              description: Generic link URL for the coin
+              example: https://instagram.com/bear_token
+            link_3:
+              type: string
+              description: Generic link URL for the coin
+              example: https://tiktok.com/@bear_token
+            link_4:
+              type: string
+              description: Generic link URL for the coin
+              example: https://bear-token.com
+            created_at:
+              type: string
+              format: date-time
+              description: The date and time when the coin was created
+              example: '2024-01-15T10:30:00Z'
+    coin_member:
+      type: object
+      required:
+      - balance
+      - user_id
+      properties:
+        balance:
+          type: integer
+          description: The user's balance of the specific coin (in wei)
+          example: 100000
+        user_id:
+          type: string
+          description: The ID of the user with a non-zero balance
+          example: 7eP5n
+    claim_rewards_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - challengeId
+            - specifier
+            properties:
+              challengeId:
+                type: string
+                description: The challenge ID
+                example: u
+              specifier:
+                type: string
+                description: The challenge specifier
+                example: 7eP5n
+              amount:
+                type: string
+                description: The reward amount
+                example: '1000000000'
+              signatures:
+                type: array
+                items:
+                  type: string
+                description: Transaction signatures
+                example:
+                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+              error:
+                type: string
+                description: Error message if claim failed
+                example: Insufficient balance
+    update_coin_request:
+      type: object
+      description: Request body for updating coin information
+      properties:
+        description:
+          type: string
+          description: The description of the coin (max 2500 characters)
+          example: Updated description for the bear token
+          maxLength: 2500
+        banner_image_url:
+          type: string
+          description: URL for the coin's banner image
+          example: https://example.com/banner.png
+          format: uri
+        link_1:
+          type: string
+          description: Generic link URL for the coin
+          example: https://x.com/bear_token
+          format: uri
+        link_2:
+          type: string
+          description: Generic link URL for the coin
+          example: https://instagram.com/bear_token
+          format: uri
+        link_3:
+          type: string
+          description: Generic link URL for the coin
+          example: https://tiktok.com/@bear_token
+          format: uri
+        link_4:
+          type: string
+          description: Generic link URL for the coin
+          example: https://bear-token.com
+          format: uri
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
     artist_locker:
       type: object
       description: Artist locker balance and claimable info for the coin
@@ -527,65 +1087,11 @@ components:
         claimable:
           type: number
           description: Claimable amount
-    update_coin_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Indicates if the update was successful
-          example: true
     coin_response:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/coin'
-    coin_insights_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/coin_insights'
-    coin_members_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/coin_member'
-    artist_coin_fees:
-      type: object
-      description: Artist coin fee info (unclaimed/total)
-      properties:
-        unclaimed_fees:
-          type: number
-          description: Unclaimed fees
-        total_fees:
-          type: number
-          description: Total fees
-    reward_code_response:
-      type: object
-      required:
-      - code
-      - amount
-      properties:
-        code:
-          type: string
-          description: The reward code
-          example: XYZ123
-        amount:
-          type: integer
-          description: The amount of coins rewarded by this code
-          example: 100
-    coins_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/coin'
     coin_insights:
       type: object
       description: 'Additional token information from Birdeye''s defi token overview API.
@@ -908,170 +1414,59 @@ components:
               type: string
               description: Address of the pool creator's wallet
               example: 2AAsAwNPTNBk5N466xyPiwqdgbc5WLbDTdnn9gVuDKaN
-    update_coin_request:
+    profile_picture:
       type: object
-      description: Request body for updating coin information
       properties:
-        description:
+        150x150:
           type: string
-          description: The description of the coin (max 2500 characters)
-          example: Updated description for the bear token
-          maxLength: 2500
-        banner_image_url:
+        480x480:
           type: string
-          description: URL for the coin's banner image
-          example: https://example.com/banner.png
-          format: uri
-        link_1:
+        1000x1000:
           type: string
-          description: Generic link URL for the coin
-          example: https://x.com/bear_token
-          format: uri
-        link_2:
-          type: string
-          description: Generic link URL for the coin
-          example: https://instagram.com/bear_token
-          format: uri
-        link_3:
-          type: string
-          description: Generic link URL for the coin
-          example: https://tiktok.com/@bear_token
-          format: uri
-        link_4:
-          type: string
-          description: Generic link URL for the coin
-          example: https://bear-token.com
-          format: uri
-    coin:
+        mirrors:
+          type: array
+          items:
+            type: string
+    redeem_amount_response:
       type: object
-      description: A coin object
       required:
-      - mint
-      - ticker
-      - decimals
-      - name
-      - created_at
+      - amount
       properties:
-        mint:
-          type: string
-          description: The mint address of the coin
-          example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
-        ticker:
-          type: string
-          description: The coin symbol/ticker
-          example: BEAR
-        decimals:
+        amount:
           type: integer
-          description: The number of decimals for the coin
-          example: 9
-        name:
+          description: Static amount indicator (always 1)
+          example: 1
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    reward_code_response:
+      type: object
+      required:
+      - code
+      - amount
+      properties:
+        code:
           type: string
-          description: The coin name
-          example: BEAR
-        logo_uri:
-          type: string
-          description: The URI for the coin's logo image
-          example: https://example.com/logo.png
-        banner_image_url:
-          type: string
-          description: The URI for the coin's banner image
-          example: https://example.com/banner.png
-        description:
-          type: string
-          description: The description of the coin
-          example: A majestic bear token for wildlife conservation
-        x_handle:
-          type: string
-          description: X (Twitter) handle for the coin
-          example: bear_token
-        instagram_handle:
-          type: string
-          description: Instagram handle for the coin
-          example: bear_token
-        tiktok_handle:
-          type: string
-          description: TikTok handle for the coin
-          example: bear_token
-        website:
-          type: string
-          description: Website URL for the coin
-          example: https://bear-token.com
-        link_1:
-          type: string
-          description: Generic link URL for the coin
-          example: https://x.com/bear_token
-        link_2:
-          type: string
-          description: Generic link URL for the coin
-          example: https://instagram.com/bear_token
-        link_3:
-          type: string
-          description: Generic link URL for the coin
-          example: https://tiktok.com/@bear_token
-        link_4:
-          type: string
-          description: Generic link URL for the coin
-          example: https://bear-token.com
-        has_discord:
-          type: boolean
-          description: Whether the coin has a Discord server
-          example: false
-        created_at:
-          type: string
-          format: date-time
-          description: The date and time when the coin was created
-          example: '2024-01-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          description: The date and time when the coin was last updated
-          example: '2024-01-15T10:30:00Z'
-        owner_id:
-          type: string
-          description: The user ID of the coin owner
-          example: 7eP5n
-        escrow_recipient:
-          type: string
-          description: The escrow recipient address for custom-created coins without DBCs
-          example: DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263
-        dynamicBondingCurve:
-          $ref: '#/components/schemas/dynamic_bonding_curve_insights'
-        artist_locker:
-          $ref: '#/components/schemas/artist_locker'
-        artist_fees:
-          $ref: '#/components/schemas/artist_coin_fees'
-        reward_pool:
-          $ref: '#/components/schemas/reward_pool'
-        price:
-          type: number
-          description: Current price in USD
-        marketCap:
-          type: number
-          description: Market capitalization in USD
-        totalVolumeUSD:
-          type: number
-          description: Total volume traded in USD (all time)
-        holder:
+          description: The reward code
+          example: XYZ123
+        amount:
           type: integer
-          description: Number of holders
-        totalSupply:
-          type: number
-          description: Total supply of the token
-        liquidity:
-          type: number
-          description: Current liquidity in USD
-        circulatingSupply:
-          type: number
-          description: Circulating supply of the token
-        priceChange24hPercent:
-          type: number
-          description: 24h price change in percent
-        displayPrice:
-          type: number
-          description: Display price (client-computed, e.g. for display formatting)
-        displayMarketCap:
-          type: number
-          description: Display market cap (client-computed)
+          description: The amount of coins rewarded by this code
+          example: 100
+    coin_members_count_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: integer
+          description: The total number of users with a non-zero balance of the specific coin
+          example: 42
     dynamic_bonding_curve_insights:
       type: object
       description: Information about the dynamic bonding curve if one exists for the coin
@@ -1100,73 +1495,6 @@ components:
         creatorWalletAddress:
           type: string
           description: Address of the pool creator's wallet
-    coin_member:
-      type: object
-      required:
-      - balance
-      - user_id
-      properties:
-        balance:
-          type: integer
-          description: The user's balance of the specific coin (in wei)
-          example: 100000
-        user_id:
-          type: string
-          description: The ID of the user with a non-zero balance
-          example: 7eP5n
-    coins_volume_leaders_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - address
-            - volume
-            properties:
-              address:
-                type: string
-              volume:
-                type: number
-              user:
-                $ref: '#/components/schemas/user'
-    reward_pool:
-      type: object
-      description: Reward pool for the coin
-      properties:
-        address:
-          type: string
-          description: Reward pool contract address
-        balance:
-          type: number
-          description: Reward pool balance
-    profile_picture:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
     create_coin_request:
       type: object
       required:
@@ -1226,318 +1554,16 @@ components:
           description: Generic link URL for the coin
           example: https://bear-token.com
           format: uri
-    reward_code_error_response:
+    artist_coin_fees:
       type: object
+      description: Artist coin fee info (unclaimed/total)
       properties:
-        error:
-          type: string
-          description: Error message indicating why the code cannot be redeemed
-          example: used
-          enum:
-          - used
-          - invalid
-    claim_rewards_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - challengeId
-            - specifier
-            properties:
-              challengeId:
-                type: string
-                description: The challenge ID
-                example: u
-              specifier:
-                type: string
-                description: The challenge specifier
-                example: 7eP5n
-              amount:
-                type: string
-                description: The reward amount
-                example: '1000000000'
-              signatures:
-                type: array
-                items:
-                  type: string
-                description: Transaction signatures
-                example:
-                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
-              error:
-                type: string
-                description: Error message if claim failed
-                example: Insufficient balance
-    redeem_amount_response:
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          type: integer
-          description: Static amount indicator (always 1)
-          example: 1
-    user:
-      required:
-      - album_count
-      - allow_ai_attribution
-      - artist_coin_badge
-      - associated_sol_wallets_balance
-      - associated_wallets_balance
-      - balance
-      - blocknumber
-      - created_at
-      - current_user_followee_follow_count
-      - does_current_user_follow
-      - does_current_user_subscribe
-      - does_follow_current_user
-      - erc_wallet
-      - followee_count
-      - follower_count
-      - handle
-      - handle_lc
-      - has_collectibles
-      - id
-      - is_available
-      - is_deactivated
-      - is_storage_v2
-      - is_verified
-      - name
-      - playlist_count
-      - repost_count
-      - spl_wallet
-      - spl_usdc_wallet
-      - supporter_count
-      - supporting_count
-      - total_audio_balance
-      - total_balance
-      - track_count
-      - updated_at
-      - verified_with_instagram
-      - verified_with_tiktok
-      - verified_with_twitter
-      - wallet
-      - waudio_balance
-      type: object
-      properties:
-        album_count:
-          type: integer
-        artist_pick_track_id:
-          type: string
-        artist_coin_badge:
-          type: object
-          properties:
-            mint:
-              type: string
-            logo_uri:
-              type: string
-            banner_image_url:
-              type: string
-            ticker:
-              type: string
-              description: The coin symbol/ticker
-        coin_flair_mint:
-          type: string
-        bio:
-          type: string
-        cover_photo:
-          $ref: '#/components/schemas/cover_photo'
-        followee_count:
-          type: integer
-        follower_count:
-          type: integer
-        handle:
-          type: string
-        id:
-          type: string
-        is_verified:
-          type: boolean
-        twitter_handle:
-          type: string
-        instagram_handle:
-          type: string
-        tiktok_handle:
-          type: string
-        verified_with_twitter:
-          type: boolean
-        verified_with_instagram:
-          type: boolean
-        verified_with_tiktok:
-          type: boolean
-        website:
-          type: string
-        donation:
-          type: string
-        location:
-          type: string
-        name:
-          type: string
-        playlist_count:
-          type: integer
-        profile_picture:
-          $ref: '#/components/schemas/profile_picture'
-        repost_count:
-          type: integer
-        track_count:
-          type: integer
-        is_deactivated:
-          type: boolean
-        is_available:
-          type: boolean
-        erc_wallet:
-          type: string
-        spl_wallet:
-          type: string
-        spl_usdc_wallet:
-          type: string
-        spl_usdc_payout_wallet:
-          type: string
-        supporter_count:
-          type: integer
-        supporting_count:
-          type: integer
-        total_audio_balance:
-          type: integer
-        wallet:
-          type: string
-          description: The user's Ethereum wallet address for their account
-        balance:
-          type: string
-        associated_wallets_balance:
-          type: string
-        total_balance:
-          type: string
-        waudio_balance:
-          type: string
-        associated_sol_wallets_balance:
-          type: string
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        is_storage_v2:
-          type: boolean
-        creator_node_endpoint:
-          type: string
-        current_user_followee_follow_count:
-          type: integer
-        does_current_user_follow:
-          type: boolean
-        does_current_user_subscribe:
-          type: boolean
-        does_follow_current_user:
-          type: boolean
-        handle_lc:
-          type: string
-        updated_at:
-          type: string
-        cover_photo_sizes:
-          type: string
-        cover_photo_cids:
-          $ref: '#/components/schemas/cover_photo'
-        cover_photo_legacy:
-          type: string
-        profile_picture_sizes:
-          type: string
-        profile_picture_cids:
-          $ref: '#/components/schemas/profile_picture'
-        profile_picture_legacy:
-          type: string
-        has_collectibles:
-          type: boolean
-        playlist_library:
-          $ref: '#/components/schemas/playlist_library'
-        allow_ai_attribution:
-          type: boolean
-        profile_type:
-          type: string
-    coin_members_count_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: integer
-          description: The total number of users with a non-zero balance of the specific coin
-          example: 42
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    create_coin_response:
-      type: object
-      properties:
-        data:
-          type: object
-          required:
-          - mint
-          - ticker
-          - user_id
-          - decimals
-          - name
-          - created_at
-          properties:
-            mint:
-              type: string
-              description: The mint address of the coin
-              example: bearR26zyyB3fNQm5wWv1ZfN8MPQDUMwaAuoG79b1Yj
-            ticker:
-              type: string
-              description: The coin symbol/ticker
-              example: BEAR
-            user_id:
-              type: integer
-              description: The user ID who created the coin
-              example: 1
-            decimals:
-              type: integer
-              description: The number of decimals for the coin
-              example: 9
-            name:
-              type: string
-              description: The coin name
-              example: BEAR
-            logo_uri:
-              type: string
-              description: The URI for the coin's logo image
-              example: https://example.com/logo.png
-            banner_image_url:
-              type: string
-              description: The URI for the coin's banner image
-              example: https://example.com/banner.png
-            description:
-              type: string
-              description: The description of the coin
-              example: A majestic bear token for wildlife conservation
-            link_1:
-              type: string
-              description: Generic link URL for the coin
-              example: https://x.com/bear_token
-            link_2:
-              type: string
-              description: Generic link URL for the coin
-              example: https://instagram.com/bear_token
-            link_3:
-              type: string
-              description: Generic link URL for the coin
-              example: https://tiktok.com/@bear_token
-            link_4:
-              type: string
-              description: Generic link URL for the coin
-              example: https://bear-token.com
-            created_at:
-              type: string
-              format: date-time
-              description: The date and time when the coin was created
-              example: '2024-01-15T10:30:00Z'
+        unclaimed_fees:
+          type: number
+          description: Unclaimed fees
+        total_fees:
+          type: number
+          description: Total fees
   securitySchemes:
     OAuth2:
       type: oauth2

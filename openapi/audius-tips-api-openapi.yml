@@ -23,7 +23,7 @@ paths:
       tags:
       - Tips
       description: Gets the most recent tips on the network
-      operationId: Get Tips
+      operationId: GetTips
       security:
       - {}
       - OAuth2:
@@ -103,8 +103,18 @@ paths:
                 $ref: '#/components/schemas/get_tips_response'
       summary: Get tips
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Tips
 components:
   schemas:
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
     get_tips_response:
       required:
       - latest_chain_block
@@ -134,19 +144,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/tip'
-    profile_picture:
+    supporter_reference:
+      required:
+      - user_id
       type: object
       properties:
-        150x150:
+        user_id:
           type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
     cover_photo:
       type: object
       properties:
@@ -158,12 +162,15 @@ components:
           type: array
           items:
             type: string
-    supporter_reference:
+    version_metadata:
       required:
-      - user_id
+      - service
+      - version
       type: object
       properties:
-        user_id:
+        service:
+          type: string
+        version:
           type: string
     tip:
       required:
@@ -366,24 +373,19 @@ components:
           type: boolean
         profile_type:
           type: string
-    version_metadata:
-      required:
-      - service
-      - version
+    profile_picture:
       type: object
       properties:
-        service:
+        150x150:
           type: string
-        version:
+        480x480:
           type: string
-    playlist_library:
-      type: object
-      properties:
-        contents:
+        1000x1000:
+          type: string
+        mirrors:
           type: array
           items:
-            type: object
-            properties: {}
+            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

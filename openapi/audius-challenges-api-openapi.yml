@@ -23,7 +23,7 @@ paths:
       tags:
       - Challenges
       description: Get all undisbursed challenges
-      operationId: Get Undisbursed Challenges
+      operationId: GetUndisbursedChallenges
       security:
       - {}
       - OAuth2:
@@ -69,12 +69,14 @@ paths:
           content: {}
       summary: Get undisbursed challenges
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Undisbursed Challenges
   /challenges/undisbursed/{user_id}:
     get:
       tags:
       - Challenges
       description: Get all undisbursed challenges for a user
-      operationId: Get Undisbursed Challenges For User
+      operationId: GetUndisbursedChallengesForUser
       parameters:
       - name: user_id
         in: path
@@ -117,12 +119,14 @@ paths:
           content: {}
       summary: Get undisbursed challenges for user
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Undisbursed Challenges For User
   /challenges/{challenge_id}/attest:
     get:
       tags:
       - Challenges
       description: Produces an attestation that a given user has completed a challenge, or errors.
-      operationId: Get Challenge Attestation
+      operationId: GetChallengeAttestation
       security:
       - {}
       - OAuth2:
@@ -167,8 +171,17 @@ paths:
           content: {}
       summary: Get challenge attestation
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Challenge Attestation
 components:
   schemas:
+    undisbursed_challenges:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/undisbursed_challenge'
     undisbursed_challenge:
       required:
       - amount
@@ -212,13 +225,6 @@ components:
           type: string
         attestation:
           type: string
-    undisbursed_challenges:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/undisbursed_challenge'
     attestation_reponse:
       type: object
       properties:

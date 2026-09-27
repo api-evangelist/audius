@@ -22,7 +22,7 @@ paths:
       tags:
       - cid_data
       description: Get a metadata by CID
-      operationId: Get Metadata
+      operationId: GetMetadata
       parameters:
       - name: metadata_id
         in: path
@@ -45,6 +45,8 @@ paths:
           content: {}
       summary: Get metadata
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Metadata
 components:
   schemas:
     data_and_type:

@@ -22,7 +22,7 @@ paths:
     get:
       tags:
       - prizes
-      operationId: Get Prizes
+      operationId: GetPrizes
       description: Gets a list of active prizes available for claiming. Excludes sensitive information like download URLs.
       responses:
         '200':
@@ -36,11 +36,13 @@ paths:
           content: {}
       summary: Get prizes
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Prizes
   /prizes/claim:
     post:
       tags:
       - prizes
-      operationId: Claim Prize
+      operationId: ClaimPrize
       description: Claims a prize by verifying a Solana transaction. User must send exactly 2 YAK to the prize receiver address. Returns the prize won and any redeem codes/URLs.
       requestBody:
         x-codegen-request-body-name: claim
@@ -64,11 +66,13 @@ paths:
           content: {}
       summary: Claim prize
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Claim Prize
   /wallet/{wallet}/prizes:
     get:
       tags:
       - prizes
-      operationId: Get Wallet Prizes
+      operationId: GetWalletPrizes
       description: Gets all claimed prizes for a wallet. Public endpoint - no authentication required. Excludes sensitive action_data for security.
       parameters:
       - name: wallet
@@ -93,6 +97,8 @@ paths:
           content: {}
       summary: Get wallet prizes
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Wallet Prizes
 components:
   schemas:
     prizes_response:
@@ -105,46 +111,50 @@ components:
           items:
             $ref: '#/components/schemas/prize_public'
           description: List of active prizes available for claiming
-    claimed_prizes_response:
+    prize_claim_request_body:
       type: object
       required:
-      - data
+      - signature
+      - wallet
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/claimed_prize'
-          description: List of claimed prizes for the wallet (action_data excluded for security)
-    prize_public:
+        signature:
+          type: string
+          description: The Solana transaction signature for the 2 YAK payment
+          example: 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+        wallet:
+          type: string
+          description: The wallet address that sent the transaction
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+    prize_claim_response:
       type: object
       required:
       - prize_id
-      - name
-      - weight
+      - prize_name
+      - wallet
       properties:
         prize_id:
           type: string
-          description: The unique identifier of the prize
+          description: The unique identifier of the prize won
           example: prize_1_yak_airdrop
-        name:
+        prize_name:
           type: string
-          description: The name of the prize
+          description: The name of the prize won
           example: 1 YAK Airdrop
-        description:
+        wallet:
           type: string
-          description: Description of the prize
-          example: Win 1 YAK coin airdrop
-        weight:
-          type: integer
-          description: Weight for random selection (higher = more likely)
-          example: 1
-        metadata:
+          description: The wallet address that claimed the prize
+          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
+        prize_type:
+          type: string
+          description: The type of prize (e.g., "coin_airdrop", "download")
+          example: coin_airdrop
+        action_data:
           type: object
-          description: Sanitized metadata (excludes sensitive URLs)
+          description: Prize-specific action data (e.g., redeem code/URL for coin airdrops, download URL for downloads)
           additionalProperties: true
           example:
-            type: coin_airdrop
-            amount: 1000000000
+            code: aB3d5F
+            url: /coins/YAK/redeem/aB3d5F
     claimed_prize:
       type: object
       required:
@@ -194,50 +204,46 @@ components:
           format: date-time
           description: When the prize was claimed
           example: '2024-01-15T10:30:00Z'
-    prize_claim_request_body:
+    claimed_prizes_response:
       type: object
       required:
-      - signature
-      - wallet
+      - data
       properties:
-        signature:
-          type: string
-          description: The Solana transaction signature for the 2 YAK payment
-          example: 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
-        wallet:
-          type: string
-          description: The wallet address that sent the transaction
-          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
-    prize_claim_response:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/claimed_prize'
+          description: List of claimed prizes for the wallet (action_data excluded for security)
+    prize_public:
       type: object
       required:
       - prize_id
-      - prize_name
-      - wallet
+      - name
+      - weight
       properties:
         prize_id:
           type: string
-          description: The unique identifier of the prize won
+          description: The unique identifier of the prize
           example: prize_1_yak_airdrop
-        prize_name:
+        name:
           type: string
-          description: The name of the prize won
+          description: The name of the prize
           example: 1 YAK Airdrop
-        wallet:
+        description:
           type: string
-          description: The wallet address that claimed the prize
-          example: HLnpSz9h2S4hiLQ43rnSD9XkcUThA7B8hQMKmDaiTLcC
-        prize_type:
-          type: string
-          description: The type of prize (e.g., "coin_airdrop", "download")
-          example: coin_airdrop
-        action_data:
+          description: Description of the prize
+          example: Win 1 YAK coin airdrop
+        weight:
+          type: integer
+          description: Weight for random selection (higher = more likely)
+          example: 1
+        metadata:
           type: object
-          description: Prize-specific action data (e.g., redeem code/URL for coin airdrops, download URL for downloads)
+          description: Sanitized metadata (excludes sensitive URLs)
           additionalProperties: true
           example:
-            code: aB3d5F
-            url: /coins/YAK/redeem/aB3d5F
+            type: coin_airdrop
+            amount: 1000000000
   securitySchemes:
     OAuth2:
       type: oauth2

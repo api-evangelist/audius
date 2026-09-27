@@ -23,7 +23,7 @@ paths:
       tags:
       - Developer Apps
       description: Create a new developer app. Indexer validates grants.
-      operationId: Create Developer App
+      operationId: CreateDeveloperApp
       parameters:
       - name: user_id
         in: query
@@ -56,12 +56,14 @@ paths:
           content: {}
       summary: Create developer app
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Developer App
   /developer-apps/{address}:
     get:
       tags:
       - Developer Apps
       description: Gets developer app matching given address (API key)
-      operationId: Get Developer App
+      operationId: GetDeveloperApp
       parameters:
       - name: address
         in: path
@@ -87,11 +89,13 @@ paths:
           content: {}
       summary: Get developer app
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Developer App
     delete:
       tags:
       - Developer Apps
       description: Deletes a developer app. Indexer validates grants.
-      operationId: Delete Developer App
+      operationId: DeleteDeveloperApp
       parameters:
       - name: user_id
         in: query
@@ -123,11 +127,13 @@ paths:
           content: {}
       summary: Delete developer app
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Developer App
     put:
       tags:
       - Developer Apps
       description: Updates a developer app. Indexer validates grants.
-      operationId: Update Developer App
+      operationId: UpdateDeveloperApp
       parameters:
       - name: user_id
         in: query
@@ -169,12 +175,14 @@ paths:
           content: {}
       summary: Update developer app
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Developer App
   /developer-apps/{address}/register-api-key:
     post:
       tags:
       - Developer Apps
       description: Register api_key and api_secret in api_keys table for developer apps created via entity manager transactions. Use when the client sends raw ManageEntity tx instead of POST /developer-apps. Inserts with rps=10, rpm=500000. Requires the app to exist in developer_apps and belong to the authenticated user.
-      operationId: Register Developer App API Key
+      operationId: RegisterDeveloperAppAPIKey
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -221,12 +229,14 @@ paths:
           content: {}
       summary: Register developer app API key
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Register Developer App API Key
   /developer-apps/{address}/access-keys/deactivate:
     post:
       tags:
       - Developer Apps
       description: Deactivate a bearer token (API access key) for a developer app. Indexer validates grants.
-      operationId: Deactivate Developer App Access Key
+      operationId: DeactivateDeveloperAppAccessKey
       parameters:
       - name: user_id
         in: query
@@ -268,12 +278,14 @@ paths:
           content: {}
       summary: Deactivate developer app access key
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Deactivate Developer App Access Key
   /developer-apps/{address}/access-keys:
     post:
       tags:
       - Developer Apps
       description: Create a new bearer token (API access key) for a developer app. Indexer validates grants.
-      operationId: Create Developer App Access Key
+      operationId: CreateDeveloperAppAccessKey
       parameters:
       - name: user_id
         in: query
@@ -305,12 +317,14 @@ paths:
           content: {}
       summary: Create developer app access key
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Developer App Access Key
   /users/{id}/developer-apps:
     get:
       tags:
       - Developer Apps
       description: Get developer apps for the user.
-      operationId: Get Developer Apps
+      operationId: GetDeveloperApps
       parameters:
       - name: id
         in: path
@@ -340,6 +354,8 @@ paths:
           content: {}
       summary: Get developer apps
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Developer Apps
 components:
   schemas:
     create_access_key_response:
@@ -350,19 +366,21 @@ components:
         api_access_key:
           type: string
           description: The newly created bearer token (API access key)
-    deactivate_access_key_request_body:
-      type: object
-      required:
-      - api_access_key
-      properties:
-        api_access_key:
-          type: string
-          description: The bearer token (API access key) to deactivate
-    developer_app_response:
+    developer_apps_response:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/developer_app'
+          type: array
+          items:
+            $ref: '#/components/schemas/developer_app'
+    register_api_key_request_body:
+      type: object
+      required:
+      - api_secret
+      properties:
+        api_secret:
+          type: string
+          description: The API secret (private key hex) for the developer app
     create_developer_app_request_body:
       type: object
       required:
@@ -385,26 +403,6 @@ components:
             type: string
             maxLength: 2000
           description: Pre-registered OAuth redirect/callback URIs
-    register_api_key_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the registration was successful
-    register_api_key_request_body:
-      type: object
-      required:
-      - api_secret
-      properties:
-        api_secret:
-          type: string
-          description: The API secret (private key hex) for the developer app
-    deactivate_access_key_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the deactivation was successful
     write_response:
       type: object
       properties:
@@ -418,6 +416,41 @@ components:
           type: integer
           format: int64
           description: The blockchain block number/height
+    deactivate_access_key_request_body:
+      type: object
+      required:
+      - api_access_key
+      properties:
+        api_access_key:
+          type: string
+          description: The bearer token (API access key) to deactivate
+    deactivate_access_key_response:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the deactivation was successful
+    update_developer_app_request_body:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Developer app name
+        description:
+          type: string
+          description: App description
+        image_url:
+          type: string
+          description: App logo/image URL
+        redirect_uris:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            maxLength: 2000
+          description: Pre-registered OAuth redirect/callback URIs
     developer_app:
       required:
       - address
@@ -442,13 +475,6 @@ components:
             type: string
             maxLength: 2000
           description: Pre-registered OAuth callback URLs for this app
-    developer_apps_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/developer_app'
     create_developer_app_response:
       type: object
       properties:
@@ -471,27 +497,17 @@ components:
           type: integer
           format: int64
           description: The blockchain block number/height
-    update_developer_app_request_body:
+    developer_app_response:
       type: object
-      required:
-      - name
       properties:
-        name:
-          type: string
-          description: Developer app name
-        description:
-          type: string
-          description: App description
-        image_url:
-          type: string
-          description: App logo/image URL
-        redirect_uris:
-          type: array
-          maxItems: 50
-          items:
-            type: string
-            maxLength: 2000
-          description: Pre-registered OAuth redirect/callback URIs
+        data:
+          $ref: '#/components/schemas/developer_app'
+    register_api_key_response:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the registration was successful
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -23,7 +23,7 @@ paths:
       tags:
       - Events
       description: Get a list of events by ID
-      operationId: Get Bulk Events
+      operationId: GetBulkEvents
       security:
       - {}
       - OAuth2:
@@ -67,12 +67,14 @@ paths:
           content: {}
       summary: Get bulk events
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Bulk Events
   /events/all:
     get:
       tags:
       - Events
       summary: Get all events
-      operationId: Get All Events
+      operationId: GetAllEvents
       security:
       - {}
       - OAuth2:
@@ -124,12 +126,14 @@ paths:
         '500':
           description: Server error
           content: {}
+      x-operation-id-source: normalized
+      x-operation-id-original: Get All Events
   /events/entity:
     get:
       tags:
       - Events
       summary: Get events for a specific entity
-      operationId: Get Entity Events
+      operationId: GetEntityEvents
       security:
       - {}
       - OAuth2:
@@ -188,12 +192,14 @@ paths:
         '500':
           description: Server error
           content: {}
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Entity Events
   /events/unclaimed_id:
     get:
       tags:
       - Events
       description: Gets an unclaimed blockchain event ID
-      operationId: Get unclaimed event ID
+      operationId: GetUnclaimedEventID
       responses:
         '200':
           description: Success
@@ -206,8 +212,15 @@ paths:
           content: {}
       summary: Get unclaimed event ID
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get unclaimed event ID
 components:
   schemas:
+    unclaimed_id_response:
+      type: object
+      properties:
+        data:
+          type: string
     events_response:
       type: object
       properties:
@@ -256,11 +269,6 @@ components:
         event_data:
           type: object
           properties: {}
-    unclaimed_id_response:
-      type: object
-      properties:
-        data:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

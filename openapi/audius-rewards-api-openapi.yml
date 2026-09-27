@@ -23,7 +23,7 @@ paths:
       tags:
       - Rewards
       description: Claims all the filtered undisbursed rewards for a user
-      operationId: Claim Rewards
+      operationId: ClaimRewards
       requestBody:
         x-codegen-request-body-name: reward
         required: true
@@ -46,12 +46,14 @@ paths:
           content: {}
       summary: Claim rewards
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Claim Rewards
   /rewards/code:
     post:
       tags:
       - Rewards
       description: Creates a new reward code with Solana signature verification
-      operationId: Create Reward Code
+      operationId: CreateRewardCode
       requestBody:
         required: true
         content:
@@ -76,44 +78,10 @@ paths:
           content: {}
       summary: Create reward code
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Reward Code
 components:
   schemas:
-    claim_rewards_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - challengeId
-            - specifier
-            properties:
-              challengeId:
-                type: string
-                description: The challenge ID
-                example: u
-              specifier:
-                type: string
-                description: The challenge specifier
-                example: 7eP5n
-              amount:
-                type: string
-                description: The reward amount
-                example: '1000000000'
-              signatures:
-                type: array
-                items:
-                  type: string
-                description: Transaction signatures
-                example:
-                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
-              error:
-                type: string
-                description: Error message if claim failed
-                example: Insufficient balance
     create_reward_code_request:
       type: object
       required:
@@ -151,6 +119,42 @@ components:
           type: string
           description: The user ID to claim rewards for
           example: 7eP5n
+    claim_rewards_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - challengeId
+            - specifier
+            properties:
+              challengeId:
+                type: string
+                description: The challenge ID
+                example: u
+              specifier:
+                type: string
+                description: The challenge specifier
+                example: 7eP5n
+              amount:
+                type: string
+                description: The reward amount
+                example: '1000000000'
+              signatures:
+                type: array
+                items:
+                  type: string
+                description: Transaction signatures
+                example:
+                - 5j7s1QjmRKFuDbCWMRVRNibSV2VAAEcNKP6HWU7GwPdXkBZvhz8n4vQl7bBq8tN4Rz9x1Kj3mP5wQ8rT2Y6zA
+              error:
+                type: string
+                description: Error message if claim failed
+                example: Insufficient balance
     create_reward_code_response:
       type: object
       required:

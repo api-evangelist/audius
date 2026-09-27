@@ -23,7 +23,7 @@ paths:
       - Transactions
       summary: Gets the user's $AUDIO transaction history within the App
       description: 'Deprecated: Use `/users/{id}/transactions/audio` or `sdk.full.users.getAudioTransactions()` instead.'
-      operationId: Get Audio Transaction History
+      operationId: GetAudioTransactionHistory
       parameters:
       - name: offset
         in: query
@@ -71,13 +71,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/transaction_history_response'
       deprecated: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Audio Transaction History
   /transactions/count:
     get:
       tags:
       - Transactions
       summary: Gets the count of the user's $AUDIO transaction history within the App
       description: 'Deprecated: Use `/users/{id}/transactions/audio/count` or `sdk.full.users.getAudioTransactionCount()` instead.'
-      operationId: Get Audio Transaction History Count
+      operationId: GetAudioTransactionHistoryCount
       parameters:
       - name: Encoded-Data-Message
         in: header
@@ -97,39 +99,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/transaction_history_count_response'
       deprecated: true
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Audio Transaction History Count
 components:
   schemas:
-    transaction_details:
-      required:
-      - balance
-      - change
-      - metadata
-      - method
-      - signature
-      - transaction_date
-      - transaction_type
-      - user_bank
-      type: object
-      properties:
-        transaction_date:
-          type: string
-        transaction_type:
-          type: string
-        method:
-          type: string
-        signature:
-          type: string
-        user_bank:
-          type: string
-        change:
-          type: string
-        balance:
-          type: string
-        metadata:
-          type: object
-          properties: {}
-      discriminator:
-        propertyName: transaction_type
     transaction_history_count_response:
       required:
       - latest_chain_block
@@ -167,6 +140,37 @@ components:
           type: string
         version:
           type: string
+    transaction_details:
+      required:
+      - balance
+      - change
+      - metadata
+      - method
+      - signature
+      - transaction_date
+      - transaction_type
+      - user_bank
+      type: object
+      properties:
+        transaction_date:
+          type: string
+        transaction_type:
+          type: string
+        method:
+          type: string
+        signature:
+          type: string
+        user_bank:
+          type: string
+        change:
+          type: string
+        balance:
+          type: string
+        metadata:
+          type: object
+          properties: {}
+      discriminator:
+        propertyName: transaction_type
     transaction_history_response:
       required:
       - latest_chain_block

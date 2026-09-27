@@ -22,7 +22,7 @@ paths:
       tags:
       - Reactions
       description: Gets reactions by reacted_to_id and type
-      operationId: Bulk get Reactions
+      operationId: BulkGetReactions
       parameters:
       - name: type
         in: query
@@ -57,6 +57,8 @@ paths:
           content: {}
       summary: Bulk get reactions
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Bulk get Reactions
 components:
   schemas:
     reaction:

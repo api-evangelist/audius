@@ -23,7 +23,7 @@ paths:
       tags:
       - dashboard_wallet_users
       description: Gets Audius user profiles connected to given dashboard wallet addresses
-      operationId: Bulk get dashboard wallet users
+      operationId: BulkGetDashboardWalletUsers
       parameters:
       - name: wallets
         in: query
@@ -53,16 +53,24 @@ paths:
           content: {}
       summary: Bulk get dashboard wallet users
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Bulk get dashboard wallet users
 components:
   schemas:
-    profile_picture:
+    playlist_library:
       type: object
       properties:
-        150x150:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    cover_photo:
+      type: object
+      properties:
+        640x:
           type: string
-        480x480:
-          type: string
-        1000x1000:
+        2000x:
           type: string
         mirrors:
           type: array
@@ -75,27 +83,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/dashboard_wallet_user'
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    dashboard_wallet_user:
-      required:
-      - user
-      - wallet
-      type: object
-      properties:
-        wallet:
-          type: string
-        user:
-          $ref: '#/components/schemas/user'
     user:
       required:
       - album_count
@@ -270,14 +257,29 @@ components:
           type: boolean
         profile_type:
           type: string
-    playlist_library:
+    dashboard_wallet_user:
+      required:
+      - user
+      - wallet
       type: object
       properties:
-        contents:
+        wallet:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
           type: array
           items:
-            type: object
-            properties: {}
+            type: string
   securitySchemes:
     OAuth2:
       type: oauth2

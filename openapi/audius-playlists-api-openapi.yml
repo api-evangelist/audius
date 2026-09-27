@@ -23,7 +23,7 @@ paths:
       tags:
       - Playlists
       description: Gets a list of playlists by ID, UPC, or permalink
-      operationId: Get Bulk Playlists
+      operationId: GetBulkPlaylists
       security:
       - {}
       - OAuth2:
@@ -76,11 +76,13 @@ paths:
           content: {}
       summary: Get bulk playlists
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Bulk Playlists
     post:
       tags:
       - Playlists
       description: Creates a new playlist or album
-      operationId: Create Playlist
+      operationId: CreatePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -118,12 +120,14 @@ paths:
           content: {}
       summary: Create playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Create Playlist
   /playlists/search:
     get:
       tags:
       - Playlists
       description: Search for a playlist
-      operationId: Search Playlists
+      operationId: SearchPlaylists
       parameters:
       - name: offset
         in: query
@@ -192,12 +196,14 @@ paths:
           content: {}
       summary: Search playlists
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Search Playlists
   /playlists/trending:
     get:
       tags:
       - Playlists
       description: Returns trending playlists for a time period
-      operationId: Get Trending Playlists
+      operationId: GetTrendingPlaylists
       security:
       - {}
       - OAuth2:
@@ -258,12 +264,14 @@ paths:
           content: {}
       summary: Get trending playlists
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Trending Playlists
   /playlists/{playlist_id}:
     get:
       tags:
       - Playlists
       description: Get a playlist by ID
-      operationId: Get Playlist
+      operationId: GetPlaylist
       security:
       - {}
       - OAuth2:
@@ -289,11 +297,13 @@ paths:
                 $ref: '#/components/schemas/playlist_response'
       summary: Get playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Playlist
     put:
       tags:
       - Playlists
       description: Updates an existing playlist or album
-      operationId: Update Playlist
+      operationId: UpdatePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -340,11 +350,13 @@ paths:
           content: {}
       summary: Update playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Update Playlist
     delete:
       tags:
       - Playlists
       description: Deletes a playlist or album
-      operationId: Delete Playlist
+      operationId: DeletePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -381,12 +393,14 @@ paths:
           content: {}
       summary: Delete playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Delete Playlist
   /playlists/{playlist_id}/access-info:
     get:
       tags:
       - Playlists
       description: Gets the information necessary to access the playlist and what access the given user has.
-      operationId: Get Playlist Access Info
+      operationId: GetPlaylistAccessInfo
       security:
       - {}
       - OAuth2:
@@ -412,12 +426,14 @@ paths:
                 $ref: '#/components/schemas/access_info_response'
       summary: Get playlist access info
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Playlist Access Info
   /playlists/{playlist_id}/tracks:
     get:
       tags:
       - Playlists
       description: Fetch tracks within a playlist.
-      operationId: Get Playlist Tracks
+      operationId: GetPlaylistTracks
       parameters:
       - name: playlist_id
         in: path
@@ -440,12 +456,14 @@ paths:
           content: {}
       summary: Get playlist tracks
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Playlist Tracks
   /playlists/{playlist_id}/favorites:
     post:
       tags:
       - Playlists
       description: Favorite a playlist
-      operationId: Favorite Playlist
+      operationId: FavoritePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -489,11 +507,13 @@ paths:
           content: {}
       summary: Favorite playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Favorite Playlist
     delete:
       tags:
       - Playlists
       description: Unfavorite a playlist
-      operationId: Unfavorite Playlist
+      operationId: UnfavoritePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -530,11 +550,13 @@ paths:
           content: {}
       summary: Unfavorite playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Unfavorite Playlist
     get:
       tags:
       - Playlists
       description: Get users that favorited a playlist
-      operationId: Get Users From Playlist Favorites
+      operationId: GetUsersFromPlaylistFavorites
       security:
       - {}
       - OAuth2:
@@ -576,12 +598,14 @@ paths:
           content: {}
       summary: Get users from playlist favorites
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Users From Playlist Favorites
   /playlists/{playlist_id}/reposts:
     post:
       tags:
       - Playlists
       description: Repost a playlist
-      operationId: Repost Playlist
+      operationId: RepostPlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -624,11 +648,13 @@ paths:
           content: {}
       summary: Repost playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Repost Playlist
     delete:
       tags:
       - Playlists
       description: Unrepost a playlist
-      operationId: Unrepost Playlist
+      operationId: UnrepostPlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -665,11 +691,13 @@ paths:
           content: {}
       summary: Unrepost playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Unrepost Playlist
     get:
       tags:
       - Playlists
       description: Get users that reposted a playlist
-      operationId: Get Users From Playlist Reposts
+      operationId: GetUsersFromPlaylistReposts
       security:
       - {}
       - OAuth2:
@@ -711,12 +739,14 @@ paths:
           content: {}
       summary: Get users from playlist reposts
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Users From Playlist Reposts
   /playlists/{playlist_id}/shares:
     post:
       tags:
       - Playlists
       description: Record a playlist share event
-      operationId: Share Playlist
+      operationId: SharePlaylist
       security:
       - BearerAuth: []
       - BasicAuth: []
@@ -753,12 +783,14 @@ paths:
           content: {}
       summary: Share playlist
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Share Playlist
   /playlists/trending/{version}:
     get:
       tags:
       - Playlists
       description: Returns trending playlists for a time period based on the given trending version
-      operationId: Get Trending Playlists With Version
+      operationId: GetTrendingPlaylistsWithVersion
       security:
       - {}
       - OAuth2:
@@ -810,133 +842,529 @@ paths:
           content: {}
       summary: Get trending playlists with version
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Trending Playlists With Version
 components:
   schemas:
-    url_with_mirrors:
+    stem_parent:
       required:
-      - mirrors
+      - category
+      - parent_track_id
       type: object
       properties:
-        url:
+        category:
           type: string
-        mirrors:
+        parent_track_id:
+          type: integer
+    playlist_search_result:
+      type: object
+      properties:
+        data:
           type: array
           items:
-            type: string
-    favorite:
+            $ref: '#/components/schemas/playlist'
+    trending_playlists_response:
       required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist'
+    extended_payment_split:
+      required:
+      - amount
+      - payout_wallet
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+        eth_wallet:
+          type: string
+        payout_wallet:
+          type: string
+        amount:
+          type: integer
+    follow_gate:
+      required:
+      - follow_user_id
+      type: object
+      properties:
+        follow_user_id:
+          type: integer
+          description: Must follow the given user ID to unlock
+    user:
+      required:
+      - album_count
+      - allow_ai_attribution
+      - artist_coin_badge
+      - associated_sol_wallets_balance
+      - associated_wallets_balance
+      - balance
+      - blocknumber
       - created_at
-      - favorite_item_id
-      - favorite_type
+      - current_user_followee_follow_count
+      - does_current_user_follow
+      - does_current_user_subscribe
+      - does_follow_current_user
+      - erc_wallet
+      - followee_count
+      - follower_count
+      - handle
+      - handle_lc
+      - has_collectibles
+      - id
+      - is_available
+      - is_deactivated
+      - is_storage_v2
+      - is_verified
+      - name
+      - playlist_count
+      - repost_count
+      - spl_wallet
+      - spl_usdc_wallet
+      - supporter_count
+      - supporting_count
+      - total_audio_balance
+      - total_balance
+      - track_count
+      - updated_at
+      - verified_with_instagram
+      - verified_with_tiktok
+      - verified_with_twitter
+      - wallet
+      - waudio_balance
+      type: object
+      properties:
+        album_count:
+          type: integer
+        artist_pick_track_id:
+          type: string
+        artist_coin_badge:
+          type: object
+          properties:
+            mint:
+              type: string
+            logo_uri:
+              type: string
+            banner_image_url:
+              type: string
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+        coin_flair_mint:
+          type: string
+        bio:
+          type: string
+        cover_photo:
+          $ref: '#/components/schemas/cover_photo'
+        followee_count:
+          type: integer
+        follower_count:
+          type: integer
+        handle:
+          type: string
+        id:
+          type: string
+        is_verified:
+          type: boolean
+        twitter_handle:
+          type: string
+        instagram_handle:
+          type: string
+        tiktok_handle:
+          type: string
+        verified_with_twitter:
+          type: boolean
+        verified_with_instagram:
+          type: boolean
+        verified_with_tiktok:
+          type: boolean
+        website:
+          type: string
+        donation:
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        playlist_count:
+          type: integer
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        repost_count:
+          type: integer
+        track_count:
+          type: integer
+        is_deactivated:
+          type: boolean
+        is_available:
+          type: boolean
+        erc_wallet:
+          type: string
+        spl_wallet:
+          type: string
+        spl_usdc_wallet:
+          type: string
+        spl_usdc_payout_wallet:
+          type: string
+        supporter_count:
+          type: integer
+        supporting_count:
+          type: integer
+        total_audio_balance:
+          type: integer
+        wallet:
+          type: string
+          description: The user's Ethereum wallet address for their account
+        balance:
+          type: string
+        associated_wallets_balance:
+          type: string
+        total_balance:
+          type: string
+        waudio_balance:
+          type: string
+        associated_sol_wallets_balance:
+          type: string
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        is_storage_v2:
+          type: boolean
+        creator_node_endpoint:
+          type: string
+        current_user_followee_follow_count:
+          type: integer
+        does_current_user_follow:
+          type: boolean
+        does_current_user_subscribe:
+          type: boolean
+        does_follow_current_user:
+          type: boolean
+        handle_lc:
+          type: string
+        updated_at:
+          type: string
+        cover_photo_sizes:
+          type: string
+        cover_photo_cids:
+          $ref: '#/components/schemas/cover_photo'
+        cover_photo_legacy:
+          type: string
+        profile_picture_sizes:
+          type: string
+        profile_picture_cids:
+          $ref: '#/components/schemas/profile_picture'
+        profile_picture_legacy:
+          type: string
+        has_collectibles:
+          type: boolean
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        allow_ai_attribution:
+          type: boolean
+        profile_type:
+          type: string
+    mood:
+      type: string
+      description: Music mood
+      enum:
+      - Peaceful
+      - Romantic
+      - Sentimental
+      - Tender
+      - Easygoing
+      - Yearning
+      - Sophisticated
+      - Sensual
+      - Cool
+      - Gritty
+      - Melancholy
+      - Serious
+      - Brooding
+      - Fiery
+      - Defiant
+      - Aggressive
+      - Rowdy
+      - Excited
+      - Energizing
+      - Empowering
+      - Stirring
+      - Upbeat
+      - Other
+    remix:
+      required:
+      - has_remix_author_reposted
+      - has_remix_author_saved
+      - parent_track_id
+      - user
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        has_remix_author_reposted:
+          type: boolean
+        has_remix_author_saved:
+          type: boolean
+    update_playlist_request_body:
+      type: object
+      description: Request body for updating playlist information. All fields are optional.
+      properties:
+        playlist_name:
+          type: string
+          minLength: 1
+          description: Playlist or album name
+        description:
+          type: string
+          description: Playlist description
+          maxLength: 1000
+        is_private:
+          type: boolean
+          description: Whether the playlist is private
+        is_album:
+          type: boolean
+          description: Whether this is an album
+        genre:
+          $ref: '#/components/schemas/genre'
+        mood:
+          allOf:
+          - $ref: '#/components/schemas/mood'
+        tags:
+          type: string
+          description: Comma-separated tags
+        license:
+          type: string
+          description: License type
+        upc:
+          type: string
+          description: Universal Product Code (for albums)
+        release_date:
+          type: string
+          format: date
+          description: Release date
+        playlist_image_sizes_multihash:
+          type: string
+          description: CID for the playlist cover art
+        playlist_contents:
+          type: array
+          description: Array of track IDs to include in the playlist
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        is_stream_gated:
+          type:
+          - boolean
+          - 'null'
+          description: Whether streaming is restricted behind an access gate
+        is_scheduled_release:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the playlist/album is a scheduled release
+        stream_conditions:
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        ddex_app:
+          type: string
+          description: DDEX application identifier
+        ddex_release_ids:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          description: DDEX release identifiers
+        artists:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ddex_resource_contributor'
+          description: DDEX resource contributors / artists
+        copyright_line:
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+          description: DDEX copyright line
+        producer_copyright_line:
+          allOf:
+          - $ref: '#/components/schemas/ddex_copyright'
+          description: DDEX producer copyright line
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+          description: Parental warning type
+        is_image_autogenerated:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the image is autogenerated
+    playlist:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
       - user_id
       type: object
       properties:
-        favorite_item_id:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
           type: string
-        favorite_type:
+        permalink:
           type: string
-        user_id:
+        id:
           type: string
+        is_album:
+          type: boolean
+        is_image_autogenerated:
+          type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
         created_at:
           type: string
-    repost_request_body:
-      type: object
-      description: Optional metadata for repost operations
-      properties:
-        is_repost_of_repost:
-          type: boolean
-          description: Set to true when reposting an item that was reposted (used for notifications)
-    genre:
-      type: string
-      description: Music genre
-      enum:
-      - Electronic
-      - Rock
-      - Metal
-      - Alternative
-      - Hip-Hop/Rap
-      - Experimental
-      - Punk
-      - Folk
-      - Pop
-      - Ambient
-      - Soundtrack
-      - World
-      - Jazz
-      - Acoustic
-      - Funk
-      - R&B/Soul
-      - Devotional
-      - Classical
-      - Reggae
-      - Podcasts
-      - Country
-      - Spoken Word
-      - Comedy
-      - Blues
-      - Kids
-      - Audiobooks
-      - Latin
-      - Lo-Fi
-      - Hyperpop
-      - Dancehall
-      - Techno
-      - Trap
-      - House
-      - Tech House
-      - Deep House
-      - Disco
-      - Electro
-      - Jungle
-      - Progressive House
-      - Hardstyle
-      - Glitch Hop
-      - Trance
-      - Future Bass
-      - Future House
-      - Tropical House
-      - Downtempo
-      - Drum & Bass
-      - Dubstep
-      - Jersey Club
-      - Vaporwave
-      - Moombahton
-    ddex_copyright:
-      type: object
-      required:
-      - year
-      - text
-      properties:
-        year:
-          type: string
-          minLength: 4
-          maxLength: 4
-          description: Copyright year (4 characters)
-        text:
-          type: string
-          minLength: 1
-          description: Copyright text
-    ddex_resource_contributor:
-      type: object
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Contributor name
-        roles:
+        followee_reposts:
           type: array
-          minItems: 1
           items:
-            type: string
-            minLength: 1
-          description: Contributor roles
-        sequence_number:
-          type: integer
-          minimum: 0
-          description: Sequence number for ordering
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+          format: date
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+    extended_access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/extended_purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
     track:
       required:
       - access
@@ -1185,172 +1613,87 @@ components:
           $ref: '#/components/schemas/url_with_mirrors'
         preview:
           $ref: '#/components/schemas/url_with_mirrors'
-    write_response:
+    access_info_response:
       type: object
       properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-    follow_gate:
+        data:
+          $ref: '#/components/schemas/track_access_info'
+    access:
       required:
-      - follow_user_id
+      - download
+      - stream
       type: object
       properties:
-        follow_user_id:
-          type: integer
-          description: Must follow the given user ID to unlock
-    repost:
+        stream:
+          type: boolean
+        download:
+          type: boolean
+    track_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    favorite_request_body:
+      type: object
+      description: Optional metadata for favorite/save operations
+      properties:
+        is_save_of_repost:
+          type: boolean
+          description: Set to true when favoriting a reposted item (used for notifications)
+    token_gate:
       required:
-      - repost_item_id
-      - repost_type
-      - user_id
+      - token_gate
       type: object
       properties:
-        repost_item_id:
-          type: string
-        repost_type:
-          type: string
-        user_id:
-          type: string
-    playlist:
-      required:
-      - access
-      - added_timestamps
-      - blocknumber
-      - created_at
-      - favorite_count
-      - followee_favorites
-      - followee_reposts
-      - has_current_user_reposted
-      - has_current_user_saved
-      - id
-      - is_album
-      - is_delete
-      - is_image_autogenerated
-      - is_private
-      - is_scheduled_release
-      - is_stream_gated
-      - permalink
-      - playlist_contents
-      - playlist_name
-      - repost_count
-      - total_play_count
-      - track_count
-      - updated_at
-      - user
-      - user_id
-      type: object
-      properties:
-        artwork:
-          $ref: '#/components/schemas/playlist_artwork'
-        description:
-          type: string
-        permalink:
-          type: string
-        id:
-          type: string
-        is_album:
-          type: boolean
-        is_image_autogenerated:
-          type: boolean
-        playlist_name:
-          type: string
-        playlist_contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        repost_count:
-          type: integer
-        favorite_count:
-          type: integer
-        total_play_count:
-          type: integer
-        user:
-          $ref: '#/components/schemas/user'
-        ddex_app:
-          type: string
-        access:
-          $ref: '#/components/schemas/access'
-        upc:
-          type: string
-        track_count:
-          type: integer
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        followee_reposts:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost'
-        followee_favorites:
-          type: array
-          items:
-            $ref: '#/components/schemas/favorite'
-        has_current_user_reposted:
-          type: boolean
-        has_current_user_saved:
-          type: boolean
-        is_delete:
-          type: boolean
-        is_private:
-          type: boolean
-        updated_at:
-          type: string
-        added_timestamps:
-          type: array
-          description: DEPRECATED. Use playlist_contents instead.
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        user_id:
-          type: string
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        cover_art:
-          type: string
-        cover_art_sizes:
-          type: string
-        cover_art_cids:
-          $ref: '#/components/schemas/playlist_artwork'
-        is_stream_gated:
-          type: boolean
-        stream_conditions:
+        token_gate:
           type: object
-          description: How to unlock stream access to the track
+          description: Must hold an NFT of the given collection to unlock
           allOf:
-          - $ref: '#/components/schemas/access_gate'
-        is_scheduled_release:
-          type: boolean
-        release_date:
+          - $ref: '#/components/schemas/extended_token_gate'
+    cover_art:
+      type: object
+      properties:
+        150x150:
           type: string
-          format: date
-        ddex_release_ids:
-          type: object
-          properties: {}
-        artists:
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
           type: array
           items:
-            type: object
-            properties: {}
-        copyright_line:
+            type: string
+    purchase_gate:
+      required:
+      - usdc_purchase
+      type: object
+      properties:
+        usdc_purchase:
           type: object
-          properties: {}
-        producer_copyright_line:
-          type: object
-          properties: {}
-        parental_warning_type:
-          type:
-          - string
-          - 'null'
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/usdc_gate'
+    playlist_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
     playlist_response:
       required:
       - latest_chain_block
@@ -1380,51 +1723,85 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/playlist'
-    track_access_info:
+    url_with_mirrors:
       required:
-      - blocknumber
-      - user_id
+      - mirrors
       type: object
       properties:
-        access:
-          type: object
-          description: Describes what access the given user has
-          allOf:
-          - $ref: '#/components/schemas/access'
-        user_id:
+        url:
           type: string
-          description: The user ID of the owner of this track
-        blocknumber:
-          type: integer
-          description: The blocknumber this track was last updated
-        is_stream_gated:
-          type: boolean
-          description: Whether or not the owner has restricted streaming behind an access gate
-        stream_conditions:
-          type: object
-          description: How to unlock stream access to the track
-          allOf:
-          - $ref: '#/components/schemas/extended_access_gate'
-        is_download_gated:
-          type: boolean
-          description: Whether or not the owner has restricted downloading behind an access gate
-        download_conditions:
-          type: object
-          description: How to unlock the track download
-          allOf:
-          - $ref: '#/components/schemas/extended_access_gate'
-    extended_token_gate:
+        mirrors:
+          type: array
+          items:
+            type: string
+    genre:
+      type: string
+      description: Music genre
+      enum:
+      - Electronic
+      - Rock
+      - Metal
+      - Alternative
+      - Hip-Hop/Rap
+      - Experimental
+      - Punk
+      - Folk
+      - Pop
+      - Ambient
+      - Soundtrack
+      - World
+      - Jazz
+      - Acoustic
+      - Funk
+      - R&B/Soul
+      - Devotional
+      - Classical
+      - Reggae
+      - Podcasts
+      - Country
+      - Spoken Word
+      - Comedy
+      - Blues
+      - Kids
+      - Audiobooks
+      - Latin
+      - Lo-Fi
+      - Hyperpop
+      - Dancehall
+      - Techno
+      - Trap
+      - House
+      - Tech House
+      - Deep House
+      - Disco
+      - Electro
+      - Jungle
+      - Progressive House
+      - Hardstyle
+      - Glitch Hop
+      - Trance
+      - Future Bass
+      - Future House
+      - Tropical House
+      - Downtempo
+      - Drum & Bass
+      - Dubstep
+      - Jersey Club
+      - Vaporwave
+      - Moombahton
+    usdc_gate:
       required:
-      - token_mint
-      - token_amount
+      - price
+      - splits
       type: object
       properties:
-        token_mint:
-          type: string
-          description: The mint of the token needed to unlock
-        token_amount:
+        price:
           type: integer
-          description: The amount of the token needed to unlock
+          description: The price in USDC needed to unlock
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_split'
     track_segment:
       required:
       - duration
@@ -1435,14 +1812,53 @@ components:
           type: number
         multihash:
           type: string
-    cover_art:
+    following_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
       type: object
       properties:
-        150x150:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
           type: string
-        480x480:
+        timestamp:
           type: string
-        1000x1000:
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    extended_usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/extended_payment_split'
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
           type: string
         mirrors:
           type: array
@@ -1546,274 +1962,39 @@ components:
           - boolean
           - 'null'
           description: Whether the image is autogenerated
-    stem_parent:
+    track_access_info:
       required:
-      - category
-      - parent_track_id
+      - blocknumber
+      - user_id
       type: object
       properties:
-        category:
-          type: string
-        parent_track_id:
-          type: integer
-    extended_purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
+        access:
           type: object
-          description: Must pay the total price and split to the given addresses to unlock
+          description: Describes what access the given user has
           allOf:
-          - $ref: '#/components/schemas/extended_usdc_gate'
-    purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
-          type: object
-          description: Must pay the total price and split to the given addresses to unlock
-          allOf:
-          - $ref: '#/components/schemas/usdc_gate'
-    extended_payment_split:
-      required:
-      - amount
-      - payout_wallet
-      - percentage
-      type: object
-      properties:
+          - $ref: '#/components/schemas/access'
         user_id:
+          type: string
+          description: The user ID of the owner of this track
+        blocknumber:
           type: integer
-          example: 1234
-        percentage:
-          type: number
-        eth_wallet:
-          type: string
-        payout_wallet:
-          type: string
-        amount:
-          type: integer
-    playlist_search_result:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist'
-    extended_usdc_gate:
-      required:
-      - price
-      - splits
-      type: object
-      properties:
-        price:
-          type: integer
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/extended_payment_split'
-    update_playlist_request_body:
-      type: object
-      description: Request body for updating playlist information. All fields are optional.
-      properties:
-        playlist_name:
-          type: string
-          minLength: 1
-          description: Playlist or album name
-        description:
-          type: string
-          description: Playlist description
-          maxLength: 1000
-        is_private:
-          type: boolean
-          description: Whether the playlist is private
-        is_album:
-          type: boolean
-          description: Whether this is an album
-        genre:
-          $ref: '#/components/schemas/genre'
-        mood:
-          allOf:
-          - $ref: '#/components/schemas/mood'
-        tags:
-          type: string
-          description: Comma-separated tags
-        license:
-          type: string
-          description: License type
-        upc:
-          type: string
-          description: Universal Product Code (for albums)
-        release_date:
-          type: string
-          format: date
-          description: Release date
-        playlist_image_sizes_multihash:
-          type: string
-          description: CID for the playlist cover art
-        playlist_contents:
-          type: array
-          description: Array of track IDs to include in the playlist
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
+          description: The blocknumber this track was last updated
         is_stream_gated:
-          type:
-          - boolean
-          - 'null'
-          description: Whether streaming is restricted behind an access gate
-        is_scheduled_release:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the playlist/album is a scheduled release
+          type: boolean
+          description: Whether or not the owner has restricted streaming behind an access gate
         stream_conditions:
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        ddex_app:
-          type: string
-          description: DDEX application identifier
-        ddex_release_ids:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          description: DDEX release identifiers
-        artists:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ddex_resource_contributor'
-          description: DDEX resource contributors / artists
-        copyright_line:
-          allOf:
-          - $ref: '#/components/schemas/ddex_copyright'
-          description: DDEX copyright line
-        producer_copyright_line:
-          allOf:
-          - $ref: '#/components/schemas/ddex_copyright'
-          description: DDEX producer copyright line
-        parental_warning_type:
-          type:
-          - string
-          - 'null'
-          description: Parental warning type
-        is_image_autogenerated:
-          type:
-          - boolean
-          - 'null'
-          description: Whether the image is autogenerated
-    mood:
-      type: string
-      description: Music mood
-      enum:
-      - Peaceful
-      - Romantic
-      - Sentimental
-      - Tender
-      - Easygoing
-      - Yearning
-      - Sophisticated
-      - Sensual
-      - Cool
-      - Gritty
-      - Melancholy
-      - Serious
-      - Brooding
-      - Fiery
-      - Defiant
-      - Aggressive
-      - Rowdy
-      - Excited
-      - Energizing
-      - Empowering
-      - Stirring
-      - Upbeat
-      - Other
-    remix_parent:
-      type: object
-      properties:
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/remix'
-    token_gate:
-      required:
-      - token_gate
-      type: object
-      properties:
-        token_gate:
           type: object
-          description: Must hold an NFT of the given collection to unlock
+          description: How to unlock stream access to the track
           allOf:
-          - $ref: '#/components/schemas/extended_token_gate'
-    access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
-    access:
-      required:
-      - download
-      - stream
-      type: object
-      properties:
-        stream:
+          - $ref: '#/components/schemas/extended_access_gate'
+        is_download_gated:
           type: boolean
-        download:
-          type: boolean
-    trending_playlists_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist'
-    playlist_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    favorite_request_body:
-      type: object
-      description: Optional metadata for favorite/save operations
-      properties:
-        is_save_of_repost:
-          type: boolean
-          description: Set to true when favoriting a reposted item (used for notifications)
+          description: Whether or not the owner has restricted downloading behind an access gate
+        download_conditions:
+          type: object
+          description: How to unlock the track download
+          allOf:
+          - $ref: '#/components/schemas/extended_access_gate'
     tip_gate:
       required:
       - tip_user_id
@@ -1822,38 +2003,34 @@ components:
         tip_user_id:
           type: integer
           description: Must tip the given user ID to unlock
-    usdc_gate:
-      required:
-      - price
-      - splits
+    ddex_resource_contributor:
       type: object
-      properties:
-        price:
-          type: integer
-          description: The price in USDC needed to unlock
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/payment_split'
-    extended_access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/extended_purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
-    playlist_added_timestamp:
       required:
-      - timestamp
-      - track_id
-      type: object
+      - name
+      - roles
       properties:
-        metadata_timestamp:
-          type: integer
-          description: Optional. Metadata timestamp for when the track was added to the playlist.
-        timestamp:
-          type: integer
-        track_id:
+        name:
           type: string
+          minLength: 1
+          description: Contributor name
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Contributor roles
+        sequence_number:
+          type: integer
+          minimum: 0
+          description: Sequence number for ordering
+    repost_request_body:
+      type: object
+      description: Optional metadata for repost operations
+      properties:
+        is_repost_of_repost:
+          type: boolean
+          description: Set to true when reposting an item that was reposted (used for notifications)
     profile_picture:
       type: object
       properties:
@@ -1867,55 +2044,33 @@ components:
           type: array
           items:
             type: string
-    remix:
+    repost:
       required:
-      - has_remix_author_reposted
-      - has_remix_author_saved
-      - parent_track_id
-      - user
+      - repost_item_id
+      - repost_type
+      - user_id
       type: object
       properties:
-        parent_track_id:
+        repost_item_id:
           type: string
-        user:
-          $ref: '#/components/schemas/user'
-        has_remix_author_reposted:
-          type: boolean
-        has_remix_author_saved:
-          type: boolean
-    cover_photo:
+        repost_type:
+          type: string
+        user_id:
+          type: string
+    access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    playlist_library:
       type: object
       properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
+        contents:
           type: array
           items:
-            type: string
-    field_visibility:
-      required:
-      - genre
-      - mood
-      - play_count
-      - remixes
-      - share
-      - tags
-      type: object
-      properties:
-        mood:
-          type: boolean
-        tags:
-          type: boolean
-        genre:
-          type: boolean
-        share:
-          type: boolean
-        play_count:
-          type: boolean
-        remixes:
-          type: boolean
+            type: object
+            properties: {}
     playlist_tracks_response:
       required:
       - latest_chain_block
@@ -1945,17 +2100,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/track'
-    payment_split:
+    favorite:
       required:
+      - created_at
+      - favorite_item_id
+      - favorite_type
       - user_id
-      - percentage
       type: object
       properties:
+        favorite_item_id:
+          type: string
+        favorite_type:
+          type: string
         user_id:
+          type: string
+        created_at:
+          type: string
+    remix_parent:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix'
+    playlist_added_timestamp:
+      required:
+      - timestamp
+      - track_id
+      type: object
+      properties:
+        metadata_timestamp:
           type: integer
-          example: 1234
-        percentage:
-          type: number
+          description: Optional. Metadata timestamp for when the track was added to the playlist.
+        timestamp:
+          type: integer
+        track_id:
+          type: string
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
     album_backlink:
       required:
       - permalink
@@ -1969,6 +2162,17 @@ components:
           type: string
         permalink:
           type: string
+    payment_split:
+      required:
+      - user_id
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
     create_playlist_response:
       type: object
       properties:
@@ -1985,11 +2189,65 @@ components:
         playlist_id:
           type: string
           description: The ID of the created playlist
-    access_info_response:
+    field_visibility:
+      required:
+      - genre
+      - mood
+      - play_count
+      - remixes
+      - share
+      - tags
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/track_access_info'
+        mood:
+          type: boolean
+        tags:
+          type: boolean
+        genre:
+          type: boolean
+        share:
+          type: boolean
+        play_count:
+          type: boolean
+        remixes:
+          type: boolean
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+    ddex_copyright:
+      type: object
+      required:
+      - year
+      - text
+      properties:
+        year:
+          type: string
+          minLength: 4
+          maxLength: 4
+          description: Copyright year (4 characters)
+        text:
+          type: string
+          minLength: 1
+          description: Copyright text
+    extended_token_gate:
+      required:
+      - token_mint
+      - token_amount
+      type: object
+      properties:
+        token_mint:
+          type: string
+          description: The mint of the token needed to unlock
+        token_amount:
+          type: integer
+          description: The amount of the token needed to unlock
     ddex_rights_controller:
       type: object
       description: DDEX rights controller
@@ -2009,240 +2267,16 @@ components:
         rights_share_unknown:
           type: string
           description: Optional
-    following_response:
+    extended_purchase_gate:
       required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
+      - usdc_purchase
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    user:
-      required:
-      - album_count
-      - allow_ai_attribution
-      - artist_coin_badge
-      - associated_sol_wallets_balance
-      - associated_wallets_balance
-      - balance
-      - blocknumber
-      - created_at
-      - current_user_followee_follow_count
-      - does_current_user_follow
-      - does_current_user_subscribe
-      - does_follow_current_user
-      - erc_wallet
-      - followee_count
-      - follower_count
-      - handle
-      - handle_lc
-      - has_collectibles
-      - id
-      - is_available
-      - is_deactivated
-      - is_storage_v2
-      - is_verified
-      - name
-      - playlist_count
-      - repost_count
-      - spl_wallet
-      - spl_usdc_wallet
-      - supporter_count
-      - supporting_count
-      - total_audio_balance
-      - total_balance
-      - track_count
-      - updated_at
-      - verified_with_instagram
-      - verified_with_tiktok
-      - verified_with_twitter
-      - wallet
-      - waudio_balance
-      type: object
-      properties:
-        album_count:
-          type: integer
-        artist_pick_track_id:
-          type: string
-        artist_coin_badge:
+        usdc_purchase:
           type: object
-          properties:
-            mint:
-              type: string
-            logo_uri:
-              type: string
-            banner_image_url:
-              type: string
-            ticker:
-              type: string
-              description: The coin symbol/ticker
-        coin_flair_mint:
-          type: string
-        bio:
-          type: string
-        cover_photo:
-          $ref: '#/components/schemas/cover_photo'
-        followee_count:
-          type: integer
-        follower_count:
-          type: integer
-        handle:
-          type: string
-        id:
-          type: string
-        is_verified:
-          type: boolean
-        twitter_handle:
-          type: string
-        instagram_handle:
-          type: string
-        tiktok_handle:
-          type: string
-        verified_with_twitter:
-          type: boolean
-        verified_with_instagram:
-          type: boolean
-        verified_with_tiktok:
-          type: boolean
-        website:
-          type: string
-        donation:
-          type: string
-        location:
-          type: string
-        name:
-          type: string
-        playlist_count:
-          type: integer
-        profile_picture:
-          $ref: '#/components/schemas/profile_picture'
-        repost_count:
-          type: integer
-        track_count:
-          type: integer
-        is_deactivated:
-          type: boolean
-        is_available:
-          type: boolean
-        erc_wallet:
-          type: string
-        spl_wallet:
-          type: string
-        spl_usdc_wallet:
-          type: string
-        spl_usdc_payout_wallet:
-          type: string
-        supporter_count:
-          type: integer
-        supporting_count:
-          type: integer
-        total_audio_balance:
-          type: integer
-        wallet:
-          type: string
-          description: The user's Ethereum wallet address for their account
-        balance:
-          type: string
-        associated_wallets_balance:
-          type: string
-        total_balance:
-          type: string
-        waudio_balance:
-          type: string
-        associated_sol_wallets_balance:
-          type: string
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        is_storage_v2:
-          type: boolean
-        creator_node_endpoint:
-          type: string
-        current_user_followee_follow_count:
-          type: integer
-        does_current_user_follow:
-          type: boolean
-        does_current_user_subscribe:
-          type: boolean
-        does_follow_current_user:
-          type: boolean
-        handle_lc:
-          type: string
-        updated_at:
-          type: string
-        cover_photo_sizes:
-          type: string
-        cover_photo_cids:
-          $ref: '#/components/schemas/cover_photo'
-        cover_photo_legacy:
-          type: string
-        profile_picture_sizes:
-          type: string
-        profile_picture_cids:
-          $ref: '#/components/schemas/profile_picture'
-        profile_picture_legacy:
-          type: string
-        has_collectibles:
-          type: boolean
-        playlist_library:
-          $ref: '#/components/schemas/playlist_library'
-        allow_ai_attribution:
-          type: boolean
-        profile_type:
-          type: string
-    version_metadata:
-      required:
-      - service
-      - version
-      type: object
-      properties:
-        service:
-          type: string
-        version:
-          type: string
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    track_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_usdc_gate'
   securitySchemes:
     OAuth2:
       type: oauth2

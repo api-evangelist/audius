@@ -45,7 +45,7 @@ paths:
           default: 50
           minimum: 1
           maximum: 100
-      operationId: Get Wallet Coins
+      operationId: GetWalletCoins
       responses:
         '200':
           description: Success
@@ -55,6 +55,8 @@ paths:
                 $ref: '#/components/schemas/user_coins_response'
       summary: Get wallet coins
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: Get Wallet Coins
 components:
   schemas:
     user_coin:
