@@ -107,98 +107,6 @@ paths:
       x-operation-id-original: Get Tips
 components:
   schemas:
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    get_tips_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/tip'
-    supporter_reference:
-      required:
-      - user_id
-      type: object
-      properties:
-        user_id:
-          type: string
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    version_metadata:
-      required:
-      - service
-      - version
-      type: object
-      properties:
-        service:
-          type: string
-        version:
-          type: string
-    tip:
-      required:
-      - amount
-      - created_at
-      - followee_supporters
-      - receiver
-      - sender
-      - slot
-      - tx_signature
-      type: object
-      properties:
-        amount:
-          type: string
-        sender:
-          $ref: '#/components/schemas/user'
-        receiver:
-          $ref: '#/components/schemas/user'
-        created_at:
-          type: string
-        slot:
-          type: integer
-        followee_supporters:
-          type: array
-          items:
-            $ref: '#/components/schemas/supporter_reference'
-        tx_signature:
-          type: string
     user:
       required:
       - album_count
@@ -373,6 +281,72 @@ components:
           type: boolean
         profile_type:
           type: string
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+    tip:
+      required:
+      - amount
+      - created_at
+      - followee_supporters
+      - receiver
+      - sender
+      - slot
+      - tx_signature
+      type: object
+      properties:
+        amount:
+          type: string
+        sender:
+          $ref: '#/components/schemas/user'
+        receiver:
+          $ref: '#/components/schemas/user'
+        created_at:
+          type: string
+        slot:
+          type: integer
+        followee_supporters:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporter_reference'
+        tx_signature:
+          type: string
+    get_tips_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/tip'
     profile_picture:
       type: object
       properties:
@@ -386,6 +360,32 @@ components:
           type: array
           items:
             type: string
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    supporter_reference:
+      required:
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

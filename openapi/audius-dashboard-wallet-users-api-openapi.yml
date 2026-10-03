@@ -57,32 +57,6 @@ paths:
       x-operation-id-original: Bulk get dashboard wallet users
 components:
   schemas:
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    dashboard_wallet_users_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/dashboard_wallet_user'
     user:
       required:
       - album_count
@@ -257,6 +231,13 @@ components:
           type: boolean
         profile_type:
           type: string
+    dashboard_wallet_users_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/dashboard_wallet_user'
     dashboard_wallet_user:
       required:
       - user
@@ -267,6 +248,14 @@ components:
           type: string
         user:
           $ref: '#/components/schemas/user'
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
     profile_picture:
       type: object
       properties:
@@ -275,6 +264,17 @@ components:
         480x480:
           type: string
         1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
           type: string
         mirrors:
           type: array

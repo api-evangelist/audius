@@ -82,6 +82,23 @@ paths:
       x-operation-id-original: Create Reward Code
 components:
   schemas:
+    claim_rewards_request_body:
+      type: object
+      required:
+      - userId
+      properties:
+        challengeId:
+          type: string
+          description: The challenge ID to filter rewards (optional)
+          example: u
+        specifier:
+          type: string
+          description: The specifier to filter rewards (optional)
+          example: 7eP5n
+        userId:
+          type: string
+          description: The user ID to claim rewards for
+          example: 7eP5n
     create_reward_code_request:
       type: object
       required:
@@ -102,23 +119,6 @@ components:
           description: The reward amount (must be greater than 0)
           minimum: 1
           example: 100
-    claim_rewards_request_body:
-      type: object
-      required:
-      - userId
-      properties:
-        challengeId:
-          type: string
-          description: The challenge ID to filter rewards (optional)
-          example: u
-        specifier:
-          type: string
-          description: The specifier to filter rewards (optional)
-          example: 7eP5n
-        userId:
-          type: string
-          description: The user ID to claim rewards for
-          example: 7eP5n
     claim_rewards_response:
       type: object
       required:

@@ -4461,826 +4461,6 @@ paths:
       x-operation-id-original: Get Me
 components:
   schemas:
-    playlist_library_explore_playlist_identifier:
-      type: object
-      description: Reference to an explore playlist
-      required:
-      - type
-      - playlist_id
-      properties:
-        type:
-          type: string
-          enum:
-          - explore_playlist
-        playlist_id:
-          type: string
-          description: Explore playlist identifier
-    stem_parent:
-      required:
-      - category
-      - parent_track_id
-      type: object
-      properties:
-        category:
-          type: string
-        parent_track_id:
-          type: integer
-    user_comments_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment'
-        related:
-          $ref: '#/components/schemas/related'
-    user:
-      required:
-      - album_count
-      - allow_ai_attribution
-      - artist_coin_badge
-      - associated_sol_wallets_balance
-      - associated_wallets_balance
-      - balance
-      - blocknumber
-      - created_at
-      - current_user_followee_follow_count
-      - does_current_user_follow
-      - does_current_user_subscribe
-      - does_follow_current_user
-      - erc_wallet
-      - followee_count
-      - follower_count
-      - handle
-      - handle_lc
-      - has_collectibles
-      - id
-      - is_available
-      - is_deactivated
-      - is_storage_v2
-      - is_verified
-      - name
-      - playlist_count
-      - repost_count
-      - spl_wallet
-      - spl_usdc_wallet
-      - supporter_count
-      - supporting_count
-      - total_audio_balance
-      - total_balance
-      - track_count
-      - updated_at
-      - verified_with_instagram
-      - verified_with_tiktok
-      - verified_with_twitter
-      - wallet
-      - waudio_balance
-      type: object
-      properties:
-        album_count:
-          type: integer
-        artist_pick_track_id:
-          type: string
-        artist_coin_badge:
-          type: object
-          properties:
-            mint:
-              type: string
-            logo_uri:
-              type: string
-            banner_image_url:
-              type: string
-            ticker:
-              type: string
-              description: The coin symbol/ticker
-        coin_flair_mint:
-          type: string
-        bio:
-          type: string
-        cover_photo:
-          $ref: '#/components/schemas/cover_photo'
-        followee_count:
-          type: integer
-        follower_count:
-          type: integer
-        handle:
-          type: string
-        id:
-          type: string
-        is_verified:
-          type: boolean
-        twitter_handle:
-          type: string
-        instagram_handle:
-          type: string
-        tiktok_handle:
-          type: string
-        verified_with_twitter:
-          type: boolean
-        verified_with_instagram:
-          type: boolean
-        verified_with_tiktok:
-          type: boolean
-        website:
-          type: string
-        donation:
-          type: string
-        location:
-          type: string
-        name:
-          type: string
-        playlist_count:
-          type: integer
-        profile_picture:
-          $ref: '#/components/schemas/profile_picture'
-        repost_count:
-          type: integer
-        track_count:
-          type: integer
-        is_deactivated:
-          type: boolean
-        is_available:
-          type: boolean
-        erc_wallet:
-          type: string
-        spl_wallet:
-          type: string
-        spl_usdc_wallet:
-          type: string
-        spl_usdc_payout_wallet:
-          type: string
-        supporter_count:
-          type: integer
-        supporting_count:
-          type: integer
-        total_audio_balance:
-          type: integer
-        wallet:
-          type: string
-          description: The user's Ethereum wallet address for their account
-        balance:
-          type: string
-        associated_wallets_balance:
-          type: string
-        total_balance:
-          type: string
-        waudio_balance:
-          type: string
-        associated_sol_wallets_balance:
-          type: string
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        is_storage_v2:
-          type: boolean
-        creator_node_endpoint:
-          type: string
-        current_user_followee_follow_count:
-          type: integer
-        does_current_user_follow:
-          type: boolean
-        does_current_user_subscribe:
-          type: boolean
-        does_follow_current_user:
-          type: boolean
-        handle_lc:
-          type: string
-        updated_at:
-          type: string
-        cover_photo_sizes:
-          type: string
-        cover_photo_cids:
-          $ref: '#/components/schemas/cover_photo'
-        cover_photo_legacy:
-          type: string
-        profile_picture_sizes:
-          type: string
-        profile_picture_cids:
-          $ref: '#/components/schemas/profile_picture'
-        profile_picture_legacy:
-          type: string
-        has_collectibles:
-          type: boolean
-        playlist_library:
-          $ref: '#/components/schemas/playlist_library'
-        allow_ai_attribution:
-          type: boolean
-        profile_type:
-          type: string
-    purchases_count_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: integer
-    remixed_track_aggregate:
-      required:
-      - remix_count
-      - title
-      - track_id
-      type: object
-      properties:
-        track_id:
-          type: string
-        title:
-          type: string
-        remix_count:
-          type: integer
-    playlists_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_without_tracks'
-    activity:
-      required:
-      - class
-      - item
-      - item_type
-      - timestamp
-      type: object
-      properties:
-        timestamp:
-          type: string
-        item_type:
-          type: string
-          example: track
-          enum:
-          - track
-          - playlist
-        item:
-          type: object
-          properties: {}
-        class:
-          type: string
-      discriminator:
-        propertyName: class
-    grant:
-      required:
-      - created_at
-      - grantee_address
-      - is_approved
-      - is_revoked
-      - updated_at
-      - user_id
-      type: object
-      properties:
-        grantee_address:
-          type: string
-        user_id:
-          type: string
-        is_revoked:
-          type: boolean
-        is_approved:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-    playlist:
-      required:
-      - access
-      - added_timestamps
-      - blocknumber
-      - created_at
-      - favorite_count
-      - followee_favorites
-      - followee_reposts
-      - has_current_user_reposted
-      - has_current_user_saved
-      - id
-      - is_album
-      - is_delete
-      - is_image_autogenerated
-      - is_private
-      - is_scheduled_release
-      - is_stream_gated
-      - permalink
-      - playlist_contents
-      - playlist_name
-      - repost_count
-      - total_play_count
-      - track_count
-      - updated_at
-      - user
-      - user_id
-      type: object
-      properties:
-        artwork:
-          $ref: '#/components/schemas/playlist_artwork'
-        description:
-          type: string
-        permalink:
-          type: string
-        id:
-          type: string
-        is_album:
-          type: boolean
-        is_image_autogenerated:
-          type: boolean
-        playlist_name:
-          type: string
-        playlist_contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        repost_count:
-          type: integer
-        favorite_count:
-          type: integer
-        total_play_count:
-          type: integer
-        user:
-          $ref: '#/components/schemas/user'
-        ddex_app:
-          type: string
-        access:
-          $ref: '#/components/schemas/access'
-        upc:
-          type: string
-        track_count:
-          type: integer
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        followee_reposts:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost'
-        followee_favorites:
-          type: array
-          items:
-            $ref: '#/components/schemas/favorite'
-        has_current_user_reposted:
-          type: boolean
-        has_current_user_saved:
-          type: boolean
-        is_delete:
-          type: boolean
-        is_private:
-          type: boolean
-        updated_at:
-          type: string
-        added_timestamps:
-          type: array
-          description: DEPRECATED. Use playlist_contents instead.
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        user_id:
-          type: string
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        cover_art:
-          type: string
-        cover_art_sizes:
-          type: string
-        cover_art_cids:
-          $ref: '#/components/schemas/playlist_artwork'
-        is_stream_gated:
-          type: boolean
-        stream_conditions:
-          type: object
-          description: How to unlock stream access to the track
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        is_scheduled_release:
-          type: boolean
-        release_date:
-          type: string
-          format: date
-        ddex_release_ids:
-          type: object
-          properties: {}
-        artists:
-          type: array
-          items:
-            type: object
-            properties: {}
-        copyright_line:
-          type: object
-          properties: {}
-        producer_copyright_line:
-          type: object
-          properties: {}
-        parental_warning_type:
-          type:
-          - string
-          - 'null'
-    user_manager:
-      required:
-      - grant
-      - manager
-      type: object
-      properties:
-        manager:
-          $ref: '#/components/schemas/user'
-        grant:
-          $ref: '#/components/schemas/grant'
-    sales_json_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/sales_json_content'
-    user_tracks_remixed_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/remixed_track_aggregate'
-    get_supporters:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/supporter'
-    cover_art:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    comment_entity_type:
-      type: string
-      description: Type of entity that can be commented on
-      enum:
-      - Track
-    purchase_gate:
-      required:
-      - usdc_purchase
-      type: object
-      properties:
-        usdc_purchase:
-          type: object
-          description: Must pay the total price and split to the given addresses to unlock
-          allOf:
-          - $ref: '#/components/schemas/usdc_gate'
-    usdc_gate:
-      required:
-      - price
-      - splits
-      type: object
-      properties:
-        price:
-          type: integer
-          description: The price in USDC needed to unlock
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/payment_split'
-    user_coin_with_accounts:
-      type: object
-      required:
-      - mint
-      - ticker
-      - decimals
-      - balance
-      - balance_usd
-      - accounts
-      properties:
-        mint:
-          type: string
-          description: The coin mint address
-          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
-        ticker:
-          type: string
-          description: The coin symbol
-          example: $AUDIO
-        decimals:
-          type: integer
-          description: The number of decimals for the coin
-          example: 8
-        logo_uri:
-          type:
-          - string
-          - 'null'
-          description: URL to the coin's logo image
-          example: https://example.com/logo.png
-        balance:
-          type: integer
-          description: The total balance of the coin in the user's account (in wei)
-          example: 1000000000
-        balance_usd:
-          type: number
-          description: The total balance of the coin in the user's account in USD
-          example: 1.23
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_coin_account'
-    playlist_library_playlist_identifier:
-      type: object
-      description: Reference to a playlist
-      required:
-      - type
-      - playlist_id
-      properties:
-        type:
-          type: string
-          enum:
-          - playlist
-        playlist_id:
-          type: integer
-          description: Playlist ID
-          example: 1234
-    following_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    remixers_count_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: integer
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    connected_wallets_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/connected_wallets'
-    user_ids_addresses_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_id_address'
-    purchasers_count_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: integer
-    account_collection:
-      required:
-      - id
-      - is_album
-      - name
-      - permalink
-      - user
-      type: object
-      properties:
-        id:
-          type: string
-        is_album:
-          type: boolean
-        name:
-          type: string
-        permalink:
-          type: string
-        user:
-          $ref: '#/components/schemas/account_collection_user'
-    top_genre_users_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    tip_gate:
-      required:
-      - tip_user_id
-      type: object
-      properties:
-        tip_user_id:
-          type: integer
-          description: Must tip the given user ID to unlock
-    favorites_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/favorite'
-    profile_picture:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    favorite:
-      required:
-      - created_at
-      - favorite_item_id
-      - favorite_type
-      - user_id
-      type: object
-      properties:
-        favorite_item_id:
-          type: string
-        favorite_type:
-          type: string
-        user_id:
-          type: string
-        created_at:
-          type: string
     reply_comment:
       required:
       - created_at
@@ -5323,463 +4503,60 @@ components:
           type: string
         parent_comment_id:
           type: integer
-    remix_parent:
-      type: object
-      properties:
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/remix'
-    user_feed_item:
-      oneOf:
-      - $ref: '#/components/schemas/track_feed_item'
-      - $ref: '#/components/schemas/playlist_feed_item'
-      discriminator:
-        propertyName: type
-        mapping:
-          track: '#/components/schemas/track_feed_item'
-          playlist: '#/components/schemas/playlist_feed_item'
-    album_backlink:
+    remixed_track_aggregate:
       required:
-      - permalink
-      - playlist_id
-      - playlist_name
+      - remix_count
+      - title
+      - track_id
       type: object
       properties:
-        playlist_id:
+        track_id:
+          type: string
+        title:
+          type: string
+        remix_count:
           type: integer
-        playlist_name:
-          type: string
-        permalink:
-          type: string
-    email_access:
+    playlist_added_timestamp:
       required:
-      - created_at
-      - email_owner_user_id
-      - encrypted_key
-      - grantor_user_id
-      - id
-      - is_initial
-      - receiving_user_id
-      - updated_at
+      - timestamp
+      - track_id
       type: object
       properties:
-        id:
+        metadata_timestamp:
           type: integer
-        email_owner_user_id:
+          description: Optional. Metadata timestamp for when the track was added to the playlist.
+        timestamp:
           type: integer
-        receiving_user_id:
-          type: integer
-        grantor_user_id:
-          type: integer
-        encrypted_key:
+        track_id:
           type: string
-        is_initial:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-    playlist_feed_item:
+    ddex_rights_controller:
+      type: object
+      description: DDEX rights controller
       required:
-      - item
-      - type
-      type: object
+      - name
+      - roles
       properties:
-        type:
-          type: string
-        item:
-          $ref: '#/components/schemas/playlist'
-    email_access_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/email_access'
-    create_user_request_body:
-      type: object
-      required:
-      - handle
-      - wallet
-      properties:
-        user_id:
-          type: string
-          description: Optional user hash ID (will be generated if not provided)
-          example: p9Km2Lx
-        handle:
-          type: string
-          description: User handle (unique username)
-          example: newartist
-        wallet:
-          type: string
-          description: Wallet address (required)
-          example: 0x1234...
         name:
           type: string
-          description: Display name
-          example: New Artist
-        bio:
-          type: string
-          description: User bio
-          maxLength: 256
-        location:
-          type: string
-          description: User location
-        website:
-          type: string
-          description: Website URL
-          format: uri
-        donation:
-          type: string
-          description: Donation link
-        twitter_handle:
-          type: string
-          description: Twitter handle (without @)
-        instagram_handle:
-          type: string
-          description: Instagram handle (without @)
-        tiktok_handle:
-          type: string
-          description: TikTok handle (without @)
-        profile_picture:
-          type: string
-          description: Profile picture CID or URL
-        profile_picture_sizes:
-          type: string
-          description: Profile picture sizes metadata
-        cover_photo:
-          type: string
-          description: Cover photo CID or URL
-        cover_photo_sizes:
-          type: string
-          description: Cover photo sizes metadata
-        profile_type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - label
-          description: Type of profile (e.g., 'label' for record labels)
-        allow_ai_attribution:
-          type: boolean
-          description: Whether to allow AI attribution
-        spl_usdc_payout_wallet:
-          type: string
-          description: Solana USDC payout wallet address
-        playlist_library:
-          $ref: '#/components/schemas/user_playlist_library'
-        events:
-          type: object
-          description: User events for tracking referrals and mobile users
-          properties:
-            referrer:
-              type: string
-              description: Hash ID of the user who referred this user
-              example: k9Xm5Pz
-            is_mobile_user:
-              type: boolean
-              description: Whether the user is on mobile
-    add_manager_request_body:
-      type: object
-      required:
-      - manager_user_id
-      properties:
-        manager_user_id:
-          type: string
-          description: The user ID of the user to add as manager
-    user_feed_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
+          minLength: 1
+        roles:
           type: array
-          items:
-            $ref: '#/components/schemas/user_feed_item'
-    bulk_subscribers_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_subscribers'
-    create_grant_request_body:
-      type: object
-      required:
-      - app_api_key
-      properties:
-        app_api_key:
-          type: string
-          description: The developer app address (API key) to grant authorization to
-    supporting:
-      required:
-      - amount
-      - rank
-      - receiver
-      type: object
-      properties:
-        rank:
-          type: integer
-        amount:
-          type: string
-        receiver:
-          $ref: '#/components/schemas/user'
-    playlist_without_tracks:
-      required:
-      - access
-      - added_timestamps
-      - blocknumber
-      - created_at
-      - favorite_count
-      - followee_favorites
-      - followee_reposts
-      - has_current_user_reposted
-      - has_current_user_saved
-      - id
-      - is_album
-      - is_delete
-      - is_image_autogenerated
-      - is_private
-      - is_scheduled_release
-      - is_stream_gated
-      - permalink
-      - playlist_contents
-      - playlist_name
-      - repost_count
-      - total_play_count
-      - track_count
-      - updated_at
-      - user
-      - user_id
-      type: object
-      properties:
-        artwork:
-          $ref: '#/components/schemas/playlist_artwork'
-        description:
-          type: string
-        permalink:
-          type: string
-        id:
-          type: string
-        is_album:
-          type: boolean
-        is_image_autogenerated:
-          type: boolean
-        playlist_name:
-          type: string
-        playlist_contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        repost_count:
-          type: integer
-        favorite_count:
-          type: integer
-        total_play_count:
-          type: integer
-        user:
-          $ref: '#/components/schemas/user'
-        ddex_app:
-          type: string
-        access:
-          $ref: '#/components/schemas/access'
-        upc:
-          type: string
-        track_count:
-          type: integer
-        blocknumber:
-          type: integer
-        created_at:
-          type: string
-        followee_reposts:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost'
-        followee_favorites:
-          type: array
-          items:
-            $ref: '#/components/schemas/favorite'
-        has_current_user_reposted:
-          type: boolean
-        has_current_user_saved:
-          type: boolean
-        is_delete:
-          type: boolean
-        is_private:
-          type: boolean
-        updated_at:
-          type: string
-        added_timestamps:
-          type: array
-          description: DEPRECATED. Use playlist_contents instead.
-          items:
-            $ref: '#/components/schemas/playlist_added_timestamp'
-        user_id:
-          type: string
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        cover_art:
-          type: string
-        cover_art_sizes:
-          type: string
-        cover_art_cids:
-          $ref: '#/components/schemas/playlist_artwork'
-        is_stream_gated:
-          type: boolean
-        stream_conditions:
-          type: object
-          description: How to unlock stream access to the track
-          allOf:
-          - $ref: '#/components/schemas/access_gate'
-        is_scheduled_release:
-          type: boolean
-        release_date:
-          type: string
-        ddex_release_ids:
-          type: object
-          properties: {}
-        artists:
-          type: array
-          items:
-            type: object
-            properties: {}
-        copyright_line:
-          type: object
-          properties: {}
-        producer_copyright_line:
-          type: object
-          properties: {}
-        parental_warning_type:
-          type:
-          - string
-          - 'null'
-    access:
-      required:
-      - download
-      - stream
-      type: object
-      properties:
-        stream:
-          type: boolean
-        download:
-          type: boolean
-    token_gate:
-      required:
-      - token_gate
-      type: object
-      properties:
-        token_gate:
-          type: object
-          description: Must hold an NFT of the given collection to unlock
-          allOf:
-          - $ref: '#/components/schemas/extended_token_gate'
-    user_account_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/account'
-    top_users_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    playlist_artwork:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
+          minItems: 1
           items:
             type: string
-    tags_response:
+            minLength: 1
+        rights_share_unknown:
+          type: string
+          description: Optional
+    user_coin_with_accounts:
       type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: string
-    user_coin:
       required:
       - mint
       - ticker
       - decimals
-      - owner_id
       - balance
-      - has_discord
       - balance_usd
-      type: object
+      - accounts
       properties:
         mint:
           type: string
@@ -5793,662 +4570,34 @@ components:
           type: integer
           description: The number of decimals for the coin
           example: 8
-        owner_id:
-          type: string
-          description: The ID of the user associated with the coin
-          example: 7eP5n
         logo_uri:
           type:
           - string
           - 'null'
           description: URL to the coin's logo image
           example: https://example.com/logo.png
-        banner_image_url:
-          type:
-          - string
-          - 'null'
-          description: URL to the coin's banner image
-          example: https://example.com/banner.png
-        has_discord:
-          type: boolean
-          description: Whether the coin has a Discord server
-          example: true
         balance:
           type: integer
-          description: The balance of the coin in the user's account (in wei)
+          description: The total balance of the coin in the user's account (in wei)
           example: 1000000000
         balance_usd:
           type: number
-          description: The balance of the coin in the user's account in USD
+          description: The total balance of the coin in the user's account in USD
           example: 1.23
-    managed_user:
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_coin_account'
+    user_manager:
       required:
       - grant
-      - user
+      - manager
       type: object
       properties:
-        user:
+        manager:
           $ref: '#/components/schemas/user'
         grant:
           $ref: '#/components/schemas/grant'
-    track_segment:
-      required:
-      - duration
-      - multihash
-      type: object
-      properties:
-        duration:
-          type: number
-        multihash:
-          type: string
-    user_subscribers:
-      required:
-      - user_id
-      type: object
-      properties:
-        user_id:
-          type: string
-        subscriber_ids:
-          type: array
-          items:
-            type: string
-    verify_token:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/decoded_user_token'
-    mutual_followers_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    user_id_address:
-      type: object
-      required:
-      - user_id
-      - address
-      properties:
-        user_id:
-          type: string
-        address:
-          type: string
-    transaction_details:
-      required:
-      - balance
-      - change
-      - metadata
-      - method
-      - signature
-      - transaction_date
-      - transaction_type
-      - user_bank
-      type: object
-      properties:
-        transaction_date:
-          type: string
-        transaction_type:
-          type: string
-        method:
-          type: string
-        signature:
-          type: string
-        user_bank:
-          type: string
-        change:
-          type: string
-        balance:
-          type: string
-        metadata:
-          type: object
-          properties: {}
-      discriminator:
-        propertyName: transaction_type
-    comment:
-      required:
-      - created_at
-      - entity_id
-      - entity_type
-      - id
-      - is_edited
-      - message
-      - react_count
-      - reply_count
-      type: object
-      properties:
-        id:
-          type: string
-        entity_id:
-          type: string
-        entity_type:
-          $ref: '#/components/schemas/comment_entity_type'
-        user_id:
-          type: string
-        message:
-          type: string
-        mentions:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment_mention'
-        track_timestamp_s:
-          type: integer
-        react_count:
-          type: integer
-        reply_count:
-          type: integer
-        is_edited:
-          type: boolean
-        is_current_user_reacted:
-          type: boolean
-        is_artist_reacted:
-          type: boolean
-        is_tombstone:
-          type: boolean
-        is_muted:
-          type: boolean
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        replies:
-          type: array
-          items:
-            $ref: '#/components/schemas/reply_comment'
-        parent_comment_id:
-          type: integer
-    purchases_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/purchase'
-    user_track_listen_counts_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/wild_month_model'
-    repost:
-      required:
-      - repost_item_id
-      - repost_type
-      - user_id
-      type: object
-      properties:
-        repost_item_id:
-          type: string
-        repost_type:
-          type: string
-        user_id:
-          type: string
-    purchase_split:
-      required:
-      - amount
-      - payout_wallet
-      type: object
-      properties:
-        user_id:
-          type: integer
-        payout_wallet:
-          type: string
-        amount:
-          type: string
-    user_playlist_library:
-      type: object
-      description: User's playlist library with support for folders and playlists
-      required:
-      - contents
-      properties:
-        contents:
-          type: array
-          description: Array of folders and playlist identifiers
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/playlist_library_folder'
-            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
-            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
-    managers_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_manager'
-    user_response_single:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/user'
-    collectibles:
-      type: object
-      properties:
-        data:
-          type: object
-          properties: {}
-          description: Raw collectibles JSON structure generated by client
-    managed_users_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/managed_user'
-    authorized_app:
-      required:
-      - address
-      - grant_created_at
-      - grant_updated_at
-      - grantor_user_id
-      - name
-      type: object
-      properties:
-        address:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        image_url:
-          type: string
-        grantor_user_id:
-          type: string
-        grant_created_at:
-          type: string
-        grant_updated_at:
-          type: string
-    user_coin_account:
-      type: object
-      required:
-      - account
-      - owner
-      - balance
-      - balance_usd
-      - is_in_app_wallet
-      properties:
-        account:
-          type: string
-          description: The token account address
-          example: CTyFguG69kwYrzk24P3UuBvY1rR5atu9kf2S6XEwAU8X
-        owner:
-          type: string
-          description: The owner wallet of the token account
-          example: HzZ3EKACbH6XEHs59Rt1adVzUKv5cTDE9o9YWFaMhwpF
-        balance:
-          type: integer
-          description: The balance of the coin in the user's account (in wei)
-          example: 1000000000
-        balance_usd:
-          type: number
-          description: The balance of the coin in the user's account in USD
-          example: 1.23
-        is_in_app_wallet:
-          type: boolean
-          description: Whether the account is in the user's in-app wallet
-          example: true
-    sale_json:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title of the content (track/album/playlist)
-        link:
-          type: string
-          description: URL link to the content
-        purchased_by:
-          type: string
-          description: Name of the buyer
-        buyer_user_id:
-          type: integer
-          description: User ID of the buyer
-        date:
-          type: string
-          description: ISO format date string of when the sale occurred
-        sale_price:
-          type: number
-          description: Base sale price in USDC
-        network_fee:
-          type: number
-          description: Network fee deducted from sale in USDC
-        pay_extra:
-          type: number
-          description: Extra amount paid by buyer in USDC
-        total:
-          type: number
-          description: Total amount received by seller in USDC
-        country:
-          type: string
-          description: Country code where purchase was made
-        encrypted_email:
-          type: string
-          description: Encrypted email of buyer if available
-        encrypted_key:
-          type: string
-          description: Encrypted key for decrypting the buyer's email
-        is_initial:
-          type: boolean
-          description: Whether this is an initial encryption from the backfill
-        pubkey_base64:
-          type: string
-          description: Base64 encoded public key of the buyer
-    account_collection_user:
-      required:
-      - handle
-      - id
-      type: object
-      properties:
-        id:
-          type: string
-        handle:
-          type: string
-        is_deactivated:
-          type: boolean
-    followers_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    track_library_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_activity'
-    tracks_count_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: integer
-          description: The total number of tracks matching the filter criteria
-          example: 15
-    listen_count:
-      type: object
-      properties:
-        trackId:
-          type: integer
-        date:
-          type: string
-        listens:
-          type: integer
-    reposts:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/activity'
-    connected_wallets:
-      required:
-      - erc_wallets
-      - spl_wallets
-      type: object
-      properties:
-        erc_wallets:
-          type: array
-          items:
-            type: string
-        spl_wallets:
-          type: array
-          items:
-            type: string
-    create_user_response:
-      type: object
-      properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-        user_id:
-          type: string
-          description: The ID of the created user
-    user_search:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    remix:
-      required:
-      - has_remix_author_reposted
-      - has_remix_author_saved
-      - parent_track_id
-      - user
-      type: object
-      properties:
-        parent_track_id:
-          type: string
-        user:
-          $ref: '#/components/schemas/user'
-        has_remix_author_reposted:
-          type: boolean
-        has_remix_author_saved:
-          type: boolean
-    sales_aggregate_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/sales_aggregate'
-    purchase:
-      required:
-      - access
-      - amount
-      - buyer_user_id
-      - content_id
-      - content_type
-      - created_at
-      - extra_amount
-      - seller_user_id
-      - signature
-      - slot
-      - splits
-      - updated_at
-      type: object
-      properties:
-        slot:
-          type: integer
-        signature:
-          type: string
-        seller_user_id:
-          type: string
-        buyer_user_id:
-          type: string
-        amount:
-          type: string
-        extra_amount:
-          type: string
-        content_type:
-          type: string
-        content_id:
-          type: string
-        created_at:
-          type: string
-        updated_at:
-          type: string
-        access:
-          type: string
-        splits:
-          type: array
-          items:
-            $ref: '#/components/schemas/purchase_split'
-      discriminator:
-        propertyName: content_type
-    account:
-      required:
-      - playlists
-      - track_save_count
-      - user
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/user'
-        playlists:
-          type: array
-          items:
-            $ref: '#/components/schemas/account_collection'
-        playlist_library:
-          $ref: '#/components/schemas/playlist_library'
-        track_save_count:
-          type: integer
-    transaction_history_count_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: integer
-    balance_history_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/balance_history_data_point'
     collection_library_response:
       required:
       - latest_chain_block
@@ -6478,282 +4627,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/collection_activity_without_tracks'
-    remixers_response:
+    approve_grant_request_body:
+      type: object
       required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
+      - grantor_user_id
+      properties:
+        grantor_user_id:
+          type: string
+          description: The user ID of the child user who proposed the manager (grantor)
+    tags_response:
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    get_supported_users:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/supporting'
-    purchasers_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    url_with_mirrors:
-      required:
-      - mirrors
-      type: object
-      properties:
-        url:
-          type: string
-        mirrors:
           type: array
           items:
             type: string
-    user_coins_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_coin'
-    monthly_aggregate_play:
-      type: object
-      properties:
-        totalListens:
-          type: integer
-        trackIds:
-          type: array
-          items:
-            type: integer
-        listenCounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/listen_count'
-    get_supporting:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/supporting'
-    ddex_resource_contributor:
-      type: object
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-          description: Contributor name
-        roles:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-          description: Contributor roles
-        sequence_number:
-          type: integer
-          minimum: 0
-          description: Sequence number for ordering
-    decoded_user_token:
-      required:
-      - apiKey
-      - email
-      - handle
-      - iat
-      - name
-      - sub
-      - userId
-      - verified
-      type: object
-      properties:
-        apiKey:
-          type: string
-        userId:
-          type: string
-        email:
-          type: string
-        name:
-          type: string
-        handle:
-          type: string
-        verified:
-          type: boolean
-        profile_picture:
-          $ref: '#/components/schemas/profile_picture'
-        sub:
-          type: string
-        iat:
-          type: string
-    comment_mention:
-      required:
-      - handle
-      - user_id
-      type: object
-      properties:
-        user_id:
-          type: integer
-        handle:
-          type: string
-    collection_activity_without_tracks:
-      allOf:
-      - $ref: '#/components/schemas/activity'
-      - required:
-        - item
-        - item_type
-        type: object
-        properties:
-          item_type:
-            type: string
-            example: playlist
-            enum:
-            - playlist
-          item:
-            $ref: '#/components/schemas/playlist_without_tracks'
-    playlist_added_timestamp:
-      required:
-      - timestamp
-      - track_id
-      type: object
-      properties:
-        metadata_timestamp:
-          type: integer
-          description: Optional. Metadata timestamp for when the track was added to the playlist.
-        timestamp:
-          type: integer
-        track_id:
-          type: string
-    transaction_history_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/transaction_details'
-    payment_split:
-      required:
-      - user_id
-      - percentage
-      type: object
-      properties:
-        user_id:
-          type: integer
-          example: 1234
-        percentage:
-          type: number
     field_visibility:
       required:
       - genre
@@ -6776,231 +4664,6 @@ components:
           type: boolean
         remixes:
           type: boolean
-    ddex_copyright:
-      type: object
-      required:
-      - year
-      - text
-      properties:
-        year:
-          type: string
-          minLength: 4
-          maxLength: 4
-          description: Copyright year (4 characters)
-        text:
-          type: string
-          minLength: 1
-          description: Copyright text
-    balance_history_data_point:
-      type: object
-      required:
-      - timestamp
-      - balance_usd
-      properties:
-        timestamp:
-          type: integer
-          format: int64
-          description: Unix timestamp in seconds
-          example: 1704067200
-        balance_usd:
-          type: number
-          format: double
-          description: Total portfolio balance in USD at this timestamp
-          example: 1234.56
-    related_artist_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    extended_token_gate:
-      required:
-      - token_mint
-      - token_amount
-      type: object
-      properties:
-        token_mint:
-          type: string
-          description: The mint of the token needed to unlock
-        token_amount:
-          type: integer
-          description: The amount of the token needed to unlock
-    ddex_rights_controller:
-      type: object
-      description: DDEX rights controller
-      required:
-      - name
-      - roles
-      properties:
-        name:
-          type: string
-          minLength: 1
-        roles:
-          type: array
-          minItems: 1
-          items:
-            type: string
-            minLength: 1
-        rights_share_unknown:
-          type: string
-          description: Optional
-    playlist_library_folder:
-      type: object
-      description: Folder containing nested playlists and folders
-      required:
-      - id
-      - type
-      - name
-      - contents
-      properties:
-        id:
-          type: string
-          description: Unique folder identifier
-        type:
-          type: string
-          enum:
-          - folder
-        name:
-          type: string
-          description: Folder name
-        contents:
-          type: array
-          description: Nested folders and playlist identifiers
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/playlist_library_folder'
-            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
-            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
-    wild_month_model:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/monthly_aggregate_play'
-    authorized_apps:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/authorized_app'
-    get_challenges:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/challenge_response'
-    follow_gate:
-      required:
-      - follow_user_id
-      type: object
-      properties:
-        follow_user_id:
-          type: integer
-          description: Must follow the given user ID to unlock
-    subscribers_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-    albums_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_without_tracks'
-    sales_aggregate:
-      required:
-      - content_id
-      - content_type
-      - purchase_count
-      type: object
-      properties:
-        content_type:
-          type: string
-        content_id:
-          type: string
-        purchase_count:
-          type: integer
-    user_coin_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/user_coin_with_accounts'
-    collectibles_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/collectibles'
     track:
       required:
       - access
@@ -7249,34 +4912,229 @@ components:
           $ref: '#/components/schemas/url_with_mirrors'
         preview:
           $ref: '#/components/schemas/url_with_mirrors'
-    related:
+    version_metadata:
+      required:
+      - service
+      - version
       type: object
       properties:
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/user'
-        tracks:
-          type: array
-          items:
-            $ref: '#/components/schemas/track'
-        playlists:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist'
-    track_artwork:
+        service:
+          type: string
+        version:
+          type: string
+    user_id_address:
+      type: object
+      required:
+      - user_id
+      - address
+      properties:
+        user_id:
+          type: string
+        address:
+          type: string
+    listen_count:
       type: object
       properties:
-        150x150:
+        trackId:
+          type: integer
+        date:
           type: string
-        480x480:
+        listens:
+          type: integer
+    challenge_response:
+      required:
+      - amount
+      - challenge_id
+      - challenge_type
+      - disbursed_amount
+      - is_active
+      - is_complete
+      - is_disbursed
+      - metadata
+      - user_id
+      type: object
+      properties:
+        challenge_id:
           type: string
-        1000x1000:
+        user_id:
           type: string
-        mirrors:
+        specifier:
+          type: string
+        is_complete:
+          type: boolean
+        is_active:
+          type: boolean
+        is_disbursed:
+          type: boolean
+        current_step_count:
+          type: integer
+        max_steps:
+          type: integer
+        challenge_type:
+          type: string
+        amount:
+          type: string
+        disbursed_amount:
+          type: integer
+        cooldown_days:
+          type: integer
+        metadata:
+          type: object
+          properties: {}
+    bulk_subscribers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/user_subscribers'
+    user_feed_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_feed_item'
+    user_comments_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment'
+        related:
+          $ref: '#/components/schemas/related'
+    purchase_gate:
+      required:
+      - usdc_purchase
+      type: object
+      properties:
+        usdc_purchase:
+          type: object
+          description: Must pay the total price and split to the given addresses to unlock
+          allOf:
+          - $ref: '#/components/schemas/usdc_gate'
+    access_gate:
+      oneOf:
+      - $ref: '#/components/schemas/tip_gate'
+      - $ref: '#/components/schemas/follow_gate'
+      - $ref: '#/components/schemas/purchase_gate'
+      - $ref: '#/components/schemas/token_gate'
+    connected_wallets_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/connected_wallets'
+    transaction_history_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/transaction_details'
+    ddex_copyright:
+      type: object
+      required:
+      - year
+      - text
+      properties:
+        year:
+          type: string
+          minLength: 4
+          maxLength: 4
+          description: Copyright year (4 characters)
+        text:
+          type: string
+          minLength: 1
+          description: Copyright text
     history_response:
       required:
       - latest_chain_block
@@ -7306,14 +5164,1496 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/track_activity'
-    approve_grant_request_body:
+    grant:
+      required:
+      - created_at
+      - grantee_address
+      - is_approved
+      - is_revoked
+      - updated_at
+      - user_id
+      type: object
+      properties:
+        grantee_address:
+          type: string
+        user_id:
+          type: string
+        is_revoked:
+          type: boolean
+        is_approved:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    create_user_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+        user_id:
+          type: string
+          description: The ID of the created user
+    token_gate:
+      required:
+      - token_gate
+      type: object
+      properties:
+        token_gate:
+          type: object
+          description: Must hold an NFT of the given collection to unlock
+          allOf:
+          - $ref: '#/components/schemas/extended_token_gate'
+    sales_aggregate:
+      required:
+      - content_id
+      - content_type
+      - purchase_count
+      type: object
+      properties:
+        content_type:
+          type: string
+        content_id:
+          type: string
+        purchase_count:
+          type: integer
+    collection_activity_without_tracks:
+      allOf:
+      - $ref: '#/components/schemas/activity'
+      - required:
+        - item
+        - item_type
+        type: object
+        properties:
+          item_type:
+            type: string
+            example: playlist
+            enum:
+            - playlist
+          item:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    following_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    verify_token:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/decoded_user_token'
+    playlist:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
+          type: string
+        permalink:
+          type: string
+        id:
+          type: string
+        is_album:
+          type: boolean
+        is_image_autogenerated:
+          type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+          format: date
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+    purchases_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    follow_gate:
+      required:
+      - follow_user_id
+      type: object
+      properties:
+        follow_user_id:
+          type: integer
+          description: Must follow the given user ID to unlock
+    email_access_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/email_access'
+    user_ids_addresses_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_id_address'
+    managed_users_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/managed_user'
+    monthly_aggregate_play:
+      type: object
+      properties:
+        totalListens:
+          type: integer
+        trackIds:
+          type: array
+          items:
+            type: integer
+        listenCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/listen_count'
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    connected_wallets:
+      required:
+      - erc_wallets
+      - spl_wallets
+      type: object
+      properties:
+        erc_wallets:
+          type: array
+          items:
+            type: string
+        spl_wallets:
+          type: array
+          items:
+            type: string
+    balance_history_response:
       type: object
       required:
-      - grantor_user_id
+      - data
       properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/balance_history_data_point'
+    usdc_gate:
+      required:
+      - price
+      - splits
+      type: object
+      properties:
+        price:
+          type: integer
+          description: The price in USDC needed to unlock
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/payment_split'
+    authorized_app:
+      required:
+      - address
+      - grant_created_at
+      - grant_updated_at
+      - grantor_user_id
+      - name
+      type: object
+      properties:
+        address:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        image_url:
+          type: string
         grantor_user_id:
           type: string
-          description: The user ID of the child user who proposed the manager (grantor)
+        grant_created_at:
+          type: string
+        grant_updated_at:
+          type: string
+    collectibles_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/collectibles'
+    account_collection_user:
+      required:
+      - handle
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+        handle:
+          type: string
+        is_deactivated:
+          type: boolean
+    user_tracks_remixed_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/remixed_track_aggregate'
+    comment_mention:
+      required:
+      - handle
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: integer
+        handle:
+          type: string
+    supporter:
+      required:
+      - amount
+      - rank
+      - sender
+      type: object
+      properties:
+        rank:
+          type: integer
+        amount:
+          type: string
+        sender:
+          $ref: '#/components/schemas/user'
+    tip_gate:
+      required:
+      - tip_user_id
+      type: object
+      properties:
+        tip_user_id:
+          type: integer
+          description: Must tip the given user ID to unlock
+    create_user_request_body:
+      type: object
+      required:
+      - handle
+      - wallet
+      properties:
+        user_id:
+          type: string
+          description: Optional user hash ID (will be generated if not provided)
+          example: p9Km2Lx
+        handle:
+          type: string
+          description: User handle (unique username)
+          example: newartist
+        wallet:
+          type: string
+          description: Wallet address (required)
+          example: 0x1234...
+        name:
+          type: string
+          description: Display name
+          example: New Artist
+        bio:
+          type: string
+          description: User bio
+          maxLength: 256
+        location:
+          type: string
+          description: User location
+        website:
+          type: string
+          description: Website URL
+          format: uri
+        donation:
+          type: string
+          description: Donation link
+        twitter_handle:
+          type: string
+          description: Twitter handle (without @)
+        instagram_handle:
+          type: string
+          description: Instagram handle (without @)
+        tiktok_handle:
+          type: string
+          description: TikTok handle (without @)
+        profile_picture:
+          type: string
+          description: Profile picture CID or URL
+        profile_picture_sizes:
+          type: string
+          description: Profile picture sizes metadata
+        cover_photo:
+          type: string
+          description: Cover photo CID or URL
+        cover_photo_sizes:
+          type: string
+          description: Cover photo sizes metadata
+        profile_type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - label
+          description: Type of profile (e.g., 'label' for record labels)
+        allow_ai_attribution:
+          type: boolean
+          description: Whether to allow AI attribution
+        spl_usdc_payout_wallet:
+          type: string
+          description: Solana USDC payout wallet address
+        playlist_library:
+          $ref: '#/components/schemas/user_playlist_library'
+        events:
+          type: object
+          description: User events for tracking referrals and mobile users
+          properties:
+            referrer:
+              type: string
+              description: Hash ID of the user who referred this user
+              example: k9Xm5Pz
+            is_mobile_user:
+              type: boolean
+              description: Whether the user is on mobile
+    comment_entity_type:
+      type: string
+      description: Type of entity that can be commented on
+      enum:
+      - Track
+    purchasers_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    user_coin_account:
+      type: object
+      required:
+      - account
+      - owner
+      - balance
+      - balance_usd
+      - is_in_app_wallet
+      properties:
+        account:
+          type: string
+          description: The token account address
+          example: CTyFguG69kwYrzk24P3UuBvY1rR5atu9kf2S6XEwAU8X
+        owner:
+          type: string
+          description: The owner wallet of the token account
+          example: HzZ3EKACbH6XEHs59Rt1adVzUKv5cTDE9o9YWFaMhwpF
+        balance:
+          type: integer
+          description: The balance of the coin in the user's account (in wei)
+          example: 1000000000
+        balance_usd:
+          type: number
+          description: The balance of the coin in the user's account in USD
+          example: 1.23
+        is_in_app_wallet:
+          type: boolean
+          description: Whether the account is in the user's in-app wallet
+          example: true
+    managers_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_manager'
+    user_coin:
+      required:
+      - mint
+      - ticker
+      - decimals
+      - owner_id
+      - balance
+      - has_discord
+      - balance_usd
+      type: object
+      properties:
+        mint:
+          type: string
+          description: The coin mint address
+          example: 9LzCMqDgTKYz9Drzqnpgee3SGa89up3a247ypMj2xrqM
+        ticker:
+          type: string
+          description: The coin symbol
+          example: $AUDIO
+        decimals:
+          type: integer
+          description: The number of decimals for the coin
+          example: 8
+        owner_id:
+          type: string
+          description: The ID of the user associated with the coin
+          example: 7eP5n
+        logo_uri:
+          type:
+          - string
+          - 'null'
+          description: URL to the coin's logo image
+          example: https://example.com/logo.png
+        banner_image_url:
+          type:
+          - string
+          - 'null'
+          description: URL to the coin's banner image
+          example: https://example.com/banner.png
+        has_discord:
+          type: boolean
+          description: Whether the coin has a Discord server
+          example: true
+        balance:
+          type: integer
+          description: The balance of the coin in the user's account (in wei)
+          example: 1000000000
+        balance_usd:
+          type: number
+          description: The balance of the coin in the user's account in USD
+          example: 1.23
+    purchase_split:
+      required:
+      - amount
+      - payout_wallet
+      type: object
+      properties:
+        user_id:
+          type: integer
+        payout_wallet:
+          type: string
+        amount:
+          type: string
+    activity:
+      required:
+      - class
+      - item
+      - item_type
+      - timestamp
+      type: object
+      properties:
+        timestamp:
+          type: string
+        item_type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+        item:
+          type: object
+          properties: {}
+        class:
+          type: string
+      discriminator:
+        propertyName: class
+    user_subscribers:
+      required:
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
+        subscriber_ids:
+          type: array
+          items:
+            type: string
+    user_track_listen_counts_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/wild_month_model'
+    tracks:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+    favorites_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+    album_backlink:
+      required:
+      - permalink
+      - playlist_id
+      - playlist_name
+      type: object
+      properties:
+        playlist_id:
+          type: integer
+        playlist_name:
+          type: string
+        permalink:
+          type: string
+    playlist_feed_item:
+      required:
+      - item
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          $ref: '#/components/schemas/playlist'
+    remix_parent:
+      type: object
+      properties:
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix'
+    playlist_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    wild_month_model:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/monthly_aggregate_play'
+    get_challenges:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/challenge_response'
+    authorized_apps:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/authorized_app'
+    favorite:
+      required:
+      - created_at
+      - favorite_item_id
+      - favorite_type
+      - user_id
+      type: object
+      properties:
+        favorite_item_id:
+          type: string
+        favorite_type:
+          type: string
+        user_id:
+          type: string
+        created_at:
+          type: string
+    get_supporters:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporter'
+    top_genre_users_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    playlists_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    account:
+      required:
+      - playlists
+      - track_save_count
+      - user
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+        playlists:
+          type: array
+          items:
+            $ref: '#/components/schemas/account_collection'
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        track_save_count:
+          type: integer
+    repost:
+      required:
+      - repost_item_id
+      - repost_type
+      - user_id
+      type: object
+      properties:
+        repost_item_id:
+          type: string
+        repost_type:
+          type: string
+        user_id:
+          type: string
+    supporting:
+      required:
+      - amount
+      - rank
+      - receiver
+      type: object
+      properties:
+        rank:
+          type: integer
+        amount:
+          type: string
+        receiver:
+          $ref: '#/components/schemas/user'
+    account_collection:
+      required:
+      - id
+      - is_album
+      - name
+      - permalink
+      - user
+      type: object
+      properties:
+        id:
+          type: string
+        is_album:
+          type: boolean
+        name:
+          type: string
+        permalink:
+          type: string
+        user:
+          $ref: '#/components/schemas/account_collection_user'
+    user_coins_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_coin'
+    related_artist_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    user_tracks_download_count_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: integer
+          format: int64
+          description: Total download count for all tracks (and stems) owned by the user
+    user_account_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/account'
+    sales_json_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/sales_json_content'
+    get_supporting:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/supporting'
+    related:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        playlists:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist'
+    add_manager_request_body:
+      type: object
+      required:
+      - manager_user_id
+      properties:
+        manager_user_id:
+          type: string
+          description: The user ID of the user to add as manager
+    ddex_resource_contributor:
+      type: object
+      required:
+      - name
+      - roles
+      properties:
+        name:
+          type: string
+          minLength: 1
+          description: Contributor name
+        roles:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Contributor roles
+        sequence_number:
+          type: integer
+          minimum: 0
+          description: Sequence number for ordering
+    access:
+      required:
+      - download
+      - stream
+      type: object
+      properties:
+        stream:
+          type: boolean
+        download:
+          type: boolean
+    purchase:
+      required:
+      - access
+      - amount
+      - buyer_user_id
+      - content_id
+      - content_type
+      - created_at
+      - extra_amount
+      - seller_user_id
+      - signature
+      - slot
+      - splits
+      - updated_at
+      type: object
+      properties:
+        slot:
+          type: integer
+        signature:
+          type: string
+        seller_user_id:
+          type: string
+        buyer_user_id:
+          type: string
+        amount:
+          type: string
+        extra_amount:
+          type: string
+        content_type:
+          type: string
+        content_id:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        access:
+          type: string
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/purchase_split'
+      discriminator:
+        propertyName: content_type
+    remix:
+      required:
+      - has_remix_author_reposted
+      - has_remix_author_saved
+      - parent_track_id
+      - user
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        user:
+          $ref: '#/components/schemas/user'
+        has_remix_author_reposted:
+          type: boolean
+        has_remix_author_saved:
+          type: boolean
+    subscribers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    playlist_library_playlist_identifier:
+      type: object
+      description: Reference to a playlist
+      required:
+      - type
+      - playlist_id
+      properties:
+        type:
+          type: string
+          enum:
+          - playlist
+        playlist_id:
+          type: integer
+          description: Playlist ID
+          example: 1234
+    top_users_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    balance_history_data_point:
+      type: object
+      required:
+      - timestamp
+      - balance_usd
+      properties:
+        timestamp:
+          type: integer
+          format: int64
+          description: Unix timestamp in seconds
+          example: 1704067200
+        balance_usd:
+          type: number
+          format: double
+          description: Total portfolio balance in USD at this timestamp
+          example: 1234.56
+    stem_parent:
+      required:
+      - category
+      - parent_track_id
+      type: object
+      properties:
+        category:
+          type: string
+        parent_track_id:
+          type: integer
+    user_search:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    sales_json_content:
+      type: object
+      properties:
+        sales:
+          type: array
+          items:
+            $ref: '#/components/schemas/sale_json'
+    track_feed_item:
+      required:
+      - item
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          $ref: '#/components/schemas/track'
+    transaction_details:
+      required:
+      - balance
+      - change
+      - metadata
+      - method
+      - signature
+      - transaction_date
+      - transaction_type
+      - user_bank
+      type: object
+      properties:
+        transaction_date:
+          type: string
+        transaction_type:
+          type: string
+        method:
+          type: string
+        signature:
+          type: string
+        user_bank:
+          type: string
+        change:
+          type: string
+        balance:
+          type: string
+        metadata:
+          type: object
+          properties: {}
+      discriminator:
+        propertyName: transaction_type
+    transaction_history_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    playlist_without_tracks:
+      required:
+      - access
+      - added_timestamps
+      - blocknumber
+      - created_at
+      - favorite_count
+      - followee_favorites
+      - followee_reposts
+      - has_current_user_reposted
+      - has_current_user_saved
+      - id
+      - is_album
+      - is_delete
+      - is_image_autogenerated
+      - is_private
+      - is_scheduled_release
+      - is_stream_gated
+      - permalink
+      - playlist_contents
+      - playlist_name
+      - repost_count
+      - total_play_count
+      - track_count
+      - updated_at
+      - user
+      - user_id
+      type: object
+      properties:
+        artwork:
+          $ref: '#/components/schemas/playlist_artwork'
+        description:
+          type: string
+        permalink:
+          type: string
+        id:
+          type: string
+        is_album:
+          type: boolean
+        is_image_autogenerated:
+          type: boolean
+        playlist_name:
+          type: string
+        playlist_contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        repost_count:
+          type: integer
+        favorite_count:
+          type: integer
+        total_play_count:
+          type: integer
+        user:
+          $ref: '#/components/schemas/user'
+        ddex_app:
+          type: string
+        access:
+          $ref: '#/components/schemas/access'
+        upc:
+          type: string
+        track_count:
+          type: integer
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        followee_reposts:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost'
+        followee_favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/favorite'
+        has_current_user_reposted:
+          type: boolean
+        has_current_user_saved:
+          type: boolean
+        is_delete:
+          type: boolean
+        is_private:
+          type: boolean
+        updated_at:
+          type: string
+        added_timestamps:
+          type: array
+          description: DEPRECATED. Use playlist_contents instead.
+          items:
+            $ref: '#/components/schemas/playlist_added_timestamp'
+        user_id:
+          type: string
+        tracks:
+          type: array
+          items:
+            $ref: '#/components/schemas/track'
+        cover_art:
+          type: string
+        cover_art_sizes:
+          type: string
+        cover_art_cids:
+          $ref: '#/components/schemas/playlist_artwork'
+        is_stream_gated:
+          type: boolean
+        stream_conditions:
+          type: object
+          description: How to unlock stream access to the track
+          allOf:
+          - $ref: '#/components/schemas/access_gate'
+        is_scheduled_release:
+          type: boolean
+        release_date:
+          type: string
+        ddex_release_ids:
+          type: object
+          properties: {}
+        artists:
+          type: array
+          items:
+            type: object
+            properties: {}
+        copyright_line:
+          type: object
+          properties: {}
+        producer_copyright_line:
+          type: object
+          properties: {}
+        parental_warning_type:
+          type:
+          - string
+          - 'null'
+    create_grant_request_body:
+      type: object
+      required:
+      - app_api_key
+      properties:
+        app_api_key:
+          type: string
+          description: The developer app address (API key) to grant authorization to
     update_user_request_body:
       type: object
       description: Request body for updating user profile. All fields are optional.
@@ -7395,6 +6735,364 @@ components:
             is_mobile_user:
               type: boolean
               description: Whether the user is on mobile
+    mutual_followers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    albums_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_without_tracks'
+    sale_json:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the content (track/album/playlist)
+        link:
+          type: string
+          description: URL link to the content
+        purchased_by:
+          type: string
+          description: Name of the buyer
+        buyer_user_id:
+          type: integer
+          description: User ID of the buyer
+        date:
+          type: string
+          description: ISO format date string of when the sale occurred
+        sale_price:
+          type: number
+          description: Base sale price in USDC
+        network_fee:
+          type: number
+          description: Network fee deducted from sale in USDC
+        pay_extra:
+          type: number
+          description: Extra amount paid by buyer in USDC
+        total:
+          type: number
+          description: Total amount received by seller in USDC
+        country:
+          type: string
+          description: Country code where purchase was made
+        encrypted_email:
+          type: string
+          description: Encrypted email of buyer if available
+        encrypted_key:
+          type: string
+          description: Encrypted key for decrypting the buyer's email
+        is_initial:
+          type: boolean
+          description: Whether this is an initial encryption from the backfill
+        pubkey_base64:
+          type: string
+          description: Base64 encoded public key of the buyer
+    sales_aggregate_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/sales_aggregate'
+    playlist_library_explore_playlist_identifier:
+      type: object
+      description: Reference to an explore playlist
+      required:
+      - type
+      - playlist_id
+      properties:
+        type:
+          type: string
+          enum:
+          - explore_playlist
+        playlist_id:
+          type: string
+          description: Explore playlist identifier
+    track_segment:
+      required:
+      - duration
+      - multihash
+      type: object
+      properties:
+        duration:
+          type: number
+        multihash:
+          type: string
+    get_supporter:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/supporter'
+    comment:
+      required:
+      - created_at
+      - entity_id
+      - entity_type
+      - id
+      - is_edited
+      - message
+      - react_count
+      - reply_count
+      type: object
+      properties:
+        id:
+          type: string
+        entity_id:
+          type: string
+        entity_type:
+          $ref: '#/components/schemas/comment_entity_type'
+        user_id:
+          type: string
+        message:
+          type: string
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention'
+        track_timestamp_s:
+          type: integer
+        react_count:
+          type: integer
+        reply_count:
+          type: integer
+        is_edited:
+          type: boolean
+        is_current_user_reacted:
+          type: boolean
+        is_artist_reacted:
+          type: boolean
+        is_tombstone:
+          type: boolean
+        is_muted:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/reply_comment'
+        parent_comment_id:
+          type: integer
+    remixers_count_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: integer
+    payment_split:
+      required:
+      - user_id
+      - percentage
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1234
+        percentage:
+          type: number
+    track_library_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_activity'
+    url_with_mirrors:
+      required:
+      - mirrors
+      type: object
+      properties:
+        url:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    cover_art:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    track_activity:
+      allOf:
+      - $ref: '#/components/schemas/activity'
+      - required:
+        - item
+        - item_type
+        type: object
+        properties:
+          item_type:
+            type: string
+            example: track
+            enum:
+            - track
+          item:
+            $ref: '#/components/schemas/track'
+    playlist_library_folder:
+      type: object
+      description: Folder containing nested playlists and folders
+      required:
+      - id
+      - type
+      - name
+      - contents
+      properties:
+        id:
+          type: string
+          description: Unique folder identifier
+        type:
+          type: string
+          enum:
+          - folder
+        name:
+          type: string
+          description: Folder name
+        contents:
+          type: array
+          description: Nested folders and playlist identifiers
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/playlist_library_folder'
+            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
+            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
+    extended_token_gate:
+      required:
+      - token_mint
+      - token_amount
+      type: object
+      properties:
+        token_mint:
+          type: string
+          description: The mint of the token needed to unlock
+        token_amount:
+          type: integer
+          description: The amount of the token needed to unlock
     user_response:
       required:
       - latest_chain_block
@@ -7424,81 +7122,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/user'
-    sales_json_content:
-      type: object
-      properties:
-        sales:
-          type: array
-          items:
-            $ref: '#/components/schemas/sale_json'
-    challenge_response:
-      required:
-      - amount
-      - challenge_id
-      - challenge_type
-      - disbursed_amount
-      - is_active
-      - is_complete
-      - is_disbursed
-      - metadata
-      - user_id
-      type: object
-      properties:
-        challenge_id:
-          type: string
-        user_id:
-          type: string
-        specifier:
-          type: string
-        is_complete:
-          type: boolean
-        is_active:
-          type: boolean
-        is_disbursed:
-          type: boolean
-        current_step_count:
-          type: integer
-        max_steps:
-          type: integer
-        challenge_type:
-          type: string
-        amount:
-          type: string
-        disbursed_amount:
-          type: integer
-        cooldown_days:
-          type: integer
-        metadata:
-          type: object
-          properties: {}
-    access_gate:
-      oneOf:
-      - $ref: '#/components/schemas/tip_gate'
-      - $ref: '#/components/schemas/follow_gate'
-      - $ref: '#/components/schemas/purchase_gate'
-      - $ref: '#/components/schemas/token_gate'
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
-    write_response:
-      type: object
-      properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-    tracks:
+    remixers_response:
       required:
       - latest_chain_block
       - latest_chain_slot_plays
@@ -7526,52 +7150,230 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/track'
-    track_activity:
-      allOf:
-      - $ref: '#/components/schemas/activity'
-      - required:
-        - item
-        - item_type
-        type: object
-        properties:
-          item_type:
-            type: string
-            example: track
-            enum:
-            - track
-          item:
-            $ref: '#/components/schemas/track'
-    track_feed_item:
+            $ref: '#/components/schemas/user'
+    user:
       required:
-      - item
-      - type
+      - album_count
+      - allow_ai_attribution
+      - artist_coin_badge
+      - associated_sol_wallets_balance
+      - associated_wallets_balance
+      - balance
+      - blocknumber
+      - created_at
+      - current_user_followee_follow_count
+      - does_current_user_follow
+      - does_current_user_subscribe
+      - does_follow_current_user
+      - erc_wallet
+      - followee_count
+      - follower_count
+      - handle
+      - handle_lc
+      - has_collectibles
+      - id
+      - is_available
+      - is_deactivated
+      - is_storage_v2
+      - is_verified
+      - name
+      - playlist_count
+      - repost_count
+      - spl_wallet
+      - spl_usdc_wallet
+      - supporter_count
+      - supporting_count
+      - total_audio_balance
+      - total_balance
+      - track_count
+      - updated_at
+      - verified_with_instagram
+      - verified_with_tiktok
+      - verified_with_twitter
+      - wallet
+      - waudio_balance
       type: object
       properties:
-        type:
+        album_count:
+          type: integer
+        artist_pick_track_id:
           type: string
-        item:
-          $ref: '#/components/schemas/track'
-    version_metadata:
+        artist_coin_badge:
+          type: object
+          properties:
+            mint:
+              type: string
+            logo_uri:
+              type: string
+            banner_image_url:
+              type: string
+            ticker:
+              type: string
+              description: The coin symbol/ticker
+        coin_flair_mint:
+          type: string
+        bio:
+          type: string
+        cover_photo:
+          $ref: '#/components/schemas/cover_photo'
+        followee_count:
+          type: integer
+        follower_count:
+          type: integer
+        handle:
+          type: string
+        id:
+          type: string
+        is_verified:
+          type: boolean
+        twitter_handle:
+          type: string
+        instagram_handle:
+          type: string
+        tiktok_handle:
+          type: string
+        verified_with_twitter:
+          type: boolean
+        verified_with_instagram:
+          type: boolean
+        verified_with_tiktok:
+          type: boolean
+        website:
+          type: string
+        donation:
+          type: string
+        location:
+          type: string
+        name:
+          type: string
+        playlist_count:
+          type: integer
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        repost_count:
+          type: integer
+        track_count:
+          type: integer
+        is_deactivated:
+          type: boolean
+        is_available:
+          type: boolean
+        erc_wallet:
+          type: string
+        spl_wallet:
+          type: string
+        spl_usdc_wallet:
+          type: string
+        spl_usdc_payout_wallet:
+          type: string
+        supporter_count:
+          type: integer
+        supporting_count:
+          type: integer
+        total_audio_balance:
+          type: integer
+        wallet:
+          type: string
+          description: The user's Ethereum wallet address for their account
+        balance:
+          type: string
+        associated_wallets_balance:
+          type: string
+        total_balance:
+          type: string
+        waudio_balance:
+          type: string
+        associated_sol_wallets_balance:
+          type: string
+        blocknumber:
+          type: integer
+        created_at:
+          type: string
+        is_storage_v2:
+          type: boolean
+        creator_node_endpoint:
+          type: string
+        current_user_followee_follow_count:
+          type: integer
+        does_current_user_follow:
+          type: boolean
+        does_current_user_subscribe:
+          type: boolean
+        does_follow_current_user:
+          type: boolean
+        handle_lc:
+          type: string
+        updated_at:
+          type: string
+        cover_photo_sizes:
+          type: string
+        cover_photo_cids:
+          $ref: '#/components/schemas/cover_photo'
+        cover_photo_legacy:
+          type: string
+        profile_picture_sizes:
+          type: string
+        profile_picture_cids:
+          $ref: '#/components/schemas/profile_picture'
+        profile_picture_legacy:
+          type: string
+        has_collectibles:
+          type: boolean
+        playlist_library:
+          $ref: '#/components/schemas/playlist_library'
+        allow_ai_attribution:
+          type: boolean
+        profile_type:
+          type: string
+    managed_user:
       required:
-      - service
+      - grant
+      - user
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/user'
+        grant:
+          $ref: '#/components/schemas/grant'
+    get_supported_users:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
       - version
       type: object
       properties:
-        service:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
           type: string
         version:
-          type: string
-    user_tracks_download_count_response:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporting'
+    tracks_count_response:
       type: object
       required:
       - data
       properties:
         data:
           type: integer
-          format: int64
-          description: Total download count for all tracks (and stems) owned by the user
-    get_supporter:
+          description: The total number of tracks matching the filter criteria
+          example: 15
+    purchasers_response:
       required:
       - latest_chain_block
       - latest_chain_slot_plays
@@ -7597,20 +7399,218 @@ components:
         version:
           $ref: '#/components/schemas/version_metadata'
         data:
-          $ref: '#/components/schemas/supporter'
-    supporter:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    email_access:
       required:
-      - amount
-      - rank
-      - sender
+      - created_at
+      - email_owner_user_id
+      - encrypted_key
+      - grantor_user_id
+      - id
+      - is_initial
+      - receiving_user_id
+      - updated_at
       type: object
       properties:
-        rank:
+        id:
           type: integer
-        amount:
+        email_owner_user_id:
+          type: integer
+        receiving_user_id:
+          type: integer
+        grantor_user_id:
+          type: integer
+        encrypted_key:
           type: string
-        sender:
+        is_initial:
+          type: boolean
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    user_feed_item:
+      oneOf:
+      - $ref: '#/components/schemas/track_feed_item'
+      - $ref: '#/components/schemas/playlist_feed_item'
+      discriminator:
+        propertyName: type
+        mapping:
+          track: '#/components/schemas/track_feed_item'
+          playlist: '#/components/schemas/playlist_feed_item'
+    track_artwork:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    decoded_user_token:
+      required:
+      - apiKey
+      - email
+      - handle
+      - iat
+      - name
+      - sub
+      - userId
+      - verified
+      type: object
+      properties:
+        apiKey:
+          type: string
+        userId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        handle:
+          type: string
+        verified:
+          type: boolean
+        profile_picture:
+          $ref: '#/components/schemas/profile_picture'
+        sub:
+          type: string
+        iat:
+          type: string
+    followers_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user'
+    user_playlist_library:
+      type: object
+      description: User's playlist library with support for folders and playlists
+      required:
+      - contents
+      properties:
+        contents:
+          type: array
+          description: Array of folders and playlist identifiers
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/playlist_library_folder'
+            - $ref: '#/components/schemas/playlist_library_playlist_identifier'
+            - $ref: '#/components/schemas/playlist_library_explore_playlist_identifier'
+    collectibles:
+      type: object
+      properties:
+        data:
+          type: object
+          properties: {}
+          description: Raw collectibles JSON structure generated by client
+    purchases_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/purchase'
+    reposts:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/activity'
+    user_response_single:
+      type: object
+      properties:
+        data:
           $ref: '#/components/schemas/user'
+    cover_photo:
+      type: object
+      properties:
+        640x:
+          type: string
+        2000x:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    user_coin_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/user_coin_with_accounts'
   securitySchemes:
     OAuth2:
       type: oauth2
