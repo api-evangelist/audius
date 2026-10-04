@@ -49,6 +49,18 @@ paths:
       x-operation-id-original: Get Metadata
 components:
   schemas:
+    data_and_type:
+      type: object
+      properties:
+        type:
+          type: string
+        data:
+          $ref: '#/components/schemas/cid_data'
+    cid_data_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/data_and_type'
     cid_data:
       type: object
       properties:
@@ -61,18 +73,6 @@ components:
         associated_wallets:
           type: object
           properties: {}
-    cid_data_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/data_and_type'
-    data_and_type:
-      type: object
-      properties:
-        type:
-          type: string
-        data:
-          $ref: '#/components/schemas/cid_data'
   securitySchemes:
     OAuth2:
       type: oauth2

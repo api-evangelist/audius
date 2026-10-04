@@ -107,6 +107,56 @@ paths:
       x-operation-id-original: Get Tips
 components:
   schemas:
+    get_tips_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/tip'
+    profile_picture:
+      type: object
+      properties:
+        150x150:
+          type: string
+        480x480:
+          type: string
+        1000x1000:
+          type: string
+        mirrors:
+          type: array
+          items:
+            type: string
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
     user:
       required:
       - album_count
@@ -281,16 +331,17 @@ components:
           type: boolean
         profile_type:
           type: string
-    version_metadata:
-      required:
-      - service
-      - version
+    cover_photo:
       type: object
       properties:
-        service:
+        640x:
           type: string
-        version:
+        2000x:
           type: string
+        mirrors:
+          type: array
+          items:
+            type: string
     tip:
       required:
       - amount
@@ -318,73 +369,22 @@ components:
             $ref: '#/components/schemas/supporter_reference'
         tx_signature:
           type: string
-    get_tips_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/tip'
-    profile_picture:
-      type: object
-      properties:
-        150x150:
-          type: string
-        480x480:
-          type: string
-        1000x1000:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    cover_photo:
-      type: object
-      properties:
-        640x:
-          type: string
-        2000x:
-          type: string
-        mirrors:
-          type: array
-          items:
-            type: string
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
     supporter_reference:
       required:
       - user_id
       type: object
       properties:
         user_id:
+          type: string
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
           type: string
   securitySchemes:
     OAuth2:

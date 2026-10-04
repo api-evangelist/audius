@@ -216,6 +216,13 @@ paths:
       x-operation-id-original: Get unclaimed event ID
 components:
   schemas:
+    events_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/event'
     event:
       required:
       - created_at
@@ -262,13 +269,6 @@ components:
       properties:
         data:
           type: string
-    events_response:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/event'
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -366,14 +366,6 @@ components:
         api_access_key:
           type: string
           description: The newly created bearer token (API access key)
-    deactivate_access_key_request_body:
-      type: object
-      required:
-      - api_access_key
-      properties:
-        api_access_key:
-          type: string
-          description: The bearer token (API access key) to deactivate
     developer_apps_response:
       type: object
       properties:
@@ -381,14 +373,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/developer_app'
-    register_api_key_request_body:
+    create_developer_app_request_body:
       type: object
       required:
-      - api_secret
+      - name
       properties:
-        api_secret:
+        name:
           type: string
-          description: The API secret (private key hex) for the developer app
+          description: Developer app name
+          example: My API Key
+        description:
+          type: string
+          description: App description
+        image_url:
+          type: string
+          description: App logo/image URL
+        redirect_uris:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            maxLength: 2000
+          description: Pre-registered OAuth redirect/callback URIs
     update_developer_app_request_body:
       type: object
       required:
@@ -432,58 +438,12 @@ components:
           type: integer
           format: int64
           description: The blockchain block number/height
-    developer_app_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/developer_app'
     deactivate_access_key_response:
       type: object
       properties:
         success:
           type: boolean
           description: Whether the deactivation was successful
-    register_api_key_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the registration was successful
-    write_response:
-      type: object
-      properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-    create_developer_app_request_body:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Developer app name
-          example: My API Key
-        description:
-          type: string
-          description: App description
-        image_url:
-          type: string
-          description: App logo/image URL
-        redirect_uris:
-          type: array
-          maxItems: 50
-          items:
-            type: string
-            maxLength: 2000
-          description: Pre-registered OAuth redirect/callback URIs
     developer_app:
       required:
       - address
@@ -508,6 +468,46 @@ components:
             type: string
             maxLength: 2000
           description: Pre-registered OAuth callback URLs for this app
+    register_api_key_response:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the registration was successful
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+    deactivate_access_key_request_body:
+      type: object
+      required:
+      - api_access_key
+      properties:
+        api_access_key:
+          type: string
+          description: The bearer token (API access key) to deactivate
+    register_api_key_request_body:
+      type: object
+      required:
+      - api_secret
+      properties:
+        api_secret:
+          type: string
+          description: The API secret (private key hex) for the developer app
+    developer_app_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/developer_app'
   securitySchemes:
     OAuth2:
       type: oauth2

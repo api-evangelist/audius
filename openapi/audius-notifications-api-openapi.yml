@@ -135,28 +135,6 @@ paths:
       x-operation-id-original: Get Playlist Updates
 components:
   schemas:
-    usdc_purchase_buyer_notification_action_data:
-      required:
-      - amount
-      - buyer_user_id
-      - content_id
-      - content_type
-      - extra_amount
-      - seller_user_id
-      type: object
-      properties:
-        content_type:
-          type: string
-        buyer_user_id:
-          type: string
-        seller_user_id:
-          type: string
-        amount:
-          type: string
-        extra_amount:
-          type: string
-        content_id:
-          type: string
     supporter_dethroned_notification_action:
       required:
       - data
@@ -173,7 +151,163 @@ components:
           type: integer
         data:
           $ref: '#/components/schemas/supporter_dethroned_notification_action_data'
-    supporter_dethroned_notification:
+    track_added_to_purchased_album_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/track_added_to_purchased_album_notification_action_data'
+    follow_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/follow_notification_action_data'
+    reaction_notification_action_data:
+      required:
+      - reacted_to
+      - reaction_type
+      - reaction_value
+      - receiver_user_id
+      - sender_user_id
+      - sender_wallet
+      - tip_amount
+      type: object
+      properties:
+        reacted_to:
+          type: string
+        reaction_type:
+          type: string
+        reaction_value:
+          type: integer
+        receiver_user_id:
+          type: string
+        sender_user_id:
+          type: string
+        sender_wallet:
+          type: string
+        tip_amount:
+          type: string
+    playlist_milestone_notification_action_data:
+      required:
+      - is_album
+      - playlist_id
+      - threshold
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        threshold:
+          type: integer
+        playlist_id:
+          type: string
+        is_album:
+          type: boolean
+    challenge_reward_notification_action_data:
+      required:
+      - amount
+      - challenge_id
+      - specifier
+      type: object
+      properties:
+        amount:
+          type: string
+        specifier:
+          type: string
+        challenge_id:
+          type: string
+        listen_streak:
+          type: integer
+    artist_remix_contest_ending_soon_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/artist_remix_contest_ending_soon_notification_action_data'
+    trending_underground_notification_action_data:
+      required:
+      - genre
+      - rank
+      - time_range
+      - track_id
+      type: object
+      properties:
+        rank:
+          type: integer
+        genre:
+          type: string
+        track_id:
+          type: string
+        time_range:
+          type: string
+          example: week
+          enum:
+          - week
+          - month
+          - year
+    supporter_rank_up_notification_action_data:
+      required:
+      - rank
+      - receiver_user_id
+      - sender_user_id
+      type: object
+      properties:
+        rank:
+          type: integer
+        sender_user_id:
+          type: string
+        receiver_user_id:
+          type: string
+    save_notification_action_data:
+      required:
+      - save_item_id
+      - type
+      - user_id
+      type: object
+      properties:
+        type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+          - album
+        user_id:
+          type: string
+        save_item_id:
+          type: string
+    create_notification:
       required:
       - actions
       - group_id
@@ -192,22 +326,365 @@ components:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/supporter_dethroned_notification_action'
-    challenge_reward_notification_action_data:
+            $ref: '#/components/schemas/create_notification_action'
+    fan_remix_contest_ended_notification_action_data:
       required:
-      - amount
-      - challenge_id
-      - specifier
+      - entity_id
+      - entity_user_id
       type: object
       properties:
-        amount:
+        entity_user_id:
           type: string
+        entity_id:
+          type: string
+    tier_change_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/tier_change_notification_action'
+    send_tip_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/send_tip_notification_action'
+    remix_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/remix_notification_action'
+    receive_tip_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
         specifier:
           type: string
-        challenge_id:
+        type:
           type: string
-        listen_streak:
+        timestamp:
           type: integer
+        data:
+          $ref: '#/components/schemas/receive_tip_notification_action_data'
+    fan_remix_contest_started_notification_action_data:
+      required:
+      - entity_id
+      - entity_user_id
+      type: object
+      properties:
+        entity_user_id:
+          type: string
+        entity_id:
+          type: string
+    comment_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_notification_action'
+    comment_notification_action_data:
+      required:
+      - comment_user_id
+      - entity_id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: Track
+          enum:
+          - Track
+          - Playlist
+          - Album
+        entity_id:
+          type: string
+        comment_user_id:
+          type: string
+        comment_id:
+          type: string
+    remix_notification_action_data:
+      required:
+      - parent_track_id
+      - track_id
+      type: object
+      properties:
+        parent_track_id:
+          type: string
+        track_id:
+          type: string
+    approve_manager_request_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/approve_manager_request_notification_action'
+    playlist_update:
+      required:
+      - playlist_id
+      - updated_at
+      type: object
+      properties:
+        playlist_id:
+          type: string
+        updated_at:
+          type: integer
+        last_seen_at:
+          type: integer
+    artist_remix_contest_submissions_notification_action_data:
+      required:
+      - entity_id
+      - event_id
+      - milestone
+      type: object
+      properties:
+        event_id:
+          type: string
+        milestone:
+          type: integer
+        entity_id:
+          type: string
+    reaction_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/reaction_notification_action'
+    tier_change_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/tier_change_notification_action_data'
+    trending_underground_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/trending_underground_notification_action_data'
+    challenge_reward_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/challenge_reward_notification_action'
+    comment_thread_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_thread_notification_action'
+    artist_remix_contest_submissions_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/artist_remix_contest_submissions_notification_action_data'
+    claimable_reward_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/claimable_reward_notification_action_data'
+    usdc_purchase_buyer_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/usdc_purchase_buyer_notification_action'
+    comment_mention_notification_action_data:
+      required:
+      - comment_user_id
+      - entity_id
+      - entity_user_id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: Track
+          enum:
+          - Track
+          - Playlist
+          - Album
+        entity_id:
+          type: string
+        entity_user_id:
+          type: string
+        comment_user_id:
+          type: string
+        comment_id:
+          type: string
     trending_playlist_notification_action_data:
       required:
       - genre
@@ -229,6 +706,611 @@ components:
           - week
           - month
           - year
+    comment_reaction_notification_action_data:
+      required:
+      - entity_id
+      - entity_user_id
+      - reacter_user_id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          example: Track
+          enum:
+          - Track
+          - Playlist
+          - Album
+        entity_id:
+          type: string
+        entity_user_id:
+          type: string
+        reacter_user_id:
+          type: string
+        comment_id:
+          type: string
+    fan_remix_contest_started_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/fan_remix_contest_started_notification_action_data'
+    comment_thread_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/comment_thread_notification_action_data'
+    trending_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/trending_notification_action_data'
+    playlist_updates_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/playlist_updates'
+    request_manager_notification_action_data:
+      required:
+      - grantee_address
+      - grantee_user_id
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
+        grantee_user_id:
+          type: string
+        grantee_address:
+          type: string
+    cosign_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/cosign_notification_action_data'
+    notifications_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          $ref: '#/components/schemas/notifications'
+    repost_of_repost_notification_action_data:
+      required:
+      - repost_of_repost_item_id
+      - type
+      - user_id
+      type: object
+      properties:
+        type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+          - album
+        user_id:
+          type: string
+        repost_of_repost_item_id:
+          type: string
+    announcement_notification_action_data:
+      required:
+      - long_description
+      - push_body
+      - short_description
+      - title
+      - route
+      type: object
+      properties:
+        title:
+          type: string
+        push_body:
+          type: string
+        short_description:
+          type: string
+        long_description:
+          type: string
+        route:
+          type: string
+    notifications:
+      required:
+      - unread_count
+      type: object
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/notification'
+        unread_count:
+          type: integer
+    tastemaker_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/tastemaker_notification_action_data'
+    artist_remix_contest_ended_notification_action_data:
+      required:
+      - entity_id
+      type: object
+      properties:
+        entity_id:
+          type: string
+    announcement_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/announcement_notification_action_data'
+    repost_of_repost_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost_of_repost_notification_action'
+    artist_remix_contest_ending_soon_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/artist_remix_contest_ending_soon_notification_action'
+    fan_remix_contest_winners_selected_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/fan_remix_contest_winners_selected_notification_action'
+    follow_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/follow_notification_action'
+    receive_tip_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/receive_tip_notification_action'
+    remix_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/remix_notification_action_data'
+    listen_streak_reminder_notification_action_data:
+      required:
+      - streak
+      type: object
+      properties:
+        streak:
+          type: integer
+    usdc_purchase_seller_notification_action_data:
+      required:
+      - amount
+      - buyer_user_id
+      - content_id
+      - content_type
+      - extra_amount
+      - seller_user_id
+      type: object
+      properties:
+        content_type:
+          type: string
+        buyer_user_id:
+          type: string
+        seller_user_id:
+          type: string
+        amount:
+          type: string
+        extra_amount:
+          type: string
+        content_id:
+          type: string
+    create_notification_action_data:
+      oneOf:
+      - $ref: '#/components/schemas/create_playlist_notification_action_data'
+      - $ref: '#/components/schemas/create_track_notification_action_data'
+    save_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/save_notification_action_data'
+    follow_notification_action_data:
+      required:
+      - followee_user_id
+      - follower_user_id
+      type: object
+      properties:
+        follower_user_id:
+          type: string
+        followee_user_id:
+          type: string
+    supporter_rank_up_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/supporter_rank_up_notification_action_data'
+    trending_playlist_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/trending_playlist_notification_action'
+    approve_manager_request_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/approve_manager_request_notification_action_data'
+    comment_reaction_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/comment_reaction_notification_action_data'
+    comment_mention_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/comment_mention_notification_action'
+    user_milestone_notification_action_data:
+      required:
+      - threshold
+      - type
+      - user_id
+      type: object
+      properties:
+        type:
+          type: string
+        threshold:
+          type: integer
+        user_id:
+          type: string
+    request_manager_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/request_manager_notification_action_data'
+    reaction_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/reaction_notification_action_data'
+    track_added_to_purchased_album_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_added_to_purchased_album_notification_action'
+    artist_remix_contest_submissions_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/artist_remix_contest_submissions_notification_action'
+    challenge_reward_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/challenge_reward_notification_action_data'
     comment_thread_notification_action_data:
       required:
       - comment_user_id
@@ -252,23 +1334,20 @@ components:
           type: string
         comment_id:
           type: string
-    save_notification_action:
+    supporter_dethroned_notification_action_data:
       required:
-      - data
-      - specifier
-      - timestamp
-      - type
+      - dethroned_user_id
+      - receiver_user_id
+      - sender_user_id
       type: object
       properties:
-        specifier:
+        dethroned_user_id:
           type: string
-        type:
+        sender_user_id:
           type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/save_notification_action_data'
-    usdc_purchase_buyer_notification:
+        receiver_user_id:
+          type: string
+    trending_notification:
       required:
       - actions
       - group_id
@@ -287,8 +1366,129 @@ components:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/usdc_purchase_buyer_notification_action'
-    comment_reaction_notification_action:
+            $ref: '#/components/schemas/trending_notification_action'
+    claimable_reward_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/claimable_reward_notification_action'
+    save_of_repost_notification_action_data:
+      required:
+      - save_of_repost_item_id
+      - type
+      - user_id
+      type: object
+      properties:
+        type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+          - album
+        user_id:
+          type: string
+        save_of_repost_item_id:
+          type: string
+    fan_remix_contest_ending_soon_notification_action_data:
+      required:
+      - entity_id
+      - entity_user_id
+      type: object
+      properties:
+        entity_user_id:
+          type: string
+        entity_id:
+          type: string
+    listen_streak_reminder_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/listen_streak_reminder_notification_action'
+    approve_manager_request_notification_action_data:
+      required:
+      - grantee_address
+      - grantee_user_id
+      - user_id
+      type: object
+      properties:
+        user_id:
+          type: string
+        grantee_user_id:
+          type: string
+        grantee_address:
+          type: string
+    fan_remix_contest_ended_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/fan_remix_contest_ended_notification_action'
+    trending_underground_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/trending_underground_notification_action'
+    repost_notification_action:
       required:
       - data
       - specifier
@@ -303,8 +1503,167 @@ components:
         timestamp:
           type: integer
         data:
-          $ref: '#/components/schemas/comment_reaction_notification_action_data'
-    fan_remix_contest_ended_notification_action_data:
+          $ref: '#/components/schemas/repost_notification_action_data'
+    create_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/create_notification_action_data'
+    cosign_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/cosign_notification_action'
+    fan_remix_contest_ending_soon_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/fan_remix_contest_ending_soon_notification_action_data'
+    save_of_repost_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/save_of_repost_notification_action_data'
+    fan_remix_contest_winners_selected_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/fan_remix_contest_winners_selected_notification_action_data'
+    milestone_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/milestone_notification_action'
+    request_manager_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/request_manager_notification_action'
+    track_added_to_playlist_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/track_added_to_playlist_notification_action_data'
+    tastemaker_notification_action_data:
+      required:
+      - action
+      - tastemaker_item_id
+      - tastemaker_item_owner_id
+      - tastemaker_item_type
+      - tastemaker_user_id
+      type: object
+      properties:
+        tastemaker_item_owner_id:
+          type: string
+        tastemaker_item_id:
+          type: string
+        action:
+          type: string
+        tastemaker_item_type:
+          type: string
+        tastemaker_user_id:
+          type: string
+    artist_remix_contest_ending_soon_notification_action_data:
       required:
       - entity_id
       - entity_user_id
@@ -334,24 +1693,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/comment_reaction_notification_action'
-    artist_remix_contest_ended_notification_action_data:
+    track_added_to_purchased_album_notification_action_data:
       required:
-      - entity_id
+      - playlist_id
+      - playlist_owner_id
+      - track_id
       type: object
       properties:
-        entity_id:
+        track_id:
           type: string
-    version_metadata:
-      required:
-      - service
-      - version
-      type: object
-      properties:
-        service:
+        playlist_id:
           type: string
-        version:
+        playlist_owner_id:
           type: string
-    fan_remix_contest_started_notification_action:
+    milestone_notification_action:
       required:
       - data
       - specifier
@@ -366,8 +1721,8 @@ components:
         timestamp:
           type: integer
         data:
-          $ref: '#/components/schemas/fan_remix_contest_started_notification_action_data'
-    supporter_rank_up_notification_action:
+          $ref: '#/components/schemas/milestone_notification_action_data'
+    repost_of_repost_notification_action:
       required:
       - data
       - specifier
@@ -382,21 +1737,44 @@ components:
         timestamp:
           type: integer
         data:
-          $ref: '#/components/schemas/supporter_rank_up_notification_action_data'
-    request_manager_notification_action_data:
+          $ref: '#/components/schemas/repost_of_repost_notification_action_data'
+    cosign_notification_action_data:
       required:
-      - grantee_address
-      - grantee_user_id
-      - user_id
+      - parent_track_id
+      - track_id
+      - track_owner_id
       type: object
       properties:
-        user_id:
+        parent_track_id:
           type: string
-        grantee_user_id:
+        track_id:
           type: string
-        grantee_address:
+        track_owner_id:
           type: string
-    trending_notification:
+    send_tip_notification_action_data:
+      required:
+      - amount
+      - receiver_user_id
+      - sender_user_id
+      - tip_tx_signature
+      type: object
+      properties:
+        amount:
+          type: string
+        sender_user_id:
+          type: string
+        receiver_user_id:
+          type: string
+        tip_tx_signature:
+          type: string
+    playlist_updates:
+      type: object
+      properties:
+        playlist_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/playlist_update'
+    supporter_dethroned_notification:
       required:
       - actions
       - group_id
@@ -415,7 +1793,502 @@ components:
         actions:
           type: array
           items:
-            $ref: '#/components/schemas/trending_notification_action'
+            $ref: '#/components/schemas/supporter_dethroned_notification_action'
+    track_added_to_playlist_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/track_added_to_playlist_notification_action'
+    usdc_purchase_buyer_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/usdc_purchase_buyer_notification_action_data'
+    track_added_to_playlist_notification_action_data:
+      required:
+      - playlist_id
+      - playlist_owner_id
+      - track_id
+      type: object
+      properties:
+        track_id:
+          type: string
+        playlist_id:
+          type: string
+        playlist_owner_id:
+          type: string
+    comment_mention_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/comment_mention_notification_action_data'
+    fan_remix_contest_ending_soon_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/fan_remix_contest_ending_soon_notification_action'
+    artist_remix_contest_ended_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/artist_remix_contest_ended_notification_action_data'
+    trending_playlist_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/trending_playlist_notification_action_data'
+    supporter_rank_up_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/supporter_rank_up_notification_action'
+    tier_change_notification_action_data:
+      required:
+      - current_value
+      - new_tier
+      - new_tier_value
+      type: object
+      properties:
+        new_tier:
+          type: string
+        current_value:
+          type: string
+        new_tier_value:
+          type: integer
+    save_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_notification_action'
+    fan_remix_contest_ended_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/fan_remix_contest_ended_notification_action_data'
+    send_tip_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/send_tip_notification_action_data'
+    create_playlist_notification_action_data:
+      required:
+      - is_album
+      - playlist_id
+      type: object
+      properties:
+        is_album:
+          type: boolean
+        playlist_id:
+          type: string
+    repost_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/repost_notification_action'
+    artist_remix_contest_ended_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/artist_remix_contest_ended_notification_action'
+    repost_notification_action_data:
+      required:
+      - repost_item_id
+      - type
+      - user_id
+      type: object
+      properties:
+        type:
+          type: string
+          example: track
+          enum:
+          - track
+          - playlist
+          - album
+        user_id:
+          type: string
+        repost_item_id:
+          type: string
+    fan_remix_contest_winners_selected_notification_action_data:
+      required:
+      - entity_id
+      - entity_user_id
+      type: object
+      properties:
+        entity_user_id:
+          type: string
+        entity_id:
+          type: string
+    version_metadata:
+      required:
+      - service
+      - version
+      type: object
+      properties:
+        service:
+          type: string
+        version:
+          type: string
+    claimable_reward_notification_action_data:
+      required:
+      - amount
+      - challenge_id
+      - specifier
+      type: object
+      properties:
+        amount:
+          type: string
+        specifier:
+          type: string
+        challenge_id:
+          type: string
+    tastemaker_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/tastemaker_notification_action'
+    milestone_notification_action_data:
+      oneOf:
+      - $ref: '#/components/schemas/user_milestone_notification_action_data'
+      - $ref: '#/components/schemas/track_milestone_notification_action_data'
+      - $ref: '#/components/schemas/playlist_milestone_notification_action_data'
+    usdc_purchase_seller_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/usdc_purchase_seller_notification_action_data'
+    listen_streak_reminder_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/listen_streak_reminder_notification_action_data'
+    create_track_notification_action_data:
+      required:
+      - track_id
+      type: object
+      properties:
+        track_id:
+          type: string
+    announcement_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/announcement_notification_action'
+    fan_remix_contest_started_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/fan_remix_contest_started_notification_action'
+    save_of_repost_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_of_repost_notification_action'
+    receive_tip_notification_action_data:
+      required:
+      - amount
+      - reaction_value
+      - receiver_user_id
+      - sender_user_id
+      - tip_tx_signature
+      type: object
+      properties:
+        amount:
+          type: string
+        sender_user_id:
+          type: string
+        receiver_user_id:
+          type: string
+        tip_tx_signature:
+          type: string
+        reaction_value:
+          type: integer
+    comment_notification_action:
+      required:
+      - data
+      - specifier
+      - timestamp
+      - type
+      type: object
+      properties:
+        specifier:
+          type: string
+        type:
+          type: string
+        timestamp:
+          type: integer
+        data:
+          $ref: '#/components/schemas/comment_notification_action_data'
+    usdc_purchase_seller_notification:
+      required:
+      - actions
+      - group_id
+      - is_seen
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        group_id:
+          type: string
+        is_seen:
+          type: boolean
+        seen_at:
+          type: integer
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/usdc_purchase_seller_notification_action'
+    track_milestone_notification_action_data:
+      required:
+      - threshold
+      - track_id
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        threshold:
+          type: integer
+        track_id:
+          type: string
     trending_notification_action_data:
       required:
       - genre
@@ -437,260 +2310,28 @@ components:
           - week
           - month
           - year
-    listen_streak_reminder_notification_action:
+    usdc_purchase_buyer_notification_action_data:
       required:
-      - data
-      - specifier
-      - timestamp
-      - type
+      - amount
+      - buyer_user_id
+      - content_id
+      - content_type
+      - extra_amount
+      - seller_user_id
       type: object
       properties:
-        specifier:
+        content_type:
           type: string
-        type:
+        buyer_user_id:
           type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/listen_streak_reminder_notification_action_data'
-    send_tip_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
+        seller_user_id:
           type: string
-        group_id:
+        amount:
           type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/send_tip_notification_action'
-    track_added_to_purchased_album_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
+        extra_amount:
           type: string
-        group_id:
+        content_id:
           type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_added_to_purchased_album_notification_action'
-    milestone_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/milestone_notification_action'
-    save_of_repost_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/save_of_repost_notification_action_data'
-    trending_playlist_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/trending_playlist_notification_action'
-    repost_of_repost_notification_action_data:
-      required:
-      - repost_of_repost_item_id
-      - type
-      - user_id
-      type: object
-      properties:
-        type:
-          type: string
-          example: track
-          enum:
-          - track
-          - playlist
-          - album
-        user_id:
-          type: string
-        repost_of_repost_item_id:
-          type: string
-    cosign_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/cosign_notification_action'
-    usdc_purchase_seller_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/usdc_purchase_seller_notification_action'
-    artist_remix_contest_ended_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/artist_remix_contest_ended_notification_action_data'
-    challenge_reward_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/challenge_reward_notification_action_data'
-    comment_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/comment_notification_action_data'
-    trending_underground_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/trending_underground_notification_action'
-    fan_remix_contest_ended_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/fan_remix_contest_ended_notification_action_data'
     notification:
       oneOf:
       - $ref: '#/components/schemas/follow_notification'
@@ -778,1647 +2419,6 @@ components:
           artist_remix_contest_ending_soon: '#/components/schemas/artist_remix_contest_ending_soon_notification'
           artist_remix_contest_submissions: '#/components/schemas/artist_remix_contest_submissions_notification'
           fan_remix_contest_winners_selected: '#/components/schemas/fan_remix_contest_winners_selected_notification'
-    claimable_reward_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/claimable_reward_notification_action_data'
-    fan_remix_contest_winners_selected_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/fan_remix_contest_winners_selected_notification_action'
-    follow_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/follow_notification_action_data'
-    playlist_update:
-      required:
-      - playlist_id
-      - updated_at
-      type: object
-      properties:
-        playlist_id:
-          type: string
-        updated_at:
-          type: integer
-        last_seen_at:
-          type: integer
-    fan_remix_contest_ended_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/fan_remix_contest_ended_notification_action'
-    tier_change_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/tier_change_notification_action_data'
-    repost_of_repost_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost_of_repost_notification_action'
-    create_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/create_notification_action_data'
-    follow_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/follow_notification_action'
-    milestone_notification_action_data:
-      oneOf:
-      - $ref: '#/components/schemas/user_milestone_notification_action_data'
-      - $ref: '#/components/schemas/track_milestone_notification_action_data'
-      - $ref: '#/components/schemas/playlist_milestone_notification_action_data'
-    fan_remix_contest_winners_selected_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/fan_remix_contest_winners_selected_notification_action_data'
-    reaction_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/reaction_notification_action'
-    save_notification_action_data:
-      required:
-      - save_item_id
-      - type
-      - user_id
-      type: object
-      properties:
-        type:
-          type: string
-          example: track
-          enum:
-          - track
-          - playlist
-          - album
-        user_id:
-          type: string
-        save_item_id:
-          type: string
-    tastemaker_notification_action_data:
-      required:
-      - action
-      - tastemaker_item_id
-      - tastemaker_item_owner_id
-      - tastemaker_item_type
-      - tastemaker_user_id
-      type: object
-      properties:
-        tastemaker_item_owner_id:
-          type: string
-        tastemaker_item_id:
-          type: string
-        action:
-          type: string
-        tastemaker_item_type:
-          type: string
-        tastemaker_user_id:
-          type: string
-    approve_manager_request_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/approve_manager_request_notification_action_data'
-    comment_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment_notification_action'
-    approve_manager_request_notification_action_data:
-      required:
-      - grantee_address
-      - grantee_user_id
-      - user_id
-      type: object
-      properties:
-        user_id:
-          type: string
-        grantee_user_id:
-          type: string
-        grantee_address:
-          type: string
-    trending_underground_notification_action_data:
-      required:
-      - genre
-      - rank
-      - time_range
-      - track_id
-      type: object
-      properties:
-        rank:
-          type: integer
-        genre:
-          type: string
-        track_id:
-          type: string
-        time_range:
-          type: string
-          example: week
-          enum:
-          - week
-          - month
-          - year
-    notifications_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/notifications'
-    announcement_notification_action_data:
-      required:
-      - long_description
-      - push_body
-      - short_description
-      - title
-      - route
-      type: object
-      properties:
-        title:
-          type: string
-        push_body:
-          type: string
-        short_description:
-          type: string
-        long_description:
-          type: string
-        route:
-          type: string
-    challenge_reward_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/challenge_reward_notification_action'
-    cosign_notification_action_data:
-      required:
-      - parent_track_id
-      - track_id
-      - track_owner_id
-      type: object
-      properties:
-        parent_track_id:
-          type: string
-        track_id:
-          type: string
-        track_owner_id:
-          type: string
-    usdc_purchase_seller_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/usdc_purchase_seller_notification_action_data'
-    playlist_milestone_notification_action_data:
-      required:
-      - is_album
-      - playlist_id
-      - threshold
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        threshold:
-          type: integer
-        playlist_id:
-          type: string
-        is_album:
-          type: boolean
-    fan_remix_contest_ending_soon_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/fan_remix_contest_ending_soon_notification_action_data'
-    claimable_reward_notification_action_data:
-      required:
-      - amount
-      - challenge_id
-      - specifier
-      type: object
-      properties:
-        amount:
-          type: string
-        specifier:
-          type: string
-        challenge_id:
-          type: string
-    create_notification_action_data:
-      oneOf:
-      - $ref: '#/components/schemas/create_playlist_notification_action_data'
-      - $ref: '#/components/schemas/create_track_notification_action_data'
-    save_of_repost_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/save_of_repost_notification_action'
-    tastemaker_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/tastemaker_notification_action_data'
-    trending_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/trending_notification_action_data'
-    repost_of_repost_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/repost_of_repost_notification_action_data'
-    comment_mention_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment_mention_notification_action'
-    announcement_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/announcement_notification_action_data'
-    listen_streak_reminder_notification_action_data:
-      required:
-      - streak
-      type: object
-      properties:
-        streak:
-          type: integer
-    track_added_to_playlist_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/track_added_to_playlist_notification_action'
-    artist_remix_contest_ending_soon_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/artist_remix_contest_ending_soon_notification_action_data'
-    artist_remix_contest_ending_soon_notification_action_data:
-      required:
-      - entity_id
-      - entity_user_id
-      type: object
-      properties:
-        entity_user_id:
-          type: string
-        entity_id:
-          type: string
-    trending_playlist_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/trending_playlist_notification_action_data'
-    supporter_rank_up_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/supporter_rank_up_notification_action'
-    repost_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/repost_notification_action'
-    comment_reaction_notification_action_data:
-      required:
-      - entity_id
-      - entity_user_id
-      - reacter_user_id
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          example: Track
-          enum:
-          - Track
-          - Playlist
-          - Album
-        entity_id:
-          type: string
-        entity_user_id:
-          type: string
-        reacter_user_id:
-          type: string
-        comment_id:
-          type: string
-    artist_remix_contest_ending_soon_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/artist_remix_contest_ending_soon_notification_action'
-    comment_mention_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/comment_mention_notification_action_data'
-    receive_tip_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/receive_tip_notification_action_data'
-    comment_notification_action_data:
-      required:
-      - comment_user_id
-      - entity_id
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          example: Track
-          enum:
-          - Track
-          - Playlist
-          - Album
-        entity_id:
-          type: string
-        comment_user_id:
-          type: string
-        comment_id:
-          type: string
-    send_tip_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/send_tip_notification_action_data'
-    send_tip_notification_action_data:
-      required:
-      - amount
-      - receiver_user_id
-      - sender_user_id
-      - tip_tx_signature
-      type: object
-      properties:
-        amount:
-          type: string
-        sender_user_id:
-          type: string
-        receiver_user_id:
-          type: string
-        tip_tx_signature:
-          type: string
-    fan_remix_contest_ending_soon_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/fan_remix_contest_ending_soon_notification_action'
-    usdc_purchase_buyer_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/usdc_purchase_buyer_notification_action_data'
-    cosign_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/cosign_notification_action_data'
-    save_of_repost_notification_action_data:
-      required:
-      - save_of_repost_item_id
-      - type
-      - user_id
-      type: object
-      properties:
-        type:
-          type: string
-          example: track
-          enum:
-          - track
-          - playlist
-          - album
-        user_id:
-          type: string
-        save_of_repost_item_id:
-          type: string
-    fan_remix_contest_started_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/fan_remix_contest_started_notification_action'
-    notifications:
-      required:
-      - unread_count
-      type: object
-      properties:
-        notifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/notification'
-        unread_count:
-          type: integer
-    comment_mention_notification_action_data:
-      required:
-      - comment_user_id
-      - entity_id
-      - entity_user_id
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          example: Track
-          enum:
-          - Track
-          - Playlist
-          - Album
-        entity_id:
-          type: string
-        entity_user_id:
-          type: string
-        comment_user_id:
-          type: string
-        comment_id:
-          type: string
-    fan_remix_contest_ending_soon_notification_action_data:
-      required:
-      - entity_id
-      - entity_user_id
-      type: object
-      properties:
-        entity_user_id:
-          type: string
-        entity_id:
-          type: string
-    reaction_notification_action_data:
-      required:
-      - reacted_to
-      - reaction_type
-      - reaction_value
-      - receiver_user_id
-      - sender_user_id
-      - sender_wallet
-      - tip_amount
-      type: object
-      properties:
-        reacted_to:
-          type: string
-        reaction_type:
-          type: string
-        reaction_value:
-          type: integer
-        receiver_user_id:
-          type: string
-        sender_user_id:
-          type: string
-        sender_wallet:
-          type: string
-        tip_amount:
-          type: string
-    request_manager_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/request_manager_notification_action_data'
-    follow_notification_action_data:
-      required:
-      - followee_user_id
-      - follower_user_id
-      type: object
-      properties:
-        follower_user_id:
-          type: string
-        followee_user_id:
-          type: string
-    remix_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/remix_notification_action_data'
-    receive_tip_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/receive_tip_notification_action'
-    fan_remix_contest_started_notification_action_data:
-      required:
-      - entity_id
-      - entity_user_id
-      type: object
-      properties:
-        entity_user_id:
-          type: string
-        entity_id:
-          type: string
-    supporter_dethroned_notification_action_data:
-      required:
-      - dethroned_user_id
-      - receiver_user_id
-      - sender_user_id
-      type: object
-      properties:
-        dethroned_user_id:
-          type: string
-        sender_user_id:
-          type: string
-        receiver_user_id:
-          type: string
-    user_milestone_notification_action_data:
-      required:
-      - threshold
-      - type
-      - user_id
-      type: object
-      properties:
-        type:
-          type: string
-        threshold:
-          type: integer
-        user_id:
-          type: string
-    track_milestone_notification_action_data:
-      required:
-      - threshold
-      - track_id
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        threshold:
-          type: integer
-        track_id:
-          type: string
-    track_added_to_purchased_album_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/track_added_to_purchased_album_notification_action_data'
-    tastemaker_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/tastemaker_notification_action'
-    track_added_to_playlist_notification_action_data:
-      required:
-      - playlist_id
-      - playlist_owner_id
-      - track_id
-      type: object
-      properties:
-        track_id:
-          type: string
-        playlist_id:
-          type: string
-        playlist_owner_id:
-          type: string
-    artist_remix_contest_submissions_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/artist_remix_contest_submissions_notification_action'
-    reaction_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/reaction_notification_action_data'
-    save_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/save_notification_action'
-    playlist_updates:
-      type: object
-      properties:
-        playlist_updates:
-          type: array
-          items:
-            $ref: '#/components/schemas/playlist_update'
-    repost_notification_action_data:
-      required:
-      - repost_item_id
-      - type
-      - user_id
-      type: object
-      properties:
-        type:
-          type: string
-          example: track
-          enum:
-          - track
-          - playlist
-          - album
-        user_id:
-          type: string
-        repost_item_id:
-          type: string
-    create_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/create_notification_action'
-    create_playlist_notification_action_data:
-      required:
-      - is_album
-      - playlist_id
-      type: object
-      properties:
-        is_album:
-          type: boolean
-        playlist_id:
-          type: string
-    approve_manager_request_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/approve_manager_request_notification_action'
-    artist_remix_contest_ended_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/artist_remix_contest_ended_notification_action'
-    remix_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/remix_notification_action'
-    create_track_notification_action_data:
-      required:
-      - track_id
-      type: object
-      properties:
-        track_id:
-          type: string
-    remix_notification_action_data:
-      required:
-      - parent_track_id
-      - track_id
-      type: object
-      properties:
-        parent_track_id:
-          type: string
-        track_id:
-          type: string
-    usdc_purchase_seller_notification_action_data:
-      required:
-      - amount
-      - buyer_user_id
-      - content_id
-      - content_type
-      - extra_amount
-      - seller_user_id
-      type: object
-      properties:
-        content_type:
-          type: string
-        buyer_user_id:
-          type: string
-        seller_user_id:
-          type: string
-        amount:
-          type: string
-        extra_amount:
-          type: string
-        content_id:
-          type: string
-    comment_thread_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/comment_thread_notification_action_data'
-    receive_tip_notification_action_data:
-      required:
-      - amount
-      - reaction_value
-      - receiver_user_id
-      - sender_user_id
-      - tip_tx_signature
-      type: object
-      properties:
-        amount:
-          type: string
-        sender_user_id:
-          type: string
-        receiver_user_id:
-          type: string
-        tip_tx_signature:
-          type: string
-        reaction_value:
-          type: integer
-    repost_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/repost_notification_action_data'
-    tier_change_notification_action_data:
-      required:
-      - current_value
-      - new_tier
-      - new_tier_value
-      type: object
-      properties:
-        new_tier:
-          type: string
-        current_value:
-          type: string
-        new_tier_value:
-          type: integer
-    track_added_to_purchased_album_notification_action_data:
-      required:
-      - playlist_id
-      - playlist_owner_id
-      - track_id
-      type: object
-      properties:
-        track_id:
-          type: string
-        playlist_id:
-          type: string
-        playlist_owner_id:
-          type: string
-    artist_remix_contest_submissions_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/artist_remix_contest_submissions_notification_action_data'
-    milestone_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/milestone_notification_action_data'
-    artist_remix_contest_submissions_notification_action_data:
-      required:
-      - entity_id
-      - event_id
-      - milestone
-      type: object
-      properties:
-        event_id:
-          type: string
-        milestone:
-          type: integer
-        entity_id:
-          type: string
-    announcement_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/announcement_notification_action'
-    fan_remix_contest_winners_selected_notification_action_data:
-      required:
-      - entity_id
-      - entity_user_id
-      type: object
-      properties:
-        entity_user_id:
-          type: string
-        entity_id:
-          type: string
-    listen_streak_reminder_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/listen_streak_reminder_notification_action'
-    request_manager_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/request_manager_notification_action'
-    claimable_reward_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/claimable_reward_notification_action'
-    playlist_updates_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
-      type: object
-      properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
-          $ref: '#/components/schemas/playlist_updates'
-    track_added_to_playlist_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/track_added_to_playlist_notification_action_data'
-    supporter_rank_up_notification_action_data:
-      required:
-      - rank
-      - receiver_user_id
-      - sender_user_id
-      type: object
-      properties:
-        rank:
-          type: integer
-        sender_user_id:
-          type: string
-        receiver_user_id:
-          type: string
-    comment_thread_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/comment_thread_notification_action'
-    tier_change_notification:
-      required:
-      - actions
-      - group_id
-      - is_seen
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-        group_id:
-          type: string
-        is_seen:
-          type: boolean
-        seen_at:
-          type: integer
-        actions:
-          type: array
-          items:
-            $ref: '#/components/schemas/tier_change_notification_action'
-    trending_underground_notification_action:
-      required:
-      - data
-      - specifier
-      - timestamp
-      - type
-      type: object
-      properties:
-        specifier:
-          type: string
-        type:
-          type: string
-        timestamp:
-          type: integer
-        data:
-          $ref: '#/components/schemas/trending_underground_notification_action_data'
   securitySchemes:
     OAuth2:
       type: oauth2

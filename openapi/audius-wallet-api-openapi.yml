@@ -59,6 +59,15 @@ paths:
       x-operation-id-original: Get Wallet Coins
 components:
   schemas:
+    user_coins_response:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_coin'
     user_coin:
       required:
       - mint
@@ -110,15 +119,6 @@ components:
           type: number
           description: The balance of the coin in the user's account in USD
           example: 1.23
-    user_coins_response:
-      type: object
-      required:
-      - data
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/user_coin'
   securitySchemes:
     OAuth2:
       type: oauth2

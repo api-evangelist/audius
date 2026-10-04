@@ -175,6 +175,18 @@ paths:
       x-operation-id-original: Get Challenge Attestation
 components:
   schemas:
+    attestation_reponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/attestation'
+    undisbursed_challenges:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/undisbursed_challenge'
     undisbursed_challenge:
       required:
       - amount
@@ -218,18 +230,6 @@ components:
           type: string
         attestation:
           type: string
-    undisbursed_challenges:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/undisbursed_challenge'
-    attestation_reponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/attestation'
   securitySchemes:
     OAuth2:
       type: oauth2
