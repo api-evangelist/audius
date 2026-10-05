@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.audius.co/openapi.yaml",
+ "requested_url": "https://docs.audius.org/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml; charset=utf-8",
+ "bytes": 527716,
+ "sha256": "b1edfe513eb192f6fcf1a860fec7fdb75e2f73f63038d9d0b9c80483f27baa75",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.95), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
