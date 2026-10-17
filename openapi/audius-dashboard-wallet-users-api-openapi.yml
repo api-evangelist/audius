@@ -57,6 +57,14 @@ paths:
       x-operation-id-original: Bulk get dashboard wallet users
 components:
   schemas:
+    playlist_library:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties: {}
     profile_picture:
       type: object
       properties:
@@ -70,14 +78,6 @@ components:
           type: array
           items:
             type: string
-    playlist_library:
-      type: object
-      properties:
-        contents:
-          type: array
-          items:
-            type: object
-            properties: {}
     user:
       required:
       - album_count

@@ -49,6 +49,11 @@ paths:
       x-operation-id-original: Get Metadata
 components:
   schemas:
+    cid_data_response:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/data_and_type'
     data_and_type:
       type: object
       properties:
@@ -56,11 +61,6 @@ components:
           type: string
         data:
           $ref: '#/components/schemas/cid_data'
-    cid_data_response:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/data_and_type'
     cid_data:
       type: object
       properties:

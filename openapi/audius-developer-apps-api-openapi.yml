@@ -358,6 +358,40 @@ paths:
       x-operation-id-original: Get Developer Apps
 components:
   schemas:
+    developer_apps_response:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/developer_app'
+    register_api_key_response:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the registration was successful
+    write_response:
+      type: object
+      properties:
+        transaction_hash:
+          type: string
+          description: The blockchain transaction hash
+        block_hash:
+          type: string
+          description: The blockchain block hash
+        block_number:
+          type: integer
+          format: int64
+          description: The blockchain block number/height
+    register_api_key_request_body:
+      type: object
+      required:
+      - api_secret
+      properties:
+        api_secret:
+          type: string
+          description: The API secret (private key hex) for the developer app
     create_access_key_response:
       type: object
       required:
@@ -366,56 +400,12 @@ components:
         api_access_key:
           type: string
           description: The newly created bearer token (API access key)
-    developer_apps_response:
+    deactivate_access_key_response:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/developer_app'
-    create_developer_app_request_body:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Developer app name
-          example: My API Key
-        description:
-          type: string
-          description: App description
-        image_url:
-          type: string
-          description: App logo/image URL
-        redirect_uris:
-          type: array
-          maxItems: 50
-          items:
-            type: string
-            maxLength: 2000
-          description: Pre-registered OAuth redirect/callback URIs
-    update_developer_app_request_body:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Developer app name
-        description:
-          type: string
-          description: App description
-        image_url:
-          type: string
-          description: App logo/image URL
-        redirect_uris:
-          type: array
-          maxItems: 50
-          items:
-            type: string
-            maxLength: 2000
-          description: Pre-registered OAuth redirect/callback URIs
+        success:
+          type: boolean
+          description: Whether the deactivation was successful
     create_developer_app_response:
       type: object
       properties:
@@ -438,12 +428,35 @@ components:
           type: integer
           format: int64
           description: The blockchain block number/height
-    deactivate_access_key_response:
+    deactivate_access_key_request_body:
       type: object
+      required:
+      - api_access_key
       properties:
-        success:
-          type: boolean
-          description: Whether the deactivation was successful
+        api_access_key:
+          type: string
+          description: The bearer token (API access key) to deactivate
+    update_developer_app_request_body:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Developer app name
+        description:
+          type: string
+          description: App description
+        image_url:
+          type: string
+          description: App logo/image URL
+        redirect_uris:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            maxLength: 2000
+          description: Pre-registered OAuth redirect/callback URIs
     developer_app:
       required:
       - address
@@ -468,46 +481,33 @@ components:
             type: string
             maxLength: 2000
           description: Pre-registered OAuth callback URLs for this app
-    register_api_key_response:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the registration was successful
-    write_response:
-      type: object
-      properties:
-        transaction_hash:
-          type: string
-          description: The blockchain transaction hash
-        block_hash:
-          type: string
-          description: The blockchain block hash
-        block_number:
-          type: integer
-          format: int64
-          description: The blockchain block number/height
-    deactivate_access_key_request_body:
-      type: object
-      required:
-      - api_access_key
-      properties:
-        api_access_key:
-          type: string
-          description: The bearer token (API access key) to deactivate
-    register_api_key_request_body:
-      type: object
-      required:
-      - api_secret
-      properties:
-        api_secret:
-          type: string
-          description: The API secret (private key hex) for the developer app
     developer_app_response:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/developer_app'
+    create_developer_app_request_body:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Developer app name
+          example: My API Key
+        description:
+          type: string
+          description: App description
+        image_url:
+          type: string
+          description: App logo/image URL
+        redirect_uris:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+            maxLength: 2000
+          description: Pre-registered OAuth redirect/callback URIs
   securitySchemes:
     OAuth2:
       type: oauth2

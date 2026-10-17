@@ -61,13 +61,6 @@ paths:
       x-operation-id-original: Bulk get Reactions
 components:
   schemas:
-    reactions:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/reaction'
     reaction:
       required:
       - reacted_to
@@ -84,6 +77,13 @@ components:
           type: string
         reacted_to:
           type: string
+    reactions:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/reaction'
   securitySchemes:
     OAuth2:
       type: oauth2

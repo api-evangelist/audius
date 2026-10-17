@@ -175,6 +175,16 @@ paths:
       x-operation-id-original: Get Challenge Attestation
 components:
   schemas:
+    attestation:
+      required:
+      - attestation
+      - owner_wallet
+      type: object
+      properties:
+        owner_wallet:
+          type: string
+        attestation:
+          type: string
     attestation_reponse:
       type: object
       properties:
@@ -220,16 +230,6 @@ components:
           type: string
         cooldown_days:
           type: integer
-    attestation:
-      required:
-      - attestation
-      - owner_wallet
-      type: object
-      properties:
-        owner_wallet:
-          type: string
-        attestation:
-          type: string
   securitySchemes:
     OAuth2:
       type: oauth2

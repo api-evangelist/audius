@@ -107,35 +107,14 @@ paths:
       x-operation-id-original: Get Tips
 components:
   schemas:
-    get_tips_response:
-      required:
-      - latest_chain_block
-      - latest_chain_slot_plays
-      - latest_indexed_block
-      - latest_indexed_slot_plays
-      - signature
-      - timestamp
-      - version
+    playlist_library:
       type: object
       properties:
-        latest_chain_block:
-          type: integer
-        latest_indexed_block:
-          type: integer
-        latest_chain_slot_plays:
-          type: integer
-        latest_indexed_slot_plays:
-          type: integer
-        signature:
-          type: string
-        timestamp:
-          type: string
-        version:
-          $ref: '#/components/schemas/version_metadata'
-        data:
+        contents:
           type: array
           items:
-            $ref: '#/components/schemas/tip'
+            type: object
+            properties: {}
     profile_picture:
       type: object
       properties:
@@ -149,14 +128,33 @@ components:
           type: array
           items:
             type: string
-    playlist_library:
+    tip:
+      required:
+      - amount
+      - created_at
+      - followee_supporters
+      - receiver
+      - sender
+      - slot
+      - tx_signature
       type: object
       properties:
-        contents:
+        amount:
+          type: string
+        sender:
+          $ref: '#/components/schemas/user'
+        receiver:
+          $ref: '#/components/schemas/user'
+        created_at:
+          type: string
+        slot:
+          type: integer
+        followee_supporters:
           type: array
           items:
-            type: object
-            properties: {}
+            $ref: '#/components/schemas/supporter_reference'
+        tx_signature:
+          type: string
     user:
       required:
       - album_count
@@ -342,33 +340,6 @@ components:
           type: array
           items:
             type: string
-    tip:
-      required:
-      - amount
-      - created_at
-      - followee_supporters
-      - receiver
-      - sender
-      - slot
-      - tx_signature
-      type: object
-      properties:
-        amount:
-          type: string
-        sender:
-          $ref: '#/components/schemas/user'
-        receiver:
-          $ref: '#/components/schemas/user'
-        created_at:
-          type: string
-        slot:
-          type: integer
-        followee_supporters:
-          type: array
-          items:
-            $ref: '#/components/schemas/supporter_reference'
-        tx_signature:
-          type: string
     supporter_reference:
       required:
       - user_id
@@ -376,6 +347,35 @@ components:
       properties:
         user_id:
           type: string
+    get_tips_response:
+      required:
+      - latest_chain_block
+      - latest_chain_slot_plays
+      - latest_indexed_block
+      - latest_indexed_slot_plays
+      - signature
+      - timestamp
+      - version
+      type: object
+      properties:
+        latest_chain_block:
+          type: integer
+        latest_indexed_block:
+          type: integer
+        latest_chain_slot_plays:
+          type: integer
+        latest_indexed_slot_plays:
+          type: integer
+        signature:
+          type: string
+        timestamp:
+          type: string
+        version:
+          $ref: '#/components/schemas/version_metadata'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/tip'
     version_metadata:
       required:
       - service
